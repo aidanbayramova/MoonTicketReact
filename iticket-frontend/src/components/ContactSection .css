@@ -1,0 +1,77 @@
+.contact-section {
+    background-color: #000; /* qara fon */
+    color: #fff; /* ağ mətn */
+    padding: 80px 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  .contact-section h3 {
+    color: #ff0000; /* qırmızı başlıqlar */
+    margin-bottom: 10px;
+  }
+  
+  .contact-section h2.text-anime {
+    color: #fff;
+    margin-bottom: 20px;
+  }
+  
+  .contact-details {
+    margin-top: 30px;
+  }
+  
+  .contact-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .contact-item img {
+    width: 40px;
+    margin-right: 15px;
+  }
+  
+  .contact-item h3 {
+    margin: 0;
+    color: #ff0000; /* qırmızı başlıqlar */
+  }
+  
+  .contact-item p a {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .contact-form-wrapper {
+    background-color: #111; /* qara ton fon */
+    padding: 30px;
+    border-radius: 8px;
+  }
+  
+  .contact-form-wrapper h3 {
+    color: #ff0000;
+  }
+  
+  .contact-form input,
+  .contact-form textarea {
+    width: 100%;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ff0000;
+    border-radius: 4px;
+    background: #000;
+    color: #fff;
+  }
+  
+  .contact-form button {
+    background-color: #ff0000;
+    color: #fff;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .contact-form button:hover {
+    background-color: #cc0000;
+  }
+  

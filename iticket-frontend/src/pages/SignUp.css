@@ -1,0 +1,181 @@
+/* ===== Fonts ===== */
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 300;
+    src: url("/fonts/montserrat/Montserrat-Light.ttf");
+}
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    src: url("/fonts/montserrat/Montserrat-Regular.ttf");
+}
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    src: url("/fonts/montserrat/Montserrat-Medium.ttf");
+}
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    src: url("/fonts/montserrat/Montserrat-SemiBold.ttf");
+}
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    src: url("/fonts/montserrat/Montserrat-Bold.ttf");
+}
+
+body {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #222;
+    font-weight: 400;
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url("../assets/images/hello.jpg") no-repeat center center fixed;
+    background-size: cover;
+}
+
+
+.register-container {
+    width: 660px;
+    margin: 50px auto;
+}
+
+.register-content {
+    position: relative;
+    border-radius: 15px;
+    padding: 11px 126px;
+    background: rgba(0, 0, 0, 0.2); 
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.register-form-group {
+    margin-bottom: 20px;
+}
+
+.register-input {
+    width: 100%;
+    border: 1px solid #ebebeb;
+    border-radius: 5px;
+    padding: 17px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #222;
+}
+
+.register-input:focus {
+    outline: none;
+    border: 1px solid transparent;
+    border-image-source: linear-gradient(to right, #800020, #800020);
+    border-image-slice: 1;
+    border-radius: 5px;
+}
+
+.register-submit {
+    width: 100%;
+    border-radius: 5px;
+    padding: 17px 20px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+    border: none;
+    background-image: linear-gradient(to left, #800020, #800020);
+    cursor: pointer;
+    transition: 0.3s all ease;
+}
+
+.register-submit:hover {
+    opacity: 0.9;
+}
+
+.register-label-agree {
+    font-size: 12px;
+    font-weight: 600;
+    color: #555;
+}
+
+.register-terms {
+    color: #460012;
+    text-decoration: none;
+}
+
+.register-terms:hover {
+    text-decoration: underline;
+}
+
+.register-login-text {
+    color: #555;
+    font-weight: 500;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.register-login-link {
+    font-weight: 700;
+    color: white;
+    text-decoration: none;
+}
+
+.register-login-link:hover {
+    text-decoration: none;
+    color:#800020;
+
+}
+
+
+.register-field-icon {
+    float: right;
+    margin-right: 17px;
+    margin-top: -32px;
+    position: relative;
+    z-index: 2;
+    color: #555;
+    cursor: pointer;
+}
+.register-title{
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    font-weight: 200;
+    font-size: 40px;
+}
+@media screen and (max-width: 768px) {
+    .register-container {
+        width: calc(100% - 40px);
+        max-width: 100%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .register-content {
+        padding: 50px 25px;
+    }
+}
+
+  
+.main {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: 
+        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url('../assets/images/hello.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+  
+  
+ 
+  

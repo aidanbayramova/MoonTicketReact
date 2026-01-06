@@ -1,0 +1,105 @@
+/* Root */
+:root {
+  --background: #ffffff;
+  --foreground: #000000;
+  --primary-color: #ff6600;
+  --scroll-track: #f0f0f0;
+}
+
+/* Body */
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  text-align: center;
+  overflow: auto;
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: var(--primary-color) var(--scroll-track); /* Firefox */
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: Arial, sans-serif;
+}
+
+/* Logo */
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+/* Logo spin animation */
+@keyframes logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+/* Card */
+.card {
+  padding: 2em;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0.5em 1em rgba(0,0,0,0.2);
+}
+
+/* Links */
+.read-the-docs {
+  color: #888;
+  transition: color 0.3s;
+}
+.read-the-docs:hover {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
+/* Scrollbar for WebKit browsers */
+::-webkit-scrollbar {
+  width: 12px;
+}
+::-webkit-scrollbar-track {
+  background: var(--scroll-track);
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color);
+  border-radius: 6px;
+  border: 3px solid var(--scroll-track);
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #cc5200;
+}
+/* Scroll bar ümumi eni */
+::-webkit-scrollbar {
+  width: 10px; /* qalınlığı */
+}
+
+/* Scroll track (boş hissə) */
+::-webkit-scrollbar-track {
+  background: #1a1a1a; /* arxa fon */
+  border-radius: 10px;
+}
+
+/* Scroll bar-ın sürüşən hissəsi */
+::-webkit-scrollbar-thumb {
+  background: #e50914; /* rəng */
+  border-radius: 10px;
+}
+
+/* Hover olanda rəng */
+::-webkit-scrollbar-thumb:hover {
+  background: #ff4b5c;
+}
+

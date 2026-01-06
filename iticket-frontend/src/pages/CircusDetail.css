@@ -1,0 +1,426 @@
+/* ================= ROOT & GLOBAL ================= */
+:root {
+    --wine-dark: #12060b;
+    --wine-main: #350404;
+    --wine-soft: #4e1010;
+    --wine-gold: #e6c27a;
+    --wine-light: #f4e9ee;
+}
+
+body {
+    background: var(--wine-dark);
+    color: white;
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+}
+
+html,
+body {
+    overflow-x: hidden;
+}
+
+/* ================= BANNER ================= */
+.blog-page {
+    width: 100%;
+}
+
+.blog-banner {
+    position: relative;
+    height: 400px;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    background: url('../assets/images/hello.jpg') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+}
+
+.banner-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 10, 10, 0.6);
+}
+
+.container {
+    position: relative;
+    z-index: 2;
+    padding-left: 50px;
+}
+
+.banner-content {
+    margin-top: 3pc;
+}
+
+.banner-title {
+    font-size: 3rem;
+    font-weight: 200;
+    text-transform: uppercase;
+}
+
+/* ================= MAIN CARD ================= */
+.circus-content {
+    width: 92%;
+    max-width: 1400px;
+    margin: 90px auto;
+    padding: 55px;
+    display: flex;
+    gap: 60px;
+    border-radius: 32px;
+    background: radial-gradient(circle at 20% 50%, rgba(230, 194, 122, 0.15), transparent 50%), radial-gradient(circle at 80% 50%, rgba(142, 29, 29, 0.25), transparent 50%), linear-gradient(135deg, #140707, #2a0d0d, #1a0707);
+    box-shadow: 0 50px 140px rgba(90, 15, 15, 0.7), 0 0 100px rgba(142, 29, 29, 0.3);
+}
+
+/* ✔ FIXED */
+.poster {
+    width: 490px;
+    height: 470px;
+    border-radius: 26px;
+    object-fit: cover;
+    box-shadow: 0 30px 90px rgba(74, 9, 9, 0.9), 0 0 60px rgba(230, 194, 122, 0.3);
+    transition: 0.5s;
+}
+
+.poster:hover {
+    transform: scale(1.08) rotate(-2deg) translateY(-10px);
+}
+
+/* ================= INFO ================= */
+.info-box {
+    flex: 1;
+}
+
+.header-tags {
+    display: flex;
+    gap: 12px;
+}
+
+.header-tags span {
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.genre-tag {
+    background: rgba(129, 12, 12, 0.4);
+}
+
+.rating-tag {
+    background: rgba(230, 194, 122, 0.3);
+}
+
+.duration-tag {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.artist-name {
+    font-size: 28px;
+    margin: 20px 0;
+}
+
+.concert-desc {
+    max-width: 600px;
+    line-height: 1.9;
+}
+
+/* ================= STADIUM ================= */
+.stadium-wrapper {
+    max-width: 1000px;
+    margin: 80px auto 200px;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 50px;
+    color: var(--wine-gold);
+}
+
+.stadium-container {
+    position: relative;
+    height: 800px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #2a0d0d, #1a0707);
+    border: 3px solid rgba(230, 194, 122, 0.2);
+}
+
+.stadium-field {
+    position: absolute;
+    inset: 50%;
+    transform: translate(-50%, -50%);
+    width: 280px;
+    height: 180px;
+    background: linear-gradient(135deg, #636161, #a8a6a6);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.field-text {
+    font-size: 26px;
+    font-weight: 700;
+    color: #500909;
+}
+
+/* ================= SECTIONS ================= */
+.stadium-section {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    padding: 14px 18px;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.stadium-section.vip {
+    background: linear-gradient(135deg, #8b0000, #660000);
+    border: 2px solid var(--wine-gold);
+}
+
+.stadium-section.premium {
+    background: linear-gradient(135deg, #4a1010, #350808);
+}
+
+.stadium-section.standard {
+    background: linear-gradient(135deg, #2a0d0d, #1a0707);
+}
+
+.stadium-section:hover {
+    transform: translate(-50%, -50%) scale(1.15);
+}
+
+/* ================= BOTTOM BAR ================= */
+.bottom-bar {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 22px 50px;
+    background: linear-gradient(90deg, #1a0707, #3a0f0f);
+    display: flex;
+    justify-content: space-between;
+}
+
+.total-price {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--wine-gold);
+}
+
+/* ================= CIRCUS WRAPPER ================= */
+.circus-wrapper {
+    max-width: 1000px;
+    margin: 80px auto 200px;
+    padding: 40px 20px;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 50px;
+    color: var(--wine-gold);
+    font-weight: 700;
+}
+
+/* ================= CIRCUS CONTAINER ================= */
+.circus-container {
+    position: relative;
+    width: 100%;
+    height: 800px;
+    margin: 0 auto;
+    border-radius: 50%;
+    background: radial-gradient(circle at center, #2a0d0d, #12060b);
+    border: 3px solid rgba(230, 194, 122, 0.25);
+    box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.7);
+}
+
+/* ================= ARENA (CENTER) ================= */
+.circus-arena {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: radial-gradient(circle at center, #d9b56a, #9c6b1e);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 60px rgba(230, 194, 122, 0.8), inset 0 0 40px rgba(0, 0, 0, 0.4);
+    border: 4px solid rgba(255, 255, 255, 0.4);
+}
+
+.arena-text {
+    font-size: 24px;
+    font-weight: 800;
+    color: #2a0d18;
+    letter-spacing: 1px;
+}
+
+/* ================= TRIBUNES / SECTIONS ================= */
+.circus-section {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    padding: 14px 18px;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    min-width: 110px;
+    backdrop-filter: blur(6px);
+    border: 2px solid;
+}
+
+.circus-section:hover {
+    transform: translate(-50%, -50%) scale(1.15);
+    box-shadow: 0 10px 30px rgba(230, 194, 122, 0.4);
+}
+
+.circus-section.active {
+    transform: translate(-50%, -50%) scale(1.22);
+    box-shadow: 0 0 40px rgba(230, 194, 122, 0.8);
+    z-index: 10;
+}
+
+/* VIP TRIBUNE */
+.circus-section.vip {
+    background: linear-gradient(135deg, rgba(168, 20, 20, 0.9), rgba(110, 10, 10, 0.95));
+    border-color: var(--wine-gold);
+}
+
+/* PREMIUM TRIBUNE */
+.circus-section.premium {
+    background: linear-gradient(135deg, rgba(95, 20, 20, 0.85), rgba(55, 10, 10, 0.9));
+    border-color: #c9a45a;
+}
+
+/* STANDARD TRIBUNE */
+.circus-section.standard {
+    background: linear-gradient(135deg, rgba(45, 12, 12, 0.85), rgba(25, 7, 7, 0.9));
+    border-color: #8b7355;
+}
+
+.section-name {
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    color: #fff;
+}
+
+.section-price {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--wine-gold);
+}
+
+/* ================= SEAT MODAL ================= */
+.seat-selection-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.88);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+
+.modal-content {
+    background: linear-gradient(135deg, #2a0d0d, #12060b);
+    border-radius: 24px;
+    padding: 40px;
+    width: 100%;
+    max-width: 650px;
+    max-height: 85vh;
+    overflow-y: auto;
+    border: 2px solid rgba(230, 194, 122, 0.3);
+    box-shadow: 0 30px 90px rgba(0, 0, 0, 0.85);
+    position: relative;
+}
+
+.modal-title {
+    font-size: 22px;
+    color: var(--wine-gold);
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+
+.close-modal {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(230, 194, 122, 0.25);
+    color: var(--wine-gold);
+    font-size: 22px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.close-modal:hover {
+    background: rgba(230, 194, 122, 0.5);
+    transform: rotate(90deg);
+}
+
+/* ================= SEATS ================= */
+.seats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(55px, 1fr));
+    gap: 12px;
+}
+
+.modal-seat {
+    aspect-ratio: 1;
+    background: linear-gradient(135deg, #5e1212, #490f0f);
+    border-radius: 10px;
+    border: 2px solid rgba(230, 194, 122, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-weight: 700;
+    transition: 0.3s;
+}
+
+.modal-seat:hover:not(.occupied) {
+    transform: scale(1.1) translateY(-4px);
+    border-color: var(--wine-gold);
+    box-shadow: 0 8px 20px rgba(230, 194, 122, 0.5);
+}
+
+.modal-seat.selected {
+    background: linear-gradient(135deg, var(--wine-gold), #fff3c4);
+    color: #2a0d18;
+}
+
+.modal-seat.occupied {
+    background: rgba(120, 30, 30, 0.4);
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.modal-seat.occupied::after {
+    content: "✕";
+    position: absolute;
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+    .circus-container {
+        height: 600px;
+    }
+
+    .circus-arena {
+        width: 200px;
+        height: 200px;
+    }
+
+    .arena-text {
+        font-size: 18px;
+    }
+}
+

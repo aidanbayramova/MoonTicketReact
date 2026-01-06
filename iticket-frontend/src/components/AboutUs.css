@@ -1,0 +1,121 @@
+.about-section {
+    color: #fff;
+    padding: 0;
+  }
+  
+  .about-row {
+    display: flex;
+    height: 500px;
+    margin-top: 4pc;
+
+  }
+  
+  .about-image-box {
+    flex: 1; 
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .about-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  
+  .about-image-box:hover .about-image {
+    transform: scale(1.1);
+  }
+  
+  .about-text {
+    flex: 1; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px 60px;
+    animation: fadeIn 1.2s ease-in-out;
+  }
+  
+  .about-title {
+    color: #640c0c;
+    font-weight: 600;
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  
+  .about-title::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+    width: 20pc;
+    height: 3px;
+    background: #640c0c;
+    border-radius: 2px;
+  }
+  
+  .about-description {
+    color: #ccc;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 15px;
+  }
+  
+  .about-btn {
+    padding: 12px 28px;
+    border: none;
+    border-radius: 25px;
+    background: #ff3b3b;
+    color: #fff;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    align-self: flex-start;
+  }
+  
+  .about-btn:hover {
+    background: #e00000;
+    box-shadow: 0 8px 20px rgba(255, 0, 0, 0.4);
+    transform: translateY(-3px);
+  }
+  
+  /* Animasiya */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(25px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* 📱 Mobil görünüş */
+  @media (max-width: 992px) {
+    .about-row {
+      flex-direction: column;
+      height: auto; /* mətnin hündürlüyünə uyğunlaşsın */
+    }
+  
+    .about-image-box {
+      width: 100%;
+      height: 300px; /* mobil üçün şəkil ölçüsü */
+    }
+  
+    .about-text {
+      padding: 30px 20px;
+      text-align: center;
+    }
+  
+    .about-btn {
+      align-self: center;
+    }
+  
+    .about-title::after {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+  

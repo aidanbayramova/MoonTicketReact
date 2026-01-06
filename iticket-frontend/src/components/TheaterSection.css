@@ -1,0 +1,54 @@
+:root {
+    --background: 0 0% 5%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 10%;
+    --border: 0 0% 20%;
+    --bordo: 345 100% 25%;
+    --primary: 200 80% 50%;
+    --muted-foreground: 0 0% 70%;
+    --card-foreground: 0 0% 95%;
+    --primary-foreground: 0 0% 100%;
+    --font-sans: "Arial", sans-serif;
+    --font-serif: "Georgia", serif;
+}
+
+.theater-container { position: relative; background: hsl(var(--background)); min-height: 100vh; padding: 4rem 2rem; }
+.theater-background-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(var(--background)) 50%, hsl(var(--card)) 100%); opacity: 0.9; }
+.theater-content { position: relative; z-index: 10; max-width: 1400px; margin: 0 auto; }
+
+.theater-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 3rem; }
+.theater-main-title { font-size: 35px; font-weight: bold; background: linear-gradient(135deg, #800020 0%, #800020 90%, #ffffff 100%); background-clip: text; -webkit-background-clip: text; color: transparent; margin-bottom: 0.5rem; font-family: var(--font-sans); display: flex; align-items: center; gap: 6px; }
+.theater-subtitle { color: hsl(var(--muted-foreground)); font-size: 1.125rem; font-weight: bold; font-family: var(--font-sans); }
+
+.theater-nav-controls { display: flex; gap: 0.75rem; }
+.theater-nav-btn { height: 3rem; width: 3rem; border-radius: 50%; border: 1px solid hsl(var(--border)/0.5); background: hsl(var(--card)/0.8); backdrop-filter: blur(8px); color: hsl(var(--foreground)); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s ease; }
+.theater-nav-btn:hover { background: hsl(var(--bordo)/0.2); border-color: hsl(var(--bordo)/0.5); transform: scale(1.05); }
+
+.theater-cards-wrapper { position: relative; overflow: hidden; }
+.theater-cards-container { display: flex; gap: 1.5rem; transition: transform 1.2s ease-in-out; will-change: transform; }
+.theater-card { position: relative; flex: 0 0 calc(25% - 1.5rem); cursor: pointer; transition: all 0.4s ease; }
+.theater-card:hover { transform: scale(1.05); }
+.theater-card-inner { position: relative; overflow: hidden; border-radius: 1rem; background: hsl(var(--card)); border: 1px solid hsl(var(--border)/0.2); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); transition: all 0.5s ease; }
+
+.theater-card-image-container { position: relative; height: 24rem; overflow: hidden; border-radius: 1rem; }
+.theater-card-image { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s ease; }
+.theater-card:hover .theater-card-image { transform: scale(1.1); }
+.theater-card-gradient { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 50%, transparent 100%); }
+
+.theater-card-overlay-content { position: absolute; bottom: 1rem; left: 1rem; right: 1rem; z-index: 5; background: linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.2) 100%); padding: 0.5rem 1rem; border-radius: 0.5rem; }
+.theater-card-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.25rem; color: #fff; }
+.theater-card-meta { display: flex; gap: 0.5rem; font-size: 0.9rem; color: hsl(var(--muted-foreground)); }
+
+.theater-card-actions { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 1rem; background: rgba(0,0,0,0.4); backdrop-filter: blur(8px); opacity: 0; transform: translateY(20px); transition: all 0.4s ease; }
+.theater-card.hovered .theater-card-actions { opacity: 1; transform: translateY(0); }
+.theater-info-btn { border: 1px solid hsl(var(--foreground)/0.2); background: hsl(var(--card)/0.8); backdrop-filter: blur(8px); color: hsl(var(--foreground)); border-radius: 9999px; padding: 0.75rem 1.5rem; display: flex; align-items: center; gap: 0.5rem; cursor: pointer; transition: all 0.3s ease; }
+.theater-info-btn:hover { background: hsl(var(--card)); border-color: hsl(var(--bordo)/0.5); }
+
+.theater-card-glow { position: absolute; inset: -4px; background: linear-gradient(135deg, hsl(var(--bordo)/0.2) 0%, hsl(var(--primary)/0.2) 50%, hsl(var(--bordo)/0.2) 100%); border-radius: 1rem; filter: blur(20px); z-index: -10; opacity: 0; animation: glowIn 0.5s ease forwards; }
+@keyframes glowIn { to { opacity: 1; } }
+
+@media (max-width: 768px) { .theater-container { padding: 2rem 1rem; } .theater-header { flex-direction: column; gap: 2rem; text-align: center; } .theater-main-title { font-size: 2.5rem; } .theater-card { width: 280px; } .theater-card-image-container { height: 20rem; } }
+@media (max-width: 480px) { .theater-card { width: 220px; } .theater-card-image-container { height: 16rem; } }
+
+.theater-explore { cursor: pointer; font-weight: 500; color: #800020; font-size: 21px; position: relative; }
+.theater-explore-tooltip { position: absolute; top: -28px; left: 50%; transform: translateX(-50%); background-color: #000; color: white; font-size: 10px; font-weight: 400; padding: 2px 6px; border-radius: 3px; white-space: nowrap; pointer-events: none; opacity: 0.9; z-index: 10; }

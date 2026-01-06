@@ -1,0 +1,637 @@
+:root {
+    --wine-dark: #12060b;
+    --wine-main: #350404;
+    --wine-soft: #4e1010;
+    --wine-gold: #ffffff;
+    --wine-light: #f4e9ee;
+  }
+
+  .tourism-detail-page {
+    background: var(--wine-dark);
+    color: white;
+    font-family: "Poppins", sans-serif;
+    min-height: 100vh;
+    padding-bottom: 100px;
+  }
+
+  /* Banner */
+  .tourism-banner {
+    position: relative;
+    height: 300px;
+    background: linear-gradient(135deg, #1a0707, #3a0f0f);
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .tourism-banner-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 30% 50%, rgba(230, 194, 122, 0.1), transparent);
+  }
+
+  .tourism-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .tourism-banner-content {
+    text-align: center;
+  }
+
+  .tourism-banner-title {
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  }
+
+  .tourism-breadcrumb {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    color: var(--wine-light);
+  }
+
+  .tourism-breadcrumb a {
+    color: var(--wine-gold);
+    text-decoration: none;
+    transition: opacity 0.3s;
+  }
+
+  .tourism-breadcrumb a:hover {
+    opacity: 0.7;
+  }
+
+  .tourism-breadcrumb-separator {
+    opacity: 0.5;
+  }
+
+  /* Ticker */
+  .tourism-ticker {
+    background: linear-gradient(90deg, var(--wine-main), var(--wine-soft), var(--wine-main));
+    padding: 12px 0;
+    overflow: hidden;
+    border-top: 1px solid rgba(230, 194, 122, 0.2);
+    border-bottom: 1px solid rgba(230, 194, 122, 0.2);
+  }
+
+  .tourism-ticker-content {
+    white-space: nowrap;
+    animation: scroll 30s linear infinite;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--wine-gold);
+  }
+
+  @keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* Main Content */
+  .tourism-content-wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 60px 40px;
+  }
+
+  .tourism-main-content {
+    display: flex;
+    gap: 60px;
+    margin-bottom: 80px;
+    padding: 55px;
+    border-radius: 32px;
+    background: 
+      radial-gradient(circle at 20% 50%, rgba(230, 194, 122, 0.15), transparent 50%),
+      radial-gradient(circle at 80% 50%, rgba(142, 29, 29, 0.25), transparent 50%),
+      linear-gradient(135deg, #140707, #2a0d0d, #1a0707);
+    box-shadow: 
+      0 50px 140px rgba(90, 15, 15, 0.7),
+      inset 0 1px 0 rgba(230, 194, 122, 0.1);
+    border: 1px solid rgba(224, 215, 197, 0.15);
+  }
+
+  .tourism-poster {
+    width: 414px;
+    height: 618px;
+    border-radius: 26px;
+    object-fit: cover;
+    box-shadow: 0 30px 90px rgba(74, 9, 9, 0.9);
+    transition: transform 0.5s;
+  }
+
+  .tourism-poster:hover {
+    transform: scale(1.05);
+  }
+
+  .tourism-info-section {
+    flex: 1;
+  }
+
+  .tourism-header-tags {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+  }
+
+  .tourism-tag {
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .tourism-genre {
+    background: linear-gradient(135deg, rgba(129, 12, 12, 0.4), rgba(90, 15, 46, 0.6));
+    border: 1px solid rgba(119, 13, 13, 0.6);
+  }
+
+  .tourism-rating {
+    background: linear-gradient(135deg, rgba(230, 194, 122, 0.3), rgba(230, 194, 122, 0.2));
+    border: 1px solid var(--wine-gold);
+    color: var(--wine-gold);
+  }
+
+  .tourism-duration {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .tourism-description {
+    line-height: 1.9;
+    opacity: 0.95;
+    margin-bottom: 30px;
+  }
+
+  /* Info Cards */
+  .tourism-info-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-bottom: 30px;
+  }
+
+  .tourism-info-card {
+    background: linear-gradient(135deg, rgba(26, 7, 13, 0.6), rgba(42, 13, 24, 0.4));
+    border: 1px solid rgba(230, 194, 122, 0.2);
+    border-radius: 16px;
+    padding: 18px;
+    transition: all 0.3s;
+  }
+
+  .tourism-info-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--wine-gold);
+    box-shadow: 0 8px 25px rgba(151, 9, 9, 0.4);
+  }
+
+  .tourism-info-content {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .tourism-info-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--wine-gold);
+    opacity: 0.8;
+    font-weight: 600;
+  }
+
+  .tourism-info-value {
+    font-size: 15px;
+    color: var(--wine-light);
+    font-weight: 500;
+  }
+
+  .tourism-price-card {
+    grid-column: span 2;
+  }
+
+  .tourism-price-options {
+    display: flex;
+    gap: 16px;
+    margin-top: 5px;
+  }
+
+  .tourism-price-item {
+    padding: 6px 14px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 15px;
+  }
+
+  .tourism-standard {
+    background: rgba(230, 194, 122, 0.2);
+    color: var(--wine-gold);
+    border: 1px solid rgba(230, 194, 122, 0.4);
+  }
+
+  .tourism-vip {
+    background: linear-gradient(135deg, var(--wine-gold), #fff1c1);
+    color: #2a0d18;
+  }
+
+  /* Selection Groups */
+  .tourism-selection-group {
+    margin-bottom: 30px;
+  }
+
+  .tourism-section-title {
+    font-size: 22px;
+    margin-bottom: 15px;
+    color: #ffffff;
+  }
+
+  .tourism-options {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .tourism-option-btn {
+    padding: 14px 24px;
+    border-radius: 14px;
+    background: rgba(68, 9, 9, 0.35);
+    border: 1px solid rgba(230, 194, 122, 0.3);
+    color: var(--wine-light);
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .tourism-option-btn:hover,
+  .tourism-option-btn.tourism-active {
+    background: linear-gradient(135deg, var(--wine-soft), var(--wine-main));
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(104, 19, 19, 0.6);
+    border-color: var(--wine-gold);
+  }
+
+  .tourism-booking-section {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 30px;
+  }
+
+  .tourism-booking-section > div {
+    flex: 1;
+  }
+
+  /* Ticket Section */
+  .tourism-ticket-section {
+    margin-top: 40px;
+    padding: 30px;
+    background: linear-gradient(135deg, rgba(26, 7, 13, 0.6), rgba(42, 13, 24, 0.4));
+    border-radius: 20px;
+    border: 1px solid rgba(230, 194, 122, 0.2);
+  }
+
+  .tourism-ticket-type {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 25px;
+  }
+
+  .tourism-ticket-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  .tourism-ticket-label input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: var(--wine-gold);
+  }
+
+  .tourism-ticket-counter {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .tourism-ticket-counter label {
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .tourism-counter-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: rgba(68, 9, 9, 0.35);
+    padding: 8px 20px;
+    border-radius: 14px;
+    border: 1px solid rgba(230, 194, 122, 0.3);
+  }
+
+  .tourism-counter-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--wine-soft), var(--wine-main));
+    border: 1px solid var(--wine-gold);
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .tourism-counter-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 15px rgba(230, 194, 122, 0.4);
+  }
+
+  .tourism-counter-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--wine-gold);
+    min-width: 40px;
+    text-align: center;
+  }
+
+  /* Related Section */
+  .tourism-related-section {
+    margin-top: 80px;
+  }
+
+  .tourism-related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 26px;
+    margin-top: 30px;
+  }
+
+  .tourism-related-card {
+    background: linear-gradient(145deg, #1a0707, #2a0d0d);
+    border-radius: 20px;
+    padding: 14px;
+    text-align: center;
+    transition: 0.3s;
+    cursor: pointer;
+  }
+
+  .tourism-related-card img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    border-radius: 16px;
+  }
+
+  .tourism-related-card p {
+    margin-top: 12px;
+    font-weight: 600;
+  }
+
+  .tourism-related-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 0 30px rgba(142, 29, 29, 0.8);
+  }
+
+  /* Bottom Bar */
+  .tourism-bottom-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 60px;
+    background: linear-gradient(90deg, #1a0707, #3a0f0f, #1a0707);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
+    border-top: 1px solid rgba(230, 194, 122, 0.2);
+  }
+
+  .tourism-booking-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .tourism-booking-details {
+    font-size: 16px;
+    color: var(--wine-light);
+  }
+
+  .tourism-ticket-info {
+    font-size: 14px;
+    color: var(--wine-gold);
+    font-weight: 600;
+  }
+
+  .tourism-booking-actions {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+  }
+
+  .tourism-total-price {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--wine-gold);
+  }
+
+  .tourism-payment-btn {
+    padding: 14px 36px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--wine-gold), #fff1c1);
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+    color: #2a0d18;
+    font-size: 16px;
+    transition: all 0.3s;
+  }
+
+  .tourism-payment-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 20px rgba(230, 194, 122, 0.5);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .tourism-main-content {
+      flex-direction: column;
+      padding: 30px;
+    }
+
+    .tourism-poster {
+      width: 100%;
+      height: auto;
+    }
+
+    .tourism-booking-section {
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .tourism-bottom-bar {
+      flex-direction: column;
+      gap: 15px;
+      padding: 15px 20px;
+    }
+
+    .tourism-ticket-type {
+      flex-direction: column;
+      gap: 15px;
+    }
+  }
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; 
+  }
+  
+  .blog-page {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .blog-banner {
+    position: relative;
+    height: 400px;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    background: url('../assets/images/hello.jpg') center center / cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    padding-top: 0; 
+  }
+  
+  
+  .blog-banner .container {
+    max-width: 100%; 
+    padding: 0;
+    margin: 0;
+  }
+  
+  .banner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .container {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+  }
+  
+  .banner-content {
+    text-align: center;
+  }
+  
+  .banner-title {
+    font-size: 3rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  
+  .breadcrumb {
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    font-size: 1rem;
+  }
+  
+  .breadcrumb-item {
+    margin-right: 8px;
+    color: #fff;
+  }
+  
+  .breadcrumb-item a {
+    text-decoration: none;
+    color: #fff;
+    transition: color 0.3s;
+  }
+  
+  .breadcrumb-item a:hover {
+    color: #ff0040;
+  }
+  
+  .breadcrumb-item.active {
+    color:#ff0040;
+  }
+  
+  .blog-content {
+    padding: 60px 20px;
+    max-width: 900px;
+    margin: auto;
+    text-align: center;
+  }
+  .blog-banner {
+    position: relative;
+    z-index: 0; 
+  }
+  
+  .banner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 10, 10, 0.6);
+    z-index: 0;
+  }
+  .blog-banner {
+    margin-top: -70px;
+  }
+  .container {
+    position: relative;
+    z-index: 2;
+    text-align: left; 
+    padding-left: 50px; 
+  }
+  
+  .banner-content {
+    text-align: left;
+    margin-top: 3pc;
+
+  }
+  
+  .banner-title {
+    font-size: 3rem;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-weight: 200;
+  }
+  .breadcrumb {
+    justify-content: flex-start; 
+  }  
+
+  .tourism-banner {
+    position: relative;
+    height: 400px;
+    background: 
+      url('../assets/images/hello.jpg') center / cover no-repeat;
+    display: flex;
+    align-items: center;
+  }
+  

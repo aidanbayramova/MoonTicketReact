@@ -1,0 +1,89 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #111;
+    color: white;
+  }
+  
+  .cinema {
+    display: flex;
+    height: 100vh;
+  }
+  
+  .left {
+    flex: 1;
+    background: url("https://wallpaperaccess.com/full/1154346.jpg") center/cover
+      no-repeat;
+    display: flex;
+    align-items: flex-end;
+    padding: 20px;
+  }
+  
+  .movie-info {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .right {
+    flex: 1;
+    padding: 20px;
+    background: #000;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .section h3 {
+    margin: 0 0 10px 0;
+  }
+  
+  .options {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .options button {
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: none;
+    background: gray;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .options button.active {
+    background: red;
+  }
+  
+  .seats {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 8px;
+  }
+  
+  .seat {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .seat.selected {
+    background: red;
+  }
+  
+  .cart-btn {
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    background: red;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: auto;
+  }
+  

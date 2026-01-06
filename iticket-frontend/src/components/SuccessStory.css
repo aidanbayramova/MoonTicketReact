@@ -1,0 +1,76 @@
+.success-story {
+  position: relative;
+  background: url('../assets/images/SSS.jpg') center/cover no-repeat;
+  background-attachment: fixed; 
+  padding: 80px 20px;
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+  overflow: hidden;
+  color: #fff;
+}
+
+.success-story .overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.7); 
+  z-index: 0;
+}
+
+.success-story .container {
+  position: relative;
+  z-index: 1; 
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.success-story .title {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: rgb(132, 11, 11); 
+  margin-left: 15pc; 
+}
+
+.success-story .subtitle {
+  font-size: 18px;
+  color: rgb(137, 11, 11);
+  margin-bottom: 50px;
+  margin-left: 16pc; 
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.stat-card {
+  background: rgba(0, 0, 0, 0.6); 
+  padding: 25px 20px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  transition: transform 0.3s, background 0.3s;
+}
+
+.stat-card:hover {
+  transform: translateY(-10px);
+  background: rgba(0, 0, 0, 0.75);
+}
+
+.stat-icon {
+  font-size: 36px;
+  margin-bottom: 15px;
+}
+
+.stat-number {
+  font-size: 28px;
+  font-weight: 700;
+  color: rgb(185, 20, 20); 
+  margin-bottom: 8px;
+}
+
+.stat-label {
+  font-size: 16px;
+  color: #a20b0b;
+}

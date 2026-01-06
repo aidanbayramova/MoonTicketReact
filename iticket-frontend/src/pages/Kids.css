@@ -1,0 +1,276 @@
+:root {
+    --background: 0 0% 5%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 10%;
+    --border: 0 0% 20%;
+    --bordo: 345 100% 25%;
+    --primary: 200 80% 50%;
+    --muted-foreground: 0 0% 70%;
+  }
+  
+  /* ===== Body & Page ===== */
+  body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .kids-page {
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* ===== Banner ===== */
+  .kidss-banner {
+    position: relative;
+    height: 400px;
+    width: 100vw; /* tam ekran eni */
+    margin-left: calc(-50vw + 50%); /* ekranın tam ortalaması üçün */
+    background: url('../assets/images/hello.jpg') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin-top: -70px;
+  }
+  
+  .banner-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 10, 10, 0.6);
+  }
+  
+  .banner-content {
+    text-align: left;
+    z-index: 2;
+  }
+  
+  .banner-title {
+    font-size: 3rem;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-weight: 200;
+  }
+  
+  .breadcrumb-navv .breadcrumb {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 1rem;
+  }
+  
+  .breadcrumb-item a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  
+  .breadcrumb-item a:hover {
+    color: #ff0040;
+  }
+  
+  .breadcrumb-item.active {
+    color: #ff0040;
+  }
+  
+  /* ===== Search & Filter ===== */
+  .kids-section {
+    padding: 100px;
+    background: hsl(var(--background));
+    color: #fff;
+  }
+  
+  .kids-controls {
+    display: flex;
+    justify-content: flex-start;
+    gap: 15px;
+    margin-bottom: 30px;
+  }
+  
+  .kids-controls input,
+  .kids-controls select {
+    padding: 12px 16px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    background: hsl(var(--card));
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.3s;
+  }
+  
+  .kids-controls input:focus,
+  .kids-controls select:focus {
+    outline: 2px solid #800020;
+  }
+  
+  .kids-controls select option:checked {
+    background: #e50914;
+    color: #fff;
+  }
+  
+  .kids-controls select option:hover {
+    background: #c40812;
+    color: #fff;
+  }
+  
+  /* ===== Grid ===== */
+  .kids-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+  }
+  
+  /* ===== Cards ===== */
+  .kids-card {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: hsl(var(--card));
+  }
+  
+  .kids-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+  }
+  
+  .kids-card-inner {
+    border-radius: 1rem;
+    overflow: hidden;
+    border: 1px solid hsl(var(--border)/0.2);
+    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+  }
+  
+  .kids-card-image-container {
+    position: relative;
+    height: 24rem;
+    overflow: hidden;
+    border-radius: 1rem;
+  }
+  
+  .kids-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.5s ease;
+  }
+  
+  .kids-card:hover .kids-card-image {
+    filter: blur(4px) brightness(70%);
+    transform: scale(1.1);
+  }
+  
+  .kids-card-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.2), transparent);
+  }
+  
+  .kids-card-overlay-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 15px;
+    background: rgba(15,14,14,0.7);
+    color: #fff;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+  
+  .kids-card:hover .kids-card-overlay-content {
+    opacity: 1;
+  }
+  
+  .kids-card-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+    color: #fff;
+  }
+  
+  .kids-card-meta {
+    font-size: 0.9rem;
+    color: hsl(var(--muted-foreground));
+  }
+  
+  .price {
+    margin-top: 5px;
+    font-weight: 600;
+    color: #fff;
+  }
+  
+  .kids-type {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: #e50914;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #fff;
+  }
+  
+  .kids-card-glow {
+    position: absolute;
+    inset: -4px;
+    background: linear-gradient(135deg, hsl(var(--bordo)/0.2), hsl(var(--primary)/0.2), hsl(var(--bordo)/0.2));
+    border-radius: 1rem;
+    filter: blur(20px);
+    z-index: -10;
+    opacity: 0.9;
+  }
+  
+  /* ===== Not Found ===== */
+  .not-found {
+    grid-column: 1/-1;
+    text-align: center;
+    padding: 40px 20px;
+    font-size: 18px;
+    color: #bbb;
+  }
+  
+  .not-found h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+    color: #e50914;
+  }
+  
+  .not-found p {
+    font-size: 16px;
+    opacity: 0.8;
+  }
+  
+  /* ===== Info Button ===== */
+  .info-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 15px 22px;
+    border-radius: 30px;
+    border: 2px solid rgb(169, 165, 165);
+    background: rgb(33, 33, 33);
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(6px);
+  }
+  
+  .info-btn:hover {
+    background: rgba(33, 33, 33);
+    border: 2px solid rgb(78, 8, 8);
+  }
+  
+  .kids-card:hover .info-btn {
+    opacity: 1;
+  }
+  
