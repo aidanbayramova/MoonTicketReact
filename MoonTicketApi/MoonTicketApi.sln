@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoonTicketApi", "MoonTicketApi\MoonTicketApi.csproj", "{BA347616-AFFA-4F7A-ABA1-4978A4C57D2D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{29F5C45B-1B3B-46EC-8839-604DA50E45BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{543E688F-60B4-4A6C-9E7D-9773C3E3C4D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.csproj", "{5BCC1B6B-BCAB-49E5-A5DE-8897970CDB22}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BA347616-AFFA-4F7A-ABA1-4978A4C57D2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA347616-AFFA-4F7A-ABA1-4978A4C57D2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA347616-AFFA-4F7A-ABA1-4978A4C57D2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA347616-AFFA-4F7A-ABA1-4978A4C57D2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29F5C45B-1B3B-46EC-8839-604DA50E45BE}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{29F5C45B-1B3B-46EC-8839-604DA50E45BE}.Debug|Any CPU.Build.0 = Release|Any CPU
+		{29F5C45B-1B3B-46EC-8839-604DA50E45BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29F5C45B-1B3B-46EC-8839-604DA50E45BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{543E688F-60B4-4A6C-9E7D-9773C3E3C4D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{543E688F-60B4-4A6C-9E7D-9773C3E3C4D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{543E688F-60B4-4A6C-9E7D-9773C3E3C4D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{543E688F-60B4-4A6C-9E7D-9773C3E3C4D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BCC1B6B-BCAB-49E5-A5DE-8897970CDB22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BCC1B6B-BCAB-49E5-A5DE-8897970CDB22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BCC1B6B-BCAB-49E5-A5DE-8897970CDB22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BCC1B6B-BCAB-49E5-A5DE-8897970CDB22}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

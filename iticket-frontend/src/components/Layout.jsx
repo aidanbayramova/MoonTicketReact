@@ -5,8 +5,6 @@ import { Link, useLocation } from "react-router-dom";
 import {
   faSearch,
   faUser,
-  faPlay,
-  faBookmark,
   faChevronLeft,
   faChevronRight,
   faChevronUp,
@@ -14,55 +12,66 @@ import {
   faInfoCircle,
   faShoppingCart
 } from "@fortawesome/free-solid-svg-icons";
+
 import {
   faFacebook,
   faInstagram,
   faSkype,
 } from "@fortawesome/free-brands-svg-icons";
+
 import "./Layout.css";
 
-const slides = [
-  {
-    id: 1,
-    title: "Dua Lipa Live Concert",
-    subtitle: "MUSIC CONCERT",
-    description: "Experience an unforgettable night with Dua Lipa performing her greatest hits live on stage.",
-    image: "src/assets/images/Dua.jpg"
-  },
-  {
-    id: 2,
-    title: "Romeo & Juliet",
-    subtitle: "THEATER DRAMA",
-    description: "A timeless Shakespearean masterpiece brought to life with powerful acting and emotional storytelling.",
-    image: "src/assets/images/Romeo.jpg"
-  },
-  {
-    id: 3,
-    title: "Volleyball Championship",
-    subtitle: "SPORTS EVENT",
-    description: "Watch top teams battle it out in an intense volleyball match filled with energy and excitement.",
-    image: "src/assets/images/Vole.jpg"
-  },
-];
-
-const movieThumbnails = [
-  { id: 1, image: "src/assets/images/Dua.jpg" },
-  { id: 2, image: "src/assets/images/Romeo.jpg" },
-  { id: 3, image: "src/assets/images/Vole.jpg" },
-];
-
 function Layout({ children }) {
+  const [slides, setSlides] = useState([]);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [scrolled, setScrolled] = useState(false);
   const [openUserPanel, setOpenUserPanel] = useState(false);
+  const [setting, setSetting] = useState(null);
   const location = useLocation();
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide(prev => (prev + 1) % slides.length);
-    }, 6000);
-    return () => clearInterval(interval);
+    const fetchSliders = async () => {
+      try {
+        const res = await fetch("https://localhost:7204/api/SliderGetAll");
+        let data = await res.json();
+
+        if (!Array.isArray(data)) data = [];
+
+        data.sort((a, b) => b.id - a.id);
+        const last3 = data.slice(0, 3);
+
+        setSlides(last3);
+      } catch (err) {
+        console.error("Slider load error:", err);
+      }
+    };
+
+    fetchSliders();
   }, []);
+
+  useEffect(() => {
+    const fetchSetting = async () => {
+      try {
+        const res = await fetch("https://localhost:7204/api/SettingGetById/1");
+        if (!res.ok) throw new Error("Setting load error");
+        const data = await res.json();
+        setSetting(data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchSetting();
+  }, []);
+
+  useEffect(() => {
+    if (slides.length === 0) return;
+
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 6000);
+
+    return () => clearInterval(interval);
+  }, [slides]);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 100);
@@ -70,24 +79,38 @@ function Layout({ children }) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const nextSlide = () => setCurrentSlide(prev => (prev + 1) % slides.length);
-  const prevSlide = () => setCurrentSlide(prev => (prev - 1 + slides.length) % slides.length);
-  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
+  const nextSlide = () =>
+    setCurrentSlide((prev) => (prev + 1) % slides.length);
+
+  const prevSlide = () =>
+    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+
+  const scrollToTop = () =>
+    window.scrollTo({ top: 0, behavior: "smooth" });
 
   return (
     <div className="layout">
-      {/* Navbar */}
+      {/* ================= NAVBAR ================= */}
       <nav className={`navbar streamlab-navbar ${scrolled ? "scrolled" : ""}`}>
         <div className="nav-left">
           <Link to="/" className="logo">
             <span className="logo-icon">▶</span>
-            <span className="logo-moon">MOON</span>
-            <span className="accent">TICKET</span>
+            {setting?.websiteName ? (
+              <>
+                {/* MOON hissəsi */}
+                <span className="logo-moon">{setting.websiteName.split(" ")[0]}</span>
+                {/* TICKET hissəsi */}
+                <span className="accent">{setting.websiteName.split(" ")[1] ?? ""}</span>
+              </>
+            ) : (
+              <>
+                <span className="logo-moon">MOON</span>
+                <span className="accent">TICKET</span>
+              </>
+            )}
           </Link>
 
           <ul className="nav-links">
-            {/* Events Dropdown */}
-
             <li><Link to="/" className="active">Home</Link></li>
             <li><Link to="/about">About</Link></li>
             <li><Link to="/blog">Blog</Link></li>
@@ -129,44 +152,55 @@ function Layout({ children }) {
           <button className="icon-btn">
             <FontAwesomeIcon icon={faShoppingCart} />
           </button>
-          {/* <button className="subscribe-btn">SUBSCRIBE</button> */}
-          {/* <Link to="/contact" className="subscribe-btn " >SUBSCRIBE</Link> */}
           <Link to="/contact">
             <button className="subscribe-btn">SUBSCRIBE</button>
           </Link>
-
         </div>
       </nav>
 
-      {/* User Panel */}
-      <div className={`overlay ${openUserPanel ? "show" : ""}`} onClick={() => setOpenUserPanel(false)}></div>
+      {/* ================= USER PANEL ================= */}
+      <div
+        className={`overlay ${openUserPanel ? "show" : ""}`}
+        onClick={() => setOpenUserPanel(false)}
+      ></div>
+
       <div className={`drawer ${openUserPanel ? "open" : ""}`}>
         <button className="close-btn" onClick={() => setOpenUserPanel(false)}>✕</button>
         <div className="drawer-links">
-          <Link to="/signup" className="drawer-linkk" onClick={() => setOpenUserPanel(false)}>Register</Link>
-          <span className="slash">/</span>
-          <Link to="/signin" className="drawer-link" onClick={() => setOpenUserPanel(false)}>Login</Link>
+          <Link to="/signup" onClick={() => setOpenUserPanel(false)}>Register</Link>
+          <span>/</span>
+          <Link to="/signin" onClick={() => setOpenUserPanel(false)}>Login</Link>
         </div>
       </div>
 
-      {/* Hero Slider */}
-      {location.pathname === "/" && (
+      {/* ================= HERO SLIDER ================= */}
+      {location.pathname === "/" && slides.length > 0 && (
         <div className="hero-slider">
           {slides.map((slide, index) => (
             <div
               key={slide.id}
               className={`hero-slide ${index === currentSlide ? "active" : ""}`}
-              style={{ backgroundImage: `url(${slide.image})` }}
+              style={{
+                backgroundImage: `url(${slide.image})`
+                // əgər image relative-dirsə:
+                // backgroundImage: `url(https://localhost:7204/${slide.image})`
+              }}
             >
               <div className="hero-overlay"></div>
+
               <div className="hero-content">
-                <div className="hover-zoom hero-text">
-                  <span className="hero-category">{slide.subtitle}</span>
+                <div className="hero-text hover-zoom">
+                  <span className="hero-category">{slide.subTitle}</span>
                   <h1 className="hero-title">{slide.title}</h1>
-                  <p className="hero-description">{slide.description}</p>
+                  <p className="hero-description">{slide.desc}</p>
+
                   <div className="hero-actions">
-                    <button className="play-btnn"><FontAwesomeIcon icon={faTicketAlt} />BUY TICKET</button>
-                    <button className="watchlater-btn"><FontAwesomeIcon icon={faInfoCircle} /> MORE INFO</button>
+                    <button className="play-btnn">
+                      <FontAwesomeIcon icon={faTicketAlt} /> BUY TICKET
+                    </button>
+                    <button className="watchlater-btn">
+                      <FontAwesomeIcon icon={faInfoCircle} /> MORE INFO
+                    </button>
                   </div>
                 </div>
               </div>
@@ -174,18 +208,24 @@ function Layout({ children }) {
           ))}
 
           <div className="thumbnails-carousel">
-            <button className="carousel-btn prev" onClick={prevSlide}><FontAwesomeIcon icon={faChevronLeft} /></button>
+            <button className="carousel-btn prev" onClick={prevSlide}>
+              <FontAwesomeIcon icon={faChevronLeft} />
+            </button>
+
             <div className="thumbnails-container">
-              {movieThumbnails.map((movie, index) => (
+              {slides.map((slide, index) => (
                 <div
-                  key={movie.id}
+                  key={slide.id}
                   className={`thumbnail ${index === currentSlide ? "active" : ""}`}
-                  style={{ backgroundImage: `url(${movie.image})` }}
+                  style={{ backgroundImage: `url(${slide.image})` }}
                   onClick={() => setCurrentSlide(index)}
                 ></div>
               ))}
             </div>
-            <button className="carousel-btn next" onClick={nextSlide}><FontAwesomeIcon icon={faChevronRight} /></button>
+
+            <button className="carousel-btn next" onClick={nextSlide}>
+              <FontAwesomeIcon icon={faChevronRight} />
+            </button>
           </div>
         </div>
       )}
@@ -193,14 +233,25 @@ function Layout({ children }) {
       {/* Main Content */}
       <main className="main-content">{children}</main>
 
-      {/* Footer */}
       <footer className="footer">
         <div className="footer-content">
           <div className="footer-section">
             <div className="footer-logo">
-              <span className="logo-icon">▶</span> MOON<span className="accent">TICKET</span>
+              <span className="logo-icon">▶</span>{" "}
+              {setting?.websiteName ? (
+                <>
+                  <span className="logo-moon">{setting.websiteName.split(" ")[0]}</span>{" "}
+                  <span className="accent">{setting.websiteName.split(" ")[1] ?? "TICKET"}</span>
+                </>
+              ) : (
+                <>
+                  <span className="logo-moon">MOON</span>{" "}
+                  <span className="accent">TICKET</span>
+                </>
+              )}
+
             </div>
-            <p className="footer-description">Discover and book the best events with MoonTicket.</p>
+            <p className="footer-description">{setting?.footerDesc ?? "Discover and book the best events with MoonTicket."}</p>
             <div className="social-icons">
               <a href="#" className="social-icon"><FontAwesomeIcon icon={faFacebook} /></a>
               <a href="#" className="social-icon"><FontAwesomeIcon icon={faInstagram} /></a>
@@ -240,7 +291,7 @@ function Layout({ children }) {
           </div>
         </div>
         <div className="footer-bottom">
-          <p>© 2025 MoonTicket — Owned and developed by Aydan. All rights reserved.</p>
+          <p>© 2025 {setting?.websiteName ?? "MoonTicket"} — Owned and developed by Aydan. All rights reserved.</p>
         </div>
         <button className="scroll-top-btn" onClick={scrollToTop}><FontAwesomeIcon icon={faChevronUp} /></button>
       </footer>

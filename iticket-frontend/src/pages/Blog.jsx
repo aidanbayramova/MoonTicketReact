@@ -1,14 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Blog.css";
 import ScrollingTicker from "../components/ScrollingTicker"; 
 import BlogCard from "../components/BlogCard"; 
 
-
 export default function Blog() {
+  const [bannerImg, setBannerImg] = useState(null);
+
+  useEffect(() => {
+    fetch("https://localhost:7204/api/SettingGetAll")
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data) && data.length > 0) {
+          setBannerImg(data[0].bannerImg); 
+        }
+      })
+      .catch(err => console.error(err));
+  }, []);
+
   return (
     <div className="blog-page">
-      <section className="blog-banner">
+      <section
+        className="blog-banner"
+        style={{
+          background: bannerImg
+            ? `url('${bannerImg}') center center / cover no-repeat`
+            : "url('../assets/images/hello.jpg') center center / cover no-repeat"
+        }}
+      >
         <div className="banner-overlay"></div>
         <div className="container">
           <div className="banner-content">
@@ -24,12 +43,9 @@ export default function Blog() {
           </div>
         </div>
       </section>
+
       <ScrollingTicker/>
       <BlogCard/>
-
-
-
-     
     </div>
   );
 }

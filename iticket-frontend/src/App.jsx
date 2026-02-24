@@ -1,9 +1,12 @@
 import { Routes, Route, useLocation } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
+
 import Concert from "./pages/Concert";
 import Theater from "./pages/Theater";
 import Kids from "./pages/Kids";
@@ -12,27 +15,30 @@ import Movie from "./pages/Movie";
 import Museum from "./pages/Museum";
 import Circus from "./pages/Circus";
 import Tourism from "./pages/Tourism";
+import Cinema from "./pages/Cinema";
+
+import ConcertDetail from "./pages/ConcertDetail";
+import SportDetail from "./pages/SportDetail";
+import TheaterDetail from "./pages/TheaterDetail";
+import CircusDetail from "./pages/CircusDetail";
+import KidsDetail from "./pages/KidsDetail";
+import MuseumsDetail from "./pages/MuseumDetail";
+import TourismDetail from "./pages/TourismDetail";
+
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
-import Cinema from "./pages/Cinema"; 
-import ConcertDetail from "./pages/ConcertDetail"; 
-import SportDetail from "./pages/SportDetail"; 
-import  TheaterDetail from "./pages/TheaterDetail"; 
-import  CircusDetail from "./pages/CircusDetail"; 
-import  KidsDetail from "./pages/KidsDetail"; 
-import  MuseumsDetail from "./pages/MuseumDetail"; 
-import  TourismDetail from "./pages/TourismDetail"; 
-import  Dashboard from "./pages/admin/Dashboard"; 
+
+/* ===== ADMIN ===== */
+import Dashboard from "./pages/admin/Dashboard";
+import SliderIndex from "./pages/admin/slider/SliderIndex";
+import CreateSliderForm from "./pages/admin/slider/CreateSliderForm";
+import EditSliderForm from "./pages/admin/slider/EditSliderForm";
 
 
-
-
-
-
-
-
-
-import React, { useState, useEffect } from "react";
+import SettingIndex from "./pages/admin/setting/SettingIndex";
+import CreateSettingForm from "./pages/admin/setting/CreateSettingForm";
+import EditSettingForm from "./pages/admin/setting/EditSettingForm";
+import SettingDetail from "./pages/admin/setting/SettingDetail";
 
 function App() {
   const location = useLocation();
@@ -47,9 +53,8 @@ function App() {
   if (loading) {
     return (
       <section style={styles.preloaderSection}>
-        <h1 style={styles.logoText} className="preloader-text">
+        <h1 style={styles.logoText}>
           <span style={styles.logoIcon}>▶</span>
-          
           <span style={{ color: "#fff" }}>MOON</span>
           <span style={{ color: "#640c0c" }}>TICKET</span>
         </h1>
@@ -63,6 +68,7 @@ function App() {
       <Route path="/about" element={<Layout><About /></Layout>} />
       <Route path="/blog" element={<Layout><Blog /></Layout>} />
       <Route path="/contact" element={<Layout><Contact /></Layout>} />
+
       <Route path="/event/concert" element={<Layout><Concert /></Layout>} />
       <Route path="/event/theater" element={<Layout><Theater /></Layout>} />
       <Route path="/event/kids" element={<Layout><Kids /></Layout>} />
@@ -71,20 +77,34 @@ function App() {
       <Route path="/event/museum" element={<Layout><Museum /></Layout>} />
       <Route path="/event/circus" element={<Layout><Circus /></Layout>} />
       <Route path="/event/tourism" element={<Layout><Tourism /></Layout>} />
+
       <Route path="/event/cinema/:id" element={<Layout><Cinema /></Layout>} />
       <Route path="/event/concertdetail/:id" element={<Layout><ConcertDetail /></Layout>} />
       <Route path="/event/sportdetail/:id" element={<Layout><SportDetail /></Layout>} />
       <Route path="/event/theaterdetail/:id" element={<Layout><TheaterDetail /></Layout>} />
       <Route path="/event/circusdetail/:id" element={<Layout><CircusDetail /></Layout>} />
       <Route path="/event/kidsdetail/:id" element={<Layout><KidsDetail /></Layout>} />
-      <Route path="/event/museumdetail/:id" element={<Layout><MuseumsDetail/></Layout>} />
-      <Route path="/event/tourismdetail/:id" element={<Layout><TourismDetail/></Layout>} />
-      <Route path="/admin/dashboard" element={<Dashboard />} />
-
-
+      <Route path="/event/museumdetail/:id" element={<Layout><MuseumsDetail /></Layout>} />
+      <Route path="/event/tourismdetail/:id" element={<Layout><TourismDetail /></Layout>} />
 
       <Route path="/signup" element={<SignUp />} />
       <Route path="/signin" element={<SignIn />} />
+
+      {/* ================= ADMIN  ================= */}
+      <Route path="/admin" element={<Dashboard />}>
+        <Route index element={<h2>Admin Dashboard</h2>} />
+        <Route path="dashboard" element={<h2 style={{fontSize:"40px",display:"flex" , justifyContent:"center",alignItems:"center",marginTop:"-3pc"}}>Admin Dashboard</h2>} />
+
+        <Route path="slider/sliderIndex" element={<SliderIndex />} />
+        <Route path="slider/createSliderForm" element={<CreateSliderForm />} />
+        <Route path="slider/editSliderForm/:id" element={<EditSliderForm />} />
+
+        <Route path="setting/settingIndex" element={<SettingIndex />} />
+        <Route path="setting/createSettingForm" element={<CreateSettingForm />} />
+        <Route path="setting/editSettingForm/:id" element={<EditSettingForm />} />
+        <Route path="setting/settingDetail/:id" element={<SettingDetail />} />
+
+      </Route>
     </Routes>
   );
 }
@@ -94,10 +114,7 @@ export default App;
 const styles = {
   preloaderSection: {
     position: "fixed",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100%",
+    inset: 0,
     backgroundColor: "#000",
     display: "flex",
     justifyContent: "center",
@@ -107,17 +124,15 @@ const styles = {
   logoText: {
     fontSize: "50px",
     fontWeight: "bold",
-    letterSpacing: "2px",
-    animation: "flipOut 2s forwards",
     display: "flex",
     alignItems: "center",
     gap: "10px",
+    animation: "flipOut 2s forwards",
   },
   logoIcon: {
     color: "#640c0c",
     fontSize: "55px",
-    marginRight: "10px",
-  }
+  },
 };
 
 const styleSheet = document.styleSheets[0];

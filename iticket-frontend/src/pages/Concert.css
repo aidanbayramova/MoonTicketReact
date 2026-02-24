@@ -276,7 +276,7 @@ body {
     background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.2), transparent);
   }
   
-  .concert-card-overlay-content {
+  .concert-card-overlay-contentt {
     position:absolute; bottom:1rem; left:1rem; right:1rem; z-index:5;
     background: linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.4), rgba(0,0,0,0.2));
     padding: 0.5rem 1rem; border-radius:0.5rem;
@@ -370,7 +370,7 @@ body {
     transform: scale(1.1);
   }
   
-  .concert-card-overlay-content {
+  .concert-card-overlay-contentt {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -382,7 +382,7 @@ body {
     transition: opacity 0.5s ease;
   }
   
-  .concert-card:hover .concert-card-overlay-content {
+  .concert-card:hover .concert-card-overlay-contentt {
     opacity: 1;
   }
   

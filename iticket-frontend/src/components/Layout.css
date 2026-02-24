@@ -175,7 +175,7 @@
 }
 
 .search:focus {
-  background: rgba(255, 255, 255, 0.2);
+  /* background: rgba(255, 255, 255, 0.2); */
   width: 300px;
 }
 

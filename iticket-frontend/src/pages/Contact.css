@@ -15,7 +15,6 @@ body {
     height: 400px;
     width: 100vw;
     margin-left: calc(-50vw + 50%);
-    background: url('../assets/images/hello.jpg') center center / cover no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;

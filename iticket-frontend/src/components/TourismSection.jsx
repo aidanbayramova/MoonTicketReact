@@ -17,7 +17,7 @@ const TourismSection = () => {
         { id: 5, title: "Paris Tour", genre: "Romance • Culture", rating: "8.9", year: "2023", img: "src/assets/images/paris.jpg" },
         { id: 6, title: "Spain Adventure", genre: "Beach • Relax", rating: "9.2", year: "2019", img: "src/assets/images/spanish.jpg" },
     ];
-    
+
 
     const visibleCards = 4;
     const maxIndex = tours.length - visibleCards;
@@ -46,7 +46,7 @@ const TourismSection = () => {
                                 onMouseLeave={() => setHoveredCard(null)}
                                 onClick={() => window.location.href = "/event/Tourism"}
                             >
-                                &gt; 
+                                &gt;
                                 {hoveredCard === "explore" && (
                                     <span className="tourism-explore-tooltip">Explore More</span>
                                 )}
@@ -98,6 +98,12 @@ const TourismSection = () => {
                                             <button className="tourism-info-btn">
                                                 <Info size={20} /> Info
                                             </button>
+                                           
+
+                                            
+                                            {/* <Link to={`/event/tourismdetail/${item.id}`} className="tourism-info-btn" style={{ color: "red" }}>
+                                                <Info size={12} /> Info
+                                            </Link> */}
                                         </div>
                                     </div>
                                 </div>

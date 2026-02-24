@@ -1,18 +1,41 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import "./HeroSection.css"
 
-export default function HeroSection({
-  backgroundImage = "src/assets/images/hello.jpg",
-  videoSrc = "src/assets/videos/Dua.mp4",
-}) {
+const API_BASE = "https://localhost:7204"
+
+export default function HeroSection() {
+  const [setting, setSetting] = useState(null)
   const [isVideoOpen, setIsVideoOpen] = useState(false)
+
+  const getFullUrl = (url) => {
+    if (!url) return ""
+    return url.startsWith("http")
+      ? url
+      : `${API_BASE}${url}`
+  }
+
+  useEffect(() => {
+    fetch(`${API_BASE}/api/SettingGetAll`)
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data) && data.length > 0) {
+          setSetting(data[0])
+        }
+      })
+      .catch(err => console.error("Setting fetch error:", err))
+  }, [])
+
+  if (!setting) {
+    return <div className="hero-loading">Loading...</div>
+  }
 
   return (
     <>
       <section
         className="hero"
-        style={{ backgroundImage: `url(${backgroundImage})` }}
-      >
+        style={{
+          backgroundImage: `url(${getFullUrl(setting.bannerImg)})`
+        }}>
         <div className="hero__overlay" />
 
         <div className="hero__content">
@@ -42,30 +65,31 @@ export default function HeroSection({
       </section>
 
       {isVideoOpen && (
-        <div className="modal" role="dialog" aria-modal="true">
-          <div className="modal__dialog">
-            <button
-              className="modal__close"
-              aria-label="Videonu bağla"
-              onClick={() => setIsVideoOpen(false)}
-            >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M18.3 5.71 12 12l6.3 6.29-1.41 1.42L10.59 13.4 4.29 19.7 2.88 18.3 9.17 12 2.88 5.71 4.29 4.29 10.59 10.6l6.3-6.3z"></path>
-              </svg>
-            </button>
+  <div className="modal" role="dialog" aria-modal="true">
+    <div className="modal__dialog">
+      <button
+        className="modal__close"
+        aria-label="Videonu bağla"
+        onClick={() => setIsVideoOpen(false)}
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M18.3 5.71 12 12l6.3 6.29-1.41 1.42L10.59 13.4 4.29 19.7 2.88 18.3 9.17 12 2.88 5.71 4.29 4.29 10.59 10.6l6.3-6.3z"></path>
+        </svg>
+      </button>
 
-            <video
-              className="modal__video"
-              src={videoSrc}
-              controls
-              autoPlay
-              poster={backgroundImage}
-            >
-              Brauzeriniz video formatını dəstəkləmir.
-            </video>
-          </div>
-        </div>
-      )}
+      <video
+        className="modal__video"
+        src={getFullUrl(setting.video)}   // databasedən gələn video
+        controls
+        autoPlay
+        poster={getFullUrl(setting.bannerImg)} // hero image poster
+      >
+        Brauzeriniz video formatını dəstəkləmir.
+      </video>
+    </div>
+  </div>
+)}
+
     </>
   )
 }

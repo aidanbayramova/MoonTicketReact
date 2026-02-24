@@ -1,0 +1,765 @@
+[
+  {
+    "ContainingType": "MoonTicketApi.Controllers.CategoryController",
+    "Method": "Create",
+    "RelativePath": "api/CategoryCreate",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Description",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Image",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "Video",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MoonTicketApi.Controllers.CategoryController",
+    "Method": "Delete",
+    "RelativePath": "api/CategoryDelete/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MoonTicketApi.Controllers.CategoryController",
+    "Method": "Edit",
+    "RelativePath": "api/CategoryEdit/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Description",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Image",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "Video",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MoonTicketApi.Controllers.CategoryController",
+    "Method": "GetAll",
+    "RelativePath": "api/CategoryGetAll",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Service.DTOs.Admin.Category.CategoryDto, Service, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MoonTicketApi.Controllers.CategoryController",
+    "Method": "GetById",
+    "RelativePath": "api/CategoryGetById/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Service.DTOs.Admin.Category.CategoryDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MoonTicketApi.Controllers.LanguageController",
+    "Method": "Create",
+    "RelativePath": "api/LanguageCreate",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "Service.DTOs.Admin.Language.LanguageCreateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Service.DTOs.Admin.Language.LanguageDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MoonTicketApi.Controllers.LanguageController",
+    "Method": "Delete",
+    "RelativePath": "api/LanguageDelete/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MoonTicketApi.Controllers.LanguageController",
+    "Method": "Edit",
+    "RelativePath": "api/LanguageEdit/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "Service.DTOs.Admin.Language.LanguageEditDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MoonTicketApi.Controllers.LanguageController",
+    "Method": "GetAll",
+    "RelativePath": "api/LanguageGetAll",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Service.DTOs.Admin.Language.LanguageDto, Service, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MoonTicketApi.Controllers.LanguageController",
+    "Method": "GetById",
+    "RelativePath": "api/LanguageGetById/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Service.DTOs.Admin.Language.LanguageDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MoonTicketApi.Controllers.PersonController",
+    "Method": "Create",
+    "RelativePath": "api/PersonCreate",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "Service.DTOs.Admin.Person.PersonCreateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Service.DTOs.Admin.Person.PersonDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MoonTicketApi.Controllers.PersonController",
+    "Method": "Delete",
+    "RelativePath": "api/PersonDelete/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MoonTicketApi.Controllers.PersonController",
+    "Method": "Edit",
+    "RelativePath": "api/PersonEdit/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "Service.DTOs.Admin.Person.PersonEditDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MoonTicketApi.Controllers.PersonController",
+    "Method": "GetAll",
+    "RelativePath": "api/PersonGetAll",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Service.DTOs.Admin.Person.PersonDto, Service, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MoonTicketApi.Controllers.PersonController",
+    "Method": "GetById",
+    "RelativePath": "api/PersonGetById/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Service.DTOs.Admin.Person.PersonDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MoonTicketApi.Controllers.SettingController",
+    "Method": "Create",
+    "RelativePath": "api/SettingCreate",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "WebsiteName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "FooterDesc",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "BannerImg",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "AboutImg",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "AboutTitle",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "AboutDescription",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Video",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "ContactTitleOne",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ContactTitleTwo",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Number",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MoonTicketApi.Controllers.SettingController",
+    "Method": "Edit",
+    "RelativePath": "api/SettingEdit/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "WebsiteName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "IsShowWebsiteName",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "FooterDesc",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "IsShowFooterDesc",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "AboutTitle",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "IsShowAboutTitle",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "AboutDescription",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "IsShowAboutDescription",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "ContactTitleOne",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "IsShowContactTitleOne",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "ContactTitleTwo",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "IsShowContactTitleTwo",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "IsShowEmail",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Number",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "IsShowNumber",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "BannerImg",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "AboutImg",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "Video",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MoonTicketApi.Controllers.SettingController",
+    "Method": "GetAll",
+    "RelativePath": "api/SettingGetAll",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MoonTicketApi.Controllers.SettingController",
+    "Method": "GetById",
+    "RelativePath": "api/SettingGetById/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MoonTicketApi.Controllers.SliderController",
+    "Method": "Create",
+    "RelativePath": "api/SliderCreate",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "SubTitle",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Title",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Desc",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Image",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MoonTicketApi.Controllers.SliderController",
+    "Method": "Delete",
+    "RelativePath": "api/SliderDelete/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MoonTicketApi.Controllers.SliderController",
+    "Method": "Edit",
+    "RelativePath": "api/SliderEdit/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "SubTitle",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Title",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Desc",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Image",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MoonTicketApi.Controllers.SliderController",
+    "Method": "GetAll",
+    "RelativePath": "api/SliderGetAll",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MoonTicketApi.Controllers.SliderController",
+    "Method": "GetById",
+    "RelativePath": "api/SliderGetById/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MoonTicketApi.Controllers.SubCategoryController",
+    "Method": "Create",
+    "RelativePath": "api/SubCategoryCreate",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "Service.DTOs.Admin.SubCategory.SubCategoryCreateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MoonTicketApi.Controllers.SubCategoryController",
+    "Method": "Delete",
+    "RelativePath": "api/SubCategoryDelete/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MoonTicketApi.Controllers.SubCategoryController",
+    "Method": "Edit",
+    "RelativePath": "api/SubCategoryEdit/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "Service.DTOs.Admin.SubCategory.SubCategoryEditDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MoonTicketApi.Controllers.SubCategoryController",
+    "Method": "GetAll",
+    "RelativePath": "api/SubCategoryGetAll",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Service.DTOs.Admin.SubCategory.SubCategoryDto, Service, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MoonTicketApi.Controllers.SubCategoryController",
+    "Method": "GetById",
+    "RelativePath": "api/SubCategoryGetById/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Service.DTOs.Admin.SubCategory.SubCategoryDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  }
+]

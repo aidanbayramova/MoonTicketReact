@@ -83,7 +83,7 @@ export default function Theater() {
                       <div className="theater-card-gradient" />
                       <span className="theater-genre">{theater.genre}</span>
 
-                      <div className="theater-card-overlay-content">
+                      <div className="theater-card-overlay-contentt">
                         <h3 className="theater-card-title">{theater.title}</h3>
                         <div className="theater-card-meta">
                           <span>{theater.date}</span> • <span>{theater.location}</span>

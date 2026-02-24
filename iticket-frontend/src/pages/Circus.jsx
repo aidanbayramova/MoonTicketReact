@@ -78,7 +78,7 @@ export default function Circus() {
                       <div className="circus-card-gradient" />
                       <span className="circus-type">{item.type}</span>
 
-                      <div className="circus-card-overlay-content">
+                      <div className="circus-card-overlay-contentt">
                         <h3 className="circus-card-title">{item.title}</h3>
                         <div className="circus-card-meta">
                           <span>{item.date}</span> • <span>{item.location}</span>

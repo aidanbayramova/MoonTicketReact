@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Info } from "lucide-react";
 import "./Concert.css";
@@ -13,7 +13,6 @@ import ZaraLarsson from "../assets/images/Zara Larsson.jpg";
 import ABBA from "../assets/images/ABBA.jpg";
 import Coldplay from "../assets/images/Coldplay.jpg";
 
-
 const concertsData = [
   { id: 1, title: "Dua Lipa Concert", date: "2025-09-20", location: "London, Wembley ", price: "80-300 EUR", img: Lipa, category: "Pop" },
   { id: 2, title: "Shakira World Tour", date: "2025-10-05", location: "Berlin, Mercedes-Benz ", price: "70-250 EUR", img: c3Img, category: "Rock" },
@@ -23,13 +22,13 @@ const concertsData = [
   { id: 6, title: "Adele Tour", date: "2025-10-05", location: "Berlin, Mercedes-Benz ", price: "70-250 EUR", img: Adele, category: "Rock" },
   { id: 7, title: "Zara Larsson Concert", date: "2025-11-12", location: "Paris, Accor Arena", price: "60-220 EUR", img: ZaraLarsson, category: "Pop" },
   { id: 8, title: "Coldplay Live", date: "2025-12-01", location: "Madrid, Santiago  ", price: "75-280 EUR", img: Coldplay, category: "Jazz" },
-
 ];
 
 export default function Concert() {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("All");
   const [hoveredCard, setHoveredCard] = useState(null);
+  const [bannerImg, setBannerImg] = useState(null);
 
   const filteredConcerts = concertsData.filter(
     (concert) =>
@@ -37,10 +36,29 @@ export default function Concert() {
       concert.title.toLowerCase().includes(search.toLowerCase())
   );
 
+  useEffect(() => {
+    // Fetch banner image from API
+    fetch("https://localhost:7204/api/SettingGetAll")
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) {
+          setBannerImg(data[0].bannerImg); // assuming bannerImg is the field for concert banner
+        }
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
   return (
     <div className="concertt-page">
       {/* Banner */}
-      <section className="concertt-banner">
+      <section
+        className="concertt-banner"
+        style={{
+          background: bannerImg
+            ? `url('${bannerImg}') center center / cover no-repeat`
+            : "url('../assets/images/hello.jpg') center center / cover no-repeat"
+        }}
+      >
         <div className="banner-overlay"></div>
         <div className="container">
           <div className="banner-content">
@@ -96,15 +114,13 @@ export default function Concert() {
                       <div className="concert-card-gradient" />
                       <span className="concert-category">{concert.category}</span>
 
-                      <div className="concert-card-overlay-content">
+                      <div className="concert-card-overlay-contentt">
                         <h3 className="concert-card-title">{concert.title}</h3>
                         <div className="concert-card-meta">
                           <span>{concert.date}</span> • <span>{concert.location}</span>
                         </div>
                         <p className="price">{concert.price}</p>
                       </div>
-
-                      {/* Info düyməsi */}
 
                       <Link to={`/event/concertdetail/${concert.id}`} className="info-btn" style={{ color: "red" }}>
                         <Info size={12} /> Info
@@ -114,7 +130,6 @@ export default function Concert() {
                 </Link>
                 {hoveredCard === i && <div className="concert-card-glow" />}
               </div>
-
             ))
           )}
         </div>

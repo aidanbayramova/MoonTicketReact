@@ -46,7 +46,7 @@ const SuccessStory = () => {
       <div className="overlay"></div>
       <div className="container">
         <h2 className="title">Our Success Story</h2>
-        <p className="subtitle">Our coffee world, your favorite place</p>
+        <p className="subtitle"></p>
         <div className="stats-grid">
           {statsData.map((stat, index) => (
             <div key={index} className="stat-card">

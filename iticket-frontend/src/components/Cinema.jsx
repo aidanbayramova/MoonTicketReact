@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import "./Cinema.css";
 
-// Demo filmlər
 const movies = [
   {
     id: "1",
@@ -23,7 +22,6 @@ const movies = [
 function Cinema() {
   const { id } = useParams();
 
-  // Seçilmiş film
   const movie = movies.find((m) => m.id === id);
 
   const [selectedDate, setSelectedDate] = useState("5");

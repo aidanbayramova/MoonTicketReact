@@ -78,7 +78,7 @@ export default function Tourism() {
                       <div className="tourism-card-gradient" />
                       <span className="tourism-type">{item.type}</span>
 
-                      <div className="tourism-card-overlay-content">
+                      <div className="tourism-card-overlay-contentt">
                         <h3 className="tourism-card-title">{item.title}</h3>
                         <div className="tourism-card-meta">
                           <span>{item.date}</span> • <span>{item.location}</span>
@@ -86,9 +86,9 @@ export default function Tourism() {
                         <p className="price">{item.price}</p>
                       </div>
 
-                        <Link to={`/event/tourismdetail/${item.id}`} className="info-btn" style={{ color: "red" }}>
-                                            <Info size={12} /> Info
-                                          </Link>
+                      <Link to={`/event/tourismdetail/${item.id}`} className="info-btn" style={{ color: "red" }}>
+                        <Info size={12} /> Info
+                      </Link>
                     </div>
                   </div>
                 </Link>

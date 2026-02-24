@@ -172,7 +172,7 @@ body, html {
     background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.2), transparent);
 }
 
-.tourism-card-overlay-content {
+.tourism-card-overlay-contentt {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -184,7 +184,7 @@ body, html {
     transition: opacity 0.5s ease;
 }
 
-.tourism-card:hover .tourism-card-overlay-content {
+.tourism-card:hover .tourism-card-overlay-contentt {
     opacity: 1;
 }
 

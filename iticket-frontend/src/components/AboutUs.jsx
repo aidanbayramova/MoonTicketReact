@@ -1,24 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./AboutUs.css";
 
+
 export default function AboutUs() {
+  const [aboutData, setAboutData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("https://localhost:7204/api/SettingGetAll")
+      .then(res => res.json())
+      .then(data => {
+        console.log("Fetched About data:", data);
+        // data arraydirsə, birinci element götür
+        setAboutData(Array.isArray(data) ? data[0] : data);
+      })
+      .catch(err => {
+        console.error("Fetch error:", err);
+        setAboutData(null);
+      })
+      .finally(() => setLoading(false));
+  }, []);
+  
+
+  if (loading) return <p>Loading...</p>;
+  if (!aboutData) return <p>No About Us data available</p>;
+
   return (
     <section className="about-section">
       <div className="about-row">
         <div className="about-image-box">
           <img
-            src="src/assets/images/salama.jpg"
+            src={aboutData.aboutImg} // Kiçik hərflə
             alt="Haqqımızda"
             className="about-image"
           />
         </div>
 
         <div className="about-text">
-          <h2 className="about-title">Your Gateway to Europe’s Best Events</h2>
-          <p className="about-description">
-          MoonTicket is a modern ticketing platform with a mission to host the most remarkable and exciting events all across Europe. Our goal is not only to provide ticket sales but also to connect people with the magical world of music, art, sports, and culture. With MoonTicket, users can enjoy fast reservations, secure payments, and a mobile-friendly interface that ensures easy access to every event. We believe that every event creates a memory, and every memory is a lasting treasure. MoonTicket is more than a ticket – it’s the gateway to unforgettable experiences across Europe.
-          </p>
-        
+          <h2 className="about-title">{aboutData.aboutTitle}</h2>
+          <p className="about-description">{aboutData.aboutDescription}</p>
         </div>
       </div>
     </section>

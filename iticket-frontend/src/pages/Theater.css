@@ -172,7 +172,7 @@
     background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.2), transparent);
   }
   
-  .theater-card-overlay-content {
+  .theater-card-overlay-contentt {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -184,7 +184,7 @@
     transition: opacity 0.5s ease;
   }
   
-  .theater-card:hover .theater-card-overlay-content {
+  .theater-card:hover .theater-card-overlay-contentt {
     opacity: 1;
   }
   

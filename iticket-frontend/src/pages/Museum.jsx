@@ -78,7 +78,7 @@ export default function Museum() {
                       <div className="museum-card-gradient" />
                       <span className="museum-type">{item.type}</span>
 
-                      <div className="museum-card-overlay-content">
+                      <div className="museum-card-overlay-contentt">
                         <h3 className="museum-card-title">{item.title}</h3>
                         <div className="museum-card-meta">
                           <span>{item.date}</span> • <span>{item.location}</span>
