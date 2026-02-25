@@ -40,6 +40,10 @@ import CreateSettingForm from "./pages/admin/setting/CreateSettingForm";
 import EditSettingForm from "./pages/admin/setting/EditSettingForm";
 import SettingDetail from "./pages/admin/setting/SettingDetail";
 
+import CategoryIndex from "./pages/admin/category/CategoryIndex";
+import CreateCategoryForm from "./pages/admin/category/CreateCategoryForm";
+import EditCategoryForm from "./pages/admin/category/EditCategoryForm";
+
 function App() {
   const location = useLocation();
   const [loading, setLoading] = useState(true);
@@ -104,6 +108,9 @@ function App() {
         <Route path="setting/editSettingForm/:id" element={<EditSettingForm />} />
         <Route path="setting/settingDetail/:id" element={<SettingDetail />} />
 
+        <Route path="category/categoryIndex" element={<CategoryIndex />} />
+        <Route path="category/createCategoryForm" element={<CreateCategoryForm />} />
+        <Route path="category/editCategoryForm/:id" element={<EditCategoryForm />} />
       </Route>
     </Routes>
   );

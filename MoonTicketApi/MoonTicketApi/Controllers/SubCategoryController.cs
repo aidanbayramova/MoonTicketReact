@@ -16,7 +16,6 @@ namespace MoonTicketApi.Controllers
             _subCategoryService = subCategoryService;
         }
 
-        // GET: api/SubCategory
         [HttpGet]
         public async Task<ActionResult<IEnumerable<SubCategoryDto>>> GetAll()
         {
@@ -24,7 +23,6 @@ namespace MoonTicketApi.Controllers
             return Ok(subCategories);
         }
 
-        // GET: api/SubCategory/5
         [HttpGet("{id}")]
         public async Task<ActionResult<SubCategoryDto>> GetById(int id)
         {
@@ -39,7 +37,6 @@ namespace MoonTicketApi.Controllers
             }
         }
 
-        // POST: api/SubCategory
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] SubCategoryCreateDto dto)
         {
@@ -54,7 +51,6 @@ namespace MoonTicketApi.Controllers
             }
         }
 
-        // PUT: api/SubCategory/5
         [HttpPut("{id}")]
         public async Task<ActionResult> Edit(int id, [FromBody] SubCategoryEditDto dto)
         {
@@ -72,7 +68,6 @@ namespace MoonTicketApi.Controllers
             }
         }
 
-        // DELETE: api/SubCategory/5
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {

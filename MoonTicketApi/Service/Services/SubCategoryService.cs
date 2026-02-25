@@ -31,7 +31,6 @@ namespace Service.Services
         {
             var entities = await _repository.GetAllAsync();
 
-            // CategoryName-i manual əlavə edirik
             var dtos = new List<SubCategoryDto>();
             foreach (var sc in entities)
             {
@@ -40,7 +39,7 @@ namespace Service.Services
                 {
                     Id = sc.Id,
                     Name = sc.Name,
-                    CategoryName = category?.Name // əgər category tapılmasa null
+                    CategoryName = category?.Name 
                 });
             }
 
@@ -65,13 +64,12 @@ namespace Service.Services
 
         public async Task CreateAsync(SubCategoryCreateDto dto)
         {
-            // CategoryName ilə Category tapılır
             var category = await _categoryRepository.GetByNameAsync(dto.CategoryName);
             if (category == null)
                 throw new Exception($"Category '{dto.CategoryName}' tapılmadı");
 
             var entity = _mapper.Map<SubCategory>(dto);
-            entity.CategoryId = category.Id; // ID server tərəfindən təyin olunur
+            entity.CategoryId = category.Id; 
 
             await _repository.CreateAsync(entity);
         }
@@ -84,7 +82,6 @@ namespace Service.Services
 
             entity.Name = dto.Name;
 
-            // CategoryName ilə Category tapılır
             var category = await _categoryRepository.GetByNameAsync(dto.CategoryName);
             if (category == null)
                 throw new Exception($"Category '{dto.CategoryName}' tapılmadı");

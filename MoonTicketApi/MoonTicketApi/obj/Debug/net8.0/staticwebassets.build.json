@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "WrMr3MdbrtqTprbEgkza5KaskNikLaLHcEDco7CXVu4=",
+  "Hash": "BoX50/JvQkTUMeJ4/yZHatILA1h4G/+XiYjEHHa4uVk=",
   "Source": "MoonTicketApi",
   "BasePath": "_content/MoonTicketApi",
   "Mode": "Default",
@@ -17,12 +17,12 @@
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\wwwroot\\Uploads\\CategoryImages\\6ec43eba-ea34-4668-beff-37e86f0a3127.jpg",
+      "Identity": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\wwwroot\\Uploads\\CategoryImages\\34c2c394-b458-4a42-9e96-f5e514024328.jpg",
       "SourceId": "MoonTicketApi",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\wwwroot\\",
       "BasePath": "_content/MoonTicketApi",
-      "RelativePath": "Uploads/CategoryImages/6ec43eba-ea34-4668-beff-37e86f0a3127#[.{fingerprint}]?.jpg",
+      "RelativePath": "Uploads/CategoryImages/34c2c394-b458-4a42-9e96-f5e514024328#[.{fingerprint}]?.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -35,15 +35,15 @@
       "Integrity": "JOUBgr0CpR5jx0qzT0NGza9nhDoctT41VpAkB1kbO9I=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Uploads\\CategoryImages\\6ec43eba-ea34-4668-beff-37e86f0a3127.jpg"
+      "OriginalItemSpec": "wwwroot\\Uploads\\CategoryImages\\34c2c394-b458-4a42-9e96-f5e514024328.jpg"
     },
     {
-      "Identity": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\wwwroot\\Uploads\\CategoryImages\\ee22cf94-e28f-47ca-a105-3c0e4b89a3c6.jpg",
+      "Identity": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\wwwroot\\Uploads\\CategoryImages\\64a25615-ccf4-40cd-8a12-30ae1b5c2a52.png",
       "SourceId": "MoonTicketApi",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\wwwroot\\",
       "BasePath": "_content/MoonTicketApi",
-      "RelativePath": "Uploads/CategoryImages/ee22cf94-e28f-47ca-a105-3c0e4b89a3c6#[.{fingerprint}]?.jpg",
+      "RelativePath": "Uploads/CategoryImages/64a25615-ccf4-40cd-8a12-30ae1b5c2a52#[.{fingerprint}]?.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -52,19 +52,19 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "kk0peiccej",
-      "Integrity": "JOUBgr0CpR5jx0qzT0NGza9nhDoctT41VpAkB1kbO9I=",
+      "Fingerprint": "l7yvdlla3x",
+      "Integrity": "8S/lmwsQragEQj33itT5moHwDO8LCgw2rtZr+3B9sUM=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Uploads\\CategoryImages\\ee22cf94-e28f-47ca-a105-3c0e4b89a3c6.jpg"
+      "OriginalItemSpec": "wwwroot\\Uploads\\CategoryImages\\64a25615-ccf4-40cd-8a12-30ae1b5c2a52.png"
     },
     {
-      "Identity": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\wwwroot\\Uploads\\CategoryVideos\\122d7401-3d54-4de9-9be2-2ea7df04d150.mp4",
+      "Identity": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\wwwroot\\Uploads\\CategoryImages\\7b38a6e6-394b-4fbc-bcaa-5cb84f4ea66e.png",
       "SourceId": "MoonTicketApi",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\wwwroot\\",
       "BasePath": "_content/MoonTicketApi",
-      "RelativePath": "Uploads/CategoryVideos/122d7401-3d54-4de9-9be2-2ea7df04d150#[.{fingerprint}]?.mp4",
+      "RelativePath": "Uploads/CategoryImages/7b38a6e6-394b-4fbc-bcaa-5cb84f4ea66e#[.{fingerprint}]?.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -73,19 +73,19 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "iwaih7mi45",
-      "Integrity": "TuvgT6LPBzazr+78bz/fX1LIjZV12stmTggypdAEDhg=",
+      "Fingerprint": "3uqqmwyb6f",
+      "Integrity": "pb8FvWyCPvqJoH9ltIfSIm8lmOsI+vSKIhKwK6kzTts=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Uploads\\CategoryVideos\\122d7401-3d54-4de9-9be2-2ea7df04d150.mp4"
+      "OriginalItemSpec": "wwwroot\\Uploads\\CategoryImages\\7b38a6e6-394b-4fbc-bcaa-5cb84f4ea66e.png"
     },
     {
-      "Identity": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\wwwroot\\Uploads\\CategoryVideos\\4af041dd-f520-456e-bf50-cc43a921ce93.mp4",
+      "Identity": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\wwwroot\\Uploads\\CategoryVideos\\77f4f923-2262-4120-bcbb-a09ea25bfcee.mp4",
       "SourceId": "MoonTicketApi",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\wwwroot\\",
       "BasePath": "_content/MoonTicketApi",
-      "RelativePath": "Uploads/CategoryVideos/4af041dd-f520-456e-bf50-cc43a921ce93#[.{fingerprint}]?.mp4",
+      "RelativePath": "Uploads/CategoryVideos/77f4f923-2262-4120-bcbb-a09ea25bfcee#[.{fingerprint}]?.mp4",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -94,11 +94,53 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "iwaih7mi45",
-      "Integrity": "TuvgT6LPBzazr+78bz/fX1LIjZV12stmTggypdAEDhg=",
+      "Fingerprint": "bcso4zfa9r",
+      "Integrity": "ewVSdzceYMAvnm17VDFutRhrbcA4I02OssbBPVrSHHI=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Uploads\\CategoryVideos\\4af041dd-f520-456e-bf50-cc43a921ce93.mp4"
+      "OriginalItemSpec": "wwwroot\\Uploads\\CategoryVideos\\77f4f923-2262-4120-bcbb-a09ea25bfcee.mp4"
+    },
+    {
+      "Identity": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\wwwroot\\Uploads\\CategoryVideos\\9e3c2f78-ae4c-4be1-a746-19f4a97f3a2b.mp4",
+      "SourceId": "MoonTicketApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\wwwroot\\",
+      "BasePath": "_content/MoonTicketApi",
+      "RelativePath": "Uploads/CategoryVideos/9e3c2f78-ae4c-4be1-a746-19f4a97f3a2b#[.{fingerprint}]?.mp4",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "bcso4zfa9r",
+      "Integrity": "ewVSdzceYMAvnm17VDFutRhrbcA4I02OssbBPVrSHHI=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\CategoryVideos\\9e3c2f78-ae4c-4be1-a746-19f4a97f3a2b.mp4"
+    },
+    {
+      "Identity": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\wwwroot\\Uploads\\CategoryVideos\\cadad88f-bc0e-4480-9fbb-1519e07da2b6.mp4",
+      "SourceId": "MoonTicketApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\wwwroot\\",
+      "BasePath": "_content/MoonTicketApi",
+      "RelativePath": "Uploads/CategoryVideos/cadad88f-bc0e-4480-9fbb-1519e07da2b6#[.{fingerprint}]?.mp4",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "bcso4zfa9r",
+      "Integrity": "ewVSdzceYMAvnm17VDFutRhrbcA4I02OssbBPVrSHHI=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\CategoryVideos\\cadad88f-bc0e-4480-9fbb-1519e07da2b6.mp4"
     },
     {
       "Identity": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\wwwroot\\Uploads\\Sliders\\0b99f98c-5457-44d7-98de-ae44b9bfadb9.jpg",
@@ -859,8 +901,8 @@
   ],
   "Endpoints": [
     {
-      "Route": "Uploads/CategoryImages/6ec43eba-ea34-4668-beff-37e86f0a3127.jpg",
-      "AssetFile": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\wwwroot\\Uploads\\CategoryImages\\6ec43eba-ea34-4668-beff-37e86f0a3127.jpg",
+      "Route": "Uploads/CategoryImages/34c2c394-b458-4a42-9e96-f5e514024328.jpg",
+      "AssetFile": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\wwwroot\\Uploads\\CategoryImages\\34c2c394-b458-4a42-9e96-f5e514024328.jpg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -881,7 +923,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 24 Feb 2026 20:37:20 GMT"
+          "Value": "Wed, 25 Feb 2026 11:54:45 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -896,8 +938,8 @@
       ]
     },
     {
-      "Route": "Uploads/CategoryImages/6ec43eba-ea34-4668-beff-37e86f0a3127.kk0peiccej.jpg",
-      "AssetFile": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\wwwroot\\Uploads\\CategoryImages\\6ec43eba-ea34-4668-beff-37e86f0a3127.jpg",
+      "Route": "Uploads/CategoryImages/34c2c394-b458-4a42-9e96-f5e514024328.kk0peiccej.jpg",
+      "AssetFile": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\wwwroot\\Uploads\\CategoryImages\\34c2c394-b458-4a42-9e96-f5e514024328.jpg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -918,7 +960,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 24 Feb 2026 20:37:20 GMT"
+          "Value": "Wed, 25 Feb 2026 11:54:45 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -932,7 +974,7 @@
         },
         {
           "Name": "label",
-          "Value": "Uploads/CategoryImages/6ec43eba-ea34-4668-beff-37e86f0a3127.jpg"
+          "Value": "Uploads/CategoryImages/34c2c394-b458-4a42-9e96-f5e514024328.jpg"
         },
         {
           "Name": "integrity",
@@ -941,8 +983,8 @@
       ]
     },
     {
-      "Route": "Uploads/CategoryImages/ee22cf94-e28f-47ca-a105-3c0e4b89a3c6.jpg",
-      "AssetFile": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\wwwroot\\Uploads\\CategoryImages\\ee22cf94-e28f-47ca-a105-3c0e4b89a3c6.jpg",
+      "Route": "Uploads/CategoryImages/64a25615-ccf4-40cd-8a12-30ae1b5c2a52.l7yvdlla3x.png",
+      "AssetFile": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\wwwroot\\Uploads\\CategoryImages\\64a25615-ccf4-40cd-8a12-30ae1b5c2a52.png",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -951,56 +993,19 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "174412"
+          "Value": "2594"
         },
         {
           "Name": "Content-Type",
-          "Value": "image/jpeg"
+          "Value": "image/png"
         },
         {
           "Name": "ETag",
-          "Value": "\"JOUBgr0CpR5jx0qzT0NGza9nhDoctT41VpAkB1kbO9I=\""
+          "Value": "\"8S/lmwsQragEQj33itT5moHwDO8LCgw2rtZr+3B9sUM=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 24 Feb 2026 20:58:14 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=3600, must-revalidate"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-JOUBgr0CpR5jx0qzT0NGza9nhDoctT41VpAkB1kbO9I="
-        }
-      ]
-    },
-    {
-      "Route": "Uploads/CategoryImages/ee22cf94-e28f-47ca-a105-3c0e4b89a3c6.kk0peiccej.jpg",
-      "AssetFile": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\wwwroot\\Uploads\\CategoryImages\\ee22cf94-e28f-47ca-a105-3c0e4b89a3c6.jpg",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "174412"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "image/jpeg"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"JOUBgr0CpR5jx0qzT0NGza9nhDoctT41VpAkB1kbO9I=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Tue, 24 Feb 2026 20:58:14 GMT"
+          "Value": "Wed, 25 Feb 2026 11:55:35 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1010,21 +1015,21 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "kk0peiccej"
+          "Value": "l7yvdlla3x"
         },
         {
           "Name": "label",
-          "Value": "Uploads/CategoryImages/ee22cf94-e28f-47ca-a105-3c0e4b89a3c6.jpg"
+          "Value": "Uploads/CategoryImages/64a25615-ccf4-40cd-8a12-30ae1b5c2a52.png"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-JOUBgr0CpR5jx0qzT0NGza9nhDoctT41VpAkB1kbO9I="
+          "Value": "sha256-8S/lmwsQragEQj33itT5moHwDO8LCgw2rtZr+3B9sUM="
         }
       ]
     },
     {
-      "Route": "Uploads/CategoryVideos/122d7401-3d54-4de9-9be2-2ea7df04d150.iwaih7mi45.mp4",
-      "AssetFile": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\wwwroot\\Uploads\\CategoryVideos\\122d7401-3d54-4de9-9be2-2ea7df04d150.mp4",
+      "Route": "Uploads/CategoryImages/64a25615-ccf4-40cd-8a12-30ae1b5c2a52.png",
+      "AssetFile": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\wwwroot\\Uploads\\CategoryImages\\64a25615-ccf4-40cd-8a12-30ae1b5c2a52.png",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1033,64 +1038,19 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "8898514"
+          "Value": "2594"
         },
         {
           "Name": "Content-Type",
-          "Value": "video/mp4"
+          "Value": "image/png"
         },
         {
           "Name": "ETag",
-          "Value": "\"TuvgT6LPBzazr+78bz/fX1LIjZV12stmTggypdAEDhg=\""
+          "Value": "\"8S/lmwsQragEQj33itT5moHwDO8LCgw2rtZr+3B9sUM=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 24 Feb 2026 20:58:14 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "iwaih7mi45"
-        },
-        {
-          "Name": "label",
-          "Value": "Uploads/CategoryVideos/122d7401-3d54-4de9-9be2-2ea7df04d150.mp4"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-TuvgT6LPBzazr+78bz/fX1LIjZV12stmTggypdAEDhg="
-        }
-      ]
-    },
-    {
-      "Route": "Uploads/CategoryVideos/122d7401-3d54-4de9-9be2-2ea7df04d150.mp4",
-      "AssetFile": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\wwwroot\\Uploads\\CategoryVideos\\122d7401-3d54-4de9-9be2-2ea7df04d150.mp4",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "8898514"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "video/mp4"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"TuvgT6LPBzazr+78bz/fX1LIjZV12stmTggypdAEDhg=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Tue, 24 Feb 2026 20:58:14 GMT"
+          "Value": "Wed, 25 Feb 2026 11:55:35 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1100,13 +1060,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-TuvgT6LPBzazr+78bz/fX1LIjZV12stmTggypdAEDhg="
+          "Value": "sha256-8S/lmwsQragEQj33itT5moHwDO8LCgw2rtZr+3B9sUM="
         }
       ]
     },
     {
-      "Route": "Uploads/CategoryVideos/4af041dd-f520-456e-bf50-cc43a921ce93.iwaih7mi45.mp4",
-      "AssetFile": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\wwwroot\\Uploads\\CategoryVideos\\4af041dd-f520-456e-bf50-cc43a921ce93.mp4",
+      "Route": "Uploads/CategoryImages/7b38a6e6-394b-4fbc-bcaa-5cb84f4ea66e.3uqqmwyb6f.png",
+      "AssetFile": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\wwwroot\\Uploads\\CategoryImages\\7b38a6e6-394b-4fbc-bcaa-5cb84f4ea66e.png",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1115,19 +1075,19 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "8898514"
+          "Value": "1744"
         },
         {
           "Name": "Content-Type",
-          "Value": "video/mp4"
+          "Value": "image/png"
         },
         {
           "Name": "ETag",
-          "Value": "\"TuvgT6LPBzazr+78bz/fX1LIjZV12stmTggypdAEDhg=\""
+          "Value": "\"pb8FvWyCPvqJoH9ltIfSIm8lmOsI+vSKIhKwK6kzTts=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 24 Feb 2026 20:37:20 GMT"
+          "Value": "Wed, 25 Feb 2026 11:56:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1137,21 +1097,21 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "iwaih7mi45"
+          "Value": "3uqqmwyb6f"
         },
         {
           "Name": "label",
-          "Value": "Uploads/CategoryVideos/4af041dd-f520-456e-bf50-cc43a921ce93.mp4"
+          "Value": "Uploads/CategoryImages/7b38a6e6-394b-4fbc-bcaa-5cb84f4ea66e.png"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-TuvgT6LPBzazr+78bz/fX1LIjZV12stmTggypdAEDhg="
+          "Value": "sha256-pb8FvWyCPvqJoH9ltIfSIm8lmOsI+vSKIhKwK6kzTts="
         }
       ]
     },
     {
-      "Route": "Uploads/CategoryVideos/4af041dd-f520-456e-bf50-cc43a921ce93.mp4",
-      "AssetFile": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\wwwroot\\Uploads\\CategoryVideos\\4af041dd-f520-456e-bf50-cc43a921ce93.mp4",
+      "Route": "Uploads/CategoryImages/7b38a6e6-394b-4fbc-bcaa-5cb84f4ea66e.png",
+      "AssetFile": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\wwwroot\\Uploads\\CategoryImages\\7b38a6e6-394b-4fbc-bcaa-5cb84f4ea66e.png",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1160,19 +1120,19 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "8898514"
+          "Value": "1744"
         },
         {
           "Name": "Content-Type",
-          "Value": "video/mp4"
+          "Value": "image/png"
         },
         {
           "Name": "ETag",
-          "Value": "\"TuvgT6LPBzazr+78bz/fX1LIjZV12stmTggypdAEDhg=\""
+          "Value": "\"pb8FvWyCPvqJoH9ltIfSIm8lmOsI+vSKIhKwK6kzTts=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 24 Feb 2026 20:37:20 GMT"
+          "Value": "Wed, 25 Feb 2026 11:56:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1182,7 +1142,253 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-TuvgT6LPBzazr+78bz/fX1LIjZV12stmTggypdAEDhg="
+          "Value": "sha256-pb8FvWyCPvqJoH9ltIfSIm8lmOsI+vSKIhKwK6kzTts="
+        }
+      ]
+    },
+    {
+      "Route": "Uploads/CategoryVideos/77f4f923-2262-4120-bcbb-a09ea25bfcee.bcso4zfa9r.mp4",
+      "AssetFile": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\wwwroot\\Uploads\\CategoryVideos\\77f4f923-2262-4120-bcbb-a09ea25bfcee.mp4",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "429900"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "video/mp4"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ewVSdzceYMAvnm17VDFutRhrbcA4I02OssbBPVrSHHI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 25 Feb 2026 11:56:42 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "bcso4zfa9r"
+        },
+        {
+          "Name": "label",
+          "Value": "Uploads/CategoryVideos/77f4f923-2262-4120-bcbb-a09ea25bfcee.mp4"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-ewVSdzceYMAvnm17VDFutRhrbcA4I02OssbBPVrSHHI="
+        }
+      ]
+    },
+    {
+      "Route": "Uploads/CategoryVideos/77f4f923-2262-4120-bcbb-a09ea25bfcee.mp4",
+      "AssetFile": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\wwwroot\\Uploads\\CategoryVideos\\77f4f923-2262-4120-bcbb-a09ea25bfcee.mp4",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "429900"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "video/mp4"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ewVSdzceYMAvnm17VDFutRhrbcA4I02OssbBPVrSHHI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 25 Feb 2026 11:56:42 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-ewVSdzceYMAvnm17VDFutRhrbcA4I02OssbBPVrSHHI="
+        }
+      ]
+    },
+    {
+      "Route": "Uploads/CategoryVideos/9e3c2f78-ae4c-4be1-a746-19f4a97f3a2b.bcso4zfa9r.mp4",
+      "AssetFile": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\wwwroot\\Uploads\\CategoryVideos\\9e3c2f78-ae4c-4be1-a746-19f4a97f3a2b.mp4",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "429900"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "video/mp4"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ewVSdzceYMAvnm17VDFutRhrbcA4I02OssbBPVrSHHI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 25 Feb 2026 11:54:45 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "bcso4zfa9r"
+        },
+        {
+          "Name": "label",
+          "Value": "Uploads/CategoryVideos/9e3c2f78-ae4c-4be1-a746-19f4a97f3a2b.mp4"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-ewVSdzceYMAvnm17VDFutRhrbcA4I02OssbBPVrSHHI="
+        }
+      ]
+    },
+    {
+      "Route": "Uploads/CategoryVideos/9e3c2f78-ae4c-4be1-a746-19f4a97f3a2b.mp4",
+      "AssetFile": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\wwwroot\\Uploads\\CategoryVideos\\9e3c2f78-ae4c-4be1-a746-19f4a97f3a2b.mp4",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "429900"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "video/mp4"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ewVSdzceYMAvnm17VDFutRhrbcA4I02OssbBPVrSHHI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 25 Feb 2026 11:54:45 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-ewVSdzceYMAvnm17VDFutRhrbcA4I02OssbBPVrSHHI="
+        }
+      ]
+    },
+    {
+      "Route": "Uploads/CategoryVideos/cadad88f-bc0e-4480-9fbb-1519e07da2b6.bcso4zfa9r.mp4",
+      "AssetFile": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\wwwroot\\Uploads\\CategoryVideos\\cadad88f-bc0e-4480-9fbb-1519e07da2b6.mp4",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "429900"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "video/mp4"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ewVSdzceYMAvnm17VDFutRhrbcA4I02OssbBPVrSHHI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 25 Feb 2026 11:55:35 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "bcso4zfa9r"
+        },
+        {
+          "Name": "label",
+          "Value": "Uploads/CategoryVideos/cadad88f-bc0e-4480-9fbb-1519e07da2b6.mp4"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-ewVSdzceYMAvnm17VDFutRhrbcA4I02OssbBPVrSHHI="
+        }
+      ]
+    },
+    {
+      "Route": "Uploads/CategoryVideos/cadad88f-bc0e-4480-9fbb-1519e07da2b6.mp4",
+      "AssetFile": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\wwwroot\\Uploads\\CategoryVideos\\cadad88f-bc0e-4480-9fbb-1519e07da2b6.mp4",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "429900"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "video/mp4"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ewVSdzceYMAvnm17VDFutRhrbcA4I02OssbBPVrSHHI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 25 Feb 2026 11:55:35 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-ewVSdzceYMAvnm17VDFutRhrbcA4I02OssbBPVrSHHI="
         }
       ]
     },

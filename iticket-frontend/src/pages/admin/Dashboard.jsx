@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import "./Dashboard.css";
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
+  const [settingsOpen, setSettingsOpen] = useState(false);
 
   return (
     <div className="admin-dashboard">
@@ -21,33 +22,53 @@ const AdminDashboard = () => {
           <NavLink to="/admin/slider/sliderIndex" className="menu-btn">
             Sliders
           </NavLink>
-
           <NavLink to="/admin/setting/settingIndex" className="menu-btn">
             Settings
           </NavLink>
 
-          <NavLink to="/admin/tickets" className="menu-btn">
-            Experience
-          </NavLink>
+          {/* Settings Dropdown */}
+          <div className="dropdown" >
+            <button
+              className="menu-btn"
+              style={{
+                background: "linear-gradient(135deg, rgba(77, 8, 8, 0.9), rgba(44,3,3,0.9))",width:"187px",height:"50px",marginLeft:"10px"
+              }}
+              onClick={() => setSettingsOpen(prev => !prev)}
+            >
+              Products
+            </button>
+            {settingsOpen && (
+              <div className="dropdown-content">
+                <NavLink
+                  to="/admin/category/categoryIndex"
+                  className="dropdown-item"
+                >
+                      Category 
+                </NavLink>
+                <NavLink
+                  to="/admin/category/settingIndex"
+                  className="dropdown-item"
+                >
+                  Category 
+                </NavLink>
+                <NavLink
+                  to="/admin/settings"
+                  className="dropdown-item"
+                >
+                  Other Settings
+                </NavLink>
+              </div>
+            )}
+          </div>
 
           <NavLink to="/admin/statistics" className="menu-btn">
             Statistics
           </NavLink>
-
-          <NavLink to="/admin/settings" className="menu-btn">
-            Settings
-          </NavLink>
         </nav>
       </aside>
 
-    
       <main className="admin-main">
-        <div className="admin-header">
-         
-
-          
-        </div>
-
+        <div className="admin-header"></div>
         <Outlet />
       </main>
     </div>

@@ -6,7 +6,6 @@ function SettingIndex() {
   const navigate = useNavigate();
   const [settings, setSettings] = useState([]);
 
-  // Fetch all settings
   const fetchSettings = async () => {
     try {
       const res = await fetch("https://localhost:7204/api/SettingGetAll");
@@ -25,7 +24,6 @@ function SettingIndex() {
     <div className="setting-container">
       <h2>Settings</h2>
 
-      {/* ✅ Only show Create button if no settings exist */}
       {settings.length === 0 && (
         <button
           className="create-btn"

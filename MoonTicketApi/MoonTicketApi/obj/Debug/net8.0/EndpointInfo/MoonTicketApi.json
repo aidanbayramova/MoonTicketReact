@@ -612,6 +612,483 @@
         }
       }
     },
+    "/api/ProductGetAll": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ProductGetById/{id}": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ProductGetCreateData/create-data": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ProductGetEditData/edit-data/{id}": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ProductCreate": {
+      "post": {
+        "tags": [
+          "Product"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "Address",
+                  "CategoryId",
+                  "Description",
+                  "EndDate",
+                  "Name",
+                  "PersonId",
+                  "StartDate"
+                ],
+                "type": "object",
+                "properties": {
+                  "Name": {
+                    "type": "string"
+                  },
+                  "Description": {
+                    "type": "string"
+                  },
+                  "Image": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Video": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Address": {
+                    "type": "string"
+                  },
+                  "AgeRestriction": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "StartDate": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "EndDate": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "StartTime": {
+                    "type": "string",
+                    "format": "date-span"
+                  },
+                  "CategoryId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "SubCategoryId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "PersonId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "LanguageIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer",
+                      "format": "int32"
+                    }
+                  },
+                  "CategoryName": {
+                    "type": "string"
+                  },
+                  "SubCategoryName": {
+                    "type": "string"
+                  },
+                  "PersonName": {
+                    "type": "string"
+                  },
+                  "SelectedLanguageNames": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "Categories": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/SelectListItemDto"
+                    }
+                  },
+                  "SubCategories": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/SelectListItemDto"
+                    }
+                  },
+                  "Persons": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/SelectListItemDto"
+                    }
+                  },
+                  "Languages": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/SelectListItemDto"
+                    }
+                  }
+                }
+              },
+              "encoding": {
+                "Name": {
+                  "style": "form"
+                },
+                "Description": {
+                  "style": "form"
+                },
+                "Image": {
+                  "style": "form"
+                },
+                "Video": {
+                  "style": "form"
+                },
+                "Address": {
+                  "style": "form"
+                },
+                "AgeRestriction": {
+                  "style": "form"
+                },
+                "StartDate": {
+                  "style": "form"
+                },
+                "EndDate": {
+                  "style": "form"
+                },
+                "StartTime": {
+                  "style": "form"
+                },
+                "CategoryId": {
+                  "style": "form"
+                },
+                "SubCategoryId": {
+                  "style": "form"
+                },
+                "PersonId": {
+                  "style": "form"
+                },
+                "LanguageIds": {
+                  "style": "form"
+                },
+                "CategoryName": {
+                  "style": "form"
+                },
+                "SubCategoryName": {
+                  "style": "form"
+                },
+                "PersonName": {
+                  "style": "form"
+                },
+                "SelectedLanguageNames": {
+                  "style": "form"
+                },
+                "Categories": {
+                  "style": "form"
+                },
+                "SubCategories": {
+                  "style": "form"
+                },
+                "Persons": {
+                  "style": "form"
+                },
+                "Languages": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ProductUpdate": {
+      "put": {
+        "tags": [
+          "Product"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "Address",
+                  "CategoryId",
+                  "Description",
+                  "EndDate",
+                  "Id",
+                  "Name",
+                  "PersonId",
+                  "StartDate"
+                ],
+                "type": "object",
+                "properties": {
+                  "Id": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "Name": {
+                    "type": "string"
+                  },
+                  "Description": {
+                    "type": "string"
+                  },
+                  "Image": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Video": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Address": {
+                    "type": "string"
+                  },
+                  "AgeRestriction": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "StartDate": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "EndDate": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "StartTime": {
+                    "type": "string",
+                    "format": "date-span"
+                  },
+                  "CategoryId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "SubCategoryId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "PersonId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "LanguageIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer",
+                      "format": "int32"
+                    }
+                  },
+                  "Categories": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/SelectListItemDto"
+                    }
+                  },
+                  "SubCategories": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/SelectListItemDto"
+                    }
+                  },
+                  "Persons": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/SelectListItemDto"
+                    }
+                  },
+                  "Languages": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/SelectListItemDto"
+                    }
+                  },
+                  "CategoryName": {
+                    "type": "string"
+                  },
+                  "SubCategoryName": {
+                    "type": "string"
+                  },
+                  "PersonName": {
+                    "type": "string"
+                  },
+                  "SelectedLanguageNames": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "encoding": {
+                "Id": {
+                  "style": "form"
+                },
+                "Name": {
+                  "style": "form"
+                },
+                "Description": {
+                  "style": "form"
+                },
+                "Image": {
+                  "style": "form"
+                },
+                "Video": {
+                  "style": "form"
+                },
+                "Address": {
+                  "style": "form"
+                },
+                "AgeRestriction": {
+                  "style": "form"
+                },
+                "StartDate": {
+                  "style": "form"
+                },
+                "EndDate": {
+                  "style": "form"
+                },
+                "StartTime": {
+                  "style": "form"
+                },
+                "CategoryId": {
+                  "style": "form"
+                },
+                "SubCategoryId": {
+                  "style": "form"
+                },
+                "PersonId": {
+                  "style": "form"
+                },
+                "LanguageIds": {
+                  "style": "form"
+                },
+                "Categories": {
+                  "style": "form"
+                },
+                "SubCategories": {
+                  "style": "form"
+                },
+                "Persons": {
+                  "style": "form"
+                },
+                "Languages": {
+                  "style": "form"
+                },
+                "CategoryName": {
+                  "style": "form"
+                },
+                "SubCategoryName": {
+                  "style": "form"
+                },
+                "PersonName": {
+                  "style": "form"
+                },
+                "SelectedLanguageNames": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ProductDelete/{id}": {
+      "delete": {
+        "tags": [
+          "Product"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/SettingGetAll": {
       "get": {
         "tags": [
@@ -1334,6 +1811,20 @@
         "additionalProperties": false
       },
       "PersonEditDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SelectListItemDto": {
         "type": "object",
         "properties": {
           "id": {

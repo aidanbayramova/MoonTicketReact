@@ -1,11 +1,11 @@
 ﻿<Project>
   <ItemGroup>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Uploads\CategoryImages\6ec43eba-ea34-4668-beff-37e86f0a3127.jpg'))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Uploads\CategoryImages\34c2c394-b458-4a42-9e96-f5e514024328.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>MoonTicketApi</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/MoonTicketApi</BasePath>
-      <RelativePath>Uploads/CategoryImages/6ec43eba-ea34-4668-beff-37e86f0a3127.jpg</RelativePath>
+      <RelativePath>Uploads/CategoryImages/34c2c394-b458-4a42-9e96-f5e514024328.jpg</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -16,61 +16,97 @@
       <Integrity>JOUBgr0CpR5jx0qzT0NGza9nhDoctT41VpAkB1kbO9I=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Uploads\CategoryImages\6ec43eba-ea34-4668-beff-37e86f0a3127.jpg'))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Uploads\CategoryImages\34c2c394-b458-4a42-9e96-f5e514024328.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Uploads\CategoryImages\ee22cf94-e28f-47ca-a105-3c0e4b89a3c6.jpg'))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Uploads\CategoryImages\64a25615-ccf4-40cd-8a12-30ae1b5c2a52.png'))">
       <SourceType>Package</SourceType>
       <SourceId>MoonTicketApi</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/MoonTicketApi</BasePath>
-      <RelativePath>Uploads/CategoryImages/ee22cf94-e28f-47ca-a105-3c0e4b89a3c6.jpg</RelativePath>
+      <RelativePath>Uploads/CategoryImages/64a25615-ccf4-40cd-8a12-30ae1b5c2a52.png</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>kk0peiccej</Fingerprint>
-      <Integrity>JOUBgr0CpR5jx0qzT0NGza9nhDoctT41VpAkB1kbO9I=</Integrity>
+      <Fingerprint>l7yvdlla3x</Fingerprint>
+      <Integrity>8S/lmwsQragEQj33itT5moHwDO8LCgw2rtZr+3B9sUM=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Uploads\CategoryImages\ee22cf94-e28f-47ca-a105-3c0e4b89a3c6.jpg'))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Uploads\CategoryImages\64a25615-ccf4-40cd-8a12-30ae1b5c2a52.png'))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Uploads\CategoryVideos\122d7401-3d54-4de9-9be2-2ea7df04d150.mp4'))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Uploads\CategoryImages\7b38a6e6-394b-4fbc-bcaa-5cb84f4ea66e.png'))">
       <SourceType>Package</SourceType>
       <SourceId>MoonTicketApi</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/MoonTicketApi</BasePath>
-      <RelativePath>Uploads/CategoryVideos/122d7401-3d54-4de9-9be2-2ea7df04d150.mp4</RelativePath>
+      <RelativePath>Uploads/CategoryImages/7b38a6e6-394b-4fbc-bcaa-5cb84f4ea66e.png</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>iwaih7mi45</Fingerprint>
-      <Integrity>TuvgT6LPBzazr+78bz/fX1LIjZV12stmTggypdAEDhg=</Integrity>
+      <Fingerprint>3uqqmwyb6f</Fingerprint>
+      <Integrity>pb8FvWyCPvqJoH9ltIfSIm8lmOsI+vSKIhKwK6kzTts=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Uploads\CategoryVideos\122d7401-3d54-4de9-9be2-2ea7df04d150.mp4'))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Uploads\CategoryImages\7b38a6e6-394b-4fbc-bcaa-5cb84f4ea66e.png'))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Uploads\CategoryVideos\4af041dd-f520-456e-bf50-cc43a921ce93.mp4'))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Uploads\CategoryVideos\77f4f923-2262-4120-bcbb-a09ea25bfcee.mp4'))">
       <SourceType>Package</SourceType>
       <SourceId>MoonTicketApi</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/MoonTicketApi</BasePath>
-      <RelativePath>Uploads/CategoryVideos/4af041dd-f520-456e-bf50-cc43a921ce93.mp4</RelativePath>
+      <RelativePath>Uploads/CategoryVideos/77f4f923-2262-4120-bcbb-a09ea25bfcee.mp4</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>iwaih7mi45</Fingerprint>
-      <Integrity>TuvgT6LPBzazr+78bz/fX1LIjZV12stmTggypdAEDhg=</Integrity>
+      <Fingerprint>bcso4zfa9r</Fingerprint>
+      <Integrity>ewVSdzceYMAvnm17VDFutRhrbcA4I02OssbBPVrSHHI=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Uploads\CategoryVideos\4af041dd-f520-456e-bf50-cc43a921ce93.mp4'))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Uploads\CategoryVideos\77f4f923-2262-4120-bcbb-a09ea25bfcee.mp4'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Uploads\CategoryVideos\9e3c2f78-ae4c-4be1-a746-19f4a97f3a2b.mp4'))">
+      <SourceType>Package</SourceType>
+      <SourceId>MoonTicketApi</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/MoonTicketApi</BasePath>
+      <RelativePath>Uploads/CategoryVideos/9e3c2f78-ae4c-4be1-a746-19f4a97f3a2b.mp4</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>bcso4zfa9r</Fingerprint>
+      <Integrity>ewVSdzceYMAvnm17VDFutRhrbcA4I02OssbBPVrSHHI=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Uploads\CategoryVideos\9e3c2f78-ae4c-4be1-a746-19f4a97f3a2b.mp4'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Uploads\CategoryVideos\cadad88f-bc0e-4480-9fbb-1519e07da2b6.mp4'))">
+      <SourceType>Package</SourceType>
+      <SourceId>MoonTicketApi</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/MoonTicketApi</BasePath>
+      <RelativePath>Uploads/CategoryVideos/cadad88f-bc0e-4480-9fbb-1519e07da2b6.mp4</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>bcso4zfa9r</Fingerprint>
+      <Integrity>ewVSdzceYMAvnm17VDFutRhrbcA4I02OssbBPVrSHHI=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Uploads\CategoryVideos\cadad88f-bc0e-4480-9fbb-1519e07da2b6.mp4'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Uploads\Sliders\0b99f98c-5457-44d7-98de-ae44b9bfadb9.jpg'))">
       <SourceType>Package</SourceType>

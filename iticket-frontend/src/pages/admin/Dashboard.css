@@ -279,14 +279,28 @@
     0 18px 40px rgba(83, 8, 8, 0.8);
 }
 
-/* LEFT GLOW LINE */
-.menu-btn.active::before {
-  content: "";
+
+.dropdown-content {
+  display: flex;
+  flex-direction: column;
   position: absolute;
+  top: 100%;
   left: 0;
-  top: 20%;
-  width: 5px;
-  height: 60%;
-  border-radius: 10px;
-  background: linear-gradient(to bottom, #ff5a5a, #350404);
+  background-color: #3a0f0f; /* tünd qırmızı fon */
+  border-radius: 12px;       /* rounded künclər */
+  min-width: 180px;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.3);
+  z-index: 1000;
+  padding: 5px 0;           /* linklərin arasına boşluq */
+}
+
+.dropdown-item {
+  padding: 10px 16px;
+  text-decoration: none;
+  color: white;              /* ağ yazı */
+  border-radius: 8px;        /* hover zamanı yumşaq künclər */
+}
+
+.dropdown-item:hover {
+  background-color: #5c1a1a; /* hoverda bir az açıq qırmızı */
 }

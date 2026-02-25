@@ -64,16 +64,21 @@ namespace Service.Services
 
             if (dto.Image != null)
             {
-                _fileService.DeleteFile(entity.Image, ImageFolder);
+                if (!string.IsNullOrEmpty(entity.Image))
+                    _fileService.DeleteFile(entity.Image, ImageFolder);
+
                 entity.Image = await _fileService.SaveFileAsync(dto.Image, ImageFolder);
             }
 
             if (dto.Video != null)
             {
-                _fileService.DeleteFile(entity.Video, VideoFolder);
+                if (!string.IsNullOrEmpty(entity.Video))
+                    _fileService.DeleteFile(entity.Video, VideoFolder);
+
                 entity.Video = await _fileService.SaveFileAsync(dto.Video, VideoFolder);
             }
-
+            if (!Directory.Exists(ImageFolder)) Directory.CreateDirectory(ImageFolder);
+            if (!Directory.Exists(VideoFolder)) Directory.CreateDirectory(VideoFolder);
             await _repository.UpdateAsync(entity);
         }
 
