@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Service.DTOs.Admin.Language;
+using Service.DTOs.Admin.Person;
+using Service.Services;
 using Service.Services.Interfaces;
 
 namespace MoonTicketApi.Controllers
@@ -26,10 +28,12 @@ namespace MoonTicketApi.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<LanguageDto>> GetById(int id)
         {
-            var language = await _languageService.GetAllAsync();
-            var lang = await _languageService.GetAllAsync(); 
+            var language = await _languageService.GetByIdAsync(id);
 
-            return Ok(lang);
+            if (language == null)
+                return NotFound();
+
+            return Ok(language);
         }
 
         [HttpPost]
@@ -51,11 +55,15 @@ namespace MoonTicketApi.Controllers
             try
             {
                 await _languageService.EditAsync(dto, id);
-                return NoContent();
+                return NoContent(); // 204 - heç nə qaytarmır, frontend alert göstərir
             }
             catch (KeyNotFoundException)
             {
                 return NotFound();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
         }
 

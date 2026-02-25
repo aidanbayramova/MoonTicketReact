@@ -35,12 +35,17 @@ namespace Service.Helpers
 
             CreateMap<Language, LanguageDto>();
             CreateMap<LanguageCreateDto, Language>();
-            CreateMap<LanguageEditDto, Language>();
+
+            CreateMap<LanguageEditDto, Language>()
+    .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
 
             CreateMap<Person, PersonDto>();
-            CreateMap<PersonCreateDto, Person>();
-            CreateMap<LanguageEditDto, Language>();
 
+            CreateMap<PersonCreateDto, Person>();
+
+           
+            CreateMap<PersonEditDto, Person>()
+    .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
 
 
             CreateMap<Category, CategoryDto>();

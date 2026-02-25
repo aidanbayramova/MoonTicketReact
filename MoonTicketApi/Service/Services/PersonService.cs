@@ -46,7 +46,9 @@ namespace Service.Services
             if (person == null)
                 throw new KeyNotFoundException("Person not found");
 
+            // AutoMapper ilə update
             _mapper.Map(model, person);
+
             await _personRepository.UpdateAsync(person);
             await _personRepository.SaveChangesAsync();
         }
@@ -59,6 +61,15 @@ namespace Service.Services
 
             await _personRepository.DeleteAsync(person);
             await _personRepository.SaveChangesAsync();
+        }
+        public async Task<PersonDto> GetByIdAsync(int id)
+        {
+            var person = await _personRepository.GetByIdAsync(id);
+
+            if (person == null)
+                return null;
+
+            return _mapper.Map<PersonDto>(person);
         }
     }
 }

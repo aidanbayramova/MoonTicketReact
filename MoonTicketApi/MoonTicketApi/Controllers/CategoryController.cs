@@ -48,25 +48,23 @@ namespace MoonTicketApi.Controllers
             return Ok(new { message = "Category created successfully" });
         }
 
-        // PUT: api/Category/5
         [HttpPut("{id}")]
         [Consumes("multipart/form-data")]
         public async Task<ActionResult> Edit(int id, [FromForm] CategoryEditDto dto)
         {
-            if (id != dto.Id)
-                return BadRequest(new { message = "Id mismatch" });
+            // 🔥 ID-ni route-dan götürüb dto-ya set edirik
+            dto.Id = id;
 
             try
             {
                 await _categoryService.EditAsync(dto);
                 return Ok(new { message = "Category updated successfully" });
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 return NotFound(new { message = ex.Message });
             }
         }
-
         // DELETE: api/Category/5
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)

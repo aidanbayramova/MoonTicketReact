@@ -29,8 +29,10 @@ namespace MoonTicketApi.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<PersonDto>> GetById(int id)
         {
-            var person = await _personService.GetAllAsync();
-            //var p = await _personService.GetAllAsync();
+            var person = await _personService.GetByIdAsync(id);
+
+            if (person == null)
+                return NotFound();
 
             return Ok(person);
         }
@@ -54,11 +56,15 @@ namespace MoonTicketApi.Controllers
             try
             {
                 await _personService.EditAsync(dto, id);
-                return NoContent();
+                return NoContent(); // 204 - heç nə qaytarmır, frontend alert göstərir
             }
             catch (KeyNotFoundException)
             {
                 return NotFound();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
         }
 

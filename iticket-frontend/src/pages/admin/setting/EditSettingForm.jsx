@@ -167,7 +167,7 @@ function EditSettingForm() {
         </div>
 
         <div className="form-actions">
-          <button type="submit" disabled={saving}>{saving ? "Saving..." : "Save"}</button>
+          <button type="create-btn" disabled={saving}>{saving ? "Saving..." : "Save"}</button>
           <button type="button" onClick={() => navigate("/admin/setting/settingIndex")}>Cancel</button>
         </div>
       </form>

@@ -44,6 +44,18 @@ import CategoryIndex from "./pages/admin/category/CategoryIndex";
 import CreateCategoryForm from "./pages/admin/category/CreateCategoryForm";
 import EditCategoryForm from "./pages/admin/category/EditCategoryForm";
 
+
+import PersonIndex from "./pages/admin/person/PersonIndex";
+import CreatePersonForm from "./pages/admin/person/CreatePersonForm";
+import EditPersonForm from "./pages/admin/person/EditPersonForm";
+
+
+
+
+import LanguageIndex from "./pages/admin/language/LanguageIndex";
+import CreateLanguageForm from "./pages/admin/language/CreateLanguageForm";
+import EditLanguageForm from "./pages/admin/language/EditLanguageForm";
+
 function App() {
   const location = useLocation();
   const [loading, setLoading] = useState(true);
@@ -111,6 +123,16 @@ function App() {
         <Route path="category/categoryIndex" element={<CategoryIndex />} />
         <Route path="category/createCategoryForm" element={<CreateCategoryForm />} />
         <Route path="category/editCategoryForm/:id" element={<EditCategoryForm />} />
+
+
+        <Route path="person/personIndex" element={<PersonIndex />} />
+        <Route path="person/createPersonForm" element={<CreatePersonForm />} />
+        <Route path="person/editPersonForm/:id" element={<EditPersonForm />} />
+
+        <Route path="language/languageIndex" element={<LanguageIndex />} />
+        <Route path="language/createLanguageForm" element={<CreateLanguageForm />} />
+        <Route path="language/editLanguageForm/:id" element={<EditLanguageForm />} />
+
       </Route>
     </Routes>
   );

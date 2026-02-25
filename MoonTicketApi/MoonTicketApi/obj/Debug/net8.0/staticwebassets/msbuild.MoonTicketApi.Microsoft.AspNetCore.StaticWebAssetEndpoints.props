@@ -1,76 +1,28 @@
 ﻿<Project>
   <ItemGroup>
-    <StaticWebAssetEndpoint Include="_content/MoonTicketApi/Uploads/CategoryImages/34c2c394-b458-4a42-9e96-f5e514024328.jpg">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Uploads\CategoryImages\34c2c394-b458-4a42-9e96-f5e514024328.jpg'))</AssetFile>
+    <StaticWebAssetEndpoint Include="_content/MoonTicketApi/Uploads/CategoryImages/53fb8a6e-3bb3-4066-b75c-6577d245bb94.1f8bo8hfz4.jpg">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Uploads\CategoryImages\53fb8a6e-3bb3-4066-b75c-6577d245bb94.jpg'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-JOUBgr0CpR5jx0qzT0NGza9nhDoctT41VpAkB1kbO9I="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"174412"},{"Name":"Content-Type","Value":"image/jpeg"},{"Name":"ETag","Value":"\u0022JOUBgr0CpR5jx0qzT0NGza9nhDoctT41VpAkB1kbO9I=\u0022"},{"Name":"Last-Modified","Value":"Wed, 25 Feb 2026 11:54:45 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"1f8bo8hfz4"},{"Name":"integrity","Value":"sha256-o/hSApXRTn7OKp8qTVJF7EbndxjLB0KxT9GjNqOm3lI="},{"Name":"label","Value":"_content/MoonTicketApi/Uploads/CategoryImages/53fb8a6e-3bb3-4066-b75c-6577d245bb94.jpg"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"66145"},{"Name":"Content-Type","Value":"image/jpeg"},{"Name":"ETag","Value":"\u0022o/hSApXRTn7OKp8qTVJF7EbndxjLB0KxT9GjNqOm3lI=\u0022"},{"Name":"Last-Modified","Value":"Wed, 25 Feb 2026 13:03:46 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/MoonTicketApi/Uploads/CategoryImages/34c2c394-b458-4a42-9e96-f5e514024328.kk0peiccej.jpg">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Uploads\CategoryImages\34c2c394-b458-4a42-9e96-f5e514024328.jpg'))</AssetFile>
+    <StaticWebAssetEndpoint Include="_content/MoonTicketApi/Uploads/CategoryImages/53fb8a6e-3bb3-4066-b75c-6577d245bb94.jpg">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Uploads\CategoryImages\53fb8a6e-3bb3-4066-b75c-6577d245bb94.jpg'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"kk0peiccej"},{"Name":"integrity","Value":"sha256-JOUBgr0CpR5jx0qzT0NGza9nhDoctT41VpAkB1kbO9I="},{"Name":"label","Value":"_content/MoonTicketApi/Uploads/CategoryImages/34c2c394-b458-4a42-9e96-f5e514024328.jpg"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"174412"},{"Name":"Content-Type","Value":"image/jpeg"},{"Name":"ETag","Value":"\u0022JOUBgr0CpR5jx0qzT0NGza9nhDoctT41VpAkB1kbO9I=\u0022"},{"Name":"Last-Modified","Value":"Wed, 25 Feb 2026 11:54:45 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-o/hSApXRTn7OKp8qTVJF7EbndxjLB0KxT9GjNqOm3lI="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"66145"},{"Name":"Content-Type","Value":"image/jpeg"},{"Name":"ETag","Value":"\u0022o/hSApXRTn7OKp8qTVJF7EbndxjLB0KxT9GjNqOm3lI=\u0022"},{"Name":"Last-Modified","Value":"Wed, 25 Feb 2026 13:03:46 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/MoonTicketApi/Uploads/CategoryImages/64a25615-ccf4-40cd-8a12-30ae1b5c2a52.l7yvdlla3x.png">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Uploads\CategoryImages\64a25615-ccf4-40cd-8a12-30ae1b5c2a52.png'))</AssetFile>
+    <StaticWebAssetEndpoint Include="_content/MoonTicketApi/Uploads/CategoryVideos/1e19ce85-8f79-4d6b-b1d1-471f6759c370.bcso4zfa9r.mp4">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Uploads\CategoryVideos\1e19ce85-8f79-4d6b-b1d1-471f6759c370.mp4'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"l7yvdlla3x"},{"Name":"integrity","Value":"sha256-8S/lmwsQragEQj33itT5moHwDO8LCgw2rtZr\u002B3B9sUM="},{"Name":"label","Value":"_content/MoonTicketApi/Uploads/CategoryImages/64a25615-ccf4-40cd-8a12-30ae1b5c2a52.png"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"2594"},{"Name":"Content-Type","Value":"image/png"},{"Name":"ETag","Value":"\u00228S/lmwsQragEQj33itT5moHwDO8LCgw2rtZr\u002B3B9sUM=\u0022"},{"Name":"Last-Modified","Value":"Wed, 25 Feb 2026 11:55:35 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"bcso4zfa9r"},{"Name":"integrity","Value":"sha256-ewVSdzceYMAvnm17VDFutRhrbcA4I02OssbBPVrSHHI="},{"Name":"label","Value":"_content/MoonTicketApi/Uploads/CategoryVideos/1e19ce85-8f79-4d6b-b1d1-471f6759c370.mp4"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"429900"},{"Name":"Content-Type","Value":"video/mp4"},{"Name":"ETag","Value":"\u0022ewVSdzceYMAvnm17VDFutRhrbcA4I02OssbBPVrSHHI=\u0022"},{"Name":"Last-Modified","Value":"Wed, 25 Feb 2026 13:03:46 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/MoonTicketApi/Uploads/CategoryImages/64a25615-ccf4-40cd-8a12-30ae1b5c2a52.png">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Uploads\CategoryImages\64a25615-ccf4-40cd-8a12-30ae1b5c2a52.png'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-8S/lmwsQragEQj33itT5moHwDO8LCgw2rtZr\u002B3B9sUM="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"2594"},{"Name":"Content-Type","Value":"image/png"},{"Name":"ETag","Value":"\u00228S/lmwsQragEQj33itT5moHwDO8LCgw2rtZr\u002B3B9sUM=\u0022"},{"Name":"Last-Modified","Value":"Wed, 25 Feb 2026 11:55:35 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/MoonTicketApi/Uploads/CategoryImages/7b38a6e6-394b-4fbc-bcaa-5cb84f4ea66e.3uqqmwyb6f.png">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Uploads\CategoryImages\7b38a6e6-394b-4fbc-bcaa-5cb84f4ea66e.png'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"3uqqmwyb6f"},{"Name":"integrity","Value":"sha256-pb8FvWyCPvqJoH9ltIfSIm8lmOsI\u002BvSKIhKwK6kzTts="},{"Name":"label","Value":"_content/MoonTicketApi/Uploads/CategoryImages/7b38a6e6-394b-4fbc-bcaa-5cb84f4ea66e.png"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"1744"},{"Name":"Content-Type","Value":"image/png"},{"Name":"ETag","Value":"\u0022pb8FvWyCPvqJoH9ltIfSIm8lmOsI\u002BvSKIhKwK6kzTts=\u0022"},{"Name":"Last-Modified","Value":"Wed, 25 Feb 2026 11:56:42 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/MoonTicketApi/Uploads/CategoryImages/7b38a6e6-394b-4fbc-bcaa-5cb84f4ea66e.png">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Uploads\CategoryImages\7b38a6e6-394b-4fbc-bcaa-5cb84f4ea66e.png'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-pb8FvWyCPvqJoH9ltIfSIm8lmOsI\u002BvSKIhKwK6kzTts="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"1744"},{"Name":"Content-Type","Value":"image/png"},{"Name":"ETag","Value":"\u0022pb8FvWyCPvqJoH9ltIfSIm8lmOsI\u002BvSKIhKwK6kzTts=\u0022"},{"Name":"Last-Modified","Value":"Wed, 25 Feb 2026 11:56:42 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/MoonTicketApi/Uploads/CategoryVideos/77f4f923-2262-4120-bcbb-a09ea25bfcee.bcso4zfa9r.mp4">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Uploads\CategoryVideos\77f4f923-2262-4120-bcbb-a09ea25bfcee.mp4'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"bcso4zfa9r"},{"Name":"integrity","Value":"sha256-ewVSdzceYMAvnm17VDFutRhrbcA4I02OssbBPVrSHHI="},{"Name":"label","Value":"_content/MoonTicketApi/Uploads/CategoryVideos/77f4f923-2262-4120-bcbb-a09ea25bfcee.mp4"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"429900"},{"Name":"Content-Type","Value":"video/mp4"},{"Name":"ETag","Value":"\u0022ewVSdzceYMAvnm17VDFutRhrbcA4I02OssbBPVrSHHI=\u0022"},{"Name":"Last-Modified","Value":"Wed, 25 Feb 2026 11:56:42 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/MoonTicketApi/Uploads/CategoryVideos/77f4f923-2262-4120-bcbb-a09ea25bfcee.mp4">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Uploads\CategoryVideos\77f4f923-2262-4120-bcbb-a09ea25bfcee.mp4'))</AssetFile>
+    <StaticWebAssetEndpoint Include="_content/MoonTicketApi/Uploads/CategoryVideos/1e19ce85-8f79-4d6b-b1d1-471f6759c370.mp4">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Uploads\CategoryVideos\1e19ce85-8f79-4d6b-b1d1-471f6759c370.mp4'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-ewVSdzceYMAvnm17VDFutRhrbcA4I02OssbBPVrSHHI="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"429900"},{"Name":"Content-Type","Value":"video/mp4"},{"Name":"ETag","Value":"\u0022ewVSdzceYMAvnm17VDFutRhrbcA4I02OssbBPVrSHHI=\u0022"},{"Name":"Last-Modified","Value":"Wed, 25 Feb 2026 11:56:42 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/MoonTicketApi/Uploads/CategoryVideos/9e3c2f78-ae4c-4be1-a746-19f4a97f3a2b.bcso4zfa9r.mp4">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Uploads\CategoryVideos\9e3c2f78-ae4c-4be1-a746-19f4a97f3a2b.mp4'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"bcso4zfa9r"},{"Name":"integrity","Value":"sha256-ewVSdzceYMAvnm17VDFutRhrbcA4I02OssbBPVrSHHI="},{"Name":"label","Value":"_content/MoonTicketApi/Uploads/CategoryVideos/9e3c2f78-ae4c-4be1-a746-19f4a97f3a2b.mp4"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"429900"},{"Name":"Content-Type","Value":"video/mp4"},{"Name":"ETag","Value":"\u0022ewVSdzceYMAvnm17VDFutRhrbcA4I02OssbBPVrSHHI=\u0022"},{"Name":"Last-Modified","Value":"Wed, 25 Feb 2026 11:54:45 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/MoonTicketApi/Uploads/CategoryVideos/9e3c2f78-ae4c-4be1-a746-19f4a97f3a2b.mp4">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Uploads\CategoryVideos\9e3c2f78-ae4c-4be1-a746-19f4a97f3a2b.mp4'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-ewVSdzceYMAvnm17VDFutRhrbcA4I02OssbBPVrSHHI="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"429900"},{"Name":"Content-Type","Value":"video/mp4"},{"Name":"ETag","Value":"\u0022ewVSdzceYMAvnm17VDFutRhrbcA4I02OssbBPVrSHHI=\u0022"},{"Name":"Last-Modified","Value":"Wed, 25 Feb 2026 11:54:45 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/MoonTicketApi/Uploads/CategoryVideos/cadad88f-bc0e-4480-9fbb-1519e07da2b6.bcso4zfa9r.mp4">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Uploads\CategoryVideos\cadad88f-bc0e-4480-9fbb-1519e07da2b6.mp4'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"bcso4zfa9r"},{"Name":"integrity","Value":"sha256-ewVSdzceYMAvnm17VDFutRhrbcA4I02OssbBPVrSHHI="},{"Name":"label","Value":"_content/MoonTicketApi/Uploads/CategoryVideos/cadad88f-bc0e-4480-9fbb-1519e07da2b6.mp4"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"429900"},{"Name":"Content-Type","Value":"video/mp4"},{"Name":"ETag","Value":"\u0022ewVSdzceYMAvnm17VDFutRhrbcA4I02OssbBPVrSHHI=\u0022"},{"Name":"Last-Modified","Value":"Wed, 25 Feb 2026 11:55:35 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/MoonTicketApi/Uploads/CategoryVideos/cadad88f-bc0e-4480-9fbb-1519e07da2b6.mp4">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Uploads\CategoryVideos\cadad88f-bc0e-4480-9fbb-1519e07da2b6.mp4'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-ewVSdzceYMAvnm17VDFutRhrbcA4I02OssbBPVrSHHI="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"429900"},{"Name":"Content-Type","Value":"video/mp4"},{"Name":"ETag","Value":"\u0022ewVSdzceYMAvnm17VDFutRhrbcA4I02OssbBPVrSHHI=\u0022"},{"Name":"Last-Modified","Value":"Wed, 25 Feb 2026 11:55:35 GMT"}]]]></ResponseHeaders>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"429900"},{"Name":"Content-Type","Value":"video/mp4"},{"Name":"ETag","Value":"\u0022ewVSdzceYMAvnm17VDFutRhrbcA4I02OssbBPVrSHHI=\u0022"},{"Name":"Last-Modified","Value":"Wed, 25 Feb 2026 13:03:46 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/MoonTicketApi/Uploads/Sliders/0b99f98c-5457-44d7-98de-ae44b9bfadb9.jpg">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Uploads\Sliders\0b99f98c-5457-44d7-98de-ae44b9bfadb9.jpg'))</AssetFile>

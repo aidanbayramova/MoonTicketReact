@@ -46,16 +46,16 @@ const AdminDashboard = () => {
                       Category 
                 </NavLink>
                 <NavLink
-                  to="/admin/category/settingIndex"
+                  to="/admin/person/PersonIndex"
                   className="dropdown-item"
                 >
-                  Category 
+                  Persons 
                 </NavLink>
                 <NavLink
-                  to="/admin/settings"
+                  to="/admin/language/languageIndex"
                   className="dropdown-item"
                 >
-                  Other Settings
+                  Languages
                 </NavLink>
               </div>
             )}

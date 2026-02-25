@@ -14,5 +14,6 @@ namespace Service.Services.Interfaces
         Task<PersonDto> CreateAsync(PersonCreateDto model);
         Task EditAsync(PersonEditDto model, int id);
         Task DeleteAsync(int id);
+        Task<PersonDto> GetByIdAsync(int id);
     }
 }

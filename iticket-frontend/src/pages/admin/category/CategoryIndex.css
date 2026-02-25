@@ -63,8 +63,8 @@ h2.form-title {
 
 .category-table td.media img,
 .category-table td.media video {
-  width: 80px;
-  height: 50px;
+    width: 98px;
+    height: 88px;
   object-fit: cover;
   border-radius: 10px;
 }
@@ -109,3 +109,28 @@ h2.form-title {
   height: auto;
   border-radius: 10px;
 }
+
+
+
+
+.media-preview-container {
+    display: flex;
+    gap: 1rem; /* aralarında boşluq */
+    flex-wrap: wrap; /* kiçik ekranlarda alt-alta düşsün */
+    margin-bottom: 1rem;
+  }
+  
+  .media-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 220px; /* ölçü balaca */
+  }
+  
+  .media-preview img,
+  .media-preview video {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+  }

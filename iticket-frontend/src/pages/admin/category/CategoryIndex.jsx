@@ -42,8 +42,8 @@ function CategoryIndex() {
             <table className="category-table">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Description</th>
+                        <th >Name</th>
+                        <th >Description</th>
                         <th>Image</th>
                         <th>Video</th>
 

@@ -8,7 +8,6 @@ namespace Service.DTOs.Admin.Person
 {
     public class PersonEditDto
     {
-        public int Id { get; set; }
         public string Name { get; set; }
     }
 }

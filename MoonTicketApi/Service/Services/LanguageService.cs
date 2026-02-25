@@ -5,8 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Domain.Entities;
+using Repository.Repositories;
 using Repository.Repositories.Interfaces;
 using Service.DTOs.Admin.Language;
+using Service.DTOs.Admin.Person;
 using Service.Services.Interfaces;
 
 namespace Service.Services
@@ -59,7 +61,16 @@ namespace Service.Services
                 await _languageRepository.DeleteAsync(language);
                 await _languageRepository.SaveChangesAsync();
             }
+        public async Task<LanguageDto> GetByIdAsync(int id)
+        {
+            var language = await _languageRepository.GetByIdAsync(id);
+
+            if (language == null)
+                return null;
+
+            return _mapper.Map<LanguageDto>(language);
         }
+    }
 }
 
 

@@ -79,36 +79,41 @@ function EditSliderForm() {
   return (
     <div className="edit-slider-wrapper">
       <form className="edit-slider-form" onSubmit={handleSubmit}>
-        <h2 style={{fontSize:"39px"}}>Edit Slider</h2>
+        <h2 style={{ fontSize: "39px" }}>Edit Slider</h2>
+        <div className="form-group">
+          <label htmlFor="name">Title</label>
+          <input
+            type="text"
+            placeholder="Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+          />
+          <label htmlFor="name">SubTitle</label>
 
-        <input
-          type="text"
-          placeholder="Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-        />
+          <input
+            type="text"
+            placeholder="SubTitle"
+            value={subTitle}
+            onChange={(e) => setSubTitle(e.target.value)}
+            required
+          />
+          <label htmlFor="name">Description</label>
 
-        <input
-          type="text"
-          placeholder="SubTitle"
-          value={subTitle}
-          onChange={(e) => setSubTitle(e.target.value)}
-          required
-        />
+          <textarea
+            placeholder="Description"
+            value={desc}
+            onChange={(e) => setDesc(e.target.value)}
+            rows={4}
+            required
+          />
+        </div>
 
-        <textarea
-          placeholder="Description"
-          value={desc}
-          onChange={(e) => setDesc(e.target.value)}
-          rows={4}
-          required
-        />
 
         {slider.image && (
-          <div className="image-preview">
+          <div className="image-preview" >
             <p>Current image:</p>
-            <img src={slider.image} alt="slider" />
+            <img style={{width:"20pc"}} src={slider.image} alt="slider" />
           </div>
         )}
 
@@ -119,13 +124,13 @@ function EditSliderForm() {
         />
 
         <div className="form-actions">
-          <button className="buton" type="submit" disabled={saving}>
+          <button className="create-btn" type="submit" disabled={saving}>
             {saving ? "Saving..." : "Edit"}
           </button>
 
           <button
             type="button"
-            className="buton2"
+            className="cancel-btn"
             onClick={() => navigate("/admin/slider/sliderIndex")}
           >
             Cancel

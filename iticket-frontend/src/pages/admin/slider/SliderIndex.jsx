@@ -61,7 +61,7 @@ function SliderIndex() {
                 <td className="title">{s.title}</td>
                 <td className="title">{s.subTitle}</td>
                 <td className="description">{s.desc}</td>
-                <td className="title">{s.image && <img src={s.image} alt="" />}</td>
+                <td className="title" style={{width:"20PC"}}>{s.image && <img src={s.image} alt="" />}</td>
                 <td className="actions">
                   <button className="buton"
                     onClick={() =>

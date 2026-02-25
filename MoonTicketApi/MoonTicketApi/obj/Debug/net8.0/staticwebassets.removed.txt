@@ -1,0 +1,6 @@
+C:\Users\ACER\Desktop\ITICKET\MoonTicketApi\MoonTicketApi\wwwroot\Uploads\CategoryImages\34c2c394-b458-4a42-9e96-f5e514024328.jpg
+C:\Users\ACER\Desktop\ITICKET\MoonTicketApi\MoonTicketApi\wwwroot\Uploads\CategoryImages\64a25615-ccf4-40cd-8a12-30ae1b5c2a52.png
+C:\Users\ACER\Desktop\ITICKET\MoonTicketApi\MoonTicketApi\wwwroot\Uploads\CategoryImages\7b38a6e6-394b-4fbc-bcaa-5cb84f4ea66e.png
+C:\Users\ACER\Desktop\ITICKET\MoonTicketApi\MoonTicketApi\wwwroot\Uploads\CategoryVideos\77f4f923-2262-4120-bcbb-a09ea25bfcee.mp4
+C:\Users\ACER\Desktop\ITICKET\MoonTicketApi\MoonTicketApi\wwwroot\Uploads\CategoryVideos\9e3c2f78-ae4c-4be1-a746-19f4a97f3a2b.mp4
+C:\Users\ACER\Desktop\ITICKET\MoonTicketApi\MoonTicketApi\wwwroot\Uploads\CategoryVideos\cadad88f-bc0e-4480-9fbb-1519e07da2b6.mp4
