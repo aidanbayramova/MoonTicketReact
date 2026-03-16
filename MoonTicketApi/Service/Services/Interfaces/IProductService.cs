@@ -14,7 +14,7 @@ namespace Service.Services.Interfaces
         Task<ProductDto> CreateAsync(ProductCreateDto dto);
         Task<ProductDto> UpdateAsync(ProductEditDto dto);
         Task<bool> DeleteAsync(int id);
-        Task<ProductCreateDto> GetCreateDataAsync();
+        Task<ProductCreateDataDto> GetCreateDataAsync();
         Task<ProductEditDto> GetEditDataAsync(int id);
     }
 }

@@ -13,7 +13,6 @@ namespace Service.DTOs.Admin.Product
         public string Image { get; set; }
         public DateTime StartDate { get; set; }
         public int AgeRestriction { get; set; }
-
         public string CategoryName { get; set; }
         public string SubCategoryName { get; set; }
         public string PersonName { get; set; }

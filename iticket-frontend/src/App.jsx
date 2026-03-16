@@ -2,34 +2,34 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 
 import Layout from "./components/Layout";
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Blog from "./pages/Blog";
-import Contact from "./pages/Contact";
+import Home from "./pages/client/home/Home";
+import About from "./pages/client/about/About";
+import Blog from "./pages/client/blog/Blog";
+import Contact from "./pages/client/contact/Contact";
 
-import Concert from "./pages/Concert";
-import Theater from "./pages/Theater";
-import Kids from "./pages/Kids";
-import Sport from "./pages/Sport";
-import Movie from "./pages/Movie";
-import Museum from "./pages/Museum";
-import Circus from "./pages/Circus";
-import Tourism from "./pages/Tourism";
-import Cinema from "./pages/Cinema";
+import Concert from "./pages/client/concert/Concert";
+import Theater from "./pages/client/theater/Theater";
+import Kids from "./pages/client/kids/Kids";
+import Sport from "./pages/client/sport/Sport";
+import Movie from "./pages/client/cinema/Movie";
+import Museum from "./pages/client/museum/Museum";
+import Circus from "./pages/client/circus/Circus";
+import Tourism from "./pages/client/tourism/Tourism";
+import Cinema from "./pages/client/cinema/Cinema";
 
-import ConcertDetail from "./pages/ConcertDetail";
-import SportDetail from "./pages/SportDetail";
-import TheaterDetail from "./pages/TheaterDetail";
-import CircusDetail from "./pages/CircusDetail";
-import KidsDetail from "./pages/KidsDetail";
-import MuseumsDetail from "./pages/MuseumDetail";
-import TourismDetail from "./pages/TourismDetail";
+import ConcertDetail from "./pages/client/concert/ConcertDetail";
+import SportDetail from "./pages/client/sport/SportDetail";
+import TheaterDetail from "./pages/client/theater/TheaterDetail";
+import CircusDetail from "./pages/client/circus/CircusDetail";
+import KidsDetail from "./pages/client/kids/KidsDetail";
+import MuseumsDetail from "./pages/client/museum/MuseumDetail";
+import TourismDetail from "./pages/client/tourism/TourismDetail";
 
-import SignUp from "./pages/SignUp";
-import SignIn from "./pages/SignIn";
+import SignUp from "./pages/client/auth/SignUp";
+import SignIn from "./pages/client/auth/SignIn";
 
 /* ===== ADMIN ===== */
-import Dashboard from "./pages/admin/Dashboard";
+import Dashboard from "./pages/admin/dashboard/Dashboard";
 import SliderIndex from "./pages/admin/slider/SliderIndex";
 import CreateSliderForm from "./pages/admin/slider/CreateSliderForm";
 import EditSliderForm from "./pages/admin/slider/EditSliderForm";
@@ -50,11 +50,25 @@ import CreatePersonForm from "./pages/admin/person/CreatePersonForm";
 import EditPersonForm from "./pages/admin/person/EditPersonForm";
 
 
-
-
 import LanguageIndex from "./pages/admin/language/LanguageIndex";
 import CreateLanguageForm from "./pages/admin/language/CreateLanguageForm";
 import EditLanguageForm from "./pages/admin/language/EditLanguageForm";
+
+
+import SubCategoryIndex from "./pages/admin/subcategory/SubCategoryIndex";
+import CreateSubCategoryForm from "./pages/admin/subcategory/CreateSubCategoryForm";
+import EditSubCategoryForm from "./pages/admin/subcategory/EditSubCategoryForm";
+
+
+
+import ProductIndex from "./pages/admin/product/ProductIndex";
+import CreateProductForm from "./pages/admin/product/CreateProductForm";
+import EditProductForm from "./pages/admin/product/EditProductForm";
+import DetailProduct from "./pages/admin/product/DetailProduct";
+
+
+
+
 
 function App() {
   const location = useLocation();
@@ -133,6 +147,14 @@ function App() {
         <Route path="language/createLanguageForm" element={<CreateLanguageForm />} />
         <Route path="language/editLanguageForm/:id" element={<EditLanguageForm />} />
 
+        <Route path="subcategory/subCategoryIndex" element={<SubCategoryIndex />} />
+        <Route path="subcategory/createSubCategoryForm" element={<CreateSubCategoryForm />} />
+        <Route path="subcategory/editSubCategoryForm/:id" element={<EditSubCategoryForm />} />
+
+        <Route path="product/productIndex" element={<ProductIndex />} />
+        <Route path="product/createProductForm" element={<CreateProductForm />} />
+        <Route path="product/editProductForm/:id" element={<EditProductForm />} />
+        <Route path="product/detailProduct/:id" element={<DetailProduct />} />
       </Route>
     </Routes>
   );

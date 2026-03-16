@@ -19,7 +19,6 @@ namespace Service.DTOs.Admin.Product
         [Required] public DateTime StartDate { get; set; }
         [Required] public DateTime EndDate { get; set; }
         public TimeSpan StartTime { get; set; }
-
         [Required] public int CategoryId { get; set; }    
         public int? SubCategoryId { get; set; }            
         [Required] public int PersonId { get; set; }        
@@ -29,7 +28,6 @@ namespace Service.DTOs.Admin.Product
         public string SubCategoryName { get; set; }
         public string PersonName { get; set; }
         public List<string> SelectedLanguageNames { get; set; }
-
         public List<SelectListItemDto> Categories { get; set; }
         public List<SelectListItemDto> SubCategories { get; set; }
         public List<SelectListItemDto> Persons { get; set; }

@@ -224,7 +224,6 @@ C:\Users\ACER\Desktop\ITICKET\MoonTicketApi\MoonTicketApi\bin\Debug\net8.0\Syste
 C:\Users\ACER\Desktop\ITICKET\MoonTicketApi\MoonTicketApi\bin\Debug\net8.0\System.Composition.TypedParts.dll
 C:\Users\ACER\Desktop\ITICKET\MoonTicketApi\MoonTicketApi\bin\Debug\net8.0\System.Configuration.ConfigurationManager.dll
 C:\Users\ACER\Desktop\ITICKET\MoonTicketApi\MoonTicketApi\bin\Debug\net8.0\System.Drawing.Common.dll
-C:\Users\ACER\Desktop\ITICKET\MoonTicketApi\MoonTicketApi\bin\Debug\net8.0\System.Formats.Asn1.dll
 C:\Users\ACER\Desktop\ITICKET\MoonTicketApi\MoonTicketApi\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
 C:\Users\ACER\Desktop\ITICKET\MoonTicketApi\MoonTicketApi\bin\Debug\net8.0\System.Memory.Data.dll
 C:\Users\ACER\Desktop\ITICKET\MoonTicketApi\MoonTicketApi\bin\Debug\net8.0\System.Runtime.Caching.dll
@@ -313,12 +312,6 @@ C:\Users\ACER\Desktop\ITICKET\MoonTicketApi\MoonTicketApi\obj\Debug\net8.0\scope
 C:\Users\ACER\Desktop\ITICKET\MoonTicketApi\MoonTicketApi\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\ACER\Desktop\ITICKET\MoonTicketApi\MoonTicketApi\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\ACER\Desktop\ITICKET\MoonTicketApi\MoonTicketApi\obj\Debug\net8.0\staticwebassets.build.endpoints.json
-C:\Users\ACER\Desktop\ITICKET\MoonTicketApi\MoonTicketApi\obj\Debug\net8.0\staticwebassets\msbuild.MoonTicketApi.Microsoft.AspNetCore.StaticWebAssets.props
-C:\Users\ACER\Desktop\ITICKET\MoonTicketApi\MoonTicketApi\obj\Debug\net8.0\staticwebassets\msbuild.MoonTicketApi.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
-C:\Users\ACER\Desktop\ITICKET\MoonTicketApi\MoonTicketApi\obj\Debug\net8.0\staticwebassets\msbuild.build.MoonTicketApi.props
-C:\Users\ACER\Desktop\ITICKET\MoonTicketApi\MoonTicketApi\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.MoonTicketApi.props
-C:\Users\ACER\Desktop\ITICKET\MoonTicketApi\MoonTicketApi\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.MoonTicketApi.props
-C:\Users\ACER\Desktop\ITICKET\MoonTicketApi\MoonTicketApi\obj\Debug\net8.0\staticwebassets.pack.json
 C:\Users\ACER\Desktop\ITICKET\MoonTicketApi\MoonTicketApi\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\ACER\Desktop\ITICKET\MoonTicketApi\MoonTicketApi\obj\Debug\net8.0\MoonTick.4B2816E1.Up2Date
 C:\Users\ACER\Desktop\ITICKET\MoonTicketApi\MoonTicketApi\obj\Debug\net8.0\MoonTicketApi.dll
@@ -326,3 +319,8 @@ C:\Users\ACER\Desktop\ITICKET\MoonTicketApi\MoonTicketApi\obj\Debug\net8.0\refin
 C:\Users\ACER\Desktop\ITICKET\MoonTicketApi\MoonTicketApi\obj\Debug\net8.0\MoonTicketApi.pdb
 C:\Users\ACER\Desktop\ITICKET\MoonTicketApi\MoonTicketApi\obj\Debug\net8.0\MoonTicketApi.genruntimeconfig.cache
 C:\Users\ACER\Desktop\ITICKET\MoonTicketApi\MoonTicketApi\obj\Debug\net8.0\ref\MoonTicketApi.dll
+C:\Users\ACER\Desktop\ITICKET\MoonTicketApi\MoonTicketApi\obj\Debug\net8.0\rpswa.dswa.cache.json
+C:\Users\ACER\Desktop\ITICKET\MoonTicketApi\MoonTicketApi\obj\Debug\net8.0\rjimswa.dswa.cache.json
+C:\Users\ACER\Desktop\ITICKET\MoonTicketApi\MoonTicketApi\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
+C:\Users\ACER\Desktop\ITICKET\MoonTicketApi\MoonTicketApi\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
+C:\Users\ACER\Desktop\ITICKET\MoonTicketApi\MoonTicketApi\obj\Debug\net8.0\staticwebassets.build.json.cache

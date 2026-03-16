@@ -81,7 +81,6 @@ namespace Service.Services
 
             _mapper.Map(dto, product);
 
-            // Update Languages
             product.ProductLanguages.Clear();
             if (dto.LanguageIds != null && dto.LanguageIds.Any())
             {
@@ -106,28 +105,38 @@ namespace Service.Services
             return true;
         }
 
-        public async Task<ProductCreateDto> GetCreateDataAsync()
+        public async Task<ProductCreateDataDto> GetCreateDataAsync()
         {
-            var dto = new ProductCreateDto
+            return new ProductCreateDataDto
             {
                 Categories = await _context.Categories
-                    .Select(c => new SelectListItemDto { Id = c.Id, Name = c.Name })
-                    .ToListAsync(),
+                    .Select(c => new SelectListItemDto
+                    {
+                        Id = c.Id,
+                        Name = c.Name
+                    }).ToListAsync(),
 
                 SubCategories = await _context.SubCategories
-                    .Select(sc => new SelectListItemDto { Id = sc.Id, Name = sc.Name })
-                    .ToListAsync(),
+                    .Select(sc => new SelectListItemDto
+                    {
+                        Id = sc.Id,
+                        Name = sc.Name
+                    }).ToListAsync(),
 
                 Persons = await _context.Persons
-                    .Select(p => new SelectListItemDto { Id = p.Id, Name = p.Name })
-                    .ToListAsync(),
+                    .Select(p => new SelectListItemDto
+                    {
+                        Id = p.Id,
+                        Name = p.Name
+                    }).ToListAsync(),
 
                 Languages = await _context.Languages
-                    .Select(l => new SelectListItemDto { Id = l.Id, Name = l.Name })
-                    .ToListAsync()
+                    .Select(l => new SelectListItemDto
+                    {
+                        Id = l.Id,
+                        Name = l.Name
+                    }).ToListAsync()
             };
-
-            return dto;
         }
 
         public async Task<ProductEditDto> GetEditDataAsync(int id)

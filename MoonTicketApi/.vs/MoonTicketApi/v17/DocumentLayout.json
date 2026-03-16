@@ -3,24 +3,64 @@
   "WorkspaceRootPath": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{BA347616-AFFA-4F7A-ABA1-4978A4C57D2D}|MoonTicketApi\\MoonTicketApi.csproj|c:\\users\\acer\\desktop\\iticket\\moonticketapi\\moonticketapi\\controllers\\languagecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BA347616-AFFA-4F7A-ABA1-4978A4C57D2D}|MoonTicketApi\\MoonTicketApi.csproj|solutionrelative:moonticketapi\\controllers\\languagecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BA347616-AFFA-4F7A-ABA1-4978A4C57D2D}|MoonTicketApi\\MoonTicketApi.csproj|c:\\users\\acer\\desktop\\iticket\\moonticketapi\\moonticketapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA347616-AFFA-4F7A-ABA1-4978A4C57D2D}|MoonTicketApi\\MoonTicketApi.csproj|solutionrelative:moonticketapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5BCC1B6B-BCAB-49E5-A5DE-8897970CDB22}|Service\\Service.csproj|c:\\users\\acer\\desktop\\iticket\\moonticketapi\\service\\services\\languageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5BCC1B6B-BCAB-49E5-A5DE-8897970CDB22}|Service\\Service.csproj|solutionrelative:service\\services\\languageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5BCC1B6B-BCAB-49E5-A5DE-8897970CDB22}|Service\\Service.csproj|c:\\users\\acer\\desktop\\iticket\\moonticketapi\\service\\services\\interfaces\\ilanguageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5BCC1B6B-BCAB-49E5-A5DE-8897970CDB22}|Service\\Service.csproj|solutionrelative:service\\services\\interfaces\\ilanguageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BA347616-AFFA-4F7A-ABA1-4978A4C57D2D}|MoonTicketApi\\MoonTicketApi.csproj|c:\\users\\acer\\desktop\\iticket\\moonticketapi\\moonticketapi\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{BA347616-AFFA-4F7A-ABA1-4978A4C57D2D}|MoonTicketApi\\MoonTicketApi.csproj|solutionrelative:moonticketapi\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5BCC1B6B-BCAB-49E5-A5DE-8897970CDB22}|Service\\Service.csproj|c:\\users\\acer\\desktop\\iticket\\moonticketapi\\service\\dtos\\admin\\language\\languageeditdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5BCC1B6B-BCAB-49E5-A5DE-8897970CDB22}|Service\\Service.csproj|solutionrelative:service\\dtos\\admin\\language\\languageeditdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{29F5C45B-1B3B-46EC-8839-604DA50E45BE}|Domain\\Domain.csproj|c:\\users\\acer\\desktop\\iticket\\moonticketapi\\domain\\entities\\subcategory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29F5C45B-1B3B-46EC-8839-604DA50E45BE}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\subcategory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5BCC1B6B-BCAB-49E5-A5DE-8897970CDB22}|Service\\Service.csproj|c:\\users\\acer\\desktop\\iticket\\moonticketapi\\service\\services\\productservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5BCC1B6B-BCAB-49E5-A5DE-8897970CDB22}|Service\\Service.csproj|solutionrelative:service\\services\\productservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5BCC1B6B-BCAB-49E5-A5DE-8897970CDB22}|Service\\Service.csproj|c:\\users\\acer\\desktop\\iticket\\moonticketapi\\service\\services\\languageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5BCC1B6B-BCAB-49E5-A5DE-8897970CDB22}|Service\\Service.csproj|solutionrelative:service\\services\\languageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5BCC1B6B-BCAB-49E5-A5DE-8897970CDB22}|Service\\Service.csproj|c:\\users\\acer\\desktop\\iticket\\moonticketapi\\service\\dtos\\admin\\product\\productcreatedatadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5BCC1B6B-BCAB-49E5-A5DE-8897970CDB22}|Service\\Service.csproj|solutionrelative:service\\dtos\\admin\\product\\productcreatedatadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{5BCC1B6B-BCAB-49E5-A5DE-8897970CDB22}|Service\\Service.csproj|c:\\users\\acer\\desktop\\iticket\\moonticketapi\\service\\helpers\\mappingprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5BCC1B6B-BCAB-49E5-A5DE-8897970CDB22}|Service\\Service.csproj|solutionrelative:service\\helpers\\mappingprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5BCC1B6B-BCAB-49E5-A5DE-8897970CDB22}|Service\\Service.csproj|c:\\users\\acer\\desktop\\iticket\\moonticketapi\\service\\dtos\\admin\\product\\productdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5BCC1B6B-BCAB-49E5-A5DE-8897970CDB22}|Service\\Service.csproj|solutionrelative:service\\dtos\\admin\\product\\productdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5BCC1B6B-BCAB-49E5-A5DE-8897970CDB22}|Service\\Service.csproj|c:\\users\\acer\\desktop\\iticket\\moonticketapi\\service\\services\\interfaces\\iproductservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5BCC1B6B-BCAB-49E5-A5DE-8897970CDB22}|Service\\Service.csproj|solutionrelative:service\\services\\interfaces\\iproductservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA347616-AFFA-4F7A-ABA1-4978A4C57D2D}|MoonTicketApi\\MoonTicketApi.csproj|c:\\users\\acer\\desktop\\iticket\\moonticketapi\\moonticketapi\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA347616-AFFA-4F7A-ABA1-4978A4C57D2D}|MoonTicketApi\\MoonTicketApi.csproj|solutionrelative:moonticketapi\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5BCC1B6B-BCAB-49E5-A5DE-8897970CDB22}|Service\\Service.csproj|c:\\users\\acer\\desktop\\iticket\\moonticketapi\\service\\dtos\\admin\\product\\productcreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5BCC1B6B-BCAB-49E5-A5DE-8897970CDB22}|Service\\Service.csproj|solutionrelative:service\\dtos\\admin\\product\\productcreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5BCC1B6B-BCAB-49E5-A5DE-8897970CDB22}|Service\\Service.csproj|c:\\users\\acer\\desktop\\iticket\\moonticketapi\\service\\services\\subcategoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5BCC1B6B-BCAB-49E5-A5DE-8897970CDB22}|Service\\Service.csproj|solutionrelative:service\\services\\subcategoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA347616-AFFA-4F7A-ABA1-4978A4C57D2D}|MoonTicketApi\\MoonTicketApi.csproj|c:\\users\\acer\\desktop\\iticket\\moonticketapi\\moonticketapi\\controllers\\languagecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA347616-AFFA-4F7A-ABA1-4978A4C57D2D}|MoonTicketApi\\MoonTicketApi.csproj|solutionrelative:moonticketapi\\controllers\\languagecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5BCC1B6B-BCAB-49E5-A5DE-8897970CDB22}|Service\\Service.csproj|c:\\users\\acer\\desktop\\iticket\\moonticketapi\\service\\services\\interfaces\\ilanguageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5BCC1B6B-BCAB-49E5-A5DE-8897970CDB22}|Service\\Service.csproj|solutionrelative:service\\services\\interfaces\\ilanguageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -35,32 +75,67 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "LanguageController.cs",
-              "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\Controllers\\LanguageController.cs",
-              "RelativeDocumentMoniker": "MoonTicketApi\\Controllers\\LanguageController.cs",
-              "ToolTip": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\Controllers\\LanguageController.cs",
-              "RelativeToolTip": "MoonTicketApi\\Controllers\\LanguageController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADgAAAAmAAAAAAAAAA==",
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\Program.cs",
+              "RelativeDocumentMoniker": "MoonTicketApi\\Program.cs",
+              "ToolTip": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\Program.cs",
+              "RelativeToolTip": "MoonTicketApi\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-25T20:14:11.658Z",
+              "WhenOpened": "2026-03-13T09:06:10.286Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "LanguageEditDto.cs",
-              "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Service\\DTOs\\Admin\\Language\\LanguageEditDto.cs",
-              "RelativeDocumentMoniker": "Service\\DTOs\\Admin\\Language\\LanguageEditDto.cs",
-              "ToolTip": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Service\\DTOs\\Admin\\Language\\LanguageEditDto.cs",
-              "RelativeToolTip": "Service\\DTOs\\Admin\\Language\\LanguageEditDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "MoonTicketApi\\appsettings.Development.json",
+              "ToolTip": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\appsettings.Development.json",
+              "RelativeToolTip": "MoonTicketApi\\appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-03-13T08:27:56.401Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ProductCreateDataDto.cs",
+              "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Service\\DTOs\\Admin\\Product\\ProductCreateDataDto.cs",
+              "RelativeDocumentMoniker": "Service\\DTOs\\Admin\\Product\\ProductCreateDataDto.cs",
+              "ToolTip": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Service\\DTOs\\Admin\\Product\\ProductCreateDataDto.cs",
+              "RelativeToolTip": "Service\\DTOs\\Admin\\Product\\ProductCreateDataDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAA+AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-25T20:13:13.53Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-02T12:18:58.334Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
+              "Title": "ProductService.cs",
+              "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Service\\Services\\ProductService.cs",
+              "RelativeDocumentMoniker": "Service\\Services\\ProductService.cs",
+              "ToolTip": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Service\\Services\\ProductService.cs",
+              "RelativeToolTip": "Service\\Services\\ProductService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-02T12:14:22.348Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ProductDto.cs",
+              "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Service\\DTOs\\Admin\\Product\\ProductDto.cs",
+              "RelativeDocumentMoniker": "Service\\DTOs\\Admin\\Product\\ProductDto.cs",
+              "ToolTip": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Service\\DTOs\\Admin\\Product\\ProductDto.cs",
+              "RelativeToolTip": "Service\\DTOs\\Admin\\Product\\ProductDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-02T12:16:18.398Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "MappingProfile.cs",
               "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Service\\Helpers\\MappingProfile.cs",
               "RelativeDocumentMoniker": "Service\\Helpers\\MappingProfile.cs",
@@ -68,25 +143,107 @@
               "RelativeToolTip": "Service\\Helpers\\MappingProfile.cs",
               "ViewState": "AgIAABYAAAAAAAAAAAAQwCYAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-25T20:11:18.376Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-25T20:11:18.376Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 5,
               "Title": "LanguageService.cs",
               "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Service\\Services\\LanguageService.cs",
               "RelativeDocumentMoniker": "Service\\Services\\LanguageService.cs",
               "ToolTip": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Service\\Services\\LanguageService.cs",
               "RelativeToolTip": "Service\\Services\\LanguageService.cs",
-              "ViewState": "AgIAACMAAAAAAAAAAAAwwEoAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAEoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-25T20:10:41.716Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-25T20:10:41.716Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "SubCategory.cs",
+              "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Domain\\Entities\\SubCategory.cs",
+              "RelativeDocumentMoniker": "Domain\\Entities\\SubCategory.cs",
+              "ToolTip": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Domain\\Entities\\SubCategory.cs",
+              "RelativeToolTip": "Domain\\Entities\\SubCategory.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-01T19:01:56.645Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "LanguageEditDto.cs",
+              "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Service\\DTOs\\Admin\\Language\\LanguageEditDto.cs",
+              "RelativeDocumentMoniker": "Service\\DTOs\\Admin\\Language\\LanguageEditDto.cs",
+              "ToolTip": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Service\\DTOs\\Admin\\Language\\LanguageEditDto.cs",
+              "RelativeToolTip": "Service\\DTOs\\Admin\\Language\\LanguageEditDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-25T20:13:13.53Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "SubCategoryService.cs",
+              "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Service\\Services\\SubCategoryService.cs",
+              "RelativeDocumentMoniker": "Service\\Services\\SubCategoryService.cs",
+              "ToolTip": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Service\\Services\\SubCategoryService.cs",
+              "RelativeToolTip": "Service\\Services\\SubCategoryService.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAkwFUAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-01T19:24:11.514Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ProductCreateDto.cs",
+              "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Service\\DTOs\\Admin\\Product\\ProductCreateDto.cs",
+              "RelativeDocumentMoniker": "Service\\DTOs\\Admin\\Product\\ProductCreateDto.cs",
+              "ToolTip": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Service\\DTOs\\Admin\\Product\\ProductCreateDto.cs",
+              "RelativeToolTip": "Service\\DTOs\\Admin\\Product\\ProductCreateDto.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAA6wCQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-02T11:01:09.526Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "IProductService.cs",
+              "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Service\\Services\\Interfaces\\IProductService.cs",
+              "RelativeDocumentMoniker": "Service\\Services\\Interfaces\\IProductService.cs",
+              "ToolTip": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Service\\Services\\Interfaces\\IProductService.cs",
+              "RelativeToolTip": "Service\\Services\\Interfaces\\IProductService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-02T12:21:25.872Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ProductController.cs",
+              "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\Controllers\\ProductController.cs",
+              "RelativeDocumentMoniker": "MoonTicketApi\\Controllers\\ProductController.cs",
+              "ToolTip": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\Controllers\\ProductController.cs",
+              "RelativeToolTip": "MoonTicketApi\\Controllers\\ProductController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACYAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-02T12:21:40.402Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "LanguageController.cs",
+              "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\Controllers\\LanguageController.cs",
+              "RelativeDocumentMoniker": "MoonTicketApi\\Controllers\\LanguageController.cs",
+              "ToolTip": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\Controllers\\LanguageController.cs",
+              "RelativeToolTip": "MoonTicketApi\\Controllers\\LanguageController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADgAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-25T20:14:11.658Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
               "Title": "ILanguageService.cs",
               "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Service\\Services\\Interfaces\\ILanguageService.cs",
               "RelativeDocumentMoniker": "Service\\Services\\Interfaces\\ILanguageService.cs",
@@ -94,8 +251,7 @@
               "RelativeToolTip": "Service\\Services\\Interfaces\\ILanguageService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-25T20:10:16.918Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-25T20:10:16.918Z"
             }
           ]
         }

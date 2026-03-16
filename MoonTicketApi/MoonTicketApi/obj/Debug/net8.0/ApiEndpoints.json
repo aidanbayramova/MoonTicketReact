@@ -512,7 +512,7 @@
   {
     "ContainingType": "MoonTicketApi.Controllers.ProductController",
     "Method": "GetCreateData",
-    "RelativePath": "api/ProductGetCreateData/create-data",
+    "RelativePath": "api/ProductGetCreateData/GetCreateData",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

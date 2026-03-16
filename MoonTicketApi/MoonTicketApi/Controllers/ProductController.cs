@@ -31,7 +31,7 @@ namespace MoonTicketApi.Controllers
             return Ok(product);
         }
 
-        [HttpGet("create-data")]
+        [HttpGet("GetCreateData")]
         public async Task<IActionResult> GetCreateData()
         {
             var data = await _productService.GetCreateDataAsync();

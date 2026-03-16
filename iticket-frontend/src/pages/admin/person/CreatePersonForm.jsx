@@ -53,7 +53,7 @@ function CreatePersonForm() {
           <button
             className="buton"
             type="button"
-            onClick={() => navigate("//admin/person/personIndex")}
+            onClick={() => navigate("/admin/person/personIndex")}
           >
             Cancel
           </button>

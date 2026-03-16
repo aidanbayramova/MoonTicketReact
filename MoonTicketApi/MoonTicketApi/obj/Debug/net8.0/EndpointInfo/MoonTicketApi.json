@@ -647,7 +647,7 @@
         }
       }
     },
-    "/api/ProductGetCreateData/create-data": {
+    "/api/ProductGetCreateData/GetCreateData": {
       "get": {
         "tags": [
           "Product"
