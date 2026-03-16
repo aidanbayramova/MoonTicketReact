@@ -8,12 +8,10 @@ using Service.Services;
 using Service.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
-
 //
 //  CONTROLLERS
 //
 builder.Services.AddControllers();
-
 //
 //  DATABASE
 //

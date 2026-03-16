@@ -5,9 +5,9 @@ import "./Movie.css";
 import ScrollingTicker from "../../../components/ScrollingTicker"; 
 
 const movieData = [
-  { id: 1, title: "Avengers: Endgame", date: "2025-09-20", location: "Cinema Baku", price: "10-20 AZN", img: ActionImg, type: "Action" },
-  { id: 2, title: "The Godfather", date: "2025-10-05", location: "Cinema Baku", price: "12-25 AZN", img: ActionImg, type: "Drama" },
-  { id: 3, title: "The Mask", date: "2025-11-12", location: "Cinema Baku", price: "8-15 AZN", img: ActionImg, type: "Comedy" },
+  { id: 1, title: "Avengers: Endgame", date: "2025-09-20", location: "Cinema Baku", price: "10-20 AZN", type: "Action" },
+  { id: 2, title: "The Godfather", date: "2025-10-05", location: "Cinema Baku", price: "12-25 AZN", type: "Drama" },
+  { id: 3, title: "The Mask", date: "2025-11-12", location: "Cinema Baku", price: "8-15 AZN", type: "Comedy" },
 ];
 
 export default function Movie() {

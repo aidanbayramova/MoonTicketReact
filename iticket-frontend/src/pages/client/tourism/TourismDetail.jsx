@@ -11,7 +11,6 @@ const tourismDetail = [
         duration: "175 min",
         rating: "9.2",
         genre: "Crime, Drama",
-        poster: tourismClassImg,
         location: "Cinema Park – Mall 28",
         time: "10:00-20:00",
         price: 12,
@@ -20,8 +19,8 @@ const tourismDetail = [
 ];
 
 const relatedtourisms = [
-    { id: "3", title: "Scarface", poster: tourismClassImg },
-    { id: "4", title: "Goodfellas", poster: tourismClassImg },
+    { id: "3", title: "Scarface"},
+    { id: "4", title: "Goodfellas"},
 ];
 
 function TourismDetail() {

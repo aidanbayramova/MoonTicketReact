@@ -5,9 +5,9 @@ import "./Kids.css";
 import ScrollingTicker from "../../../components/ScrollingTicker";
 
 const kidsData = [
-  { id: 1, title: "Painting Masterclass", date: "2025-09-20", location: "Baku, Art Center", price: "30-50 AZN", img: KidsClassImg, type: "Art" },
-  { id: 2, title: "Music Masterclass", date: "2025-10-05", location: "Baku, Music School", price: "40-60 AZN", img: KidsClassImg, type: "Music" },
-  { id: 3, title: "Dance Masterclass", date: "2025-11-12", location: "Baku, Dance Studio", price: "35-55 AZN", img: KidsClassImg, type: "Dance" },
+  { id: 1, title: "Painting Masterclass", date: "2025-09-20", location: "Baku, Art Center", price: "30-50 AZN",type: "Art" },
+  { id: 2, title: "Music Masterclass", date: "2025-10-05", location: "Baku, Music School", price: "40-60 AZN",type: "Music" },
+  { id: 3, title: "Dance Masterclass", date: "2025-11-12", location: "Baku, Dance Studio", price: "35-55 AZN",type: "Dance" },
 ];
 
 export default function Kids() {

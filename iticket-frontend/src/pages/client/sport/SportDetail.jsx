@@ -15,7 +15,6 @@ const matches = [
         duration: "90 + Extra Time",
         rating: "5.0",
         league: "UEFA Champions League",
-        image: FootballImg,
         stadium: "Wembley Stadium",
         date: "25 May 2025",
         time: "22:00",

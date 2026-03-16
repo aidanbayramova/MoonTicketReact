@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Blog.css";
-import ScrollingTicker from "../components/ScrollingTicker"; 
-import BlogCard from "../components/BlogCard"; 
+import ScrollingTicker from "../../../components/ScrollingTicker"; 
+import BlogCard from "../../../components/BlogCard"; 
 
 export default function Blog() {
   const [bannerImg, setBannerImg] = useState(null);

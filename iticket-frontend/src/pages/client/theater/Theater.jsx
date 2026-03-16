@@ -8,9 +8,9 @@ import ScrollingTicker from "../../../components/ScrollingTicker";
 
 
 const theatersData = [
-  { id: 1, title: "Hamlet", date: "2025-09-20", location: "London, Globe Theater", ticketPrice: "50-150 GBP", img: TheCrucible, genre: "Drama" },
-  { id: 2, title: "Royal Shakespeare", date: "2025-10-05", location: "New York, Broadway", ticketPrice: "70-200 USD", img: Shakespeare, genre: "Musical" },
-  { id: 3, title: "National Theatre", date: "2025-11-12", location: "Paris, Palais Garnier", ticketPrice: "60-180 EUR", img: National, genre: "Musical" },
+  { id: 1, title: "Hamlet", date: "2025-09-20", location: "London, Globe Theater", ticketPrice: "50-150 GBP",genre: "Drama" },
+  { id: 2, title: "Royal Shakespeare", date: "2025-10-05", location: "New York, Broadway", ticketPrice: "70-200 USD",genre: "Musical" },
+  { id: 3, title: "National Theatre", date: "2025-11-12", location: "Paris, Palais Garnier", ticketPrice: "60-180 EUR",genre: "Musical" },
 ];
 
 export default function Theater() {

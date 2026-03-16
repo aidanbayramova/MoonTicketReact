@@ -5,9 +5,9 @@ import "./Museum.css";
 import ScrollingTicker from "../../../components/ScrollingTicker"; 
 
 const museumData = [
-  { id: 1, title: "Ancient Sculptures", date: "2025-09-20", location: "Baku Museum of History", price: "Free", img: ArtImg, type: "Art" },
-  { id: 2, title: "Medieval Artifacts", date: "2025-10-05", location: "Baku Museum of History", price: "5-10 AZN", img: ArtImg, type: "History" },
-  { id: 3, title: "Science Exhibit", date: "2025-11-12", location: "Baku Science Museum", price: "10-15 AZN", img: ArtImg, type: "Science" },
+  { id: 1, title: "Ancient Sculptures", date: "2025-09-20", location: "Baku Museum of History", price: "Free",type: "Art" },
+  { id: 2, title: "Medieval Artifacts", date: "2025-10-05", location: "Baku Museum of History", price: "5-10 AZN",type: "History" },
+  { id: 3, title: "Science Exhibit", date: "2025-11-12", location: "Baku Science Museum", price: "10-15 AZN",type: "Science" },
 ];
 
 export default function Museum() {

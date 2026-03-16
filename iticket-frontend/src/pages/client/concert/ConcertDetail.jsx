@@ -12,7 +12,6 @@ const concerts = [
     duration: "3 hours",
     rating: "4.8",
     genre: "Pop, Latin Pop, Live Music",
-    image: Lipa,
     location: "Paris Concert Hall",
     date: "15 Jan 2025",
     time: "20:00",

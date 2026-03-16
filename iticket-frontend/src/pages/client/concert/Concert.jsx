@@ -6,14 +6,14 @@ import ScrollingTicker from "../../../components/ScrollingTicker";
 
 
 const concertsData = [
-  { id: 1, title: "Dua Lipa Concert", date: "2025-09-20", location: "London, Wembley ", price: "80-300 EUR", img: Lipa, category: "Pop" },
-  { id: 2, title: "Shakira World Tour", date: "2025-10-05", location: "Berlin, Mercedes-Benz ", price: "70-250 EUR", img: c3Img, category: "Rock" },
-  { id: 3, title: "Billie Eilish Concert", date: "2025-11-12", location: "Paris, Accor Arena", price: "60-220 EUR", img: Billie, category: "Pop" },
-  { id: 4, title: "Ed Sheeran Live", date: "2025-12-01", location: "Madrid, Santiago  ", price: "75-280 EUR", img: EdSheeran, category: "Pop" },
-  { id: 5, title: "ABBA Concert", date: "2025-09-20", location: "London, Wembley ", price: "80-300 EUR", img: ABBA, category: "Jazz" },
-  { id: 6, title: "Adele Tour", date: "2025-10-05", location: "Berlin, Mercedes-Benz ", price: "70-250 EUR", img: Adele, category: "Rock" },
-  { id: 7, title: "Zara Larsson Concert", date: "2025-11-12", location: "Paris, Accor Arena", price: "60-220 EUR", img: ZaraLarsson, category: "Pop" },
-  { id: 8, title: "Coldplay Live", date: "2025-12-01", location: "Madrid, Santiago  ", price: "75-280 EUR", img: Coldplay, category: "Jazz" },
+  { id: 1, title: "Dua Lipa Concert", date: "2025-09-20", location: "London, Wembley ", price: "80-300 EUR",category: "Pop" },
+  { id: 2, title: "Shakira World Tour", date: "2025-10-05", location: "Berlin, Mercedes-Benz ", price: "70-250 EUR",category: "Rock" },
+  { id: 3, title: "Billie Eilish Concert", date: "2025-11-12", location: "Paris, Accor Arena", price: "60-220 EUR",category: "Pop" },
+  { id: 4, title: "Ed Sheeran Live", date: "2025-12-01", location: "Madrid, Santiago  ", price: "75-280 EUR",category: "Pop" },
+  { id: 5, title: "ABBA Concert", date: "2025-09-20", location: "London, Wembley ", price: "80-300 EUR",category: "Jazz" },
+  { id: 6, title: "Adele Tour", date: "2025-10-05", location: "Berlin, Mercedes-Benz ", price: "70-250 EUR",category: "Rock" },
+  { id: 7, title: "Zara Larsson Concert", date: "2025-11-12", location: "Paris, Accor Arena", price: "60-220 EUR", category: "Pop" },
+  { id: 8, title: "Coldplay Live", date: "2025-12-01", location: "Madrid, Santiago  ", price: "75-280 EUR",category: "Jazz" },
 ];
 
 export default function Concert() {

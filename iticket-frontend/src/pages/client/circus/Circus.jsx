@@ -5,9 +5,9 @@ import ScrollingTicker from "../../../components/ScrollingTicker";
 import "./Circus.css";
 
 const circusData = [
-  { id: 1, title: "Acrobat Show", date: "2025-09-20", location: "Baku Circus Arena", price: "20-40 AZN", img: CircusImg, type: "Acrobatics" },
-  { id: 2, title: "Animal Parade", date: "2025-10-05", location: "Baku Circus Arena", price: "15-30 AZN", img: CircusImg, type: "Animals" },
-  { id: 3, title: "Clown Comedy", date: "2025-11-12", location: "Baku Circus Arena", price: "10-25 AZN", img: CircusImg, type: "Clown" },
+  { id: 1, title: "Acrobat Show", date: "2025-09-20", location: "Baku Circus Arena", price: "20-40 AZN",type: "Acrobatics" },
+  { id: 2, title: "Animal Parade", date: "2025-10-05", location: "Baku Circus Arena", price: "15-30 AZN",type: "Animals" },
+  { id: 3, title: "Clown Comedy", date: "2025-11-12", location: "Baku Circus Arena", price: "10-25 AZN",type: "Clown" },
 ];
 
 export default function Circus() {

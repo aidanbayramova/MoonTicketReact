@@ -10,8 +10,6 @@ const museumDetail = [
         desc: "The aging patriarch of an organized crime dynasty transfers control of his empire to his reluctant son.",
         duration: "175 min",
         rating: "9.2",
-        genre: "Crime, Drama",
-        poster: museumClassImg,
         location: "Cinema Park – Mall 28",
         fromDate: "03 Jan 2025",
         time: "10:00-20:00",
@@ -21,8 +19,8 @@ const museumDetail = [
 ];
 
 const relatedMuseums = [
-    { id: "3", title: "Scarface", poster: museumClassImg },
-    { id: "4", title: "Goodfellas", poster: museumClassImg },
+    { id: "3", title: "Scarface"},
+    { id: "4", title: "Goodfellas"},
 ];
 
 function MuseumDetail() {

@@ -5,9 +5,9 @@ import "./Sport.css";
 import ScrollingTicker from "../../../components/ScrollingTicker";
 
 const sportData = [
-  { id: 1, title: "Football Training", date: "2025-09-20", location: "Baku, National Stadium", price: "20-40 AZN", img: FootballImg, type: "Football" },
-  { id: 2, title: "Basketball Camp", date: "2025-10-05", location: "Baku, Sports Complex", price: "25-45 AZN", img: FootballImg, type: "Basketball" },
-  { id: 3, title: "Tennis Workshop", date: "2025-11-12", location: "Baku, Tennis Club", price: "30-50 AZN", img: FootballImg, type: "Tennis" },
+  { id: 1, title: "Football Training", date: "2025-09-20", location: "Baku, National Stadium", price: "20-40 AZN",type: "Football" },
+  { id: 2, title: "Basketball Camp", date: "2025-10-05", location: "Baku, Sports Complex", price: "25-45 AZN",type: "Basketball" },
+  { id: 3, title: "Tennis Workshop", date: "2025-11-12", location: "Baku, Tennis Club", price: "30-50 AZN",type: "Tennis" },
 ];
 
 export default function Sport() {

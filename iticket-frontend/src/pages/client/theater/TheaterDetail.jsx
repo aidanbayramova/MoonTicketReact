@@ -14,8 +14,6 @@ const theaters = [
     rating: "9.2",
     genre: "Crime, Drama",
     trailer: "https://www.youtube.com/embed/sY1S34973zA",
-    poster:
-    GodfatherPoster,
     location: "Cinema Park – Mall 28",
     fromDate: "03 Jan 2025",
     toDate: "10 Jan 2025",
@@ -29,14 +27,10 @@ const relatedTheaters = [
   {
     id: "3",
     title: "Scarface",
-    poster:
-    GodfatherPoster,
   },
   {
     id: "4",
     title: "Goodfellas",
-    poster:
-    GodfatherPoster,
   },
 ];
 

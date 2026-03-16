@@ -1,4 +1,3 @@
-// CircusDetail.jsx
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -16,7 +15,6 @@ const shows = [
       duration: "2 Hours",
       rating: "4.9",
       league: "International Circus Show",
-      image: ShowImg,
       stadium: "Royal Circus Arena",
       date: "25 May 2025",
       time: "20:00",

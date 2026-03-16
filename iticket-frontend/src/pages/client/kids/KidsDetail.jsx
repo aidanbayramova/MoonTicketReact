@@ -11,7 +11,6 @@ const kidsTheaters = [
     duration: "175 min",
     rating: "9.2",
     genre: "Crime, Drama",
-    poster: KidsClassImg,
     location: "Cinema Park – Mall 28",
     fromDate: "03 Jan 2025",
     time: "16:30",
@@ -22,8 +21,8 @@ const kidsTheaters = [
 ];
 
 const relatedTheaters = [
-  { id: "3", title: "Scarface", poster: KidsClassImg },
-  { id: "4", title: "Goodfellas", poster: KidsClassImg },
+  { id: "3", title: "Scarface"},
+  { id: "4", title: "Goodfellas"},
 ];
 
 function KidsTheaterDetail() {

@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Contact.css";
 import ScrollingTicker from "../../../components/ScrollingTicker"; 
-import ContactSection from "../components/ContactSection"; 
-import MapWithBranches from "../components/MapWithBranches"; 
+import ContactSection from "../../../components/ContactSection"; 
+import MapWithBranches from "../../../components/MapWithBranches"; 
 
 export default function Contact() {
   const [bannerImg, setBannerImg] = useState(null);

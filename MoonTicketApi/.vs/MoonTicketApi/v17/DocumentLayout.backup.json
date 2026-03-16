@@ -78,9 +78,9 @@
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\Program.cs",
               "RelativeDocumentMoniker": "MoonTicketApi\\Program.cs",
-              "ToolTip": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\Program.cs*",
-              "RelativeToolTip": "MoonTicketApi\\Program.cs*",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAACIAAAAAAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\Program.cs",
+              "RelativeToolTip": "MoonTicketApi\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-13T09:06:10.286Z",
               "EditorCaption": ""
@@ -95,8 +95,7 @@
               "RelativeToolTip": "MoonTicketApi\\appsettings.Development.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-03-13T08:27:56.401Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-13T08:27:56.401Z"
             },
             {
               "$type": "Document",
@@ -180,8 +179,7 @@
               "RelativeToolTip": "Service\\DTOs\\Admin\\Language\\LanguageEditDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-25T20:13:13.53Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-25T20:13:13.53Z"
             },
             {
               "$type": "Document",

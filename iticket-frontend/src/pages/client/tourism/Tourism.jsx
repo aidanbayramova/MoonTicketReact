@@ -5,9 +5,9 @@ import "./Tourism.css";
 import ScrollingTicker from "../../../components/ScrollingTicker";
 
 const tourismData = [
-  { id: 1, title: "Nature Hike", date: "2025-09-20", location: "Quba Mountains", price: "50-80 AZN", img: TourismImg, type: "Nature" },
-  { id: 2, title: "City Tour", date: "2025-10-05", location: "Baku City", price: "40-70 AZN", img: TourismImg, type: "City" },
-  { id: 3, title: "Adventure Trip", date: "2025-11-12", location: "Gabala Adventure Park", price: "60-100 AZN", img: TourismImg, type: "Adventure" },
+  { id: 1, title: "Nature Hike", date: "2025-09-20", location: "Quba Mountains", price: "50-80 AZN",type: "Nature" },
+  { id: 2, title: "City Tour", date: "2025-10-05", location: "Baku City", price: "40-70 AZN",type: "City" },
+  { id: 3, title: "Adventure Trip", date: "2025-11-12", location: "Gabala Adventure Park", price: "60-100 AZN",type: "Adventure" },
 ];
 
 export default function Tourism() {
