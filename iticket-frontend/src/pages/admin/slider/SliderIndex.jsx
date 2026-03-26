@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./SliderIndex.css";
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5149";
+
 function SliderIndex() {
   const navigate = useNavigate();
 
@@ -9,7 +11,7 @@ function SliderIndex() {
 
   const fetchSliders = async () => {
     try {
-      const res = await fetch("https://localhost:7204/api/SliderGetAll");
+      const res = await fetch(`${API_BASE}/api/SliderGetAll`);
       const data = await res.json();
       setSliders(Array.isArray(data) ? data : []);
     } catch {
@@ -23,7 +25,7 @@ function SliderIndex() {
 
   const handleDelete = async (id) => {
     if (!window.confirm("Delete?")) return;
-    await fetch(`https://localhost:7204/api/SliderDelete/${id}`, {
+    await fetch(`${API_BASE}/api/SliderDelete/${id}`, {
       method: "DELETE",
     });
     fetchSliders();
@@ -61,7 +63,7 @@ function SliderIndex() {
                 <td className="title">{s.title}</td>
                 <td className="title">{s.subTitle}</td>
                 <td className="description">{s.desc}</td>
-                <td className="title" style={{width:"20PC"}}>{s.image && <img src={s.image} alt="" />}</td>
+                <td className="title" style={{width:"20PC"}}>{s.image && <img src={`${API_BASE}${s.image}`} alt="" />}</td>
                 <td className="actions">
                   <button className="buton"
                     onClick={() =>

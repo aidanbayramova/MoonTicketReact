@@ -13,7 +13,7 @@ function SettingDetail() {
     const fetchSetting = async () => {
       try {
         const res = await fetch(
-          `https://localhost:7204/api/SettingGetById/${id}`
+          `http://localhost:5149/api/SettingGetById/${id}`
         );
         if (!res.ok) throw new Error();
 

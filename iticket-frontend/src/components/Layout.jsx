@@ -32,7 +32,7 @@ function Layout({ children }) {
   useEffect(() => {
     const fetchSliders = async () => {
       try {
-        const res = await fetch("https://localhost:7204/api/SliderGetAll");
+        const res = await fetch("http://localhost:5149/api/SliderGetAll");
         let data = await res.json();
 
         if (!Array.isArray(data)) data = [];
@@ -52,7 +52,7 @@ function Layout({ children }) {
   useEffect(() => {
     const fetchSetting = async () => {
       try {
-        const res = await fetch("https://localhost:7204/api/SettingGetById/1");
+        const res = await fetch("http://localhost:5149/api/SettingGetById/1");
         if (!res.ok) throw new Error("Setting load error");
         const data = await res.json();
         setSetting(data);
@@ -181,9 +181,9 @@ function Layout({ children }) {
               key={slide.id}
               className={`hero-slide ${index === currentSlide ? "active" : ""}`}
               style={{
-                backgroundImage: `url(${slide.image})`
+                // backgroundImage: `url(${slide.image})`
                 // əgər image relative-dirsə:
-                // backgroundImage: `url(https://localhost:7204/${slide.image})`
+                backgroundImage: `url(http://localhost:5149/${slide.image})`
               }}
             >
               <div className="hero-overlay"></div>
@@ -217,7 +217,7 @@ function Layout({ children }) {
                 <div
                   key={slide.id}
                   className={`thumbnail ${index === currentSlide ? "active" : ""}`}
-                  style={{ backgroundImage: `url(${slide.image})` }}
+                  style={{ backgroundImage: `url(http://localhost:5149/${slide.image})`}}
                   onClick={() => setCurrentSlide(index)}
                 ></div>
               ))}

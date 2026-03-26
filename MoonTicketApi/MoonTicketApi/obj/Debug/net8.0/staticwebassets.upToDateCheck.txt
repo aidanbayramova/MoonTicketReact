@@ -1,5 +1,7 @@
 wwwroot\Uploads\CategoryImages\53fb8a6e-3bb3-4066-b75c-6577d245bb94.jpg
+wwwroot\Uploads\CategoryImages\7a98f456-b4a2-46e0-9b3a-b2ee5a1585c8.jpg
 wwwroot\Uploads\CategoryVideos\1e19ce85-8f79-4d6b-b1d1-471f6759c370.mp4
+wwwroot\Uploads\CategoryVideos\d0d7551f-e133-4763-ba59-99601ee6181a.mp4
 wwwroot\Uploads\Sliders\0b99f98c-5457-44d7-98de-ae44b9bfadb9.jpg
 wwwroot\Uploads\Sliders\36a830aa-852f-4baa-8a8f-da3b874382e0.jpg
 wwwroot\Uploads\Sliders\417f8514-8d22-45cf-9bf4-65d04b641171.png
@@ -7,13 +9,16 @@ wwwroot\Uploads\Sliders\58e9fb95-4987-47ab-9c7b-821417c04ca7.png
 wwwroot\Uploads\Sliders\60a1e302-8a1a-4041-8d02-7e19b9a654ce.jpg
 wwwroot\Uploads\Sliders\d8e1d014-9fdd-428b-a79f-77b5d0f7230d.png
 wwwroot\Uploads\Sliders\dc896e0f-3ff9-4bb4-9768-96ea723bc688.jpg
+wwwroot\Uploads\Sliders\ea9ead06-16d4-4b01-a414-c87e9282b584.jpg
 wwwroot\Uploads\Uploads\settings\0849d362-79f3-4de7-9506-8415cd517a48.jpg
+wwwroot\Uploads\Uploads\settings\0d1bb097-5c21-4b22-93e1-fb4fcd0cdfc6.jpg
 wwwroot\Uploads\Uploads\settings\14533ae8-e481-43c1-ac76-024b3369111f.jpg
 wwwroot\Uploads\Uploads\settings\1ac26ebb-3403-4a93-a0de-fa3bf4ffa0eb.jpg
 wwwroot\Uploads\Uploads\settings\27b7745a-570b-41cc-9d4b-8bb6671efe2e.jpeg
 wwwroot\Uploads\Uploads\settings\2b2de8d4-9685-43ef-ae40-bae2a725c87d.png
 wwwroot\Uploads\Uploads\settings\2f57aa7f-065e-4df8-afb2-9345d30bab49.jpg
 wwwroot\Uploads\Uploads\settings\39a5869d-b76d-415e-809d-b9628182c145.jpg
+wwwroot\Uploads\Uploads\settings\4b5e3628-7569-4b77-ac3b-82b1ad3e7808.jpg
 wwwroot\Uploads\Uploads\settings\80f079df-bd94-488c-9c37-85ed4775623d.png
 wwwroot\Uploads\Uploads\settings\844240df-963c-4c15-9523-8e9e871d1883.jpg
 wwwroot\Uploads\Uploads\settings\8e88746c-e790-4bbf-977d-fad8926f08ae.jpeg
@@ -33,6 +38,8 @@ wwwroot\Uploads\Uploads\videos\7674df4a-a99f-45dd-a4f1-9412a6cd4edb.mp4
 wwwroot\Uploads\Uploads\videos\76a373b6-d6fc-42f3-832c-b7a321eccf77.mp4
 wwwroot\Uploads\Uploads\videos\87c3c9a4-8abd-44a9-a275-a5a8e6a75669.mp4
 wwwroot\Uploads\Uploads\videos\9b8d739a-3dd9-4982-a155-f315835dd8d5.mp4
+wwwroot\Uploads\Uploads\videos\d6d42a99-5f01-4f20-a153-5ac22920581d.mp4
 wwwroot\Uploads\Uploads\videos\ea79d51d-92aa-4496-8397-4ef4dc31526e.mp4
 wwwroot\Uploads\Uploads\videos\f308f68e-242a-42fa-9f49-7410382199f9.mp4
 wwwroot\Uploads\Uploads\videos\ff4cfb0d-6639-4a86-811b-9e4439a4a72a.mp4
+wwwroot\Uploads\products\6596e1fa-621a-4737-be7c-81846a17951f.png

@@ -8,7 +8,7 @@ function SettingIndex() {
 
   const fetchSettings = async () => {
     try {
-      const res = await fetch("https://localhost:7204/api/SettingGetAll");
+      const res = await fetch("http://localhost:5149/api/SettingGetAll");
       const data = await res.json();
       setSettings(Array.isArray(data) ? data : []);
     } catch {

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Product.css";
 
-const API_BASE = "https://localhost:7204";
+const API_BASE = "http://localhost:5149";
 
 function CreateProductForm() {
   const navigate = useNavigate();
@@ -31,55 +31,21 @@ function CreateProductForm() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const res = await fetch(`${API_BASE}/api/CategoryGetAll`);
-        const data = await res.json();
-        setCategories(data);
-      } catch (err) {
-        console.error("Failed to fetch categories:", err);
-      }
-    };
-    fetchCategories();
-  }, []);
+    fetch(`${API_BASE}/api/CategoryGetAll`)
+      .then(res => res.json())
+      .then(setCategories);
 
-  useEffect(() => {
-    const fetchSubCategories = async () => {
-      try {
-        const res = await fetch(`${API_BASE}/api/SubCategoryGetAll`);
-        const data = await res.json();
-        setSubCategories(data);
-      } catch (err) {
-        console.error("Failed to fetch subCategories:", err);
-      }
-    };
-    fetchSubCategories();
-  }, []);
+    fetch(`${API_BASE}/api/SubCategoryGetAll`)
+      .then(res => res.json())
+      .then(setSubCategories);
 
-  useEffect(() => {
-    const fetchPersons = async () => {
-      try {
-        const res = await fetch(`${API_BASE}/api/PersonGetAll`);
-        const data = await res.json();
-        setPersons(data);
-      } catch (err) {
-        console.error("Failed to fetch persons:", err);
-      }
-    };
-    fetchPersons();
-  }, []);
+    fetch(`${API_BASE}/api/PersonGetAll`)
+      .then(res => res.json())
+      .then(setPersons);
 
-  useEffect(() => {
-    const fetchLanguages = async () => {
-      try {
-        const res = await fetch(`${API_BASE}/api/LanguageGetAll`);
-        const data = await res.json();
-        setLanguages(data);
-      } catch (err) {
-        console.error("Failed to fetch languages:", err);
-      }
-    };
-    fetchLanguages();
+    fetch(`${API_BASE}/api/LanguageGetAll`)
+      .then(res => res.json())
+      .then(setLanguages);
   }, []);
 
   const handleChange = (e) => {
@@ -97,34 +63,57 @@ function CreateProductForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // 🔥 IMAGE MƏCBURİ
+    if (!image) {
+      alert("Şəkil seçmək məcburidir!");
+      return;
+    }
+
+    if (!form.startDate || !form.endDate) {
+      alert("Tarixləri seç");
+      return;
+    }
+
     if (new Date(form.startDate) < new Date()) {
-      alert("Keçmiş tarix seçilə bilməz");
+      alert("Keçmiş tarix olmaz");
       return;
     }
 
     if (new Date(form.endDate) < new Date(form.startDate)) {
-      alert("End Date Start Date-dən böyük olmalıdır");
+      alert("End date böyük olmalıdır");
       return;
     }
 
     const data = new FormData();
+
     data.append("Name", form.name);
     data.append("Description", form.description);
     data.append("Address", form.address);
-    data.append("AgeRestriction", form.ageRestriction);
-    data.append("StartDate", form.startDate);
-    data.append("EndDate", form.endDate);
-    data.append("CategoryId", form.categoryId);
-    data.append("SubCategoryId", form.subCategoryId || "");
-    data.append("PersonId", form.personId);
-    form.languageIds.forEach(id => data.append("LanguageIds", id));
+    data.append("AgeRestriction", parseInt(form.ageRestriction) || 0);
 
-    if (image) data.append("Image", image);
+    data.append("StartDate", new Date(form.startDate).toISOString());
+    data.append("EndDate", new Date(form.endDate).toISOString());
+
+    data.append("CategoryId", parseInt(form.categoryId));
+    data.append(
+      "SubCategoryId",
+      form.subCategoryId ? parseInt(form.subCategoryId) : ""
+    );
+    data.append("PersonId", parseInt(form.personId));
+
+    form.languageIds.forEach(id =>
+      data.append("LanguageIds", id)
+    );
+
+    // 🔥 ƏN VACİB HİSSƏ
+    data.append("Image", image);
+
     if (video) data.append("Video", video);
 
     try {
       setLoading(true);
-      const response = await fetch(`${API_BASE}/api/Product/Create`, {
+
+      const response = await fetch(`${API_BASE}/api/ProductCreate`, {
         method: "POST",
         body: data
       });
@@ -134,10 +123,11 @@ function CreateProductForm() {
         throw new Error(errorText);
       }
 
-      alert("Product successfully created ");
+      alert("Product created");
       navigate("/admin/product/productIndex");
+
     } catch (error) {
-      console.error(error);
+      console.error("FULL ERROR:", error);
       alert("Error: " + error.message);
     } finally {
       setLoading(false);
@@ -149,60 +139,50 @@ function CreateProductForm() {
       <form className="product-form" onSubmit={handleSubmit}>
         <h2>Create Product</h2>
 
-        <label>Name</label>
-        <input type="text" name="name" value={form.name} onChange={handleChange} required />
+        <input name="name" placeholder="Name" value={form.name} onChange={handleChange} required />
+        <textarea name="description" placeholder="Description" value={form.description} onChange={handleChange} required />
+        <input name="address" placeholder="Address" value={form.address} onChange={handleChange} required />
 
-        <label>Description</label>
-        <textarea name="description" value={form.description} onChange={handleChange} required />
+        <input type="number" name="ageRestriction" value={form.ageRestriction} onChange={handleChange} />
 
-        <label>Address</label>
-        <input type="text" name="address" value={form.address} onChange={handleChange} required />
-
-        <label>Age Restriction</label>
-        <input type="number" name="ageRestriction" min="0" value={form.ageRestriction} onChange={handleChange} />
-
-        <label>Start Date & Time</label>
         <input type="datetime-local" name="startDate" min={now} value={form.startDate} onChange={handleChange} required />
-
-        <label>End Date & Time</label>
         <input type="datetime-local" name="endDate" min={form.startDate || now} value={form.endDate} onChange={handleChange} required />
 
-        <label>Category</label>
         <select name="categoryId" value={form.categoryId} onChange={handleChange} required>
-          <option value="">Select Category</option>
-          {categories.map(c => (
-            <option key={c.id} value={c.id}>{c.name}</option>
-          ))}
+          <option value="">Category</option>
+          {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
         </select>
 
-        <label>Sub Category</label>
         <select name="subCategoryId" value={form.subCategoryId} onChange={handleChange}>
-          <option value="">Select SubCategory</option>
-          {subCategories.map(sc => (
-            <option key={sc.id} value={sc.id}>{sc.name}</option>
-          ))}
+          <option value="">SubCategory</option>
+          {subCategories.map(sc => <option key={sc.id} value={sc.id}>{sc.name}</option>)}
         </select>
 
-        <label>Person</label>
         <select name="personId" value={form.personId} onChange={handleChange} required>
-          <option value="">Select Person</option>
-          {persons.map(p => (
-            <option key={p.id} value={p.id}>{p.name}</option>
-          ))}
+          <option value="">Person</option>
+          {persons.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
         </select>
 
-        <label>Languages</label>
         <select multiple onChange={handleLanguageChange}>
-          {languages.map(l => (
-            <option key={l.id} value={l.id}>{l.name}</option>
-          ))}
+          {languages.map(l => <option key={l.id} value={l.id}>{l.name}</option>)}
         </select>
 
-        <label>Image</label>
-        <input type="file" accept="image/*" onChange={(e) => setImage(e.target.files[0])} />
+        {/* 🔥 FILE INPUT */}
+        <input 
+          type="file" 
+          accept="image/*" 
+          onChange={(e) => {
+            setImage(e.target.files[0]);
+            console.log(e.target.files[0]); // debug
+          }} 
+          required
+        />
 
-        <label>Video</label>
-        <input type="file" accept="video/*" onChange={(e) => setVideo(e.target.files[0])} />
+        <input 
+          type="file" 
+          accept="video/*" 
+          onChange={(e) => setVideo(e.target.files[0])} 
+        />
 
         <button type="submit" disabled={loading}>
           {loading ? "Creating..." : "Create"}

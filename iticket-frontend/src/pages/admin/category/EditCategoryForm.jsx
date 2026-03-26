@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "./CategoryIndex.css";
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5149";
+
 function EditCategoryForm() {
     const { id } = useParams();
     const navigate = useNavigate();
@@ -18,7 +20,7 @@ function EditCategoryForm() {
     useEffect(() => {
         const fetchCategory = async () => {
             try {
-                const res = await fetch(`https://localhost:7204/api/CategoryGetById/${id}`);
+                const res = await fetch(`${API_BASE}/api/CategoryGetById/${id}`);
                 if (!res.ok) throw new Error("Category tapılmadı");
 
                 const data = await res.json();
@@ -50,7 +52,7 @@ function EditCategoryForm() {
         if (video) formData.append("Video", video);
 
         try {
-            const res = await fetch(`https://localhost:7204/api/CategoryEdit/${category.id}`, {
+            const res = await fetch(`${API_BASE}/api/CategoryEdit/${category.id}`, {
                 method: "PUT",
                 body: formData,
             });
@@ -107,14 +109,14 @@ function EditCategoryForm() {
                     {category.image && (
                         <div className="media-preview">
                             <p>Current Image:</p>
-                            <img src={`https://localhost:7204${category.image}`} alt="category" />
+                            <img src={`${API_BASE}${category.image}`} alt="category" />
                         </div>
                     )}
 
                     {category.video && (
                         <div className="media-preview">
                             <p>Current Video:</p>
-                            <video src={`https://localhost:7204${category.video}`} controls />
+                            <video src={`${API_BASE}${category.video}`} controls />
                         </div>
                     )}
                 </div>

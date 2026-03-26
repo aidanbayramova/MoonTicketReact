@@ -11,7 +11,7 @@ function CreatePersonForm() {
         e.preventDefault();
 
         try {
-            const res = await fetch("https://localhost:7204/api/PersonCreate", {
+            const res = await fetch("http://localhost:5149/api/PersonCreate", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

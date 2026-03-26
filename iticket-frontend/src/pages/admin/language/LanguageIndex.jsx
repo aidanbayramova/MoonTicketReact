@@ -8,7 +8,7 @@ function LanguageIndex() {
 
   const fetchLanguages = async () => {
     try {
-      const res = await fetch("https://localhost:7204/api/LanguageGetAll");
+      const res = await fetch("http://localhost:5149/api/LanguageGetAll");
       const data = await res.json();
       setLanguages(Array.isArray(data) ? data : []);
     } catch {
@@ -22,7 +22,7 @@ function LanguageIndex() {
 
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this language?")) return;
-    await fetch(`https://localhost:7204/api/LanguageDelete/${id}`, { method: "DELETE" });
+    await fetch(`http://localhost:5149/api/LanguageDelete/${id}`, { method: "DELETE" });
     fetchLanguages();
   };
 

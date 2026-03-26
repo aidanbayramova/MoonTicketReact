@@ -8,7 +8,7 @@ function SubCategoryIndex() {
 
   const fetchSubCategories = async () => {
     try {
-      const res = await fetch("https://localhost:7204/api/SubCategoryGetAll");
+      const res = await fetch("http://localhost:5149/api/SubCategoryGetAll");
       const data = await res.json();
       setSubCategories(Array.isArray(data) ? data : []);
     } catch {
@@ -23,7 +23,7 @@ function SubCategoryIndex() {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this subcategory?")) return;
 
-    await fetch(`https://localhost:7204/api/SubCategoryDelete/${id}`, {
+    await fetch(`http://localhost:5149/api/SubCategoryDelete/${id}`, {
       method: "DELETE",
     });
 

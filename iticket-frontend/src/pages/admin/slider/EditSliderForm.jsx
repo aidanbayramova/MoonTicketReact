@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "./SliderIndex.css";
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5149";
+
 function EditSliderForm() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -18,9 +20,7 @@ function EditSliderForm() {
   useEffect(() => {
     const fetchSlider = async () => {
       try {
-        const res = await fetch(
-          `https://localhost:7204/api/SliderGetById/${id}`
-        );
+        const res = await fetch(`${API_BASE}/api/SliderGetById/${id}`);
 
         if (!res.ok) throw new Error();
 
@@ -54,8 +54,7 @@ function EditSliderForm() {
     if (image) formData.append("Image", image);
 
     try {
-      const res = await fetch(
-        `https://localhost:7204/api/SliderEdit/${slider.id}`,
+      const res = await fetch(`${API_BASE}/api/SliderEdit/${slider.id}`,
         {
           method: "PUT",
           body: formData,
@@ -113,7 +112,7 @@ function EditSliderForm() {
         {slider.image && (
           <div className="image-preview" >
             <p>Current image:</p>
-            <img style={{width:"20pc"}} src={slider.image} alt="slider" />
+            <img style={{width:"20pc"}} src={`${API_BASE}${slider.image}`} alt="slider" />
           </div>
         )}
 

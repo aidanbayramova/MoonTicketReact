@@ -8,7 +8,7 @@ function PersonIndex() {
 
     const fetchPersons = async () => {
         try {
-            const res = await fetch("https://localhost:7204/api/PersonGetAll");
+            const res = await fetch("http://localhost:5149/api/PersonGetAll");
             const data = await res.json();
             setPersons(Array.isArray(data) ? data : []);
         } catch {
@@ -22,7 +22,7 @@ function PersonIndex() {
 
     const handleDelete = async (id) => {
         if (!window.confirm("Are you sure you want to delete this person?")) return;
-        await fetch(`https://localhost:7204/api/PersonDelete/${id}`, {
+        await fetch(`http://localhost:5149/api/PersonDelete/${id}`, {
             method: "DELETE",
         });
         fetchPersons();

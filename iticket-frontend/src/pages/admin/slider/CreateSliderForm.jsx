@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5149";
+
 function CreateSliderForm() {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
@@ -18,7 +20,7 @@ function CreateSliderForm() {
     if (image) formData.append("Image", image);
 
     try {
-      const res = await fetch("https://localhost:7204/api/SliderCreate", {
+      const res = await fetch(`${API_BASE}/api/SliderCreate`, {
         method: "POST",
         body: formData,
       });

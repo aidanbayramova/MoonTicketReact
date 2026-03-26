@@ -2,13 +2,15 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./CategoryIndex.css";
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5149";
+
 function CategoryIndex() {
     const navigate = useNavigate();
     const [categories, setCategories] = useState([]);
 
     const fetchCategories = async () => {
         try {
-            const res = await fetch("https://localhost:7204/api/CategoryGetAll");
+            const res = await fetch(`${API_BASE}/api/CategoryGetAll`);
             const data = await res.json();
             setCategories(Array.isArray(data) ? data : []);
         } catch {
@@ -22,7 +24,7 @@ function CategoryIndex() {
 
     const handleDelete = async (id) => {
         if (!window.confirm("Are you sure you want to delete this category?")) return;
-        await fetch(`https://localhost:7204/api/CategoryDelete/${id}`, {
+        await fetch(`${API_BASE}/api/CategoryDelete/${id}`, {
             method: "DELETE",
         });
         fetchCategories();
@@ -62,12 +64,12 @@ function CategoryIndex() {
                                 <td className="desc">{c.description}</td>
                                 <td className="media">
                                     {c.image && (
-                                      <img src={`https://localhost:7204${c.image}`} alt={c.name} />
+                                      <img src={`${API_BASE}${c.image}`} alt={c.name} />
                                     )}
                                 </td>
                                 <td className="media">
                                     {c.video && (
-                                       <video src={`https://localhost:7204${c.video}`} controls />
+                                       <video src={`${API_BASE}${c.video}`} controls />
                                     )}
                                 </td>
 

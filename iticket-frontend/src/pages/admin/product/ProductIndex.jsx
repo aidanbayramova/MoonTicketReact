@@ -2,14 +2,22 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Product.css";
 
+const API_BASE = "http://localhost:5149";
+
 function ProductIndex() {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
 
   const fetchProducts = async () => {
-    const res = await fetch("https://localhost:7204/api/ProductGetAll");
-    const data = await res.json();
-    setProducts(Array.isArray(data) ? data : []);
+    try {
+      const res = await fetch(`${API_BASE}/api/ProductGetAll`);
+      const data = await res.json();
+
+      console.log("DATA:", data);
+      setProducts(Array.isArray(data) ? data : []);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -19,7 +27,7 @@ function ProductIndex() {
   const handleDelete = async (id) => {
     if (!window.confirm("Delete this product?")) return;
 
-    await fetch(`https://localhost:7204/api/ProductDelete/${id}`, {
+    await fetch(`${API_BASE}/api/ProductDelete/${id}`, {
       method: "DELETE",
     });
 
@@ -57,17 +65,53 @@ function ProductIndex() {
           ) : (
             products.map((p) => (
               <tr key={p.id}>
-                <td>{p.name}</td>
-                <td>{p.address}</td>
-                <td>{new Date(p.startDate).toLocaleString()}</td>
-                <td>{p.ageRestriction}+</td>
+                {/* NAME */}
+                <td>{p.name ?? p.Name ?? "-"}</td>
+
+                {/* ADDRESS */}
+                <td>{p.address ?? p.Address ?? "-"}</td>
+
+                {/* START DATE */}
                 <td>
-                  {p.image && <img src={p.image} alt="" />}
+                  {p.startDate || p.StartDate
+                    ? new Date(p.startDate || p.StartDate).toLocaleString()
+                    : "-"}
                 </td>
-                <td className="actions">
-                  <button onClick={() => navigate(`/admin/product/detail/${p.id}`)}>Detail</button>
-                  <button onClick={() => navigate(`/admin/product/edit/${p.id}`)}>Edit</button>
-                  <button onClick={() => handleDelete(p.id)}>Delete</button>
+
+                {/* AGE */}
+                <td>{(p.ageRestriction ?? p.AgeRestriction ?? 0) + "+"}</td>
+
+                {/* IMAGE */}
+                <td>
+                  {p.image || p.Image ? (
+                    <img
+                      src={`${API_BASE}${p.image ?? p.Image}`}
+                      alt="product"
+                      style={{
+                        width: "60px",
+                        height: "60px",
+                        objectFit: "cover",
+                        borderRadius: "8px",
+                      }}
+                    />
+                  ) : (
+                    "No image"
+                  )}
+                </td>
+
+                {/* ACTIONS */}
+                <td>
+                  <button onClick={() => navigate(`/admin/product/detailProduct/${p.id}`)}>
+                    Detail
+                  </button>
+
+                  <button onClick={() => navigate(`/admin/product/editProductForm/${p.id}`)}>
+                    Edit
+                  </button>
+
+                  <button onClick={() => handleDelete(p.id)}>
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))

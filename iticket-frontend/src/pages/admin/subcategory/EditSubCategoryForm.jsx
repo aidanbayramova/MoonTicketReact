@@ -16,13 +16,13 @@ function EditSubCategoryForm() {
     const fetchData = async () => {
       try {
         // Bütün kateqoriyaları götür
-        const catRes = await fetch("https://localhost:7204/api/CategoryGetAll");
+        const catRes = await fetch("http://localhost:5149/api/CategoryGetAll");
         const cats = await catRes.json();
         setCategories(cats);
 
         // SubCategory məlumatını götür
         const res = await fetch(
-          `https://localhost:7204/api/SubCategoryGetById/${id}`
+          `http://localhost:5149/api/SubCategoryGetById/${id}`
         );
         const data = await res.json();
 
@@ -58,7 +58,7 @@ function EditSubCategoryForm() {
       }
 
       const res = await fetch(
-        `https://localhost:7204/api/SubCategoryEdit/${id}`,
+        `http://localhost:5149/api/SubCategoryEdit/${id}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },

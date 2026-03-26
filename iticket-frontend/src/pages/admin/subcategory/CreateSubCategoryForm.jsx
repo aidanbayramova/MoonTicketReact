@@ -12,7 +12,7 @@ function CreateSubCategoryForm() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const res = await fetch("https://localhost:7204/api/CategoryGetAll");
+        const res = await fetch("http://localhost:5149/api/CategoryGetAll");
         const data = await res.json();
         setCategories(data);
       } catch (err) {
@@ -32,7 +32,7 @@ function CreateSubCategoryForm() {
     });
 
     try {
-      const res = await fetch("https://localhost:7204/api/SubCategoryCreate", {
+      const res = await fetch("http://localhost:5149/api/SubCategoryCreate", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

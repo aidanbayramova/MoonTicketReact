@@ -18,12 +18,14 @@ namespace Service.Services
         private readonly IProductRepository _productRepository;
         private readonly AppDbContext _context;
         private readonly IMapper _mapper;
+        private readonly IFileService _fileService;
 
-        public ProductService (IProductRepository productRepository ,AppDbContext context, IMapper mapper)
+        public ProductService (IProductRepository productRepository ,AppDbContext context, IMapper mapper,IFileService fileService)
         {
             _productRepository = productRepository;
             _context = context;
             _mapper = mapper;
+            _fileService = fileService;
         }
         public async Task<List<ProductDto>> GetAllAsync()
         {
@@ -55,6 +57,13 @@ namespace Service.Services
         {
             var product = _mapper.Map<Product>(dto);
 
+            // 🔥 IMAGE SAVE ET
+            if (dto.Image != null)
+            {
+                string fileName = await _fileService.SaveFileAsync(dto.Image, "products");
+                product.Image = fileName;
+            }
+
             // Many-to-Many Languages
             if (dto.LanguageIds != null && dto.LanguageIds.Any())
             {
@@ -64,6 +73,11 @@ namespace Service.Services
                 }).ToList();
             }
 
+            if (dto.Video != null)
+            {
+                string videoName = await _fileService.SaveFileAsync(dto.Video, "products");
+                product.Video = videoName;
+            }
             await _context.Products.AddAsync(product);
             await _context.SaveChangesAsync();
 

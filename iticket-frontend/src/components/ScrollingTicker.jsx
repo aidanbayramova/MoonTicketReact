@@ -5,7 +5,7 @@ export default function ScrollingTitle() {
   const [websiteName, setWebsiteName] = useState("• Loading...");
 
   useEffect(() => {
-    fetch("https://localhost:7204/api/SettingGetAll")
+    fetch("http://localhost:5149/api/SettingGetAll")
       .then((res) => res.json())
       .then((data) => {
         if (data && data.length > 0) {

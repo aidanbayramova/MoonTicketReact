@@ -15,7 +15,7 @@ function EditPersonForm() {
   useEffect(() => {
     const fetchPerson = async () => {
       try {
-        const res = await fetch(`https://localhost:7204/api/PersonGetById/${id}`);
+        const res = await fetch(`http://localhost:5149/api/PersonGetById/${id}`);
         if (!res.ok) throw new Error("Person not found");
 
         const data = await res.json();
@@ -43,7 +43,7 @@ function EditPersonForm() {
     const dto = { Name: name }; // backend ilə match edir
 
     try {
-      const res = await fetch(`https://localhost:7204/api/PersonEdit/${person.id}`, {
+      const res = await fetch(`http://localhost:5149/api/PersonEdit/${person.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(dto),

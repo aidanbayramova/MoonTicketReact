@@ -7,7 +7,7 @@ export default function AboutUs() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://localhost:7204/api/SettingGetAll")
+    fetch("http://localhost:5149/api/SettingGetAll")
       .then(res => res.json())
       .then(data => {
         console.log("Fetched About data:", data);

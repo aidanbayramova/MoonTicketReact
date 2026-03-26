@@ -10,7 +10,7 @@ function CreateLanguageForm() {
     e.preventDefault();
 
     try {
-      const res = await fetch("https://localhost:7204/api/LanguageCreate", {
+      const res = await fetch("http://localhost:5149/api/LanguageCreate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name }),

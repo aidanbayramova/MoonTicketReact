@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import "./HeroSection.css"
 
-const API_BASE = "https://localhost:7204"
+const API_BASE = "http://localhost:5149"
 
 export default function HeroSection() {
   const [setting, setSetting] = useState(null)

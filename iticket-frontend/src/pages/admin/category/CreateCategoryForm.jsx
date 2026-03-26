@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./CategoryIndex.css";
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5149";
 
 function CreateCategoryForm() {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ function CreateCategoryForm() {
     if (video) formData.append("Video", video);
 
     try {
-      const res = await fetch("https://localhost:7204/api/CategoryCreate", {
+      const res = await fetch(`${API_BASE}/api/CategoryCreate`, {
         method: "POST",
         body: formData,
       });
@@ -77,7 +78,7 @@ function CreateCategoryForm() {
           <button
             className="buton"
             type="button"
-            onClick={() => navigate("//admin/category/categoryIndex")}
+            onClick={() => navigate("/admin/category/categoryIndex")}
           >
             Cancel
           </button>

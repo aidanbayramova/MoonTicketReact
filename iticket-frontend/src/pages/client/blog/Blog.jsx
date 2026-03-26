@@ -8,7 +8,7 @@ export default function Blog() {
   const [bannerImg, setBannerImg] = useState(null);
 
   useEffect(() => {
-    fetch("https://localhost:7204/api/SettingGetAll")
+    fetch("http://localhost:5149/api/SettingGetAll")
       .then(res => res.json())
       .then(data => {
         if (Array.isArray(data) && data.length > 0) {

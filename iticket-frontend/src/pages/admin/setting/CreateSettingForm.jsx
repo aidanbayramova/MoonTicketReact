@@ -37,7 +37,7 @@ function CreateSettingForm() {
     if (video) formData.append("Video", video);
 
     try {
-      const res = await fetch("https://localhost:7204/api/SettingCreate", {
+      const res = await fetch("http://localhost:5149/api/SettingCreate", {
         method: "POST",
         body: formData,
       });

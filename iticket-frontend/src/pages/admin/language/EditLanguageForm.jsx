@@ -14,7 +14,7 @@ function EditLanguageForm() {
   useEffect(() => {
     const fetchLanguage = async () => {
       try {
-        const res = await fetch(`https://localhost:7204/api/LanguageGetById/${id}`);
+        const res = await fetch(`http://localhost:5149/api/LanguageGetById/${id}`);
         if (!res.ok) throw new Error("Language not found");
 
         const data = await res.json();
@@ -37,7 +37,7 @@ function EditLanguageForm() {
     setSaving(true);
 
     try {
-      const res = await fetch(`https://localhost:7204/api/LanguageEdit/${language.id}`, {
+      const res = await fetch(`http://localhost:5149/api/LanguageEdit/${language.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ Name: name }),

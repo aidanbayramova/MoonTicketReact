@@ -23,7 +23,7 @@ function EditProductForm() {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await fetch(`https://localhost:7204/api/ProductGetById/${id}`);
+        const res = await fetch(`http://localhost:5149/api/ProductGetById/${id}`);
         const data = await res.json();
 
         setProduct(data);
@@ -73,7 +73,7 @@ function EditProductForm() {
     if (image) formData.append("Image", image);
     if (video) formData.append("Video", video);
 
-    await fetch(`https://localhost:7204/api/ProductEdit/${id}`, {
+    await fetch(`http://localhost:5149/api/ProductEdit/${id}`, {
       method: "PUT",
       body: formData,
     });

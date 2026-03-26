@@ -42,7 +42,7 @@ function EditSettingForm() {
   useEffect(() => {
     const fetchSetting = async () => {
       try {
-        const res = await fetch(`https://localhost:7204/api/SettingGetById/${id}`);
+        const res = await fetch(`http://localhost:5149/api/SettingGetById/${id}`);
         if (!res.ok) throw new Error("Setting tapılmadı");
         const data = await res.json();
 
@@ -99,7 +99,7 @@ function EditSettingForm() {
     if (video) formData.append("Video", video);
 
     try {
-      const res = await fetch(`https://localhost:7204/api/SettingEdit/${id}`, {
+      const res = await fetch(`http://localhost:5149/api/SettingEdit/${id}`, {
         method: "PUT",
         body: formData,
       });
