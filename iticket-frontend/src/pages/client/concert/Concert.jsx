@@ -1,34 +1,65 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Info } from "lucide-react";
 import "./Concert.css";
 import ScrollingTicker from "../../../components/ScrollingTicker";
+import { buildAssetUrl, fetchProducts, formatDate, filterProductsByCategory } from "../../../api/products";
 
 
-const concertsData = [
-  { id: 1, title: "Dua Lipa Concert", date: "2025-09-20", location: "London, Wembley ", price: "80-300 EUR",category: "Pop" },
-  { id: 2, title: "Shakira World Tour", date: "2025-10-05", location: "Berlin, Mercedes-Benz ", price: "70-250 EUR",category: "Rock" },
-  { id: 3, title: "Billie Eilish Concert", date: "2025-11-12", location: "Paris, Accor Arena", price: "60-220 EUR",category: "Pop" },
-  { id: 4, title: "Ed Sheeran Live", date: "2025-12-01", location: "Madrid, Santiago  ", price: "75-280 EUR",category: "Pop" },
-  { id: 5, title: "ABBA Concert", date: "2025-09-20", location: "London, Wembley ", price: "80-300 EUR",category: "Jazz" },
-  { id: 6, title: "Adele Tour", date: "2025-10-05", location: "Berlin, Mercedes-Benz ", price: "70-250 EUR",category: "Rock" },
-  { id: 7, title: "Zara Larsson Concert", date: "2025-11-12", location: "Paris, Accor Arena", price: "60-220 EUR", category: "Pop" },
-  { id: 8, title: "Coldplay Live", date: "2025-12-01", location: "Madrid, Santiago  ", price: "75-280 EUR",category: "Jazz" },
+const fallbackConcerts = [
+  { id: 1, title: "Dua Lipa Concert", date: "2025-09-20", location: "London, Wembley", price: "80-300 EUR", category: "Pop", img: "src/assets/images/c2.jpg" },
+  { id: 2, title: "Shakira World Tour", date: "2025-10-05", location: "Berlin, Mercedes-Benz", price: "70-250 EUR", category: "Rock", img: "src/assets/images/c3.jpg" },
+  { id: 3, title: "Billie Eilish Concert", date: "2025-11-12", location: "Paris, Accor Arena", price: "60-220 EUR", category: "Pop", img: "src/assets/images/c1.jpg" },
 ];
+
+const placeholderImg = "src/assets/images/hello.jpg";
+
+const mapProductToCard = (product) => {
+  const category = product.subCategoryName || product.categoryName || "Concert";
+  return {
+    id: product.id,
+    title: product.name,
+    date: formatDate(product.startDate) || "",
+    location: product.address || "",
+    price: product.personName || (product.ageRestriction ? `${product.ageRestriction}+` : ""),
+    category,
+    img: buildAssetUrl(product.image) || placeholderImg,
+  };
+};
 
 export default function Concert() {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("All");
+  const [filterOptions, setFilterOptions] = useState(() => ["All", ...new Set(fallbackConcerts.map((c) => c.category).filter(Boolean))]);
   const [hoveredCard, setHoveredCard] = useState(null);
   const [bannerImg, setBannerImg] = useState(null);
+  const [concerts, setConcerts] = useState(fallbackConcerts);
 
-  const filteredConcerts = concertsData.filter(
+  const filteredConcerts = concerts.filter(
     (concert) =>
       (filter === "All" || concert.category === filter) &&
       concert.title.toLowerCase().includes(search.toLowerCase())
   );
 
   useEffect(() => {
+    let active = true;
+
+    fetchProducts()
+      .then((list) => {
+        if (!active || !list.length) return;
+        const allowed = ["concert", "music", "live"];
+        const filtered = filterProductsByCategory(list, allowed);
+        const source = filtered.length ? filtered : list;
+        const mapped = source.map(mapProductToCard).filter((p) => p.img || p.title);
+        if (mapped.length) {
+          setConcerts(mapped);
+          const nextFilters = ["All", ...new Set(mapped.map((item) => item.category).filter(Boolean))];
+          setFilterOptions(nextFilters);
+          if (!nextFilters.includes(filter)) setFilter("All");
+        }
+      })
+      .catch(() => {});
+
     // Fetch banner image from API
     fetch("http://localhost:5149/api/SettingGetAll")
       .then((res) => res.json())
@@ -38,6 +69,10 @@ export default function Concert() {
         }
       })
       .catch((err) => console.error(err));
+
+    return () => {
+      active = false;
+    };
   }, []);
 
   return (
@@ -77,10 +112,9 @@ export default function Concert() {
             onChange={(e) => setSearch(e.target.value)}
           />
           <select value={filter} onChange={(e) => setFilter(e.target.value)}>
-            <option value="All">All</option>
-            <option value="Pop">Pop</option>
-            <option value="Rock">Rock</option>
-            <option value="Jazz">Jazz</option>
+            {filterOptions.map((opt) => (
+              <option key={opt} value={opt}>{opt}</option>
+            ))}
           </select>
         </div>
 
@@ -99,7 +133,7 @@ export default function Concert() {
                 onMouseEnter={() => setHoveredCard(i)}
                 onMouseLeave={() => setHoveredCard(null)}
               >
-                <Link to={`/concert/${concert.id}`} className="concert-link">
+                <Link to={`/event/concertdetail/${concert.id}`} className="concert-link">
                   <div className="concert-card-inner">
                     <div className="concert-card-image-container">
                       <img src={concert.img} alt={concert.title} className="concert-card-image" />

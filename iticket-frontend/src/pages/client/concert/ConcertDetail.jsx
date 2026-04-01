@@ -1,24 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import ScrollingTicker from "../../../components/ScrollingTicker";
+import { buildAssetUrl, fetchProductById, formatDate } from "../../../api/products";
 import "./ConcertDetail.css";
 
-const concerts = [
-  {
-    id: "1",
-    title: "Shakira Live in Concert",
-    artist: "Shakira",
-    desc: "Experience an unforgettable evening of smooth jazz featuring world-class musicians performing timeless classics and modern compositions.",
-    duration: "3 hours",
-    rating: "4.8",
-    genre: "Pop, Latin Pop, Live Music",
-    location: "Paris Concert Hall",
-    date: "15 Jan 2025",
-    time: "20:00",
-    language: "English",
-    age: "16+",
-  },
-];
+const fallbackConcert = {
+  id: "1",
+  title: "Shakira Live in Concert",
+  artist: "Shakira",
+  desc: "Experience an unforgettable evening of smooth jazz featuring world-class musicians performing timeless classics and modern compositions.",
+  duration: "3 hours",
+  rating: "4.8",
+  genre: "Pop, Latin Pop, Live Music",
+  location: "Paris Concert Hall",
+  date: "15 Jan 2025",
+  time: "20:00",
+  language: "English",
+  age: "16+",
+  image: "src/assets/images/c1.jpg",
+};
 
 const relatedConcerts = [
   {
@@ -45,7 +45,42 @@ const venueLayout = [
 
 function Concert() {
   const { id } = useParams();
-  const concert = concerts.find((c) => c.id === id);
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let active = true;
+    setLoading(true);
+    fetchProductById(id)
+      .then((data) => {
+        if (!active) return;
+        setProduct(data);
+      })
+      .catch(() => {})
+      .finally(() => active && setLoading(false));
+    return () => {
+      active = false;
+    };
+  }, [id]);
+
+  const concert = product
+    ? {
+        ...fallbackConcert,
+        id: product.id,
+        title: product.name || fallbackConcert.title,
+        artist: product.personName || fallbackConcert.artist,
+        desc: product.description || fallbackConcert.desc,
+        genre: [product.categoryName, product.subCategoryName].filter(Boolean).join(", ") || fallbackConcert.genre,
+        location: product.address || fallbackConcert.location,
+        date: formatDate(product.startDate) || fallbackConcert.date,
+        time: product.startTime || fallbackConcert.time,
+        language: (product.languages || []).join(", ") || fallbackConcert.language,
+        age: product.ageRestriction ? `${product.ageRestriction}+` : fallbackConcert.age,
+        image: buildAssetUrl(product.image) || fallbackConcert.image,
+        rating: fallbackConcert.rating,
+        duration: fallbackConcert.duration,
+      }
+    : fallbackConcert;
 
   // Occupied sections/seats
   const occupiedStanding = {
@@ -117,13 +152,8 @@ function Concert() {
     return standingCount + selectedSeats.length;
   };
 
-  if (!concert) {
-    return (
-      <div className="not-found">
-        <h2>Concert not found</h2>
-        <Link to="/event/concerts">← Back</Link>
-      </div>
-    );
+  if (loading && !product) {
+    return <div className="not-found"><h2>Yüklənir...</h2></div>;
   }
 
   return (

@@ -1,33 +1,55 @@
 "use client";
 
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, Info } from "lucide-react";
+import { buildAssetUrl, fetchProducts, filterProductsByCategory } from "../api/products";
 import "./ConcertSection.css";
+
+const fallbackConcerts = [
+    { id: 1, title: "Billie Eilish", genre: "Pop • Live", rating: "8.9", year: "2024", img: "src/assets/images/c1.jpg" },
+    { id: 2, title: "Dua Lipa", genre: "Pop • Live", rating: "9.0", year: "2023", img: "src/assets/images/c2.jpg" },
+    { id: 3, title: "Shakira", genre: "Latin • Live", rating: "8.7", year: "2022", img: "src/assets/images/c3.jpg" },
+    { id: 4, title: "Dragon", genre: "Rock • Live", rating: "8.8", year: "2024", img: "src/assets/images/c4.jpg" },
+];
+
+const toCard = (product) => {
+    const genreParts = [product.categoryName, product.subCategoryName].filter(Boolean);
+    return {
+        id: product.id,
+        title: product.name,
+        genre: genreParts.length ? genreParts.join(" • ") : "Concert",
+        rating: product.ageRestriction ? `${product.ageRestriction}+` : product.personName || "—",
+        year: product.startDate ? product.startDate.getFullYear() : "",
+        img: buildAssetUrl(product.image),
+    };
+};
 
 const ConcertSection = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [hoveredCard, setHoveredCard] = useState(null);
+    const [concerts, setConcerts] = useState(fallbackConcerts);
     const containerRef = useRef(null);
 
-    const concerts = [
-        { id: 1, title: "Billie Eilish", genre: "Pop • Live", rating: "8.9", year: "2024", img: "src/assets/images/c1.jpg" },
-        { id: 2, title: "Dua Lipa", genre: "Pop • Live", rating: "9.0", year: "2023", img: "src/assets/images/c2.jpg" },
-        { id: 3, title: "Shakira", genre: "Latin • Live", rating: "8.7", year: "2022", img: "src/assets/images/c3.jpg" },
-        { id: 4, title: "Dragon", genre: "Rock • Live", rating: "8.8", year: "2024", img: "src/assets/images/c4.jpg" },
-        { id: 5, title: "Inna", genre: "Dance • Live", rating: "8.5", year: "2023", img: "src/assets/images/c5.jpg" },
-        { id: 6, title: "Lana Del Rey", genre: "Alternative • Live", rating: "8.6", year: "2019", img: "src/assets/images/c6.jpg" },
-        { id: 7, title: "Billie Eilish", genre: "Pop • Live", rating: "8.9", year: "2024", img: "src/assets/images/c2.jpg" },
-        { id: 8, title: "Dua Lipa", genre: "Pop • Live", rating: "9.0", year: "2023", img: "src/assets/images/c5.jpg" },
-        { id: 9, title: "Shakira", genre: "Latin • Live", rating: "8.7", year: "2022", img: "src/assets/images/c3.jpg" },
-        { id: 10, title: "Dragon", genre: "Rock • Live", rating: "8.8", year: "2024", img: "src/assets/images/c1.jpg" },
-        { id: 11, title: "Inna", genre: "Dance • Live", rating: "8.5", year: "2023", img: "src/assets/images/c6.jpg" },
-        { id: 12, title: "Lana Del Rey", genre: "Alternative • Live", rating: "8.6", year: "2019", img: "src/assets/images/c4.jpg" },
-    ];
-    
-    
+    useEffect(() => {
+        let active = true;
+        fetchProducts()
+            .then((list) => {
+                if (!active || !list.length) return;
+                const filtered = filterProductsByCategory(list, ["concert", "music", "live"]);
+                const mapped = (filtered.length ? filtered : list)
+                    .slice(0, 12)
+                    .map(toCard)
+                    .filter((c) => c.img);
+                if (mapped.length) setConcerts(mapped);
+            })
+            .catch(() => {});
+        return () => {
+            active = false;
+        };
+    }, []);
 
     const visibleCards = 4;
-    const maxIndex = concerts.length - visibleCards;
+    const maxIndex = Math.max(concerts.length - visibleCards, 0);
 
     const nextSlide = () => {
         if (currentIndex < maxIndex) setCurrentIndex((prev) => prev + 1);
@@ -101,11 +123,14 @@ const ConcertSection = () => {
                                         <div className="concert-card-overlay-content">
                                             <h3 className="concert-card-title">{concert.title}</h3>
                                             <div className="concert-card-meta">
-                                                <span>{concert.year}</span> • <span>{concert.genre}</span>
+                                                <span>{concert.year || ""}</span> • <span>{concert.genre}</span>
                                             </div>
                                         </div>
                                         <div className="concert-card-actions">
-                                            <button className="concert-info-btn">
+                                            <button
+                                                className="concert-info-btn"
+                                                onClick={() => concert.id && (window.location.href = `/event/concertdetail/${concert.id}`)}
+                                            >
                                                 <Info size={20} /> Info
                                             </button>
                                         </div>

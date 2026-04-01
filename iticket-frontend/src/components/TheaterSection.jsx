@@ -1,68 +1,55 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, Info } from "lucide-react";
+import { buildAssetUrl, fetchProducts } from "../api/products";
 import "./TheaterSection.css";
+
+const fallbackShows = [
+    { id: 1, title: "Uncle Vanya", genre: "Drama • Classic", rating: "8.7", year: "2021", img: "src/assets/images/Uncle Vanya.jpg" },
+    { id: 2, title: "The Crucible", genre: "Drama • Historical", rating: "9.0", year: "2022", img: "src/assets/images/The Crucible.jpg" },
+    { id: 3, title: "Romeo and Juliet", genre: "Tragedy • Romance", rating: "9.2", year: "2020", img: "src/assets/images/romeoandjuliet.jpg" },
+    { id: 4, title: "Les Misérables", genre: "Musical • Drama", rating: "9.5", year: "2019", img: "src/assets/images/Les Misérables.jpg" },
+];
+
+const toCard = (product) => {
+    const genreParts = [product.categoryName, product.subCategoryName].filter(Boolean);
+    return {
+        id: product.id,
+        title: product.name,
+        genre: genreParts.length ? genreParts.join(" • ") : "Theater",
+        rating: product.ageRestriction ? `${product.ageRestriction}+` : product.personName || "—",
+        year: product.startDate ? product.startDate.getFullYear() : "",
+        img: buildAssetUrl(product.image),
+    };
+};
 
 const TheaterSection = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [hoveredCard, setHoveredCard] = useState(null);
+    const [shows, setShows] = useState(fallbackShows);
     const containerRef = useRef(null);
 
-    const shows = [
-        { 
-            id: 1, 
-            title: "Uncle Vanya", 
-            genre: "Drama • Classic", 
-            rating: "8.7", 
-            year: "2021", 
-            img: "src/assets/images/Uncle Vanya.jpg" 
-        },
-        { 
-            id: 2, 
-            title: "The Crucible", 
-            genre: "Drama • Historical", 
-            rating: "9.0", 
-            year: "2022", 
-            img: "src/assets/images/The Crucible.jpg" 
-        },
-        { 
-            id: 3, 
-            title: "Romeo and Juliet", 
-            genre: "Tragedy • Romance", 
-            rating: "9.2", 
-            year: "2020", 
-            img: "src/assets/images/romeoandjuliet.jpg" 
-        },
-        { 
-            id: 4, 
-            title: "Les Misérables", 
-            genre: "Musical • Drama", 
-            rating: "9.5", 
-            year: "2019", 
-            img: "src/assets/images/Les Misérables.jpg" 
-        },
-        { 
-            id: 5, 
-            title: "Uncle Vanya (Revival)", 
-            genre: "Drama • Classic", 
-            rating: "8.8", 
-            year: "2023", 
-            img: "src/assets/images/Uncle Vanya.jpg" 
-        },
-        { 
-            id: 6, 
-            title: "Hamilton", 
-            genre: "Musical • History", 
-            rating: "9.6", 
-            year: "2023", 
-            img: "src/assets/images/Hamilton.jpg" 
-        },
-    ];
-    
+    useEffect(() => {
+        let active = true;
+        fetchProducts()
+            .then((list) => {
+                if (!active || !list.length) return;
+                const filtered = list.filter((p) => `${p.categoryName} ${p.subCategoryName}`.toLowerCase().includes("theater"));
+                const mapped = (filtered.length ? filtered : list)
+                    .slice(0, 12)
+                    .map(toCard)
+                    .filter((c) => c.img);
+                if (mapped.length) setShows(mapped);
+            })
+            .catch(() => {});
+        return () => {
+            active = false;
+        };
+    }, []);
 
     const visibleCards = 4;
-    const maxIndex = shows.length - visibleCards;
+    const maxIndex = Math.max(shows.length - visibleCards, 0);
 
     const nextSlide = () => {
         if (currentIndex < maxIndex) setCurrentIndex((prev) => prev + 1);
@@ -133,11 +120,14 @@ const TheaterSection = () => {
                                         <div className="theater-card-overlay-content">
                                             <h3 className="theater-card-title">{show.title}</h3>
                                             <div className="theater-card-meta">
-                                                <span>{show.year}</span> • <span>{show.genre}</span>
+                                                <span>{show.year || ""}</span> • <span>{show.genre}</span>
                                             </div>
                                         </div>
                                         <div className="theater-card-actions">
-                                            <button className="theater-info-btn">
+                                            <button
+                                                className="theater-info-btn"
+                                                onClick={() => show.id && (window.location.href = `/event/theaterdetail/${show.id}`)}
+                                            >
                                                 <Info size={20} /> Info
                                             </button>
                                         </div>

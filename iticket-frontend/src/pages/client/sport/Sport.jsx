@@ -1,25 +1,63 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Info } from "lucide-react";
 import "./Sport.css";
 import ScrollingTicker from "../../../components/ScrollingTicker";
+import { buildAssetUrl, fetchProducts, formatDate, filterProductsByCategory } from "../../../api/products";
 
 const sportData = [
-  { id: 1, title: "Football Training", date: "2025-09-20", location: "Baku, National Stadium", price: "20-40 AZN",type: "Football" },
-  { id: 2, title: "Basketball Camp", date: "2025-10-05", location: "Baku, Sports Complex", price: "25-45 AZN",type: "Basketball" },
-  { id: 3, title: "Tennis Workshop", date: "2025-11-12", location: "Baku, Tennis Club", price: "30-50 AZN",type: "Tennis" },
+  { id: 1, title: "Football Training", date: "2025-09-20", location: "Baku, National Stadium", price: "20-40 AZN", type: "Football", img: "src/assets/images/sport.jpg" },
+  { id: 2, title: "Basketball Camp", date: "2025-10-05", location: "Baku, Sports Complex", price: "25-45 AZN", type: "Basketball", img: "src/assets/images/sport.jpg" },
+  { id: 3, title: "Tennis Workshop", date: "2025-11-12", location: "Baku, Tennis Club", price: "30-50 AZN", type: "Tennis", img: "src/assets/images/sport.jpg" },
 ];
+
+const mapProductToCard = (product) => {
+  const type = product.subCategoryName || product.categoryName || "Sport";
+  return {
+    id: product.id,
+    title: product.name,
+    date: formatDate(product.startDate) || "",
+    location: product.address || "",
+    price: product.personName || (product.ageRestriction ? `${product.ageRestriction}+` : ""),
+    type,
+    img: buildAssetUrl(product.image) || sportData[0].img,
+  };
+};
 
 export default function Sport() {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("All");
+  const [filterOptions, setFilterOptions] = useState(() => ["All", ...new Set(sportData.map((s) => s.type).filter(Boolean))]);
   const [hoveredCard, setHoveredCard] = useState(null);
+  const [sports, setSports] = useState(sportData);
 
-  const filteredSport = sportData.filter(
+  const filteredSport = sports.filter(
     (sport) =>
       (filter === "All" || sport.type === filter) &&
       sport.title.toLowerCase().includes(search.toLowerCase())
   );
+
+  useEffect(() => {
+    let active = true;
+    fetchProducts()
+      .then((list) => {
+        if (!active || !list.length) return;
+        const allowed = ["sport", "sports", "football", "basketball", "tennis", "training"];
+        const filtered = filterProductsByCategory(list, allowed);
+        const source = filtered.length ? filtered : list;
+        const mapped = source.map(mapProductToCard);
+        if (mapped.length) {
+          setSports(mapped);
+          const nextFilters = ["All", ...new Set(mapped.map((item) => item.type).filter(Boolean))];
+          setFilterOptions(nextFilters);
+          if (!nextFilters.includes(filter)) setFilter("All");
+        }
+      })
+      .catch(() => {});
+    return () => {
+      active = false;
+    };
+  }, []);
 
   return (
     <div className="sport-page">
@@ -49,10 +87,9 @@ export default function Sport() {
             onChange={(e) => setSearch(e.target.value)}
           />
           <select value={filter} onChange={(e) => setFilter(e.target.value)}>
-            <option value="All">All</option>
-            <option value="Football">Football</option>
-            <option value="Basketball">Basketball</option>
-            <option value="Tennis">Tennis</option>
+            {filterOptions.map((opt) => (
+              <option key={opt} value={opt}>{opt}</option>
+            ))}
           </select>
         </div>
 
@@ -70,10 +107,10 @@ export default function Sport() {
                 onMouseEnter={() => setHoveredCard(i)}
                 onMouseLeave={() => setHoveredCard(null)}
               >
-                <Link to={`/sport/${sport.id}`} className="sport-link">
+                <Link to={`/event/sportdetail/${sport.id}`} className="sport-link">
                   <div className="sport-card-inner">
                     <div className="sport-card-image-container">
-                      <img src={sport.img} alt={sport.title} className="sport-card-image" />
+                      <img src={sport.img || sportData[0].img} alt={sport.title} className="sport-card-image" />
                       <div className="sport-card-gradient" />
                       <span className="sport-type">{sport.type}</span>
 

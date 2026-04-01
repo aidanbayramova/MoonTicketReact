@@ -1,25 +1,63 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Info } from "lucide-react";
 import "./Movie.css";
 import ScrollingTicker from "../../../components/ScrollingTicker"; 
+import { buildAssetUrl, fetchProducts, formatDate, filterProductsByCategory } from "../../../api/products";
 
 const movieData = [
-  { id: 1, title: "Avengers: Endgame", date: "2025-09-20", location: "Cinema Baku", price: "10-20 AZN", type: "Action" },
-  { id: 2, title: "The Godfather", date: "2025-10-05", location: "Cinema Baku", price: "12-25 AZN", type: "Drama" },
-  { id: 3, title: "The Mask", date: "2025-11-12", location: "Cinema Baku", price: "8-15 AZN", type: "Comedy" },
+  { id: 1, title: "Avengers: Endgame", date: "2025-09-20", location: "Cinema Baku", price: "10-20 AZN", type: "Action", img: "src/assets/images/movie.jpg" },
+  { id: 2, title: "The Godfather", date: "2025-10-05", location: "Cinema Baku", price: "12-25 AZN", type: "Drama", img: "src/assets/images/movie.jpg" },
+  { id: 3, title: "The Mask", date: "2025-11-12", location: "Cinema Baku", price: "8-15 AZN", type: "Comedy", img: "src/assets/images/movie.jpg" },
 ];
+
+const mapProductToCard = (product) => {
+  const type = product.subCategoryName || product.categoryName || "Movie";
+  return {
+    id: product.id,
+    title: product.name,
+    date: formatDate(product.startDate) || "",
+    location: product.address || "",
+    price: product.personName || (product.ageRestriction ? `${product.ageRestriction}+` : ""),
+    type,
+    img: buildAssetUrl(product.image) || movieData[0].img,
+  };
+};
 
 export default function Movie() {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("All");
+  const [filterOptions, setFilterOptions] = useState(() => ["All", ...new Set(movieData.map((m) => m.type).filter(Boolean))]);
   const [hoveredCard, setHoveredCard] = useState(null);
+  const [movies, setMovies] = useState(movieData);
 
-  const filteredMovies = movieData.filter(
+  const filteredMovies = movies.filter(
     (movie) =>
       (filter === "All" || movie.type === filter) &&
       movie.title.toLowerCase().includes(search.toLowerCase())
   );
+
+  useEffect(() => {
+    let active = true;
+    fetchProducts()
+      .then((list) => {
+        if (!active || !list.length) return;
+        const allowed = ["movie", "film", "cinema"];
+        const filtered = filterProductsByCategory(list, allowed);
+        const source = filtered.length ? filtered : list;
+        const mapped = source.map(mapProductToCard);
+        if (mapped.length) {
+          setMovies(mapped);
+          const nextFilters = ["All", ...new Set(mapped.map((item) => item.type).filter(Boolean))];
+          setFilterOptions(nextFilters);
+          if (!nextFilters.includes(filter)) setFilter("All");
+        }
+      })
+      .catch(() => {});
+    return () => {
+      active = false;
+    };
+  }, []);
 
   return (
     <div className="movie-page">
@@ -49,10 +87,9 @@ export default function Movie() {
             onChange={(e) => setSearch(e.target.value)}
           />
           <select value={filter} onChange={(e) => setFilter(e.target.value)}>
-            <option value="All">All</option>
-            <option value="Action">Action</option>
-            <option value="Drama">Drama</option>
-            <option value="Comedy">Comedy</option>
+            {filterOptions.map((opt) => (
+              <option key={opt} value={opt}>{opt}</option>
+            ))}
           </select>
         </div>
 
@@ -70,10 +107,10 @@ export default function Movie() {
                 onMouseEnter={() => setHoveredCard(i)}
                 onMouseLeave={() => setHoveredCard(null)}
               >
-                <Link to={`/movie/${movie.id}`} className="movie-link">
+                <Link to={`/event/cinema/${movie.id}`} className="movie-link">
                   <div className="movie-card-inner">
                     <div className="movie-card-image-container">
-                      <img src={movie.img} alt={movie.title} className="movie-card-image" />
+                      <img src={movie.img || movieData[0].img} alt={movie.title} className="movie-card-image" />
                       <div className="movie-card-gradient" />
                       <span className="movie-type">{movie.type}</span>
 

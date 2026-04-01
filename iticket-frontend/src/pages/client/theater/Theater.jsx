@@ -1,28 +1,66 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Info } from "lucide-react";
 import "./Theater.css";
 import ScrollingTicker from "../../../components/ScrollingTicker";
+import { buildAssetUrl, fetchProducts, formatDate, filterProductsByCategory } from "../../../api/products";
 
 
 
 
 const theatersData = [
-  { id: 1, title: "Hamlet", date: "2025-09-20", location: "London, Globe Theater", ticketPrice: "50-150 GBP",genre: "Drama" },
-  { id: 2, title: "Royal Shakespeare", date: "2025-10-05", location: "New York, Broadway", ticketPrice: "70-200 USD",genre: "Musical" },
-  { id: 3, title: "National Theatre", date: "2025-11-12", location: "Paris, Palais Garnier", ticketPrice: "60-180 EUR",genre: "Musical" },
+  { id: 1, title: "Hamlet", date: "2025-09-20", location: "London, Globe Theater", ticketPrice: "50-150 GBP", genre: "Drama", img: "src/assets/images/theater.jpg" },
+  { id: 2, title: "Royal Shakespeare", date: "2025-10-05", location: "New York, Broadway", ticketPrice: "70-200 USD", genre: "Musical", img: "src/assets/images/theater.jpg" },
+  { id: 3, title: "National Theatre", date: "2025-11-12", location: "Paris, Palais Garnier", ticketPrice: "60-180 EUR", genre: "Musical", img: "src/assets/images/theater.jpg" },
 ];
+
+const mapProductToCard = (product) => {
+  const genre = product.subCategoryName || product.categoryName || "Theater";
+  return {
+    id: product.id,
+    title: product.name,
+    date: formatDate(product.startDate) || "",
+    location: product.address || "",
+    ticketPrice: product.personName || (product.ageRestriction ? `${product.ageRestriction}+` : ""),
+    genre,
+    img: buildAssetUrl(product.image) || theatersData[0].img,
+  };
+};
 
 export default function Theater() {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("All");
+  const [filterOptions, setFilterOptions] = useState(() => ["All", ...new Set(theatersData.map((t) => t.genre).filter(Boolean))]);
   const [hoveredCard, setHoveredCard] = useState(null);
+  const [theaters, setTheaters] = useState(theatersData);
 
-  const filteredTheaters = theatersData.filter(
+  const filteredTheaters = theaters.filter(
     (theater) =>
       (filter === "All" || theater.genre === filter) &&
       theater.title.toLowerCase().includes(search.toLowerCase())
   );
+
+  useEffect(() => {
+    let active = true;
+    fetchProducts()
+      .then((list) => {
+        if (!active || !list.length) return;
+        const allowed = ["theater", "theatre", "drama", "play", "musical", "comedy"];
+        const filtered = filterProductsByCategory(list, allowed);
+        const source = filtered.length ? filtered : list;
+        const mapped = source.map(mapProductToCard);
+        if (mapped.length) {
+          setTheaters(mapped);
+          const nextFilters = ["All", ...new Set(mapped.map((item) => item.genre).filter(Boolean))];
+          setFilterOptions(nextFilters);
+          if (!nextFilters.includes(filter)) setFilter("All");
+        }
+      })
+      .catch(() => { });
+    return () => {
+      active = false;
+    };
+  }, []);
 
   return (
     <div className="theater-page">
@@ -52,10 +90,9 @@ export default function Theater() {
             onChange={(e) => setSearch(e.target.value)}
           />
           <select value={filter} onChange={(e) => setFilter(e.target.value)}>
-            <option value="All">All</option>
-            <option value="Drama">Drama</option>
-            <option value="Musical">Musical</option>
-            <option value="Comedy">Comedy</option>
+            {filterOptions.map((opt) => (
+              <option key={opt} value={opt}>{opt}</option>
+            ))}
           </select>
         </div>
 
@@ -73,10 +110,10 @@ export default function Theater() {
                 onMouseEnter={() => setHoveredCard(i)}
                 onMouseLeave={() => setHoveredCard(null)}
               >
-                <Link to={`/theater/${theater.id}`} className="theater-link">
+                <Link to={`/event/theaterdetail/${theater.id}`} className="theater-link">
                   <div className="theater-card-inner">
                     <div className="theater-card-image-container">
-                      <img src={theater.img} alt={theater.title} className="theater-card-image" />
+                      <img src={theater.img || theatersData[0].img} alt={theater.title} className="theater-card-image" />
                       <div className="theater-card-gradient" />
                       <span className="theater-genre">{theater.genre}</span>
 

@@ -1,28 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import ScrollingTicker from "../../../components/ScrollingTicker";
+import { buildAssetUrl, fetchProductById, formatDate } from "../../../api/products";
 import "./Cinema.css";
 
 
-const movies = [
-  {
-    id: "2",
-    title: "The Godfather",
-    desc:
-      "The aging patriarch of an organized crime dynasty transfers control of his empire to his reluctant son.",
-    duration: "175 min",
-    rating: "9.2",
-    genre: "Crime, Drama",
-    trailer: "https://www.youtube.com/embed/sY1S34973zA",
-
-    location: "Cinema Park – Mall 28",
-    fromDate: "03 Jan 2025",
-    toDate: "10 Jan 2025",
-    languages: ["English", "Russian", "Turkish"],
-    age: "18+",
-    price: "$12.00",
-  },
-];
+const fallbackMovie = {
+  id: "2",
+  title: "The Godfather",
+  desc: "The aging patriarch of an organized crime dynasty transfers control of his empire to his reluctant son.",
+  duration: "175 min",
+  rating: "9.2",
+  genre: "Crime, Drama",
+  trailer: "https://www.youtube.com/embed/sY1S34973zA",
+  location: "Cinema Park – Mall 28",
+  fromDate: "03 Jan 2025",
+  toDate: "10 Jan 2025",
+  languages: ["English", "Russian", "Turkish"],
+  age: "18+",
+  price: "$12.00",
+  poster: "src/assets/images/movie.jpg",
+};
 
 const relatedMovies = [
   {
@@ -50,7 +48,39 @@ const seatLayout = [
 
 function Cinema() {
   const { id } = useParams();
-  const movie = movies.find((m) => m.id === id);
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let active = true;
+    setLoading(true);
+    fetchProductById(id)
+      .then((data) => {
+        if (!active) return;
+        setProduct(data);
+      })
+      .catch(() => {})
+      .finally(() => active && setLoading(false));
+    return () => {
+      active = false;
+    };
+  }, [id]);
+
+  const movie = product
+    ? {
+        ...fallbackMovie,
+        id: product.id,
+        title: product.name || fallbackMovie.title,
+        desc: product.description || fallbackMovie.desc,
+        genre: [product.categoryName, product.subCategoryName].filter(Boolean).join(", ") || fallbackMovie.genre,
+        location: product.address || fallbackMovie.location,
+        fromDate: formatDate(product.startDate) || fallbackMovie.fromDate,
+        toDate: formatDate(product.endDate) || fallbackMovie.toDate,
+        languages: product.languages?.length ? product.languages : fallbackMovie.languages,
+        age: product.ageRestriction ? `${product.ageRestriction}+` : fallbackMovie.age,
+        poster: buildAssetUrl(product.image) || fallbackMovie.poster,
+      }
+    : fallbackMovie;
 
   const days = ["03 Jan", "04 Jan", "05 Jan", "06 Jan", "07 Jan"];
   const times = ["16:30", "18:30", "20:30", "22:30"];
@@ -95,13 +125,8 @@ function Cinema() {
     }, 0);
   };
 
-  if (!movie) {
-    return (
-      <div className="not-found">
-        <h2>Movie not found</h2>
-        <Link to="/event/cinema">← Back</Link>
-      </div>
-    );
+  if (loading && !product) {
+    return <div className="not-found"><h2>Yüklənir...</h2></div>;
   }
 
   return (

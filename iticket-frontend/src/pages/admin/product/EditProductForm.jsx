@@ -27,7 +27,7 @@ function EditProductForm() {
         const data = await res.json();
 
         setProduct(data);
-        setName(data.name || "");
+        setName(data.name || "");f
         setDescription(data.description || "");
         setAddress(data.address || "");
         setAgeRestriction(data.ageRestriction || 0);
@@ -40,7 +40,7 @@ function EditProductForm() {
         setEndDate(formatDate(data.endDate));
       } catch {
         alert("Product tapılmadı");
-        navigate("/admin/product");
+        navigate("/admin/product/productIndex");
       } finally {
         setLoading(false);
       }
@@ -170,7 +170,7 @@ function EditProductForm() {
 
         <div style={{ display: "flex", gap: "10px" }}>
           <button type="submit">Save</button>
-          <button type="button" onClick={() => navigate("/admin/product")}>
+          <button type="button" onClick={() => navigate("/admin/product/productIndex")}>
             Cancel
           </button>
         </div>

@@ -1,25 +1,55 @@
 "use client";
 
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, Info } from "lucide-react";
+import { buildAssetUrl, fetchProducts } from "../api/products";
 import "./MuseumSection.css";
+
+const fallbackMuseums = [
+    { id: 1, title: "Louvre", genre: "Art • Paris", rating: "9.5", year: "1793", img: "src/assets/images/Louvre.jpg" },
+    { id: 2, title: "British Museum", genre: "History • London", rating: "9.2", year: "1753", img: "src/assets/images/British Museum.jpg" },
+    { id: 3, title: "Prado", genre: "Art • Madrid", rating: "9.0", year: "1819", img: "src/assets/images/Prado.jpg" },
+    { id: 4, title: "Metropolitan", genre: "Art • New York", rating: "9.3", year: "1870", img: "src/assets/images/Metropolitan.jpg" },
+];
+
+const toCard = (product) => {
+    const genreParts = [product.categoryName, product.subCategoryName].filter(Boolean);
+    return {
+        id: product.id,
+        title: product.name,
+        genre: genreParts.length ? genreParts.join(" • ") : "Museum",
+        rating: product.ageRestriction ? `${product.ageRestriction}+` : product.personName || "—",
+        year: product.startDate ? product.startDate.getFullYear() : "",
+        img: buildAssetUrl(product.image),
+    };
+};
 
 const MuseumSection = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [hoveredCard, setHoveredCard] = useState(null);
+    const [museums, setMuseums] = useState(fallbackMuseums);
     const containerRef = useRef(null);
 
-    const museums = [
-        { id: 1, title: "Louvre", genre: "Art • Paris", rating: "9.5", year: "1793", img: "src/assets/images/Louvre.jpg" },
-        { id: 2, title: "British Museum", genre: "History • London", rating: "9.2", year: "1753", img: "src/assets/images/British Museum.jpg" },
-        { id: 3, title: "Prado", genre: "Art • Madrid", rating: "9.0", year: "1819", img: "src/assets/images/Prado.jpg" },
-        { id: 4, title: "Metropolitan", genre: "Art • New York", rating: "9.3", year: "1870", img: "src/assets/images/Metropolitan.jpg" },
-        { id: 5, title: "Vatican Museums", genre: "Religion • Rome", rating: "9.4", year: "1506", img: "src/assets/images/Vatican Museums.jpg" },
-        { id: 6, title: "Hermitage", genre: "Art • St. Petersburg", rating: "9.1", year: "1764", img: "src/assets/images/Hermitage.jpg" },
-    ];
+    useEffect(() => {
+        let active = true;
+        fetchProducts()
+            .then((list) => {
+                if (!active || !list.length) return;
+                const filtered = list.filter((p) => `${p.categoryName} ${p.subCategoryName}`.toLowerCase().includes("museum"));
+                const mapped = (filtered.length ? filtered : list)
+                    .slice(0, 12)
+                    .map(toCard)
+                    .filter((c) => c.img);
+                if (mapped.length) setMuseums(mapped);
+            })
+            .catch(() => {});
+        return () => {
+            active = false;
+        };
+    }, []);
 
     const visibleCards = 4;
-    const maxIndex = museums.length - visibleCards;
+    const maxIndex = Math.max(museums.length - visibleCards, 0);
 
     const nextSlide = () => {
         if (currentIndex < maxIndex) setCurrentIndex((prev) => prev + 1);
@@ -90,11 +120,14 @@ const MuseumSection = () => {
                                         <div className="museum-card-overlay-content">
                                             <h3 className="museum-card-title">{museum.title}</h3>
                                             <div className="museum-card-meta">
-                                                <span>{museum.year}</span> • <span>{museum.genre}</span>
+                                                <span>{museum.year || ""}</span> • <span>{museum.genre}</span>
                                             </div>
                                         </div>
                                         <div className="museum-card-actions">
-                                            <button className="museum-info-btn">
+                                            <button
+                                                className="museum-info-btn"
+                                                onClick={() => museum.id && (window.location.href = `/event/museumdetail/${museum.id}`)}
+                                            >
                                                 <Info size={20} /> Info
                                             </button>
                                         </div>

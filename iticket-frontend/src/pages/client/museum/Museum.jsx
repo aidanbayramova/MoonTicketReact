@@ -1,25 +1,63 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Info } from "lucide-react";
 import "./Museum.css";
 import ScrollingTicker from "../../../components/ScrollingTicker"; 
+import { buildAssetUrl, fetchProducts, formatDate, filterProductsByCategory } from "../../../api/products";
 
 const museumData = [
-  { id: 1, title: "Ancient Sculptures", date: "2025-09-20", location: "Baku Museum of History", price: "Free",type: "Art" },
-  { id: 2, title: "Medieval Artifacts", date: "2025-10-05", location: "Baku Museum of History", price: "5-10 AZN",type: "History" },
-  { id: 3, title: "Science Exhibit", date: "2025-11-12", location: "Baku Science Museum", price: "10-15 AZN",type: "Science" },
+  { id: 1, title: "Ancient Sculptures", date: "2025-09-20", location: "Baku Museum of History", price: "Free", type: "Art", img: "src/assets/images/museum.jpg" },
+  { id: 2, title: "Medieval Artifacts", date: "2025-10-05", location: "Baku Museum of History", price: "5-10 AZN", type: "History", img: "src/assets/images/museum.jpg" },
+  { id: 3, title: "Science Exhibit", date: "2025-11-12", location: "Baku Science Museum", price: "10-15 AZN", type: "Science", img: "src/assets/images/museum.jpg" },
 ];
+
+const mapProductToCard = (product) => {
+  const type = product.subCategoryName || product.categoryName || "Museum";
+  return {
+    id: product.id,
+    title: product.name,
+    date: formatDate(product.startDate) || "",
+    location: product.address || "",
+    price: product.personName || (product.ageRestriction ? `${product.ageRestriction}+` : ""),
+    type,
+    img: buildAssetUrl(product.image) || museumData[0].img,
+  };
+};
 
 export default function Museum() {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("All");
+  const [filterOptions, setFilterOptions] = useState(() => ["All", ...new Set(museumData.map((m) => m.type).filter(Boolean))]);
   const [hoveredCard, setHoveredCard] = useState(null);
+  const [museums, setMuseums] = useState(museumData);
 
-  const filteredMuseums = museumData.filter(
+  const filteredMuseums = museums.filter(
     (item) =>
       (filter === "All" || item.type === filter) &&
       item.title.toLowerCase().includes(search.toLowerCase())
   );
+
+  useEffect(() => {
+    let active = true;
+    fetchProducts()
+      .then((list) => {
+        if (!active || !list.length) return;
+        const allowed = ["museum", "history", "art", "science", "exhibit", "gallery"];
+        const filtered = filterProductsByCategory(list, allowed);
+        const source = filtered.length ? filtered : list;
+        const mapped = source.map(mapProductToCard);
+        if (mapped.length) {
+          setMuseums(mapped);
+          const nextFilters = ["All", ...new Set(mapped.map((item) => item.type).filter(Boolean))];
+          setFilterOptions(nextFilters);
+          if (!nextFilters.includes(filter)) setFilter("All");
+        }
+      })
+      .catch(() => {});
+    return () => {
+      active = false;
+    };
+  }, []);
 
   return (
     <div className="museum-page">
@@ -49,10 +87,9 @@ export default function Museum() {
             onChange={(e) => setSearch(e.target.value)}
           />
           <select value={filter} onChange={(e) => setFilter(e.target.value)}>
-            <option value="All">All</option>
-            <option value="Art">Art</option>
-            <option value="History">History</option>
-            <option value="Science">Science</option>
+            {filterOptions.map((opt) => (
+              <option key={opt} value={opt}>{opt}</option>
+            ))}
           </select>
         </div>
 
@@ -70,10 +107,10 @@ export default function Museum() {
                 onMouseEnter={() => setHoveredCard(i)}
                 onMouseLeave={() => setHoveredCard(null)}
               >
-                <Link to={`/museum/${item.id}`} className="museum-link">
+                <Link to={`/event/museumdetail/${item.id}`} className="museum-link">
                   <div className="museum-card-inner">
                     <div className="museum-card-image-container">
-                      <img src={item.img} alt={item.title} className="museum-card-image" />
+                      <img src={item.img || museumData[0].img} alt={item.title} className="museum-card-image" />
                       <div className="museum-card-gradient" />
                       <span className="museum-type">{item.type}</span>
 

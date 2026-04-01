@@ -42,4 +42,6 @@ wwwroot\Uploads\Uploads\videos\d6d42a99-5f01-4f20-a153-5ac22920581d.mp4
 wwwroot\Uploads\Uploads\videos\ea79d51d-92aa-4496-8397-4ef4dc31526e.mp4
 wwwroot\Uploads\Uploads\videos\f308f68e-242a-42fa-9f49-7410382199f9.mp4
 wwwroot\Uploads\Uploads\videos\ff4cfb0d-6639-4a86-811b-9e4439a4a72a.mp4
+wwwroot\Uploads\products\0007ff6b-b106-4e14-a925-3b66c29b080a.jpg
+wwwroot\Uploads\products\2bb28ea3-5481-4c6b-b883-b031f4e8b503.mp4
 wwwroot\Uploads\products\6596e1fa-621a-4737-be7c-81846a17951f.png
