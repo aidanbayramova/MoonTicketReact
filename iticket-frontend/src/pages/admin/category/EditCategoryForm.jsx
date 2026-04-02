@@ -16,12 +16,11 @@ function EditCategoryForm() {
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
 
-    // 🔹 Fetch category
     useEffect(() => {
         const fetchCategory = async () => {
             try {
                 const res = await fetch(`${API_BASE}/api/CategoryGetById/${id}`);
-                if (!res.ok) throw new Error("Category tapılmadı");
+                if (!res.ok) throw new Error("Category not found");
 
                 const data = await res.json();
                 setCategory(data);
@@ -38,7 +37,6 @@ function EditCategoryForm() {
         fetchCategory();
     }, [id, navigate]);
 
-    // 🔹 Submit edit
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!category) return;

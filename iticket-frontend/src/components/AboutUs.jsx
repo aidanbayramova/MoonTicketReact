@@ -11,7 +11,6 @@ export default function AboutUs() {
       .then(res => res.json())
       .then(data => {
         console.log("Fetched About data:", data);
-        // data arraydirsə, birinci element götür
         setAboutData(Array.isArray(data) ? data[0] : data);
       })
       .catch(err => {
@@ -20,7 +19,7 @@ export default function AboutUs() {
       })
       .finally(() => setLoading(false));
   }, []);
-  
+
 
   if (loading) return <p>Loading...</p>;
   if (!aboutData) return <p>No About Us data available</p>;
@@ -29,9 +28,7 @@ export default function AboutUs() {
     <section className="about-section">
       <div className="about-row">
         <div className="about-image-box">
-          <img
-            src={aboutData.aboutImg} // Kiçik hərflə
-            alt="Haqqımızda"
+          <img src={`http://localhost:5149${aboutData.aboutImg}`} alt="About"
             className="about-image"
           />
         </div>

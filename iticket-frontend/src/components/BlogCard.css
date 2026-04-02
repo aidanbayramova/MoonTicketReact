@@ -139,6 +139,12 @@
     justify-content: space-between;
     align-items: center;
   }
+
+  .post-location {
+    color: #d6d6d6;
+    font-size: 13px;
+    margin: 0;
+  }
   
   .post-author {
     font-weight: 500;

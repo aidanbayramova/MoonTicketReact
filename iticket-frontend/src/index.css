@@ -89,3 +89,22 @@ html {
   scrollbar-width: thin;
   scrollbar-color: #e50914 #111;
 }
+
+/* Global banner image from Setting.bannerImg */
+.about-banner,
+.blog-banner,
+.contact-banner,
+.concertt-banner,
+.theater-banner,
+.theaterdetail-banner,
+.kidss-banner,
+.movie-banner,
+.museum-banner,
+.sport-banner,
+.tourism-banner,
+.circus-banner {
+  background-image: var(--global-banner-image) !important;
+  background-position: center !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+}

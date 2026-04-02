@@ -1,0 +1,105 @@
+.news-author-admin-container,
+.news-author-admin-form-page,
+.news-author-admin-detail-container {
+  padding: 24px;
+  font-family: "Poppins", sans-serif;
+  color: #f5f5f5;
+}
+
+.news-author-admin-title {
+  font-size: 36px;
+  margin-bottom: 24px;
+  font-weight: 600;
+}
+
+.news-author-admin-create-btn,
+.news-author-admin-primary-btn,
+.news-author-admin-secondary-btn {
+  padding: 10px 20px;
+  border-radius: 26px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.news-author-admin-create-btn,
+.news-author-admin-primary-btn {
+  background: linear-gradient(135deg, #350404, #6b0f0f);
+  color: #fff;
+}
+
+.news-author-admin-secondary-btn {
+  background: linear-gradient(135deg, #6b0f0f, #350404);
+  color: #fff;
+  margin-left: 10px;
+}
+
+.news-author-admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: linear-gradient(160deg, rgba(40, 12, 12, 0.9), rgba(55, 14, 14, 0.9));
+  border-radius: 20px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06), 0 20px 50px rgb(2, 0, 0);
+  text-align: center;
+  margin-top: 20px;
+}
+
+.news-author-admin-table th,
+.news-author-admin-table td {
+  padding: 12px 16px;
+  color: #fff;
+}
+
+.news-author-admin-table th {
+  background: linear-gradient(135deg, #350404, #4d010b);
+  font-weight: 600;
+}
+
+.news-author-admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 500px;
+}
+
+.news-author-admin-form input {
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+}
+
+.news-author-admin-form-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.news-author-admin-detail-table {
+  width: 100%;
+  max-width: 700px;
+  border-collapse: collapse;
+  margin-top: 16px;
+  background: linear-gradient(160deg, rgba(40, 12, 12, 0.9), rgba(55, 14, 14, 0.9));
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.news-author-admin-detail-table th,
+.news-author-admin-detail-table td {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 14px;
+  text-align: left;
+}
+
+.news-author-admin-detail-table th {
+  width: 220px;
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.news-author-admin-loading {
+  font-size: 20px;
+  font-weight: 600;
+  color: #fff;
+}

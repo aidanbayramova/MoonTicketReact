@@ -37,6 +37,8 @@ builder.Services.AddScoped<IPersonRepository, PersonRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ISubCategoryRepository, SubCategoryRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<INewsRepository, NewsRepository>();
+builder.Services.AddScoped<INewsAuthorRepository, NewsAuthorRepository>();
 
 //
 //  SERVICES
@@ -49,6 +51,8 @@ builder.Services.AddScoped<IPersonService, PersonService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ISubCategoryService, SubCategoryService>();
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<INewsService, NewsService>();
+builder.Services.AddScoped<INewsAuthorService, NewsAuthorService>();
 
 builder.Services.AddCors(options =>
 {

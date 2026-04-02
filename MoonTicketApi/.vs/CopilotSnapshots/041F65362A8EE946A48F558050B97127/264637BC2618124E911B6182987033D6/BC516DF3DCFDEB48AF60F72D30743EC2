@@ -1,0 +1,89 @@
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Service.DTOs.Admin.News;
+using Service.Services.Interfaces;
+
+namespace MoonTicketApi.Controllers
+{
+    [Route("api/[controller][action]")]
+    [ApiController]
+    public class NewsController : ControllerBase
+    {
+        private readonly INewsService _newsService;
+
+        public NewsController(INewsService newsService)
+        {
+            _newsService = newsService;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<NewsDto>>> GetAll()
+        {
+            var newsList = await _newsService.GetAllAsync();
+            return Ok(newsList);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<NewsDto>> GetById(int id)
+        {
+            var news = await _newsService.GetByIdAsync(id);
+
+            if (news == null)
+                return NotFound();
+
+            return Ok(news);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<NewsDto>> Create([FromBody] NewsCreateDto dto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            try
+            {
+                var news = await _newsService.CreateAsync(dto);
+                return CreatedAtAction(nameof(GetById), new { id = news.Id }, news);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Edit(int id, [FromBody] NewsEditDto dto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            try
+            {
+                await _newsService.EditAsync(dto, id);
+                return NoContent();
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                await _newsService.DeleteAsync(id);
+                return NoContent();
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound();
+            }
+        }
+    }
+}

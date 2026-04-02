@@ -66,6 +66,16 @@ import CreateProductForm from "./pages/admin/product/CreateProductForm";
 import EditProductForm from "./pages/admin/product/EditProductForm";
 import DetailProduct from "./pages/admin/product/DetailProduct";
 
+import NewsIndex from "./pages/admin/news/NewsIndex";
+import CreateNewsForm from "./pages/admin/news/CreateNewsForm";
+import EditNewsForm from "./pages/admin/news/EditNewsForm";
+import DetailNews from "./pages/admin/news/DetailNews";
+
+import NewsAuthorIndex from "./pages/admin/newsauthor/NewsAuthorIndex";
+import CreateNewsAuthorForm from "./pages/admin/newsauthor/CreateNewsAuthorForm";
+import EditNewsAuthorForm from "./pages/admin/newsauthor/EditNewsAuthorForm";
+import DetailNewsAuthor from "./pages/admin/newsauthor/DetailNewsAuthor";
+
 
 
 
@@ -155,6 +165,16 @@ function App() {
         <Route path="product/createProductForm" element={<CreateProductForm />} />
         <Route path="product/editProductForm/:id" element={<EditProductForm />} />
         <Route path="product/detailProduct/:id" element={<DetailProduct />} />
+
+        <Route path="news/newsIndex" element={<NewsIndex />} />
+        <Route path="news/createNewsForm" element={<CreateNewsForm />} />
+        <Route path="news/editNewsForm/:id" element={<EditNewsForm />} />
+        <Route path="news/detailNews/:id" element={<DetailNews />} />
+
+        <Route path="newsauthor/newsAuthorIndex" element={<NewsAuthorIndex />} />
+        <Route path="newsauthor/createNewsAuthorForm" element={<CreateNewsAuthorForm />} />
+        <Route path="newsauthor/editNewsAuthorForm/:id" element={<EditNewsAuthorForm />} />
+        <Route path="newsauthor/detailNewsAuthor/:id" element={<DetailNewsAuthor />} />
       </Route>
     </Routes>
   );

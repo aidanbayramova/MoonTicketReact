@@ -2,6 +2,8 @@
 using Domain.Entities;
 using Service.DTOs.Admin.Category;
 using Service.DTOs.Admin.Language;
+using Service.DTOs.Admin.News;
+using Service.DTOs.Admin.NewsAuthor;
 using Service.DTOs.Admin.Person;
 using Service.DTOs.Admin.Product;
 using Service.DTOs.Admin.Settings;
@@ -130,6 +132,21 @@ namespace Service.Helpers
                 .ForMember(dest => dest.ProductLanguages, opt => opt.Ignore())
                 .ForMember(dest => dest.Image, opt => opt.Ignore())
                 .ForMember(dest => dest.Video, opt => opt.Ignore());
+
+
+            CreateMap<NewsAuthor, NewsAuthorDto>();
+            CreateMap<NewsAuthorCreateDto, NewsAuthor>();
+            CreateMap<NewsAuthorEditDto, NewsAuthor>()
+                .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
+
+            CreateMap<News, NewsDto>()
+                .ForMember(dest => dest.NewsAuthorFullName,
+                    opt => opt.MapFrom(src => src.NewsAuthor.FullName));
+            CreateMap<NewsCreateDto, News>()
+                .ForMember(dest => dest.Image, opt => opt.Ignore());
+            CreateMap<NewsEditDto, News>()
+                .ForMember(dest => dest.Image, opt => opt.Ignore())
+                .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
 
         }
     }

@@ -2,6 +2,8 @@ const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5149";
 
 let productsCache = null;
 let productsPromise = null;
+let categoriesCache = null;
+let categoriesPromise = null;
 
 const pick = (obj, keys) => {
   for (const key of keys) {
@@ -51,6 +53,23 @@ const normalizeProduct = (raw = {}) => {
   };
 };
 
+const normalizeCategory = (raw = {}) => {
+  const id = pick(raw, ["id", "Id"]);
+  const name = pick(raw, ["name", "Name"]) || "Untitled";
+  const description = pick(raw, ["description", "Description"]) || "";
+  const image = pick(raw, ["image", "Image"]) || "";
+  const video = pick(raw, ["video", "Video"]) || "";
+
+  return {
+    id,
+    name,
+    description,
+    image,
+    video,
+    raw,
+  };
+};
+
 export const buildAssetUrl = (path) => (path ? `${API_BASE}${path}` : "");
 
 export async function fetchProducts({ force = false } = {}) {
@@ -77,6 +96,32 @@ export async function fetchProducts({ force = false } = {}) {
   })();
 
   return productsPromise;
+}
+
+export async function fetchCategories({ force = false } = {}) {
+  if (!force && categoriesCache) return categoriesCache;
+  if (!force && categoriesPromise) return categoriesPromise;
+
+  categoriesPromise = (async () => {
+    try {
+      const res = await fetch(`${API_BASE}/api/CategoryGetAll`);
+      if (!res.ok) throw new Error(`Failed to load categories (${res.status})`);
+      const data = await res.json();
+      const list = Array.isArray(data) ? data : [];
+      categoriesCache = list
+        .map(normalizeCategory)
+        .filter((category) => category.id !== undefined && category.id !== null);
+      return categoriesCache;
+    } catch (error) {
+      console.error("fetchCategories error", error);
+      categoriesCache = [];
+      return categoriesCache;
+    } finally {
+      categoriesPromise = null;
+    }
+  })();
+
+  return categoriesPromise;
 }
 
 export async function fetchProductById(id) {

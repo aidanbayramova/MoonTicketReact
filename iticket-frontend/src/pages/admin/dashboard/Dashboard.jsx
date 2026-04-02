@@ -4,14 +4,22 @@ import "./Dashboard.css";
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
-  const [settingsOpen, setSettingsOpen] = useState(false);
-  const dropdownRef = useRef(null);
 
-  // Çöldə klik edəndə bağlanmaq demekdi buu
+  // Dropdown açıq/bağlıq state-ləri
+  const [productsOpen, setProductsOpen] = useState(false);
+  const [newsOpen, setNewsOpen] = useState(false);
+
+  const productsRef = useRef(null);
+  const newsRef = useRef(null);
+
+  // Çöldə klik edəndə dropdown bağlanması
   useEffect(() => {
     const handleClickOutside = (e) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-        setSettingsOpen(false);
+      if (productsRef.current && !productsRef.current.contains(e.target)) {
+        setProductsOpen(false);
+      }
+      if (newsRef.current && !newsRef.current.contains(e.target)) {
+        setNewsOpen(false);
       }
     };
 
@@ -40,28 +48,68 @@ const AdminDashboard = () => {
             Settings
           </NavLink>
 
-          {/* PRODUCTS DROPDOWN */}
-          <div className="dropdown" ref={dropdownRef}>
-            <div className="menu-btn products-btn" >
-              <NavLink
-                to="/admin/product/productIndex"
-                className="products-link"style={{color:"white ",}}
-              >
-                Products
-              </NavLink>
-
+          {/* NEWS DROPDOWN */}
+          <div className="dropdown" ref={newsRef}>
+            <div className="menu-btn news-btn">
               <span
-                className={`menu-icon ${settingsOpen ? "rotate" : ""}`}
+                className="news-link"
                 onClick={(e) => {
                   e.stopPropagation();
-                  setSettingsOpen((prev) => !prev);
+                  setNewsOpen((prev) => !prev);
+                }}
+                style={{ cursor: "pointer", color: "white" }}
+              >
+                News
+              </span>
+              <span
+                className={`menu-icon ${newsOpen ? "rotate" : ""}`}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setNewsOpen((prev) => !prev);
                 }}
               >
                 ☰
               </span>
             </div>
+            {newsOpen && (
+              <div className="dropdown-content">
+                <NavLink
+                  to="/admin/news/newsIndex"
+                  className="dropdown-item"
+                >
+                  All News
+                </NavLink>
+                <NavLink
+                  to="/admin/newsauthor/newsAuthorIndex"
+                  className="dropdown-item"
+                >
+                  News Authors
+                </NavLink>
+              </div>
+            )}
+          </div>
 
-            {settingsOpen && (
+          {/* PRODUCTS DROPDOWN */}
+          <div className="dropdown" ref={productsRef}>
+            <div className="menu-btn products-btn">
+              <NavLink
+                to="/admin/product/productIndex"
+                className="products-link"
+                style={{ color: "white" }}
+              >
+                Products
+              </NavLink>
+              <span
+                className={`menu-icon ${productsOpen ? "rotate" : ""}`}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setProductsOpen((prev) => !prev);
+                }}
+              >
+                ☰
+              </span>
+            </div>
+            {productsOpen && (
               <div className="dropdown-content">
                 <NavLink
                   to="/admin/category/categoryIndex"
@@ -69,21 +117,18 @@ const AdminDashboard = () => {
                 >
                   Category
                 </NavLink>
-
                 <NavLink
                   to="/admin/person/PersonIndex"
                   className="dropdown-item"
                 >
                   Persons
                 </NavLink>
-
                 <NavLink
                   to="/admin/language/languageIndex"
                   className="dropdown-item"
                 >
                   Languages
                 </NavLink>
-
                 <NavLink
                   to="/admin/subcategory/SubCategoryIndex"
                   className="dropdown-item"

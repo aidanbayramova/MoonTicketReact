@@ -88,7 +88,6 @@ namespace Service.Services
             if (entity == null)
                 throw new Exception("Category not found");
 
-            // Delete files if exist
             _fileService.DeleteFile(entity.Image, ImageFolder);
             _fileService.DeleteFile(entity.Video, VideoFolder);
 

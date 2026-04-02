@@ -28,7 +28,6 @@ namespace Service.Services
             using var stream = new FileStream(filePath, FileMode.Create);
             await file.CopyToAsync(stream);
 
-            // Return relative URL for use in the app
             return $"/Uploads/{folder}/{fileName}";
         }
 
@@ -36,7 +35,7 @@ namespace Service.Services
         {
             if (string.IsNullOrEmpty(fileUrl)) return;
 
-            string fileName = Path.GetFileName(fileUrl); // Extract file name from URL
+            string fileName = Path.GetFileName(fileUrl); 
             string folderPath = Path.Combine(_baseUploadPath, folder);
             string filePath = Path.Combine(folderPath, fileName);
 

@@ -21,6 +21,13 @@ import {
 
 import "./Layout.css";
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5149";
+
+const toAbsoluteUrl = (path) => {
+  if (!path) return "";
+  return path.startsWith("http") ? path : `${API_BASE}${path}`;
+};
+
 function Layout({ children }) {
   const [slides, setSlides] = useState([]);
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -32,7 +39,7 @@ function Layout({ children }) {
   useEffect(() => {
     const fetchSliders = async () => {
       try {
-        const res = await fetch("http://localhost:5149/api/SliderGetAll");
+        const res = await fetch(`${API_BASE}/api/SliderGetAll`);
         let data = await res.json();
 
         if (!Array.isArray(data)) data = [];
@@ -52,15 +59,24 @@ function Layout({ children }) {
   useEffect(() => {
     const fetchSetting = async () => {
       try {
-        const res = await fetch("http://localhost:5149/api/SettingGetById/1");
+        const res = await fetch(`${API_BASE}/api/SettingGetById/1`);
         if (!res.ok) throw new Error("Setting load error");
         const data = await res.json();
         setSetting(data);
+
+        const bannerUrl = toAbsoluteUrl(data?.bannerImg);
+        if (bannerUrl) {
+          document.documentElement.style.setProperty("--global-banner-image", `url('${bannerUrl}')`);
+        }
       } catch (err) {
         console.error(err);
       }
     };
     fetchSetting();
+
+    return () => {
+      document.documentElement.style.removeProperty("--global-banner-image");
+    };
   }, []);
 
   useEffect(() => {
@@ -183,7 +199,7 @@ function Layout({ children }) {
               style={{
                 // backgroundImage: `url(${slide.image})`
                 // əgər image relative-dirsə:
-                backgroundImage: `url(http://localhost:5149/${slide.image})`
+                backgroundImage: `url(${toAbsoluteUrl(slide.image)})`
               }}
             >
               <div className="hero-overlay"></div>
@@ -217,7 +233,7 @@ function Layout({ children }) {
                 <div
                   key={slide.id}
                   className={`thumbnail ${index === currentSlide ? "active" : ""}`}
-                  style={{ backgroundImage: `url(http://localhost:5149/${slide.image})`}}
+                  style={{ backgroundImage: `url(${toAbsoluteUrl(slide.image)})`}}
                   onClick={() => setCurrentSlide(index)}
                 ></div>
               ))}

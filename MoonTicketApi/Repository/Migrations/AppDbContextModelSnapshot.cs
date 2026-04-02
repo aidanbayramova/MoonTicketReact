@@ -74,6 +74,63 @@ namespace Repository.Migrations
                     b.ToTable("Languages");
                 });
 
+            modelBuilder.Entity("Domain.Entities.News", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Desc")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NewsAuthorId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NewsAuthorId");
+
+                    b.ToTable("News");
+                });
+
+            modelBuilder.Entity("Domain.Entities.NewsAuthor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("NewsAuthors");
+                });
+
             modelBuilder.Entity("Domain.Entities.Person", b =>
                 {
                     b.Property<int>("Id")
@@ -300,6 +357,17 @@ namespace Repository.Migrations
                     b.ToTable("SubCategories");
                 });
 
+            modelBuilder.Entity("Domain.Entities.News", b =>
+                {
+                    b.HasOne("Domain.Entities.NewsAuthor", "NewsAuthor")
+                        .WithMany("News")
+                        .HasForeignKey("NewsAuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("NewsAuthor");
+                });
+
             modelBuilder.Entity("Domain.Entities.Product", b =>
                 {
                     b.HasOne("Domain.Entities.Category", "Category")
@@ -365,6 +433,11 @@ namespace Repository.Migrations
             modelBuilder.Entity("Domain.Entities.Language", b =>
                 {
                     b.Navigation("ProductLanguages");
+                });
+
+            modelBuilder.Entity("Domain.Entities.NewsAuthor", b =>
+                {
+                    b.Navigation("News");
                 });
 
             modelBuilder.Entity("Domain.Entities.Person", b =>
