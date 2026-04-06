@@ -18,8 +18,8 @@ namespace MoonTicketApi.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var sliders = await _sliderService.GetAllAsync();
-            return Ok(sliders);
+            //var sliders = await _sliderService.GetAllAsync();
+            return Ok(await _sliderService.GetAllAsync());
         }
 
         [HttpGet("{id}")]

@@ -16,22 +16,18 @@ namespace MoonTicketApi.Controllers
             _categoryService = categoryService;
         }
 
-        // GET: api/Category
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CategoryDto>>> GetAll()
         {
-            var categories = await _categoryService.GetAllAsync();
-            return Ok(categories);
+            return Ok(await _categoryService.GetAllAsync());
         }
 
-        // GET: api/Category/5
         [HttpGet("{id}")]
         public async Task<ActionResult<CategoryDto>> GetById(int id)
         {
             try
             {
-                var category = await _categoryService.GetByIdAsync(id);
-                return Ok(category);
+                return Ok(await _categoryService.GetByIdAsync(id));
             }
             catch (System.Exception ex)
             {
@@ -39,7 +35,6 @@ namespace MoonTicketApi.Controllers
             }
         }
 
-        // POST: api/Category
         [HttpPost]
         [Consumes("multipart/form-data")]
         public async Task<ActionResult> Create([FromForm] CategoryCreateDto dto)
@@ -52,7 +47,6 @@ namespace MoonTicketApi.Controllers
         [Consumes("multipart/form-data")]
         public async Task<ActionResult> Edit(int id, [FromForm] CategoryEditDto dto)
         {
-            // 🔥 ID-ni route-dan götürüb dto-ya set edirik
             dto.Id = id;
 
             try
@@ -65,7 +59,6 @@ namespace MoonTicketApi.Controllers
                 return NotFound(new { message = ex.Message });
             }
         }
-        // DELETE: api/Category/5
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {

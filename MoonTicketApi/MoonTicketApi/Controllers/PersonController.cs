@@ -12,8 +12,6 @@ namespace MoonTicketApi.Controllers
     {
         private readonly IPersonService _personService;
 
-
-
         public PersonController(IPersonService personService)
         {
             _personService = personService;
@@ -31,8 +29,7 @@ namespace MoonTicketApi.Controllers
         {
             var person = await _personService.GetByIdAsync(id);
 
-            if (person == null)
-                return NotFound();
+            if (person == null) return NotFound();
 
             return Ok(person);
         }
@@ -40,8 +37,7 @@ namespace MoonTicketApi.Controllers
         [HttpPost]
         public async Task<ActionResult<PersonDto>> Create([FromBody] PersonCreateDto dto)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+            if (!ModelState.IsValid)  return BadRequest(ModelState);
 
             var person = await _personService.CreateAsync(dto);
             return CreatedAtAction(nameof(GetById), new { id = person.Id }, person);
@@ -56,7 +52,7 @@ namespace MoonTicketApi.Controllers
             try
             {
                 await _personService.EditAsync(dto, id);
-                return NoContent(); // 204 - heç nə qaytarmır, frontend alert göstərir
+                return NoContent(); 
             }
             catch (KeyNotFoundException)
             {

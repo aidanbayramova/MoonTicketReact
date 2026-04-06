@@ -19,8 +19,7 @@ namespace MoonTicketApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<SubCategoryDto>>> GetAll()
         {
-            var subCategories = await _subCategoryService.GetAllAsync();
-            return Ok(subCategories);
+            return Ok(await _subCategoryService.GetAllAsync());
         }
 
         [HttpGet("{id}")]
@@ -28,8 +27,7 @@ namespace MoonTicketApi.Controllers
         {
             try
             {
-                var subCategory = await _subCategoryService.GetByIdAsync(id);
-                return Ok(subCategory);
+                return Ok(await _subCategoryService.GetByIdAsync(id));
             }
             catch (Exception ex)
             {
@@ -54,8 +52,7 @@ namespace MoonTicketApi.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult> Edit(int id, [FromBody] SubCategoryEditDto dto)
         {
-            if (id != dto.Id)
-                return BadRequest(new { message = "Id uyğun deyil" });
+            if (id != dto.Id) return BadRequest(new { message = "Id uyğun deyil" });
 
             try
             {

@@ -33,8 +33,7 @@ namespace MoonTicketApi.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromForm] SettingCreateDto model)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+            if (!ModelState.IsValid) return BadRequest(ModelState);
 
             await _settingService.CreateAsync(model);
             return Ok("Setting created successfully");
@@ -43,8 +42,7 @@ namespace MoonTicketApi.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Edit(int id, [FromForm] SettingEditDto model)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+            if (!ModelState.IsValid) return BadRequest(ModelState);
 
             try
             {

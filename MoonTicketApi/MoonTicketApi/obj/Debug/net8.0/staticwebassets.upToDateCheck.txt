@@ -16,6 +16,7 @@ wwwroot\Uploads\CategoryVideos\5337c3d4-2554-46e2-bf20-77c25180c30b.mp4
 wwwroot\Uploads\CategoryVideos\83c56ecc-d16e-499e-a49b-003d7846ffcf.mp4
 wwwroot\Uploads\CategoryVideos\a2e829fb-7e98-4691-bbf3-9063091bcb78.mp4
 wwwroot\Uploads\CategoryVideos\f04f2126-cd5b-4e48-9988-3943d9251e50.mp4
+wwwroot\Uploads\NewsImages\04f4fb05-9da8-4e85-967b-03f43c4471ed.jpg
 wwwroot\Uploads\Sliders\0b99f98c-5457-44d7-98de-ae44b9bfadb9.jpg
 wwwroot\Uploads\Sliders\36a830aa-852f-4baa-8a8f-da3b874382e0.jpg
 wwwroot\Uploads\Sliders\417f8514-8d22-45cf-9bf4-65d04b641171.png
@@ -59,3 +60,5 @@ wwwroot\Uploads\Uploads\videos\ff4cfb0d-6639-4a86-811b-9e4439a4a72a.mp4
 wwwroot\Uploads\products\0007ff6b-b106-4e14-a925-3b66c29b080a.jpg
 wwwroot\Uploads\products\2bb28ea3-5481-4c6b-b883-b031f4e8b503.mp4
 wwwroot\Uploads\products\6596e1fa-621a-4737-be7c-81846a17951f.png
+wwwroot\Uploads\products\efb817a3-4603-4be5-8444-8a71f66c7cfa.mp4
+wwwroot\Uploads\products\fd10e0a4-b4c4-49c2-a205-d3a3dcf2b9e9.jpg

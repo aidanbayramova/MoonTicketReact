@@ -3,16 +3,44 @@
   "WorkspaceRootPath": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{BA347616-AFFA-4F7A-ABA1-4978A4C57D2D}|MoonTicketApi\\MoonTicketApi.csproj|c:\\users\\acer\\desktop\\iticket\\moonticketapi\\moonticketapi\\controllers\\subcategorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA347616-AFFA-4F7A-ABA1-4978A4C57D2D}|MoonTicketApi\\MoonTicketApi.csproj|solutionrelative:moonticketapi\\controllers\\subcategorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA347616-AFFA-4F7A-ABA1-4978A4C57D2D}|MoonTicketApi\\MoonTicketApi.csproj|c:\\users\\acer\\desktop\\iticket\\moonticketapi\\moonticketapi\\controllers\\slidercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA347616-AFFA-4F7A-ABA1-4978A4C57D2D}|MoonTicketApi\\MoonTicketApi.csproj|solutionrelative:moonticketapi\\controllers\\slidercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA347616-AFFA-4F7A-ABA1-4978A4C57D2D}|MoonTicketApi\\MoonTicketApi.csproj|c:\\users\\acer\\desktop\\iticket\\moonticketapi\\moonticketapi\\controllers\\settingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA347616-AFFA-4F7A-ABA1-4978A4C57D2D}|MoonTicketApi\\MoonTicketApi.csproj|solutionrelative:moonticketapi\\controllers\\settingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA347616-AFFA-4F7A-ABA1-4978A4C57D2D}|MoonTicketApi\\MoonTicketApi.csproj|c:\\users\\acer\\desktop\\iticket\\moonticketapi\\moonticketapi\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA347616-AFFA-4F7A-ABA1-4978A4C57D2D}|MoonTicketApi\\MoonTicketApi.csproj|solutionrelative:moonticketapi\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA347616-AFFA-4F7A-ABA1-4978A4C57D2D}|MoonTicketApi\\MoonTicketApi.csproj|c:\\users\\acer\\desktop\\iticket\\moonticketapi\\moonticketapi\\controllers\\personcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA347616-AFFA-4F7A-ABA1-4978A4C57D2D}|MoonTicketApi\\MoonTicketApi.csproj|solutionrelative:moonticketapi\\controllers\\personcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA347616-AFFA-4F7A-ABA1-4978A4C57D2D}|MoonTicketApi\\MoonTicketApi.csproj|c:\\users\\acer\\desktop\\iticket\\moonticketapi\\moonticketapi\\controllers\\newscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA347616-AFFA-4F7A-ABA1-4978A4C57D2D}|MoonTicketApi\\MoonTicketApi.csproj|solutionrelative:moonticketapi\\controllers\\newscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA347616-AFFA-4F7A-ABA1-4978A4C57D2D}|MoonTicketApi\\MoonTicketApi.csproj|c:\\users\\acer\\desktop\\iticket\\moonticketapi\\moonticketapi\\controllers\\newsauthorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA347616-AFFA-4F7A-ABA1-4978A4C57D2D}|MoonTicketApi\\MoonTicketApi.csproj|solutionrelative:moonticketapi\\controllers\\newsauthorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA347616-AFFA-4F7A-ABA1-4978A4C57D2D}|MoonTicketApi\\MoonTicketApi.csproj|c:\\users\\acer\\desktop\\iticket\\moonticketapi\\moonticketapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA347616-AFFA-4F7A-ABA1-4978A4C57D2D}|MoonTicketApi\\MoonTicketApi.csproj|solutionrelative:moonticketapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{5BCC1B6B-BCAB-49E5-A5DE-8897970CDB22}|Service\\Service.csproj|c:\\users\\acer\\desktop\\iticket\\moonticketapi\\service\\helpers\\mappingprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5BCC1B6B-BCAB-49E5-A5DE-8897970CDB22}|Service\\Service.csproj|solutionrelative:service\\helpers\\mappingprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5BCC1B6B-BCAB-49E5-A5DE-8897970CDB22}|Service\\Service.csproj|c:\\users\\acer\\desktop\\iticket\\moonticketapi\\service\\services\\newsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5BCC1B6B-BCAB-49E5-A5DE-8897970CDB22}|Service\\Service.csproj|solutionrelative:service\\services\\newsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BA347616-AFFA-4F7A-ABA1-4978A4C57D2D}|MoonTicketApi\\MoonTicketApi.csproj|c:\\users\\acer\\desktop\\iticket\\moonticketapi\\moonticketapi\\controllers\\newscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BA347616-AFFA-4F7A-ABA1-4978A4C57D2D}|MoonTicketApi\\MoonTicketApi.csproj|solutionrelative:moonticketapi\\controllers\\newscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5BCC1B6B-BCAB-49E5-A5DE-8897970CDB22}|Service\\Service.csproj|c:\\users\\acer\\desktop\\iticket\\moonticketapi\\service\\dtos\\admin\\news\\newseditdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -37,10 +65,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{29F5C45B-1B3B-46EC-8839-604DA50E45BE}|Domain\\Domain.csproj|c:\\users\\acer\\desktop\\iticket\\moonticketapi\\domain\\entities\\newsauthor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{29F5C45B-1B3B-46EC-8839-604DA50E45BE}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\newsauthor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BA347616-AFFA-4F7A-ABA1-4978A4C57D2D}|MoonTicketApi\\MoonTicketApi.csproj|c:\\users\\acer\\desktop\\iticket\\moonticketapi\\moonticketapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BA347616-AFFA-4F7A-ABA1-4978A4C57D2D}|MoonTicketApi\\MoonTicketApi.csproj|solutionrelative:moonticketapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5BCC1B6B-BCAB-49E5-A5DE-8897970CDB22}|Service\\Service.csproj|c:\\users\\acer\\desktop\\iticket\\moonticketapi\\service\\services\\personservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -97,10 +121,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{5BCC1B6B-BCAB-49E5-A5DE-8897970CDB22}|Service\\Service.csproj|c:\\users\\acer\\desktop\\iticket\\moonticketapi\\service\\services\\newsauthorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5BCC1B6B-BCAB-49E5-A5DE-8897970CDB22}|Service\\Service.csproj|solutionrelative:service\\services\\newsauthorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BA347616-AFFA-4F7A-ABA1-4978A4C57D2D}|MoonTicketApi\\MoonTicketApi.csproj|c:\\users\\acer\\desktop\\iticket\\moonticketapi\\moonticketapi\\controllers\\newsauthorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BA347616-AFFA-4F7A-ABA1-4978A4C57D2D}|MoonTicketApi\\MoonTicketApi.csproj|solutionrelative:moonticketapi\\controllers\\newsauthorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -110,50 +130,76 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "SubCategoryController.cs",
+              "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\Controllers\\SubCategoryController.cs",
+              "RelativeDocumentMoniker": "MoonTicketApi\\Controllers\\SubCategoryController.cs",
+              "ToolTip": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\Controllers\\SubCategoryController.cs*",
+              "RelativeToolTip": "MoonTicketApi\\Controllers\\SubCategoryController.cs*",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAzwDoAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-06T11:10:33.878Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SliderController.cs",
+              "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\Controllers\\SliderController.cs",
+              "RelativeDocumentMoniker": "MoonTicketApi\\Controllers\\SliderController.cs",
+              "ToolTip": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\Controllers\\SliderController.cs",
+              "RelativeToolTip": "MoonTicketApi\\Controllers\\SliderController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-06T11:09:05.998Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "SettingController.cs",
+              "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\Controllers\\SettingController.cs",
+              "RelativeDocumentMoniker": "MoonTicketApi\\Controllers\\SettingController.cs",
+              "ToolTip": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\Controllers\\SettingController.cs",
+              "RelativeToolTip": "MoonTicketApi\\Controllers\\SettingController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADMAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-06T11:08:24.064Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "NewsCreateDto.cs",
-              "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Service\\DTOs\\Admin\\News\\NewsCreateDto.cs",
-              "RelativeDocumentMoniker": "Service\\DTOs\\Admin\\News\\NewsCreateDto.cs",
-              "ToolTip": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Service\\DTOs\\Admin\\News\\NewsCreateDto.cs",
-              "RelativeToolTip": "Service\\DTOs\\Admin\\News\\NewsCreateDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
+              "Title": "PersonController.cs",
+              "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\Controllers\\PersonController.cs",
+              "RelativeDocumentMoniker": "MoonTicketApi\\Controllers\\PersonController.cs",
+              "ToolTip": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\Controllers\\PersonController.cs",
+              "RelativeToolTip": "MoonTicketApi\\Controllers\\PersonController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADYAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-02T07:59:07.856Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "News.cs",
-              "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Domain\\Entities\\News.cs",
-              "RelativeDocumentMoniker": "Domain\\Entities\\News.cs",
-              "ToolTip": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Domain\\Entities\\News.cs",
-              "RelativeToolTip": "Domain\\Entities\\News.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-02T07:53:12.663Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "NewsDto.cs",
-              "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Service\\DTOs\\Admin\\News\\NewsDto.cs",
-              "RelativeDocumentMoniker": "Service\\DTOs\\Admin\\News\\NewsDto.cs",
-              "ToolTip": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Service\\DTOs\\Admin\\News\\NewsDto.cs",
-              "RelativeToolTip": "Service\\DTOs\\Admin\\News\\NewsDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-02T07:58:58.922Z",
+              "WhenOpened": "2026-04-06T11:05:21.595Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
+              "Title": "CategoryController.cs",
+              "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\Controllers\\CategoryController.cs",
+              "RelativeDocumentMoniker": "MoonTicketApi\\Controllers\\CategoryController.cs",
+              "ToolTip": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\Controllers\\CategoryController.cs",
+              "RelativeToolTip": "MoonTicketApi\\Controllers\\CategoryController.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAD8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-06T11:04:58.867Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "NewsEditDto.cs",
               "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Service\\DTOs\\Admin\\News\\NewsEditDto.cs",
               "RelativeDocumentMoniker": "Service\\DTOs\\Admin\\News\\NewsEditDto.cs",
@@ -161,12 +207,11 @@
               "RelativeToolTip": "Service\\DTOs\\Admin\\News\\NewsEditDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-02T07:59:08.136Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-02T07:59:08.136Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "NewsController.cs",
               "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\Controllers\\NewsController.cs",
               "RelativeDocumentMoniker": "MoonTicketApi\\Controllers\\NewsController.cs",
@@ -179,7 +224,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 9,
               "Title": "NewsService.cs",
               "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Service\\Services\\NewsService.cs",
               "RelativeDocumentMoniker": "Service\\Services\\NewsService.cs",
@@ -187,51 +232,23 @@
               "RelativeToolTip": "Service\\Services\\NewsService.cs",
               "ViewState": "AgIAAAkAAAAAAAAAAAAqwGQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-02T07:59:40.746Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-02T07:59:40.746Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 8,
               "Title": "MappingProfile.cs",
               "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Service\\Helpers\\MappingProfile.cs",
               "RelativeDocumentMoniker": "Service\\Helpers\\MappingProfile.cs",
               "ToolTip": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Service\\Helpers\\MappingProfile.cs",
               "RelativeToolTip": "Service\\Helpers\\MappingProfile.cs",
-              "ViewState": "AgIAAIQAAAAAAAAAAAAuwAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-02T08:00:05.888Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-02T08:00:05.888Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "NewsRepository.cs",
-              "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Repository\\Repositories\\NewsRepository.cs",
-              "RelativeDocumentMoniker": "Repository\\Repositories\\NewsRepository.cs",
-              "ToolTip": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Repository\\Repositories\\NewsRepository.cs",
-              "RelativeToolTip": "Repository\\Repositories\\NewsRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-02T07:59:17.831Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "INewsService.cs",
-              "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Service\\Services\\Interfaces\\INewsService.cs",
-              "RelativeDocumentMoniker": "Service\\Services\\Interfaces\\INewsService.cs",
-              "ToolTip": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Service\\Services\\Interfaces\\INewsService.cs",
-              "RelativeToolTip": "Service\\Services\\Interfaces\\INewsService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-02T07:59:17.948Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 6,
               "Title": "NewsAuthorController.cs",
               "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\Controllers\\NewsAuthorController.cs",
               "RelativeDocumentMoniker": "MoonTicketApi\\Controllers\\NewsAuthorController.cs",
@@ -244,7 +261,80 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 11,
+              "Title": "NewsCreateDto.cs",
+              "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Service\\DTOs\\Admin\\News\\NewsCreateDto.cs",
+              "RelativeDocumentMoniker": "Service\\DTOs\\Admin\\News\\NewsCreateDto.cs",
+              "ToolTip": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Service\\DTOs\\Admin\\News\\NewsCreateDto.cs",
+              "RelativeToolTip": "Service\\DTOs\\Admin\\News\\NewsCreateDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-02T07:59:07.856Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\Program.cs",
+              "RelativeDocumentMoniker": "MoonTicketApi\\Program.cs",
+              "ToolTip": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\Program.cs",
+              "RelativeToolTip": "MoonTicketApi\\Program.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-02T07:05:52.624Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "NewsDto.cs",
+              "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Service\\DTOs\\Admin\\News\\NewsDto.cs",
+              "RelativeDocumentMoniker": "Service\\DTOs\\Admin\\News\\NewsDto.cs",
+              "ToolTip": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Service\\DTOs\\Admin\\News\\NewsDto.cs",
+              "RelativeToolTip": "Service\\DTOs\\Admin\\News\\NewsDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-02T07:58:58.922Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "News.cs",
+              "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Domain\\Entities\\News.cs",
+              "RelativeDocumentMoniker": "Domain\\Entities\\News.cs",
+              "ToolTip": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Domain\\Entities\\News.cs",
+              "RelativeToolTip": "Domain\\Entities\\News.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-02T07:53:12.663Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "NewsRepository.cs",
+              "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Repository\\Repositories\\NewsRepository.cs",
+              "RelativeDocumentMoniker": "Repository\\Repositories\\NewsRepository.cs",
+              "ToolTip": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Repository\\Repositories\\NewsRepository.cs",
+              "RelativeToolTip": "Repository\\Repositories\\NewsRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-02T07:59:17.831Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "INewsService.cs",
+              "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Service\\Services\\Interfaces\\INewsService.cs",
+              "RelativeDocumentMoniker": "Service\\Services\\Interfaces\\INewsService.cs",
+              "ToolTip": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Service\\Services\\Interfaces\\INewsService.cs",
+              "RelativeToolTip": "Service\\Services\\Interfaces\\INewsService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-02T07:59:17.948Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
               "Title": "INewsAuthorRepository.cs",
               "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Repository\\Repositories\\Interfaces\\INewsAuthorRepository.cs",
               "RelativeDocumentMoniker": "Repository\\Repositories\\Interfaces\\INewsAuthorRepository.cs",
@@ -252,12 +342,11 @@
               "RelativeToolTip": "Repository\\Repositories\\Interfaces\\INewsAuthorRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-02T07:59:07.765Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-02T07:59:07.765Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 22,
               "Title": "NewsAuthorDto.cs",
               "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Service\\DTOs\\Admin\\NewsAuthor\\NewsAuthorDto.cs",
               "RelativeDocumentMoniker": "Service\\DTOs\\Admin\\NewsAuthor\\NewsAuthorDto.cs",
@@ -265,12 +354,11 @@
               "RelativeToolTip": "Service\\DTOs\\Admin\\NewsAuthor\\NewsAuthorDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-02T07:58:59.082Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-02T07:58:59.082Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 29,
               "Title": "NewsAuthorService.cs",
               "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Service\\Services\\NewsAuthorService.cs",
               "RelativeDocumentMoniker": "Service\\Services\\NewsAuthorService.cs",
@@ -278,12 +366,11 @@
               "RelativeToolTip": "Service\\Services\\NewsAuthorService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAEgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-02T07:59:40.339Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-02T07:59:40.339Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 28,
               "Title": "INewsAuthorService.cs",
               "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Service\\Services\\Interfaces\\INewsAuthorService.cs",
               "RelativeDocumentMoniker": "Service\\Services\\Interfaces\\INewsAuthorService.cs",
@@ -291,12 +378,11 @@
               "RelativeToolTip": "Service\\Services\\Interfaces\\INewsAuthorService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-02T07:59:18.156Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-02T07:59:18.156Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 21,
               "Title": "NewsAuthorCreateDto.cs",
               "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Service\\DTOs\\Admin\\NewsAuthor\\NewsAuthorCreateDto.cs",
               "RelativeDocumentMoniker": "Service\\DTOs\\Admin\\NewsAuthor\\NewsAuthorCreateDto.cs",
@@ -304,12 +390,11 @@
               "RelativeToolTip": "Service\\DTOs\\Admin\\NewsAuthor\\NewsAuthorCreateDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-02T07:58:59.004Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-02T07:58:59.004Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 25,
               "Title": "NewsAuthorRepository.cs",
               "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Repository\\Repositories\\NewsAuthorRepository.cs",
               "RelativeDocumentMoniker": "Repository\\Repositories\\NewsAuthorRepository.cs",
@@ -317,12 +402,11 @@
               "RelativeToolTip": "Repository\\Repositories\\NewsAuthorRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-02T07:59:17.712Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-02T07:59:17.712Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 24,
               "Title": "INewsRepository.cs",
               "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Repository\\Repositories\\Interfaces\\INewsRepository.cs",
               "RelativeDocumentMoniker": "Repository\\Repositories\\Interfaces\\INewsRepository.cs",
@@ -330,12 +414,11 @@
               "RelativeToolTip": "Repository\\Repositories\\Interfaces\\INewsRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-02T07:59:07.985Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-02T07:59:07.985Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 20,
               "Title": "NewsAuthorEditDto.cs",
               "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Service\\DTOs\\Admin\\NewsAuthor\\NewsAuthorEditDto.cs",
               "RelativeDocumentMoniker": "Service\\DTOs\\Admin\\NewsAuthor\\NewsAuthorEditDto.cs",
@@ -343,12 +426,11 @@
               "RelativeToolTip": "Service\\DTOs\\Admin\\NewsAuthor\\NewsAuthorEditDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-02T07:58:58.802Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-02T07:58:58.802Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 14,
               "Title": "AppDbContext.cs",
               "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Repository\\Data\\AppDbContext.cs",
               "RelativeDocumentMoniker": "Repository\\Data\\AppDbContext.cs",
@@ -356,12 +438,11 @@
               "RelativeToolTip": "Repository\\Data\\AppDbContext.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-02T07:54:28.523Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-02T07:54:28.523Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 15,
               "Title": "NewsAuthor.cs",
               "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Domain\\Entities\\NewsAuthor.cs",
               "RelativeDocumentMoniker": "Domain\\Entities\\NewsAuthor.cs",
@@ -369,25 +450,11 @@
               "RelativeToolTip": "Domain\\Entities\\NewsAuthor.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-02T07:52:20.227Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-02T07:52:20.227Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\Program.cs",
-              "RelativeDocumentMoniker": "MoonTicketApi\\Program.cs",
-              "ToolTip": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\MoonTicketApi\\Program.cs",
-              "RelativeToolTip": "MoonTicketApi\\Program.cs",
-              "ViewState": "AgIAABcAAAAAAAAAAAAmwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-02T07:05:52.624Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 16,
               "Title": "PersonService.cs",
               "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Service\\Services\\PersonService.cs",
               "RelativeDocumentMoniker": "Service\\Services\\PersonService.cs",
@@ -395,12 +462,11 @@
               "RelativeToolTip": "Service\\Services\\PersonService.cs",
               "ViewState": "AgIAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-02T07:04:41.161Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-02T07:04:41.161Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 17,
               "Title": "FileService.cs",
               "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Service\\Services\\FileService.cs",
               "RelativeDocumentMoniker": "Service\\Services\\FileService.cs",
@@ -408,12 +474,11 @@
               "RelativeToolTip": "Service\\Services\\FileService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACUAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-02T06:56:16.985Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-02T06:56:16.985Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 18,
               "Title": "CategoryService.cs",
               "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Service\\Services\\CategoryService.cs",
               "RelativeDocumentMoniker": "Service\\Services\\CategoryService.cs",
@@ -421,12 +486,11 @@
               "RelativeToolTip": "Service\\Services\\CategoryService.cs",
               "ViewState": "AgIAAAkAAAAAAAAAAAAAAFoAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-02T06:55:10.224Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-02T06:55:10.224Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 19,
               "Title": "Category.cs",
               "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\ITICKET\\MoonTicketApi\\Domain\\Entities\\Category.cs",
               "RelativeDocumentMoniker": "Domain\\Entities\\Category.cs",
@@ -434,8 +498,7 @@
               "RelativeToolTip": "Domain\\Entities\\Category.cs",
               "ViewState": "AgIAAAcAAAAAAAAAAAAwwBIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-02T05:41:54.497Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-02T05:41:54.497Z"
             }
           ]
         }
