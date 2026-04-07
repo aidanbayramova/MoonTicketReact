@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MoonTicketApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+08ca030b9f83dbed4f18888bcd848dc37701ca91")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d51d46d6f8e3a035187085134f94466fae021cf8")]
 [assembly: System.Reflection.AssemblyProductAttribute("MoonTicketApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MoonTicketApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

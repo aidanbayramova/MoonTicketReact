@@ -29,6 +29,8 @@ namespace Repository.Data
         public DbSet<ProductLanguage> ProductLanguages { get; set; }
         public DbSet<News> News { get; set; }
         public DbSet<NewsAuthor> NewsAuthors { get; set; }
+        public DbSet<ContactMessage> ContactMessages { get; set; }
+        public DbSet<Subscriber> Subscribers { get; set; }
 
 
     }

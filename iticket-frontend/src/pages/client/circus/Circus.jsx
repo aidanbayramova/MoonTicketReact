@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Info } from "lucide-react";
 import ScrollingTicker from "../../../components/ScrollingTicker";
 import "./Circus.css";
-import { buildAssetUrl, fetchProducts, formatDate, filterProductsByCategory } from "../../../api/products";
+import { buildAssetUrl, fetchProducts, formatDate, filterProductsByCategory, sortProductsByNewest } from "../../../api/products";
 
 const circusData = [
   { id: 1, title: "Acrobat Show", date: "2025-09-20", location: "Baku Circus Arena", price: "20-40 AZN", type: "Acrobatics", img: "src/assets/images/circus.jpg" },
@@ -44,8 +44,7 @@ export default function Circus() {
         if (!active || !list.length) return;
         const allowed = ["circus", "acrobat", "acrobatics", "animals", "clown", "show"];
         const filtered = filterProductsByCategory(list, allowed);
-        const source = filtered.length ? filtered : list;
-        const mapped = source.map(mapProductToCard);
+        const mapped = sortProductsByNewest(filtered).map(mapProductToCard);
         if (mapped.length) {
           setCircus(mapped);
           const nextFilters = ["All", ...new Set(mapped.map((item) => item.type).filter(Boolean))];

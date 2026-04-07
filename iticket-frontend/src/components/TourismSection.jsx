@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, Info } from "lucide-react";
-import { buildAssetUrl, fetchProducts } from "../api/products";
+import { buildAssetUrl, fetchProducts, filterProductsByCategory, sortProductsByNewest } from "../api/products";
 import "./TourismSection.css";
 
 const fallbackTours = [
@@ -35,8 +35,8 @@ const TourismSection = () => {
         fetchProducts()
             .then((list) => {
                 if (!active || !list.length) return;
-                const filtered = list.filter((p) => `${p.categoryName} ${p.subCategoryName}`.toLowerCase().includes("tour"));
-                const mapped = (filtered.length ? filtered : list)
+                const filtered = filterProductsByCategory(list, ["tourism", "tour", "travel", "trip", "hike", "city", "adventure", "nature"]);
+                const mapped = sortProductsByNewest(filtered)
                     .slice(0, 12)
                     .map(toCard)
                     .filter((c) => c.img);

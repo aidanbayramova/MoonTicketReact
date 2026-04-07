@@ -58,7 +58,11 @@ wwwroot\Uploads\Uploads\videos\ea79d51d-92aa-4496-8397-4ef4dc31526e.mp4
 wwwroot\Uploads\Uploads\videos\f308f68e-242a-42fa-9f49-7410382199f9.mp4
 wwwroot\Uploads\Uploads\videos\ff4cfb0d-6639-4a86-811b-9e4439a4a72a.mp4
 wwwroot\Uploads\products\0007ff6b-b106-4e14-a925-3b66c29b080a.jpg
+wwwroot\Uploads\products\0e52457d-eaf9-423a-a3b5-e8150d2c43e3.mp4
 wwwroot\Uploads\products\2bb28ea3-5481-4c6b-b883-b031f4e8b503.mp4
 wwwroot\Uploads\products\6596e1fa-621a-4737-be7c-81846a17951f.png
+wwwroot\Uploads\products\8db47270-76e9-4c8c-b208-d7d4fb08ae25.jpg
+wwwroot\Uploads\products\947ebc3a-c416-46b3-b371-828302340340.mp4
+wwwroot\Uploads\products\e7bf4de6-3ee9-46a2-bb1e-76c38da80d4b.jpg
 wwwroot\Uploads\products\efb817a3-4603-4be5-8444-8a71f66c7cfa.mp4
 wwwroot\Uploads\products\fd10e0a4-b4c4-49c2-a205-d3a3dcf2b9e9.jpg

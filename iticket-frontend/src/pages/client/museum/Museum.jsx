@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Info } from "lucide-react";
 import "./Museum.css";
 import ScrollingTicker from "../../../components/ScrollingTicker"; 
-import { buildAssetUrl, fetchProducts, formatDate, filterProductsByCategory } from "../../../api/products";
+import { buildAssetUrl, fetchProducts, formatDate, filterProductsByCategory, sortProductsByNewest } from "../../../api/products";
 
 const museumData = [
   { id: 1, title: "Ancient Sculptures", date: "2025-09-20", location: "Baku Museum of History", price: "Free", type: "Art", img: "src/assets/images/museum.jpg" },
@@ -44,8 +44,7 @@ export default function Museum() {
         if (!active || !list.length) return;
         const allowed = ["museum", "history", "art", "science", "exhibit", "gallery"];
         const filtered = filterProductsByCategory(list, allowed);
-        const source = filtered.length ? filtered : list;
-        const mapped = source.map(mapProductToCard);
+        const mapped = sortProductsByNewest(filtered).map(mapProductToCard);
         if (mapped.length) {
           setMuseums(mapped);
           const nextFilters = ["All", ...new Set(mapped.map((item) => item.type).filter(Boolean))];

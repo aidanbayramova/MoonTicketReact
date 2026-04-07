@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, Info } from "lucide-react";
-import { buildAssetUrl, fetchProducts, formatDate } from "../api/products";
+import { buildAssetUrl, fetchProducts, filterProductsByCategory, formatDate, sortProductsByNewest } from "../api/products";
 import "./SportsSection.css";
 
 const fallbackSports = [
@@ -35,8 +35,8 @@ const SportsSection = () => {
         fetchProducts()
             .then((list) => {
                 if (!active || !list.length) return;
-                const filtered = list.filter((p) => `${p.categoryName} ${p.subCategoryName}`.toLowerCase().includes("sport"));
-                const mapped = (filtered.length ? filtered : list)
+                const filtered = filterProductsByCategory(list, ["sport", "sports", "football", "basketball", "tennis", "training"]);
+                const mapped = sortProductsByNewest(filtered)
                     .slice(0, 12)
                     .map(toCard)
                     .filter((c) => c.img);

@@ -1,0 +1,12 @@
+using Service.DTOs.Admin.ContactMessage;
+
+namespace Service.Services.Interfaces
+{
+    public interface IContactMessageService
+    {
+        Task<List<ContactMessageDto>> GetAllAsync();
+        Task<ContactMessageDto> CreateAsync(ContactMessageCreateDto dto);
+        Task<bool> ReplyAsync(int id, ContactMessageReplyDto dto);
+        Task<int> DeleteRepliedOlderThanAsync(DateTime cutoffUtc);
+    }
+}

@@ -161,3 +161,73 @@
 .event-card:hover .event-img {
   transform: scale(1.12);
 }
+
+.sidebar-hint {
+  margin: 0;
+  color: #c9b7bb;
+  line-height: 1.55;
+  font-size: 14px;
+  padding: 10px 4px;
+}
+
+.clear-btn {
+  margin-top: 12px;
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  background: #7e0c28;
+  color: #fff;
+  font-weight: 700;
+  padding: 10px 12px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.clear-btn:hover {
+  background: #98112f;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(152, 17, 47, 0.4);
+}
+
+.address-marker {
+  position: relative;
+}
+
+.address-marker .marker-dot {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  background: radial-gradient(circle at 30% 30%, #ff547a, #950826 60%, #640316 100%);
+  box-shadow: 0 0 0 6px rgba(212, 25, 68, 0.2), 0 0 18px rgba(212, 25, 68, 0.8);
+  animation: markerPulse 1.7s infinite ease-in-out;
+}
+
+.address-marker .marker-count {
+  position: absolute;
+  right: -10px;
+  top: -10px;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  padding: 0 4px;
+  background: #fff;
+  color: #7d041f;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 18px;
+  text-align: center;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.45);
+}
+
+@keyframes markerPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

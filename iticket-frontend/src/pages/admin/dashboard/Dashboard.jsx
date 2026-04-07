@@ -142,6 +142,14 @@ const AdminDashboard = () => {
           <NavLink to="/admin/statistics" className="menu-btn">
             Statistics
           </NavLink>
+
+          <NavLink to="/admin/contact/messages" className="menu-btn">
+            Contact Messages
+          </NavLink>
+
+          <NavLink to="/admin/subscriber/index" className="menu-btn">
+            Subscribers
+          </NavLink>
         </nav>
       </aside>
 

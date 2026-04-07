@@ -1,0 +1,23 @@
+﻿{
+  "EmailSettings": {
+    "Host": "smtp.gmail.com",
+    "Port": 587,
+    "Username": "your-email@gmail.com",
+    "Password": "your-app-password",
+    "FromEmail": "your-email@gmail.com",
+    "FromName": "MoonTicket",
+    "EnableSsl": true
+  },
+
+  "ConnectionStrings": {
+    "Default": "Server=(localdb)\\MSSQLLocalDB;Database=MoonTicket;Trusted_Connection=True;TrustServerCertificate=True"
+  },
+
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  }
+
+}

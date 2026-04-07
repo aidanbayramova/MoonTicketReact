@@ -14,16 +14,19 @@ namespace Service.DTOs.Admin.Product
         [Required] public string Description { get; set; }
         public IFormFile Image { get; set; }
         public IFormFile Video { get; set; }
-        [Required] public string Address { get; set; }
+        [Required] 
+        public string Address { get; set; }
         public int AgeRestriction { get; set; }
-        [Required] public DateTime StartDate { get; set; }
-        [Required] public DateTime EndDate { get; set; }
+        [Required]
+        public DateTime StartDate { get; set; }
+        [Required]
+        public DateTime EndDate { get; set; }
         public TimeSpan StartTime { get; set; }
         [Required] public int CategoryId { get; set; }    
         public int? SubCategoryId { get; set; }            
-        [Required] public int PersonId { get; set; }        
+        [Required] 
+        public int PersonId { get; set; }        
         public List<int> LanguageIds { get; set; }         
-
         public string? CategoryName { get; set; }
         public string? SubCategoryName { get; set; }
         public string? PersonName { get; set; }

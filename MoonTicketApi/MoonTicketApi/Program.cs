@@ -1,4 +1,5 @@
 using AutoMapper;
+using MoonTicketApi.BackgroundServices;
 using Microsoft.EntityFrameworkCore;
 using Repository.Data;
 using Repository.Repositories;
@@ -39,6 +40,8 @@ builder.Services.AddScoped<ISubCategoryRepository, SubCategoryRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<INewsRepository, NewsRepository>();
 builder.Services.AddScoped<INewsAuthorRepository, NewsAuthorRepository>();
+builder.Services.AddScoped<IContactMessageRepository, ContactMessageRepository>();
+builder.Services.AddScoped<ISubscriberRepository, SubscriberRepository>();
 
 //
 //  SERVICES
@@ -53,6 +56,12 @@ builder.Services.AddScoped<ISubCategoryService, SubCategoryService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<INewsService, NewsService>();
 builder.Services.AddScoped<INewsAuthorService, NewsAuthorService>();
+builder.Services.AddScoped<IContactMessageService, ContactMessageService>();
+builder.Services.AddScoped<ISubscriberService, SubscriberService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddHostedService<ContactMessageCleanupBackgroundService>();
+
+builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
 
 builder.Services.AddCors(options =>
 {
@@ -86,7 +95,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 //
-// ?? Static files (image üçün)
+// ?? Static files (image ï¿½ï¿½ï¿½n)
 //
 app.UseStaticFiles();
 

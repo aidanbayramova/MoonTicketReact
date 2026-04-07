@@ -12,6 +12,12 @@ const pick = (obj, keys) => {
   return undefined;
 };
 
+const parseDate = (value) => {
+  if (!value) return null;
+  const date = new Date(value);
+  return isNaN(date.getTime()) ? null : date;
+};
+
 const normalizeProduct = (raw = {}) => {
   const id = pick(raw, ["id", "Id"]);
   const name = pick(raw, ["name", "Name"]) || "Untitled";
@@ -22,17 +28,12 @@ const normalizeProduct = (raw = {}) => {
   const ageRestriction = pick(raw, ["ageRestriction", "AgeRestriction"]) ?? null;
   const startDateRaw = pick(raw, ["startDate", "StartDate"]) || null;
   const endDateRaw = pick(raw, ["endDate", "EndDate"]) || null;
+  const createdDateRaw = pick(raw, ["createdDate", "CreatedDate", "createdAt", "CreatedAt", "dateCreated", "DateCreated"]) || null;
   const startTime = pick(raw, ["startTime", "StartTime"]) || null;
   const categoryName = pick(raw, ["categoryName", "CategoryName"]) || "";
   const subCategoryName = pick(raw, ["subCategoryName", "SubCategoryName"]) || "";
   const personName = pick(raw, ["personName", "PersonName"]) || "";
   const languages = pick(raw, ["languages", "Languages"]) || [];
-
-  const parseDate = (value) => {
-    if (!value) return null;
-    const date = new Date(value);
-    return isNaN(date.getTime()) ? null : date;
-  };
 
   return {
     id,
@@ -44,6 +45,7 @@ const normalizeProduct = (raw = {}) => {
     ageRestriction,
     startDate: parseDate(startDateRaw),
     endDate: parseDate(endDateRaw),
+    createdDate: parseDate(createdDateRaw),
     startTime,
     categoryName,
     subCategoryName,
@@ -174,5 +176,24 @@ export const filterProductsByCategory = (products, allowed = []) => {
     const cat = normalize(p.categoryName);
     const sub = normalize(p.subCategoryName);
     return allowedSet.has(cat) || allowedSet.has(sub);
+  });
+};
+
+const toTimestamp = (value) => {
+  if (!value) return 0;
+  const time = value instanceof Date ? value.getTime() : new Date(value).getTime();
+  return Number.isNaN(time) ? 0 : time;
+};
+
+export const sortProductsByNewest = (products) => {
+  if (!Array.isArray(products)) return [];
+  return [...products].sort((a, b) => {
+    const createdDiff = toTimestamp(b.createdDate) - toTimestamp(a.createdDate);
+    if (createdDiff !== 0) return createdDiff;
+
+    const startDiff = toTimestamp(b.startDate) - toTimestamp(a.startDate);
+    if (startDiff !== 0) return startDiff;
+
+    return (Number(b.id) || 0) - (Number(a.id) || 0);
   });
 };

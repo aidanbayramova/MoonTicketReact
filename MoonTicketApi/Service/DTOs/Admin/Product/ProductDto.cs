@@ -11,6 +11,7 @@ namespace Service.DTOs.Admin.Product
         public int Id { get; set; }
         public string Name { get; set; }
         public string Image { get; set; }
+        public string Address { get; set; } 
         public DateTime StartDate { get; set; }
         public int AgeRestriction { get; set; }
         public string CategoryName { get; set; }

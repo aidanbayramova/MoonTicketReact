@@ -230,6 +230,91 @@
         }
       }
     },
+    "/api/ContactMessageGetAll": {
+      "get": {
+        "tags": [
+          "ContactMessage"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ContactMessageCreate": {
+      "post": {
+        "tags": [
+          "ContactMessage"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContactMessageCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContactMessageCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContactMessageCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ContactMessageReply/{id}": {
+      "post": {
+        "tags": [
+          "ContactMessage"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContactMessageReplyDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContactMessageReplyDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContactMessageReplyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/LanguageGetAll": {
       "get": {
         "tags": [
@@ -2155,6 +2240,80 @@
           }
         }
       }
+    },
+    "/api/SubscriberGetAll": {
+      "get": {
+        "tags": [
+          "Subscriber"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/SubscriberSubscribe": {
+      "post": {
+        "tags": [
+          "Subscriber"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubscriberCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubscriberCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubscriberCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/SubscriberUnsubscribe": {
+      "post": {
+        "tags": [
+          "Subscriber"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubscriberUnsubscribeDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubscriberUnsubscribeDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubscriberUnsubscribeDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -2181,6 +2340,58 @@
           "video": {
             "type": "string",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ContactMessageCreateDto": {
+        "required": [
+          "email",
+          "firstName",
+          "lastName",
+          "message"
+        ],
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "maxLength": 60,
+            "minLength": 1,
+            "type": "string"
+          },
+          "lastName": {
+            "maxLength": 60,
+            "minLength": 1,
+            "type": "string"
+          },
+          "email": {
+            "maxLength": 120,
+            "minLength": 1,
+            "type": "string",
+            "format": "email"
+          },
+          "phone": {
+            "maxLength": 40,
+            "type": "string",
+            "nullable": true
+          },
+          "message": {
+            "maxLength": 2000,
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ContactMessageReplyDto": {
+        "required": [
+          "reply"
+        ],
+        "type": "object",
+        "properties": {
+          "reply": {
+            "maxLength": 2000,
+            "minLength": 1,
+            "type": "string"
           }
         },
         "additionalProperties": false
@@ -2381,6 +2592,36 @@
           "categoryName": {
             "type": "string",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SubscriberCreateDto": {
+        "required": [
+          "email"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "maxLength": 120,
+            "minLength": 1,
+            "type": "string",
+            "format": "email"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SubscriberUnsubscribeDto": {
+        "required": [
+          "email"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "maxLength": 120,
+            "minLength": 1,
+            "type": "string",
+            "format": "email"
           }
         },
         "additionalProperties": false

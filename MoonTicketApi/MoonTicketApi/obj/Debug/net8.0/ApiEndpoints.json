@@ -134,6 +134,53 @@
     ]
   },
   {
+    "ContainingType": "MoonTicketApi.Controllers.ContactMessageController",
+    "Method": "Create",
+    "RelativePath": "api/ContactMessageCreate",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "Service.DTOs.Admin.ContactMessage.ContactMessageCreateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MoonTicketApi.Controllers.ContactMessageController",
+    "Method": "GetAll",
+    "RelativePath": "api/ContactMessageGetAll",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MoonTicketApi.Controllers.ContactMessageController",
+    "Method": "Reply",
+    "RelativePath": "api/ContactMessageReply/{id}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "Service.DTOs.Admin.ContactMessage.ContactMessageReplyDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "MoonTicketApi.Controllers.LanguageController",
     "Method": "Create",
     "RelativePath": "api/LanguageCreate",
@@ -1324,5 +1371,47 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "MoonTicketApi.Controllers.SubscriberController",
+    "Method": "GetAll",
+    "RelativePath": "api/SubscriberGetAll",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MoonTicketApi.Controllers.SubscriberController",
+    "Method": "Subscribe",
+    "RelativePath": "api/SubscriberSubscribe",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "Service.DTOs.Admin.Subscriber.SubscriberCreateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MoonTicketApi.Controllers.SubscriberController",
+    "Method": "Unsubscribe",
+    "RelativePath": "api/SubscriberUnsubscribe",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "Service.DTOs.Admin.Subscriber.SubscriberUnsubscribeDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   }
 ]

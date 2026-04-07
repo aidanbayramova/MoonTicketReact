@@ -75,6 +75,9 @@ import NewsAuthorIndex from "./pages/admin/newsauthor/NewsAuthorIndex";
 import CreateNewsAuthorForm from "./pages/admin/newsauthor/CreateNewsAuthorForm";
 import EditNewsAuthorForm from "./pages/admin/newsauthor/EditNewsAuthorForm";
 import DetailNewsAuthor from "./pages/admin/newsauthor/DetailNewsAuthor";
+import ContactMessageIndex from "./pages/admin/contact/ContactMessageIndex";
+import ReplyContactMessageForm from "./pages/admin/contact/ReplyContactMessageForm";
+import SubscriberIndex from "./pages/admin/subscriber/SubscriberIndex";
 
 
 
@@ -175,6 +178,10 @@ function App() {
         <Route path="newsauthor/createNewsAuthorForm" element={<CreateNewsAuthorForm />} />
         <Route path="newsauthor/editNewsAuthorForm/:id" element={<EditNewsAuthorForm />} />
         <Route path="newsauthor/detailNewsAuthor/:id" element={<DetailNewsAuthor />} />
+
+        <Route path="contact/messages" element={<ContactMessageIndex />} />
+        <Route path="contact/reply/:id" element={<ReplyContactMessageForm />} />
+        <Route path="subscriber/index" element={<SubscriberIndex />} />
       </Route>
     </Routes>
   );

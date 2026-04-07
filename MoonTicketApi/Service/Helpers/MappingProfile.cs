@@ -9,7 +9,9 @@ using Service.DTOs.Admin.Product;
 using Service.DTOs.Admin.Settings;
 using Service.DTOs.Admin.Slider;
 using Service.DTOs.Admin.Sliders;
+using Service.DTOs.Admin.Subscriber;
 using Service.DTOs.Admin.SubCategory;
+using Service.DTOs.Admin.ContactMessage;
 
 namespace Service.Helpers
 {
@@ -147,6 +149,11 @@ namespace Service.Helpers
             CreateMap<NewsEditDto, News>()
                 .ForMember(dest => dest.Image, opt => opt.Ignore())
                 .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
+
+            CreateMap<ContactMessageCreateDto, ContactMessage>();
+            CreateMap<ContactMessage, ContactMessageDto>();
+
+            CreateMap<Subscriber, SubscriberDto>();
 
         }
     }

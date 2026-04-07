@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Info } from "lucide-react";
 import "./Theater.css";
 import ScrollingTicker from "../../../components/ScrollingTicker";
-import { buildAssetUrl, fetchProducts, formatDate, filterProductsByCategory } from "../../../api/products";
+import { buildAssetUrl, fetchProducts, formatDate, filterProductsByCategory, sortProductsByNewest } from "../../../api/products";
 
 
 
@@ -47,8 +47,7 @@ export default function Theater() {
         if (!active || !list.length) return;
         const allowed = ["theater", "theatre", "drama", "play", "musical", "comedy"];
         const filtered = filterProductsByCategory(list, allowed);
-        const source = filtered.length ? filtered : list;
-        const mapped = source.map(mapProductToCard);
+        const mapped = sortProductsByNewest(filtered).map(mapProductToCard);
         if (mapped.length) {
           setTheaters(mapped);
           const nextFilters = ["All", ...new Set(mapped.map((item) => item.genre).filter(Boolean))];

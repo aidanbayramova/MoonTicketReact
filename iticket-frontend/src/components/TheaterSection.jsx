@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, Info } from "lucide-react";
-import { buildAssetUrl, fetchProducts } from "../api/products";
+import { buildAssetUrl, fetchProducts, filterProductsByCategory, sortProductsByNewest } from "../api/products";
 import "./TheaterSection.css";
 
 const fallbackShows = [
@@ -35,8 +35,8 @@ const TheaterSection = () => {
         fetchProducts()
             .then((list) => {
                 if (!active || !list.length) return;
-                const filtered = list.filter((p) => `${p.categoryName} ${p.subCategoryName}`.toLowerCase().includes("theater"));
-                const mapped = (filtered.length ? filtered : list)
+                const filtered = filterProductsByCategory(list, ["theater", "theatre", "drama", "play", "musical", "comedy"]);
+                const mapped = sortProductsByNewest(filtered)
                     .slice(0, 12)
                     .map(toCard)
                     .filter((c) => c.img);

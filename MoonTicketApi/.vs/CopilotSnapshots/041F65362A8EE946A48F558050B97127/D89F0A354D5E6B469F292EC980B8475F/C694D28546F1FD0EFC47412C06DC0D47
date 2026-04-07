@@ -1,0 +1,47 @@
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Service.Services.Interfaces;
+
+namespace Service.Services
+{
+    public class ContactMessageCleanupBackgroundService : BackgroundService
+    {
+        private readonly IServiceScopeFactory _scopeFactory;
+        private readonly ILogger<ContactMessageCleanupBackgroundService> _logger;
+
+        public ContactMessageCleanupBackgroundService(
+            IServiceScopeFactory scopeFactory,
+            ILogger<ContactMessageCleanupBackgroundService> logger)
+        {
+            _scopeFactory = scopeFactory;
+            _logger = logger;
+        }
+
+        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+        {
+            while (!stoppingToken.IsCancellationRequested)
+            {
+                try
+                {
+                    using var scope = _scopeFactory.CreateScope();
+                    var contactMessageService = scope.ServiceProvider.GetRequiredService<IContactMessageService>();
+
+                    var cutoffUtc = DateTime.UtcNow.AddMonths(-1);
+                    var deletedCount = await contactMessageService.DeleteRepliedOlderThanAsync(cutoffUtc);
+
+                    if (deletedCount > 0)
+                    {
+                        _logger.LogInformation("Contact message cleanup completed. Deleted {DeletedCount} replied messages older than one month.", deletedCount);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Error occurred while cleaning old replied contact messages.");
+                }
+
+                await Task.Delay(TimeSpan.FromHours(24), stoppingToken);
+            }
+        }
+    }
+}

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Info } from "lucide-react";
 import "./Movie.css";
 import ScrollingTicker from "../../../components/ScrollingTicker"; 
-import { buildAssetUrl, fetchProducts, formatDate, filterProductsByCategory } from "../../../api/products";
+import { buildAssetUrl, fetchProducts, formatDate, filterProductsByCategory, sortProductsByNewest } from "../../../api/products";
 
 const movieData = [
   { id: 1, title: "Avengers: Endgame", date: "2025-09-20", location: "Cinema Baku", price: "10-20 AZN", type: "Action", img: "src/assets/images/movie.jpg" },
@@ -44,8 +44,7 @@ export default function Movie() {
         if (!active || !list.length) return;
         const allowed = ["movie", "film", "cinema"];
         const filtered = filterProductsByCategory(list, allowed);
-        const source = filtered.length ? filtered : list;
-        const mapped = source.map(mapProductToCard);
+        const mapped = sortProductsByNewest(filtered).map(mapProductToCard);
         if (mapped.length) {
           setMovies(mapped);
           const nextFilters = ["All", ...new Set(mapped.map((item) => item.type).filter(Boolean))];
