@@ -1,27 +1,33 @@
-"use client"
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import "./SignUp.css"; 
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../../context/AuthContext";
+import "./SignUp.css";
 
 export default function Login() {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
-
+  const navigate = useNavigate();
+  const { login } = useAuth();
+  const [formData, setFormData] = useState({ email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
-    const { name, type, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Login form submitted:", formData);
+    setMessage("");
+    setLoading(true);
+    try {
+      await login(formData);
+      navigate("/profile");
+    } catch (error) {
+      setMessage(error.message || "Login uğursuz oldu.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -36,6 +42,7 @@ export default function Login() {
               onSubmit={handleSubmit}
             >
               <h2 className="register-title">Login</h2>
+              {message && <p className="auth-message">{message}</p>}
 
               {/* Email */}
               <div className="register-form-group">
@@ -70,9 +77,14 @@ export default function Login() {
                 <input
                   type="submit"
                   className="register-submit"
-                  value="Login"
+                  value={loading ? "Loading..." : "Login"}
+                  disabled={loading}
                 />
               </div>
+
+              <p className="auth-inline-link">
+                <Link to="/forgot-password">Forgot password?</Link>
+              </p>
             </form>
 
             <p className="register-login-text">

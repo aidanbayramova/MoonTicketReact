@@ -1,0 +1,149 @@
+.profile-page {
+  min-height: 100vh;
+  
+  color: #f4f4f5;
+  padding: 120px 6vw 70px;
+}
+
+.profile-hero h1 {
+  margin: 0;
+  font-size: 44px;
+}
+/* .profile-hero{
+    margin-top: -10pc;
+} */
+.profile-hero p {
+  margin: 10px 0 0;
+  color: #d4d4d8;
+}
+
+.profile-message {
+  margin: 20px 0;
+  border: 1px solid rgba(248, 113, 113, 0.5);
+  color: #fee2e2;
+  padding: 10px 14px;
+  border-radius: 10px;
+}
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 24px;
+ margin-top: -41px;
+}
+
+.profile-card,
+.tickets-card {
+  background: rgba(30, 15, 15, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 18px;
+  padding: 22px;
+}
+
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #991b1b;
+}
+
+.profile-upload {
+  display: inline-block;
+  margin: 12px 0 16px;
+  color: #fca5a5;
+  cursor: pointer;
+}
+
+.profile-upload input {
+  display: none;
+}
+
+.profile-role-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 6px 0 16px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(153, 27, 27, 0.18);
+  border: 1px solid rgba(248, 113, 113, 0.3);
+  color: #fecaca;
+  font-size: 13px;
+  text-transform: capitalize;
+}
+
+.profile-form {
+  display: grid;
+  gap: 10px;
+}
+
+.profile-form input,
+.ticket-item textarea {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  background: #111827;
+  color: #f8fafc;
+  padding: 10px 12px;
+}
+
+.profile-form button,
+.ticket-item button,
+.logout-btn {
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(120deg, #7f1d1d, #b91c1c);
+  color: #fff;
+  padding: 11px 14px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.logout-btn {
+  margin-top: 14px;
+  width: 100%;
+}
+
+.ticket-list {
+  display: grid;
+  gap: 14px;
+  margin: 12px 0 24px;
+}
+
+.ticket-item {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 14px;
+  background: rgba(30, 41, 59, 0.45);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 14px;
+  padding: 12px;
+}
+
+.ticket-item img {
+  width: 120px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.ticket-item h3 {
+  margin: 0 0 6px;
+}
+
+.ticket-item p {
+  margin: 2px 0;
+  color: #d4d4d8;
+}
+
+.ticket-item textarea {
+  min-height: 80px;
+  margin: 8px 0;
+}
+
+@media (max-width: 900px) {
+  .profile-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -27,6 +27,11 @@ import TourismDetail from "./pages/client/tourism/TourismDetail";
 
 import SignUp from "./pages/client/auth/SignUp";
 import SignIn from "./pages/client/auth/SignIn";
+import ForgotPassword from "./pages/client/auth/ForgotPassword";
+import ResetPassword from "./pages/client/auth/ResetPassword";
+import ConfirmEmail from "./pages/client/auth/ConfirmEmail";
+import Profile from "./pages/client/profile/Profile";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 /* ===== ADMIN ===== */
 import Dashboard from "./pages/admin/dashboard/Dashboard";
@@ -132,6 +137,10 @@ function App() {
 
       <Route path="/signup" element={<SignUp />} />
       <Route path="/signin" element={<SignIn />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/reset-password" element={<ResetPassword />} />
+      <Route path="/confirm-email" element={<ConfirmEmail />} />
+      <Route path="/profile" element={<ProtectedRoute><Layout><Profile /></Layout></ProtectedRoute>} />
 
       {/* ================= ADMIN  ================= */}
       <Route path="/admin" element={<Dashboard />}>

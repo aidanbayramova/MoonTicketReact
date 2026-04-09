@@ -12,6 +12,7 @@ C:\Users\ACER\Desktop\ITICKET\MoonTicketApi\MoonTicketApi\bin\Debug\net8.0\AutoM
 C:\Users\ACER\Desktop\ITICKET\MoonTicketApi\MoonTicketApi\bin\Debug\net8.0\Azure.Core.dll
 C:\Users\ACER\Desktop\ITICKET\MoonTicketApi\MoonTicketApi\bin\Debug\net8.0\Azure.Identity.dll
 C:\Users\ACER\Desktop\ITICKET\MoonTicketApi\MoonTicketApi\bin\Debug\net8.0\Humanizer.dll
+C:\Users\ACER\Desktop\ITICKET\MoonTicketApi\MoonTicketApi\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\ACER\Desktop\ITICKET\MoonTicketApi\MoonTicketApi\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.Internal.dll
 C:\Users\ACER\Desktop\ITICKET\MoonTicketApi\MoonTicketApi\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
 C:\Users\ACER\Desktop\ITICKET\MoonTicketApi\MoonTicketApi\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link, useLocation } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 import {
   faSearch,
@@ -29,6 +30,7 @@ const toAbsoluteUrl = (path) => {
 };
 
 function Layout({ children }) {
+  const { isAuthenticated, user, logout } = useAuth();
   const [slides, setSlides] = useState([]);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [scrolled, setScrolled] = useState(false);
@@ -162,7 +164,7 @@ function Layout({ children }) {
             <input type="text" className="search" placeholder="Search ..." />
             <button className="search-btn"><FontAwesomeIcon icon={faSearch} /></button>
           </div>
-          <button className="icon-btn" onClick={() => setOpenUserPanel(true)}>
+          <button className="icon-btn" onClick={() => setOpenUserPanel(true)} title={isAuthenticated ? user?.fullName : "Account"}>
             <FontAwesomeIcon icon={faUser} />
           </button>
           <button className="icon-btn">
@@ -183,9 +185,29 @@ function Layout({ children }) {
       <div className={`drawer ${openUserPanel ? "open" : ""}`}>
         <button className="close-btn" onClick={() => setOpenUserPanel(false)}>✕</button>
         <div className="drawer-links">
-          <Link to="/signup" onClick={() => setOpenUserPanel(false)}>Register</Link>
-          <span>/</span>
-          <Link to="/signin" onClick={() => setOpenUserPanel(false)}>Login</Link>
+          {isAuthenticated ? (
+            <>
+              <span className="drawer-role">{(user?.roles?.[0] || "member")}</span>
+              <Link to="/profile" onClick={() => setOpenUserPanel(false)}>My Profile</Link>
+              <span>/</span>
+              <button
+                type="button"
+                className="drawer-logout-btn"
+                onClick={() => {
+                  logout();
+                  setOpenUserPanel(false);
+                }}
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <Link to="/signup" onClick={() => setOpenUserPanel(false)}>Register</Link>
+              <span>/</span>
+              <Link to="/signin" onClick={() => setOpenUserPanel(false)}>Login</Link>
+            </>
+          )}
         </div>
       </div>
 

@@ -820,6 +820,36 @@
   font-weight: 600;
 }
 
+.drawer-links a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.drawer-links a:hover {
+  color: #ff7f7f;
+}
+
+.drawer-role {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 127, 127, 0.4);
+  color: #ffb4b4;
+  font-size: 15px;
+  text-transform: capitalize;
+}
+
+.drawer-logout-btn {
+  background: transparent;
+  border: 1px solid #ff7f7f;
+  color: #ff7f7f;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
 .drawer-linkk {
   color: #800020;
 

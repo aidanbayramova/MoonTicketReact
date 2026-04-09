@@ -1,0 +1,280 @@
+﻿using System.Net;
+using Domain.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using MoonTicketApi.Helpers;
+using MoonTicketApi.Models.Auth;
+using Service.Services.Interfaces;
+
+namespace MoonTicketApi.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class AuthController : ControllerBase
+    {
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly JwtTokenGenerator _jwtTokenGenerator;
+        private readonly IEmailService _emailService;
+        private readonly IConfiguration _configuration;
+
+        public AuthController(
+            UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager,
+            RoleManager<IdentityRole> roleManager,
+            JwtTokenGenerator jwtTokenGenerator,
+            IEmailService emailService,
+            IConfiguration configuration)
+        {
+            _userManager = userManager;
+            _signInManager = signInManager;
+            _roleManager = roleManager;
+            _jwtTokenGenerator = jwtTokenGenerator;
+            _emailService = emailService;
+            _configuration = configuration;
+        }
+
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] RegisterRequest request)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var age = CalculateAge(request.BirthDate);
+            if (age < 18)
+                return BadRequest(new { message = "18 yaşdan aşağı istifadəçilər qeydiyyat ola bilməz." });
+
+            var existsByEmail = await _userManager.FindByEmailAsync(request.Email);
+            if (existsByEmail != null)
+                return BadRequest(new { message = "Bu email ilə hesab artıq mövcuddur." });
+
+            var existsByUserName = await _userManager.FindByNameAsync(request.UserName);
+            if (existsByUserName != null)
+                return BadRequest(new { message = "Bu username artıq istifadə olunur." });
+
+            var user = new ApplicationUser
+            {
+                FullName = request.FullName,
+                UserName = request.UserName,
+                Email = request.Email,
+                PhoneNumber = request.Phone,
+                BirthDate = request.BirthDate,
+                EmailConfirmed = false
+            };
+
+            var createResult = await _userManager.CreateAsync(user, request.Password);
+            if (!createResult.Succeeded)
+            {
+                return BadRequest(new
+                {
+                    message = "Qeydiyyat uğursuz oldu.",
+                    errors = createResult.Errors.Select(x => x.Description)
+                });
+            }
+
+         
+            string role = "superadmin"; 
+
+            if (!await _roleManager.RoleExistsAsync(role))
+            {
+                await _roleManager.CreateAsync(new IdentityRole(role));
+            }
+
+            await _userManager.AddToRoleAsync(user, role);
+
+            var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            var encodedToken = WebUtility.UrlEncode(token);
+            var encodedEmail = WebUtility.UrlEncode(user.Email);
+
+            var frontendBaseUrl = _configuration["FrontendBaseUrl"] ?? "http://localhost:5173";
+            var confirmUrl = $"{frontendBaseUrl}/confirm-email?email={encodedEmail}&token={encodedToken}";
+
+            await _emailService.SendAsync(
+                user.Email!,
+                "MoonTicket - Email Təsdiqi",
+                BuildEmailTemplate(
+                    "Hesabını təsdiqlə",
+                    $"Salam {user.FullName}, qeydiyyatını tamamla və hesabını aktiv et.",
+                    "Emaili təsdiqlə",
+                    confirmUrl,
+                    "Bu linkə klik etdikdən sonra avtomatik login aktiv olacaq."
+                )
+            );
+
+            return Ok(new
+            {
+                message = "Qeydiyyat tamamlandı. Email ünvanına təsdiq linki göndərildi.",
+                requiresEmailConfirmation = true
+            });
+        }
+
+        [HttpGet("confirm-email")]
+        public async Task<IActionResult> ConfirmEmail([FromQuery] string email, [FromQuery] string token)
+        {
+            var decodedEmail = WebUtility.UrlDecode(email);
+            var decodedToken = WebUtility.UrlDecode(token);
+
+            if (string.IsNullOrWhiteSpace(decodedEmail) || string.IsNullOrWhiteSpace(decodedToken))
+                return BadRequest(new { message = "Email və token tələb olunur." });
+
+            var user = await _userManager.FindByEmailAsync(decodedEmail);
+            if (user == null)
+                return BadRequest(new { message = "İstifadəçi tapılmadı." });
+
+            var result = await _userManager.ConfirmEmailAsync(user, decodedToken);
+            if (!result.Succeeded)
+            {
+                return BadRequest(new
+                {
+                    message = "Email təsdiqi alınmadı.",
+                    errors = result.Errors.Select(x => x.Description)
+                });
+            }
+
+            var roles = await _userManager.GetRolesAsync(user);
+            var (tokenValue, expiresAt) = _jwtTokenGenerator.CreateToken(user, roles);
+
+            return Ok(BuildAuthResponse(user, tokenValue, expiresAt, roles));
+        }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginRequest request)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var user = await _userManager.FindByEmailAsync(request.Email);
+            if (user == null)
+                return Unauthorized(new { message = "Email və ya şifrə yanlışdır." });
+
+            if (!user.EmailConfirmed)
+                return Unauthorized(new { message = "Əvvəlcə email təsdiqini tamamlayın." });
+
+            var signIn = await _signInManager.CheckPasswordSignInAsync(user, request.Password, false);
+            if (!signIn.Succeeded)
+                return Unauthorized(new { message = "Email və ya şifrə yanlışdır." });
+
+            var roles = await _userManager.GetRolesAsync(user);
+            var (tokenValue, expiresAt) = _jwtTokenGenerator.CreateToken(user, roles);
+
+            return Ok(BuildAuthResponse(user, tokenValue, expiresAt, roles));
+        }
+
+        [HttpPost("forgot-password")]
+        public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordRequest request)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var user = await _userManager.FindByEmailAsync(request.Email);
+
+            if (user != null)
+            {
+                var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+                var encodedToken = WebUtility.UrlEncode(token);
+                var encodedEmail = WebUtility.UrlEncode(user.Email);
+
+                var frontendBaseUrl = _configuration["FrontendBaseUrl"] ?? "http://localhost:5173";
+                var resetUrl = $"{frontendBaseUrl}/reset-password?email={encodedEmail}&token={encodedToken}";
+
+                await _emailService.SendAsync(
+                    user.Email!,
+                    "MoonTicket - Şifrə Yeniləmə",
+                    BuildEmailTemplate(
+                        "Şifrəni yenilə",
+                        $"Salam {user.FullName}, şifrə yeniləmə sorğusu aldıq.",
+                        "Şifrəni yenilə",
+                        resetUrl,
+                        "Bu sorğunu siz etməmisinizsə, emaili görməzdən gəlin."
+                    )
+                );
+            }
+
+            return Ok(new { message = "Əgər email mövcuddursa, link göndərildi." });
+        }
+
+        [HttpPost("reset-password")]
+        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordRequest request)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var user = await _userManager.FindByEmailAsync(request.Email);
+            if (user == null)
+                return BadRequest(new { message = "İstifadəçi tapılmadı." });
+
+            var result = await _userManager.ResetPasswordAsync(user, request.Token, request.NewPassword);
+            if (!result.Succeeded)
+            {
+                return BadRequest(new
+                {
+                    message = "Şifrə yenilənmədi.",
+                    errors = result.Errors.Select(x => x.Description)
+                });
+            }
+
+            return Ok(new { message = "Şifrə uğurla yeniləndi." });
+        }
+
+        private static int CalculateAge(DateTime birthDate)
+        {
+            var today = DateTime.Today;
+            var age = today.Year - birthDate.Year;
+            if (birthDate.Date > today.AddYears(-age))
+                age--;
+
+            return age;
+        }
+
+        private static AuthResponse BuildAuthResponse(ApplicationUser user, string token, DateTime expiresAt, IEnumerable<string> roles)
+        {
+            return new AuthResponse
+            {
+                Token = token,
+                ExpiresAt = expiresAt,
+                User = new UserSummary
+                {
+                    Id = user.Id,
+                    FullName = user.FullName,
+                    UserName = user.UserName ?? "",
+                    Email = user.Email ?? "",
+                    Phone = user.PhoneNumber,
+                    BirthDate = user.BirthDate,
+                    ProfileImage = user.ProfileImage,
+                    Roles = roles.ToList()
+                }
+            };
+        }
+
+        private static string BuildEmailTemplate(string title, string description, string buttonText, string buttonUrl, string footerText)
+        {
+            return $@"
+    <div style='font-family: Arial, sans-serif; background-color:#f4f4f4; padding:20px;'>
+        <div style='max-width:600px; margin:auto; background:white; padding:20px; border-radius:10px; text-align:center;'>
+            
+            <h2 style='color:#333;'>{title}</h2>
+            
+            <p style='color:#555; font-size:16px;'>
+                {description}
+            </p>
+
+            <a href='{buttonUrl}' 
+               style='display:inline-block; margin-top:20px; padding:12px 25px; background:#007bff; color:white; text-decoration:none; border-radius:5px; font-weight:bold;'>
+                {buttonText}
+            </a>
+
+            <p style='margin-top:30px; font-size:14px; color:#888;'>
+                {footerText}
+            </p>
+
+            <hr style='margin:20px 0;' />
+
+            <p style='font-size:12px; color:#aaa;'>
+                © 2026 MoonTicket. All rights reserved.
+            </p>
+        </div>
+    </div>";
+        }
+    }
+}

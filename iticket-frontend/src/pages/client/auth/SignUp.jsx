@@ -1,31 +1,70 @@
-"use client"
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "./SignUp.css"; 
+import { authApi } from "../../../api/auth";
+import "./SignUp.css";
 
 export default function Register() {
   const [formData, setFormData] = useState({
-    name: "",
+    fullName: "",
     username: "",
     email: "",
+    phone: "",
+    birthDate: "",
     password: "",
-    re_password: "",
-    agree: false,
+    rePassword: ""
   });
 
   const [showPassword, setShowPassword] = useState(false);
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
-    const { name, type, value, checked } = e.target;
-    setFormData({
-      ...formData,
-      [name]: type === "checkbox" ? checked : value,
-    });
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const calculateAge = (birthDate) => {
+    const birth = new Date(birthDate);
+    const today = new Date();
+    let age = today.getFullYear() - birth.getFullYear();
+    const monthDiff = today.getMonth() - birth.getMonth();
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+      age -= 1;
+    }
+    return age;
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
+
+    if (formData.password !== formData.rePassword) {
+      setMessage("Şifrələr uyğun deyil.");
+      return;
+    }
+
+    if (calculateAge(formData.birthDate) < 18) {
+      setMessage("18 yaşdan aşağı qeydiyyat mümkün deyil.");
+      return;
+    }
+
+    setLoading(true);
+    setMessage("");
+    try {
+      const payload = {
+        fullName: formData.fullName,
+        userName: formData.username,
+        email: formData.email,
+        phone: formData.phone,
+        birthDate: formData.birthDate,
+        password: formData.password
+      };
+      const response = await authApi.register(payload);
+      setMessage(response.message || "Qeydiyyat tamamlandı. Emailini təsdiqlə.");
+    } catch (error) {
+      setMessage(error.message || "Qeydiyyat uğursuz oldu.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -40,15 +79,16 @@ export default function Register() {
               onSubmit={handleSubmit}
             >
               <h2 className="register-title">Create account</h2>
+              {message && <p className="auth-message">{message}</p>}
 
               {/* Name */}
               <div className="register-form-group">
                 <input
                   type="text"
                   className="register-input"
-                  name="name"
-                  placeholder="Your Name"
-                  value={formData.name}
+                  name="fullName"
+                  placeholder="Full Name"
+                  value={formData.fullName}
                   onChange={handleChange}
                 />
               </div>
@@ -61,6 +101,27 @@ export default function Register() {
                   name="username"
                   placeholder="Username"
                   value={formData.username}
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className="register-form-group">
+                <input
+                  type="tel"
+                  className="register-input"
+                  name="phone"
+                  placeholder="Phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className="register-form-group">
+                <input
+                  type="date"
+                  className="register-input"
+                  name="birthDate"
+                  value={formData.birthDate}
                   onChange={handleChange}
                 />
               </div>
@@ -99,9 +160,9 @@ export default function Register() {
                 <input
                   type="password"
                   className="register-input"
-                  name="re_password"
+                  name="rePassword"
                   placeholder="Repeat your password"
-                  value={formData.re_password}
+                  value={formData.rePassword}
                   onChange={handleChange}
                 />
               </div>
@@ -111,7 +172,8 @@ export default function Register() {
                 <input
                   type="submit"
                   className="register-submit"
-                  value="Sign up"
+                  value={loading ? "Sending..." : "Sign up"}
+                  disabled={loading}
                 />
               </div>
             </form>

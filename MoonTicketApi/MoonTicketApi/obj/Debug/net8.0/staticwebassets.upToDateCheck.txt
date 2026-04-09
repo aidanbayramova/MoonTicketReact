@@ -1,3 +1,4 @@
+wwwroot\ProfileImages\f4a35c89-3fc6-4a07-a184-e68cb4264530.jpg
 wwwroot\Uploads\CategoryImages\215b2a8f-d5e2-4280-a064-00601266965a.jpg
 wwwroot\Uploads\CategoryImages\24182c94-81f3-436a-bbaf-8c274639922b.jpg
 wwwroot\Uploads\CategoryImages\26239e9e-e5ff-4c09-8b5c-ce26b5938c85.jpg
