@@ -26,7 +26,7 @@
     position: relative;
     height: 400px;
     width: 100vw; /* tam ekran eni */
-    margin-left: calc(-50vw + 50%); /* ekranın tam ortalaması üçün */
+    margin-left: calc(-50vw + 50%); /* center to full screen width */
     background: url('../assets/images/hello.jpg') center/cover no-repeat;
     display: flex;
     align-items: center;

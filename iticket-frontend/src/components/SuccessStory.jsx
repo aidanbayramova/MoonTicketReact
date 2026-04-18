@@ -1,15 +1,53 @@
 import React, { useEffect, useState } from "react";
+import { fetchCategories, fetchProducts } from "../api/products";
 import "./SuccessStory.css";
 
-const statsData = [
-  { number: 300, label: "Daily Visitors" },
-  { number: 50, label: "Delicious Creations" },
-  { number: 220, label: "Memorable Events" },
-  { number: 700, label: "Happy Customers" },
+const METRICS_KEY = "moonTicket.metrics";
+
+const defaultStats = [
+  { number: 10000, label: "Tickets Sold" },
+  { number: 250, label: "Events Hosted" },
+  { number: 50, label: "Trusted Partners" },
+  { number: 8000, label: "Happy Customers" },
 ];
 
 const SuccessStory = () => {
-  const [counts, setCounts] = useState(statsData.map(() => 0));
+  const [statsData, setStatsData] = useState(defaultStats);
+  const [counts, setCounts] = useState(defaultStats.map(() => 0));
+
+  useEffect(() => {
+    let active = true;
+
+    Promise.all([fetchProducts(), fetchCategories()])
+      .then(([products, categories]) => {
+        if (!active) return;
+
+        const metricsRaw = localStorage.getItem(METRICS_KEY);
+        const metrics = metricsRaw
+          ? JSON.parse(metricsRaw)
+          : { orders: 0, ticketsSold: 0 };
+
+        const ticketsSold = Math.max(10000, 10000 + (Number(metrics.ticketsSold) || 0));
+        const eventsHosted = Math.max(250, (products?.length || 0) + 200);
+        const trustedPartners = Math.max(50, (categories?.length || 0) * 5);
+        const happyCustomers = Math.max(8000, 8000 + (Number(metrics.orders) || 0));
+
+        setStatsData([
+          { number: ticketsSold, label: "Tickets Sold" },
+          { number: eventsHosted, label: "Events Hosted" },
+          { number: trustedPartners, label: "Trusted Partners" },
+          { number: happyCustomers, label: "Happy Customers" },
+        ]);
+      })
+      .catch(() => {
+        if (!active) return;
+        setStatsData(defaultStats);
+      });
+
+    return () => {
+      active = false;
+    };
+  }, []);
 
   useEffect(() => {
     const duration = 9000; 
@@ -39,7 +77,7 @@ const SuccessStory = () => {
     }, duration / totalFrames);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [statsData]);
 
   return (
     <section className="success-story">

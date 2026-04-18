@@ -58,7 +58,7 @@ function SubCategoryIndex() {
             subCategories.map((s) => (
               <tr key={s.id}>
                 <td>{s.name}</td>
-                <td>{s.categoryName || "—"}</td> {/* 🔹 düzəliş burada */}
+                <td>{s.categoryName || "—"}</td> {/* category name fix */}
                 <td className="action">
                   <button
                     className="buton"

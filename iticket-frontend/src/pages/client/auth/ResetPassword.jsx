@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { authApi } from "../../../api/auth";
+import PasswordField from "../../../components/auth/PasswordField";
 import "./SignUp.css";
 
 export default function ResetPassword() {
@@ -18,9 +19,9 @@ export default function ResetPassword() {
     setMessage("");
     try {
       const response = await authApi.resetPassword({ email, token, newPassword });
-      setMessage(response.message || "Şifrə yeniləndi.");
+      setMessage(response.message || "Password reset successfully.");
     } catch (error) {
-      setMessage(error.message || "Şifrə yenilənmədi.");
+      setMessage(error.message || "Password reset failed.");
     } finally {
       setLoading(false);
     }
@@ -38,12 +39,12 @@ export default function ResetPassword() {
                 <input type="email" className="register-input" value={email} readOnly />
               </div>
               <div className="register-form-group">
-                <input
-                  type="password"
-                  className="register-input"
+                <PasswordField
                   placeholder="New Password"
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
+                  autoComplete="new-password"
+                  required
                 />
               </div>
               <div className="register-form-group">

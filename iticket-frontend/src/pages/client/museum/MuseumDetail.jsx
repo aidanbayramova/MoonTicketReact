@@ -1,6 +1,8 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import ScrollingTicker from "../../../components/ScrollingTicker"; 
+import { buildAssetUrl, fetchProductById, formatDate } from "../../../api/products";
+import { useBasket } from "../../../context/BasketContext";
 import "./MuseumDetail.css";
 
 const museumDetail = [
@@ -24,13 +26,102 @@ const relatedMuseums = [
 ];
 
 function MuseumDetail() {
-    const museum = museumDetail[0];
+    const { id } = useParams();
+    const { addToBasket, buyNow } = useBasket();
+    const [product, setProduct] = useState(null);
+    const [similarProducts, setSimilarProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [actionMessage, setActionMessage] = useState("");
+
+    useEffect(() => {
+        let active = true;
+        setLoading(true);
+        
+        (async () => {
+            try {
+                const data = await fetchProductById(id);
+                if (!active) return;
+                setProduct(data);
+                
+                // Fetch similar products from same category
+                const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5149";
+                const res = await fetch(`${API_BASE}/api/ProductGetAll`);
+                if (res.ok) {
+                    const all = await res.json();
+                    const similar = all
+                        .filter(p => p.categoryName === data.categoryName && p.id !== data.id)
+                        .slice(0, 2)
+                        .map(p => ({
+                            id: p.id,
+                            title: p.name || "Unknown",
+                            poster: buildAssetUrl(p.image) || ""
+                        }));
+                    setSimilarProducts(similar);
+                }
+            } catch (err) {
+                console.log("Error loading similar products:", err);
+            } finally {
+                active && setLoading(false);
+            }
+        })();
+
+        return () => {
+            active = false;
+        };
+    }, [id]);
+
+    const museum = product
+        ? {
+              ...museumDetail[0],
+              id: product.id,
+              title: product.name || museumDetail[0].title,
+              desc: product.description || museumDetail[0].desc,
+              genre: [product.categoryName, product.subCategoryName].filter(Boolean).join(", ") || museumDetail[0].genre,
+              location: product.address || museumDetail[0].location,
+              fromDate: formatDate(product.startDate) || museumDetail[0].fromDate,
+              time: product.startTime || museumDetail[0].time,
+              language: (product.languages || []).join(", ") || museumDetail[0].language,
+              poster: buildAssetUrl(product.image) || museumDetail[0].poster,
+          }
+        : museumDetail[0];
 
     const [ticketCount, setTicketCount] = useState(1);
 
     const calculateTotal = () => {
         return museum.price * ticketCount;
     };
+
+    const buildBasketItem = () => ({
+        eventType: "museum",
+        productId: museum.id,
+        title: museum.title,
+        quantity: ticketCount,
+        seats: [],
+        showKey: `museum-${museum.id}-${museum.fromDate}-${museum.time}`,
+        eventDate: museum.fromDate,
+        eventTime: museum.time,
+        language: museum.language,
+        location: museum.location,
+        total: calculateTotal(),
+    });
+
+    const handleAddToBasket = () => {
+        addToBasket(buildBasketItem());
+        setActionMessage("Ticket added to basket.");
+    };
+
+    const handleBuyNow = async () => {
+        try {
+            await buyNow(buildBasketItem());
+            setActionMessage("Ticket purchased successfully.");
+        } catch (error) {
+            setActionMessage(error.message || "Failed to purchase ticket.");
+        }
+    };
+
+    if (loading && !product) {
+        return <div className="not-found"><h2>Loading...</h2></div>;
+    }
 
     return (
         <div className="museum-detail-page">
@@ -127,14 +218,18 @@ function MuseumDetail() {
 
                 {/* Related Section */}
                 <div className="museum-related-section">
-                    <h3 className="museum-section-title">Related museums</h3>
+                    <h3 className="museum-section-title">Similar Museums</h3>
                     <div className="museum-related-grid">
-                        {relatedMuseums.map((rm) => (
-                            <div key={rm.id} className="museum-related-card">
-                                <img src={rm.poster} alt={rm.title} />
-                                <p>{rm.title}</p>
-                            </div>
-                        ))}
+                        {similarProducts.length > 0 ? (
+                            similarProducts.map((rm) => (
+                                <Link key={rm.id} to={`/museum-detail/${rm.id}`} className="museum-related-card">
+                                    {rm.poster && <img src={rm.poster} alt={rm.title} />}
+                                    <p>{rm.title}</p>
+                                </Link>
+                            ))
+                        ) : (
+                            <p>No similar museums available.</p>
+                        )}
                     </div>
                 </div>
             </div>
@@ -142,6 +237,7 @@ function MuseumDetail() {
             {/* Bottom Bar */}
             <div className="museum-bottom-bar">
                 <div className="museum-booking-info">
+                    {actionMessage && <span className="museum-booking-details">{actionMessage}</span>}
                     <span className="museum-booking-details">
                         {museum.fromDate} • {museum.time} • {museum.language}
                     </span>
@@ -151,9 +247,8 @@ function MuseumDetail() {
                 </div>
                 <div className="museum-booking-actions">
                     <span className="museum-total-price">Total: ${calculateTotal()}</span>
-                    <button className="museum-payment-btn">
-                        Continue to Payment →
-                    </button>
+                    <button className="museum-payment-btn" onClick={handleAddToBasket}>Add to Basket</button>
+                    <button className="museum-payment-btn" onClick={handleBuyNow}>Buy Now</button>
                 </div>
             </div>
         </div>

@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext";
+import PasswordField from "../../../components/auth/PasswordField";
 import "./SignUp.css";
 
 export default function Login() {
   const navigate = useNavigate();
   const { login } = useAuth();
   const [formData, setFormData] = useState({ email: "", password: "" });
-  const [showPassword, setShowPassword] = useState(false);
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -24,7 +24,7 @@ export default function Login() {
       await login(formData);
       navigate("/profile");
     } catch (error) {
-      setMessage(error.message || "Login uğursuz oldu.");
+      setMessage(error.message || "Login failed.");
     } finally {
       setLoading(false);
     }
@@ -58,18 +58,14 @@ export default function Login() {
 
               {/* Password */}
               <div className="register-form-group">
-                <input
-                  type={showPassword ? "text" : "password"}
-                  className="register-input"
+                <PasswordField
                   name="password"
                   placeholder="Password"
                   value={formData.password}
                   onChange={handleChange}
+                  autoComplete="current-password"
+                  required
                 />
-                <span
-                  className="zmdi zmdi-eye register-field-icon"
-                  onClick={() => setShowPassword(!showPassword)}
-                ></span>
               </div>
 
               {/* Submit */}

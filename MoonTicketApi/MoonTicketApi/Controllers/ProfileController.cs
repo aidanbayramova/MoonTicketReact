@@ -45,6 +45,7 @@ namespace MoonTicketApi.Controllers
                 fullName = user.FullName,
                 userName = user.UserName,
                 email = user.Email,
+                emailConfirmed = user.EmailConfirmed,
                 phone = user.PhoneNumber,
                 birthDate = user.BirthDate,
                 profileImage = user.ProfileImage,

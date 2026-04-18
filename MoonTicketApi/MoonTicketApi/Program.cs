@@ -40,6 +40,20 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
 builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
 
+var stripeSection = builder.Configuration.GetSection("StripeSettings");
+if (!stripeSection.Exists())
+{
+    stripeSection = builder.Configuration.GetSection("Stripe");
+}
+
+builder.Services.Configure<StripeSettings>(stripeSection);
+
+var stripeSecret = stripeSection["SecretKey"];
+if (!string.IsNullOrWhiteSpace(stripeSecret))
+{
+    Stripe.StripeConfiguration.ApiKey = stripeSecret;
+}
+
 var jwtSettings = builder.Configuration.GetSection("JwtSettings").Get<JwtSettings>() ?? new JwtSettings();
 if (string.IsNullOrWhiteSpace(jwtSettings.SecretKey))
 {

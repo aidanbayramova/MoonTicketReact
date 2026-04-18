@@ -10,22 +10,22 @@ export default function ConfirmEmail() {
   const [searchParams] = useSearchParams();
   const email = useMemo(() => searchParams.get("email") || "", [searchParams]);
   const token = useMemo(() => searchParams.get("token") || "", [searchParams]);
-  const [message, setMessage] = useState("Email təsdiqlənir...");
+  const [message, setMessage] = useState("Verifying email...");
 
   useEffect(() => {
     const run = async () => {
       try {
         const response = await authApi.confirmEmail(email, token);
         setAuthSession(response);
-        setMessage("Email təsdiqləndi. Avtomatik login edildi.");
+        setMessage("Email verified. Auto login successful.");
         setTimeout(() => navigate("/profile"), 1200);
       } catch (error) {
-        setMessage(error.message || "Email təsdiqi alınmadı.");
+        setMessage(error.message || "Email verification failed.");
       }
     };
 
     if (!email || !token) {
-      setMessage("Email təsdiqi üçün link tam deyil.");
+      setMessage("Email verification link is incomplete.");
       return;
     }
 

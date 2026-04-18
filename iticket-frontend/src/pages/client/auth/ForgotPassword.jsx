@@ -14,9 +14,9 @@ export default function ForgotPassword() {
     setMessage("");
     try {
       const response = await authApi.forgotPassword(email);
-      setMessage(response.message || "Email göndərildi.");
+      setMessage(response.message || "Reset link sent to your email.");
     } catch (error) {
-      setMessage(error.message || "Sorğu uğursuz oldu.");
+      setMessage(error.message || "Password reset request failed.");
     } finally {
       setLoading(false);
     }

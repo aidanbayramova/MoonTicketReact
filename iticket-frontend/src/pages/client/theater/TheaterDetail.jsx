@@ -1,27 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import ScrollingTicker from "../../../components/ScrollingTicker"; 
+import { buildAssetUrl, fetchProductById, formatDate } from "../../../api/products";
+import { useBasket } from "../../../context/BasketContext";
 import "./TheaterDetail.css";
 
 
-const theaters = [
-  {
-    id: "2",
-    title: "The Godfather",
-    desc:
-      "The aging patriarch of an organized crime dynasty transfers control of his empire to his reluctant son.",
-    duration: "175 min",
-    rating: "9.2",
-    genre: "Crime, Drama",
-    trailer: "https://www.youtube.com/embed/sY1S34973zA",
-    location: "Cinema Park – Mall 28",
-    fromDate: "03 Jan 2025",
-    toDate: "10 Jan 2025",
-    languages: ["English", "Russian", "Turkish"],
-    age: "18+",
-    price: "$12.00",
-  },
-];
+const fallbackTheater = {
+  id: "2",
+  title: "The Godfather",
+  desc:
+    "The aging patriarch of an organized crime dynasty transfers control of his empire to his reluctant son.",
+  duration: "175 min",
+  rating: "9.2",
+  genre: "Crime, Drama",
+  location: "Cinema Park – Mall 28",
+  fromDate: "03 Jan 2025",
+  toDate: "10 Jan 2025",
+  languages: ["English", "Russian", "Turkish"],
+  age: "18+",
+  poster: "src/assets/images/theater.jpg",
+};
 
 const relatedTheaters = [
   {
@@ -48,13 +47,70 @@ const seatLayout = [
 
 function Theater() {
   const { id } = useParams();
-  const theater = theaters.find((m) => m.id === id);
+  const { addToBasket, buyNow, getOccupiedSeats } = useBasket();
+  const [product, setProduct] = useState(null);
+  const [similarProducts, setSimilarProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [actionMessage, setActionMessage] = useState("");
+
+  useEffect(() => {
+    let active = true;
+    setLoading(true);
+    
+    (async () => {
+      try {
+        const data = await fetchProductById(id);
+        if (!active) return;
+        setProduct(data);
+        
+        // Fetch similar products from same category
+        const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5149";
+        const res = await fetch(`${API_BASE}/api/ProductGetAll`);
+        if (res.ok) {
+          const all = await res.json();
+          const similar = all
+            .filter(p => p.categoryName === data.categoryName && p.id !== data.id)
+            .slice(0, 2)
+            .map(p => ({
+              id: p.id,
+              title: p.name || "Unknown",
+              poster: buildAssetUrl(p.image) || ""
+            }));
+          setSimilarProducts(similar);
+        }
+      } catch (err) {
+        console.log("Error loading similar products:", err);
+      } finally {
+        active && setLoading(false);
+      }
+    })();
+
+    return () => {
+      active = false;
+    };
+  }, [id]);
+
+  const theater = product
+    ? {
+        ...fallbackTheater,
+        id: product.id,
+        title: product.name || fallbackTheater.title,
+        desc: product.description || fallbackTheater.desc,
+        genre: [product.categoryName, product.subCategoryName].filter(Boolean).join(", ") || fallbackTheater.genre,
+        location: product.address || fallbackTheater.location,
+        fromDate: formatDate(product.startDate) || fallbackTheater.fromDate,
+        toDate: formatDate(product.endDate) || fallbackTheater.toDate,
+        languages: product.languages?.length ? product.languages : fallbackTheater.languages,
+        age: product.ageRestriction ? `${product.ageRestriction}+` : fallbackTheater.age,
+        poster: buildAssetUrl(product.image) || fallbackTheater.poster,
+      }
+    : fallbackTheater;
 
   const days = ["03 Jan", "04 Jan", "05 Jan", "06 Jan", "07 Jan"];
   const times = ["16:30", "18:30", "20:30", "22:30"];
 
   // Occupied seats (format: "A-3", "B-5")
-  const occupiedSeats = [
+  const staticOccupiedSeats = [
     "A-2", "A-3", "A-6",
     "B-4", "B-5", "B-8",
     "C-3", "C-7", "C-10",
@@ -69,7 +125,9 @@ function Theater() {
   const [selectedTime, setSelectedTime] = useState("20:30");
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [selectedLang, setSelectedLang] = useState("English");
-  const [showTrailer, setShowTrailer] = useState(false);
+  const showKey = `theater-${theater.id}-${selectedDate}-${selectedTime}-${selectedLang}`;
+  const occupiedFromOrders = getOccupiedSeats(showKey);
+  const occupiedSeats = Array.from(new Set([...staticOccupiedSeats, ...occupiedFromOrders]));
 
   const toggleSeat = (seatId) => {
     if (occupiedSeats.includes(seatId)) return;
@@ -92,6 +150,41 @@ function Theater() {
       return total + getSeatPrice(rowData.type);
     }, 0);
   };
+
+  const buildBasketItem = () => ({
+    eventType: "theater",
+    productId: theater.id,
+    title: theater.title,
+    quantity: selectedSeats.length,
+    seats: selectedSeats,
+    showKey,
+    eventDate: selectedDate,
+    eventTime: selectedTime,
+    language: selectedLang,
+    location: theater.location,
+    total: calculateTotal(),
+  });
+
+  const handleAddToBasket = () => {
+    if (!selectedSeats.length) return;
+    addToBasket(buildBasketItem());
+    setActionMessage("Selected seats added to basket.");
+  };
+
+  const handleBuyNow = async () => {
+    if (!selectedSeats.length) return;
+    try {
+      await buyNow(buildBasketItem());
+      setSelectedSeats([]);
+      setActionMessage("Tickets purchased successfully.");
+    } catch (error) {
+      setActionMessage(error.message || "Failed to purchase tickets.");
+    }
+  };
+
+  if (loading && !product) {
+    return <div className="not-found"><h2>Loading...</h2></div>;
+  }
 
   if (!theater) {
     return (
@@ -298,20 +391,25 @@ function Theater() {
 
       {/* ===== RELATED ===== */}
       <div className="related-section">
-        <h3 className="section-title">Related theaters</h3>
+        <h3 className="section-title">Similar Theaters</h3>
         <div className="related-grid">
-          {relatedTheaters.map((rm) => (
-            <div key={rm.id} className="related-card">
-              <img src={rm.poster} alt={rm.title} />
-              <p>{rm.title}</p>
-            </div>
-          ))}
+          {similarProducts.length > 0 ? (
+            similarProducts.map((rm) => (
+              <Link key={rm.id} to={`/event/theater/${rm.id}`} className="related-card">
+                {rm.poster && <img src={rm.poster} alt={rm.title} />}
+                <p>{rm.title}</p>
+              </Link>
+            ))
+          ) : (
+            <p>No similar theaters available.</p>
+          )}
         </div>
       </div>
 
       {/* ===== BOTTOM BAR ===== */}
       <div className="bottom-bar">
         <div className="booking-info">
+          {actionMessage && <span className="booking-details">{actionMessage}</span>}
           <span className="booking-details">
             {selectedDate} • {selectedTime} • {selectedLang}
           </span>
@@ -322,9 +420,8 @@ function Theater() {
         </div>
         <div className="booking-actions">
           <span className="total-price">Total: ${calculateTotal()}</span>
-          <button disabled={selectedSeats.length === 0}>
-            Continue to Payment →
-          </button>
+          <button disabled={selectedSeats.length === 0} onClick={handleAddToBasket}>Add to Basket</button>
+          <button disabled={selectedSeats.length === 0} onClick={handleBuyNow}>Buy Now</button>
         </div>
       </div>
     </div>

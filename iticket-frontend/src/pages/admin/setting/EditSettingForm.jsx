@@ -43,7 +43,7 @@ function EditSettingForm() {
     const fetchSetting = async () => {
       try {
         const res = await fetch(`http://localhost:5149/api/SettingGetById/${id}`);
-        if (!res.ok) throw new Error("Setting tapılmadı");
+        if (!res.ok) throw new Error("Setting not found");
         const data = await res.json();
 
         // set text values
@@ -104,7 +104,7 @@ function EditSettingForm() {
         body: formData,
       });
 
-      if (!res.ok) throw new Error("Xəta baş verdi");
+      if (!res.ok) throw new Error("An error occurred");
 
       alert("Setting updated successfully!");
       navigate("/admin/setting/settingIndex");

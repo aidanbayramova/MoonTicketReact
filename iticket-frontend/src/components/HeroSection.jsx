@@ -48,7 +48,7 @@ export default function HeroSection() {
           <div className="hover-zoom hero__play">
             <button
               className="hover-zoom play-btn"
-              aria-label="Konsert videosunu izlə"
+              aria-label="Play concert video"
               onClick={() => setIsVideoOpen(true)}
             >
               <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -69,7 +69,7 @@ export default function HeroSection() {
     <div className="modal__dialog">
       <button
         className="modal__close"
-        aria-label="Videonu bağla"
+        aria-label="Close video"
         onClick={() => setIsVideoOpen(false)}
       >
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -79,12 +79,12 @@ export default function HeroSection() {
 
       <video
         className="modal__video"
-        src={getFullUrl(setting.video)}   // databasedən gələn video
+        src={getFullUrl(setting.video)}   // video from database
         controls
         autoPlay
         poster={getFullUrl(setting.bannerImg)} // hero image poster
       >
-        Brauzeriniz video formatını dəstəkləmir.
+        Your browser does not support this video format.
       </video>
     </div>
   </div>

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { useToast, ToastContainer } from "../../../components/admin/Toast";
+import { AdminButton } from "../../../components/admin/AdminButton";
 import "./SliderIndex.css";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5149";
@@ -7,6 +9,7 @@ const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5149";
 function EditSliderForm() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { toasts, showToast, removeToast } = useToast();
 
   const [slider, setSlider] = useState(null);
   const [title, setTitle] = useState("");
@@ -31,9 +34,10 @@ function EditSliderForm() {
         setSubTitle(data.subTitle || "");
         setDesc(data.desc || "");
       } catch {
-        alert("Slider tapılmadı");
+        showToast("Slider not found", "error");
         navigate("/admin/slider/sliderIndex");
       } finally {
+          showToast("✓ Slider updated successfully!", "success");
         setLoading(false);
       }
     };
@@ -65,7 +69,7 @@ function EditSliderForm() {
 
       navigate("/admin/slider/sliderIndex");
     } catch {
-      alert("Edit zamanı xəta baş verdi");
+      showToast("Error while editing slider", "error");
     } finally {
       setSaving(false);
     }
@@ -77,6 +81,7 @@ function EditSliderForm() {
 
   return (
     <div className="edit-slider-wrapper">
+        <ToastContainer toasts={toasts} onRemoveToast={removeToast} />
       <form className="edit-slider-form" onSubmit={handleSubmit}>
         <h2 style={{ fontSize: "39px" }}>Edit Slider</h2>
         <div className="form-group">
@@ -123,17 +128,17 @@ function EditSliderForm() {
         />
 
         <div className="form-actions">
-          <button className="create-btn" type="submit" disabled={saving}>
-            {saving ? "Saving..." : "Edit"}
-          </button>
-
-          <button
+          <AdminButton type="submit" variant="primary" loading={saving} disabled={saving}>
+            {saving ? "Saving..." : "Save Slider"}
+          </AdminButton>
+          <AdminButton
             type="button"
-            className="cancel-btn"
+            variant="cancel"
             onClick={() => navigate("/admin/slider/sliderIndex")}
+            disabled={saving}
           >
             Cancel
-          </button>
+          </AdminButton>
         </div>
       </form>
     </div>

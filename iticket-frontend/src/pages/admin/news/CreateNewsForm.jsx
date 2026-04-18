@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useToast, ToastContainer } from "../../../components/admin/Toast";
+import { AdminButton } from "../../../components/admin/AdminButton";
 import "./NewsAdmin.css";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5149";
 
 function CreateNewsForm() {
   const navigate = useNavigate();
+  const { toasts, showToast, removeToast } = useToast();
 
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
@@ -13,6 +16,7 @@ function CreateNewsForm() {
   const [newsAuthorId, setNewsAuthorId] = useState("");
   const [image, setImage] = useState(null);
   const [authors, setAuthors] = useState([]);
+  const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     fetch(`${API_BASE}/api/NewsAuthorGetAll`)
@@ -30,10 +34,17 @@ function CreateNewsForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!image) {
-      alert("Image is required");
+    if (!title.trim() || !desc.trim()) {
+      showToast("Title and description are required", "warning");
       return;
     }
+
+    if (!image) {
+      showToast("Image is required", "warning");
+      return;
+    }
+
+    setSaving(true);
 
     const formData = new FormData();
     formData.append("Title", title);
@@ -53,15 +64,18 @@ function CreateNewsForm() {
         throw new Error(text || "Create failed");
       }
 
-      alert("News created successfully!");
-      navigate("/admin/news/newsIndex");
+      showToast("✓ News created successfully!", "success");
+      setTimeout(() => navigate("/admin/news/newsIndex"), 1000);
     } catch (err) {
-      alert("Error: " + err.message);
+      showToast("Error: " + err.message, "error");
+    } finally {
+      setSaving(false);
     }
   };
 
   return (
     <div className="news-admin-form-page">
+      <ToastContainer toasts={toasts} onRemoveToast={removeToast} />
       <h2 className="news-admin-title">Create News</h2>
 
       <form className="news-admin-form" onSubmit={handleSubmit}>
@@ -112,16 +126,17 @@ function CreateNewsForm() {
         />
 
         <div className="news-admin-form-buttons">
-          <button className="news-admin-primary-btn" type="submit">
-            Create
-          </button>
-          <button
-            className="news-admin-secondary-btn"
+          <AdminButton type="submit" variant="primary" loading={saving} disabled={saving}>
+            {saving ? "Creating..." : "Create News"}
+          </AdminButton>
+          <AdminButton
             type="button"
+            variant="cancel"
             onClick={() => navigate("/admin/news/newsIndex")}
+            disabled={saving}
           >
             Cancel
-          </button>
+          </AdminButton>
         </div>
       </form>
     </div>

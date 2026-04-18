@@ -1,34 +1,43 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useToast, ToastContainer } from "../../../components/admin/Toast";
+import { ConfirmDialog } from "../../../components/admin/ConfirmDialog";
+import { AdminButton } from "../../../components/admin/AdminButton";
 import "./CategoryIndex.css";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5149";
 
 function CategoryIndex() {
   const navigate = useNavigate();
+  const { toasts, showToast, removeToast } = useToast();
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [deleteConfirm, setDeleteConfirm] = useState({ open: false, id: null });
 
   const fetchCategories = async () => {
     try {
       const res = await fetch(`${API_BASE}/api/CategoryGetAll`);
+      if (!res.ok) throw new Error("Failed to fetch categories");
+      
       const data = await res.json();
 
       // 🔹 NEWEST FIRST SORT
       const sorted = Array.isArray(data)
         ? data.sort((a, b) => {
-            // əvvəlcə createdDate varsa ona görə sırala
-            if (a.createdDate && b.createdDate) {
-              return new Date(b.createdDate) - new Date(a.createdDate);
+            const dateA = a.createdDate || a.CreatedDate;
+            const dateB = b.createdDate || b.CreatedDate;
+            
+            if (dateA && dateB) {
+              return new Date(dateB) - new Date(dateA);
             }
-            // yoxdursa id ilə fallback
-            return b.id - a.id;
+            return (b.id || b.Id) - (a.id || a.Id);
           })
         : [];
 
       setCategories(sorted);
     } catch (err) {
       console.error(err);
+      showToast("Failed to load categories", "error");
       setCategories([]);
     } finally {
       setLoading(false);
@@ -39,16 +48,26 @@ function CategoryIndex() {
     fetchCategories();
   }, []);
 
-  const handleDelete = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this category?")) return;
+  const handleDeleteClick = (id) => {
+    setDeleteConfirm({ open: true, id });
+  };
+
+  const handleConfirmDelete = async () => {
+    const id = deleteConfirm.id;
+    setDeleteConfirm({ open: false, id: null });
 
     try {
-      await fetch(`${API_BASE}/api/CategoryDelete/${id}`, {
+      const res = await fetch(`${API_BASE}/api/CategoryDelete/${id}`, {
         method: "DELETE",
       });
+
+      if (!res.ok) throw new Error("Failed to delete category");
+
+      showToast("Category deleted successfully!", "success");
       fetchCategories();
     } catch (err) {
       console.error(err);
+      showToast("Error deleting category", "error");
     }
   };
 
@@ -64,16 +83,17 @@ function CategoryIndex() {
 
   return (
     <div className="category-container">
-      <h2 style={{ fontSize: "36px", marginBottom: "20px", fontWeight: 600 }}>
-        Categories
-      </h2>
+      <ToastContainer toasts={toasts} onRemoveToast={removeToast} />
 
-      <button
-        className="create-btn"
-        onClick={() => navigate("/admin/category/createCategoryForm")}
-      >
-        + Create
-      </button>
+      <div className="page-header">
+        <h2>Categories</h2>
+        <AdminButton
+          variant="primary"
+          onClick={() => navigate("/admin/category/createCategoryForm")}
+        >
+          + Create Category
+        </AdminButton>
+      </div>
 
       <table className="category-table">
         <thead>
@@ -89,60 +109,75 @@ function CategoryIndex() {
         <tbody>
           {categories.length === 0 ? (
             <tr>
-              <td colSpan="5">No categories found</td>
+              <td colSpan="5" className="empty-state">
+                No categories found
+              </td>
             </tr>
           ) : (
             categories.map((c) => (
-              <tr key={c.id}>
-                <td>{c.name}</td>
+              <tr key={c.id || c.Id}>
+                <td className="name-cell">{c.name || c.Name}</td>
 
-                <td className="desc">{c.description}</td>
+                <td className="desc">{c.description || c.Description}</td>
 
                 {/* IMAGE */}
                 <td className="media">
-                  {c.image ? (
-                    <img src={getMediaUrl(c.image)} alt={c.name} />
+                  {c.image || c.Image ? (
+                    <img src={getMediaUrl(c.image || c.Image)} alt={c.name || c.Name} />
                   ) : (
-                    <span>No image</span>
+                    <span className="no-media">No image</span>
                   )}
                 </td>
 
                 {/* VIDEO */}
                 <td className="media">
-                  {c.video ? (
+                  {c.video || c.Video ? (
                     <video
-                      src={getMediaUrl(c.video)}
+                      src={getMediaUrl(c.video || c.Video)}
                       controls
                       width="120"
                     />
                   ) : (
-                    <span>No video</span>
+                    <span className="no-media">No video</span>
                   )}
                 </td>
 
                 {/* ACTIONS */}
                 <td className="actions">
-                  <button
-                    className="buton"
+                  <AdminButton
+                    variant="primary"
+                    size="sm"
                     onClick={() =>
-                      navigate(`/admin/category/editCategoryForm/${c.id}`)
+                      navigate(`/admin/category/editCategoryForm/${c.id || c.Id}`)
                     }
                   >
                     Edit
-                  </button>
+                  </AdminButton>
 
-                  <button
-                    className="buton2"
-                    onClick={() => handleDelete(c.id)}
+                  <AdminButton
+                    variant="danger"
+                    size="sm"
+                    onClick={() => handleDeleteClick(c.id || c.Id)}
                   >
                     Delete
-                  </button>
+                  </AdminButton>
                 </td>
               </tr>
             ))
           )}
         </tbody>
       </table>
+
+      <ConfirmDialog
+        isOpen={deleteConfirm.open}
+        title="Delete Category"
+        message="Are you sure you want to delete this category? This action cannot be undone."
+        confirmText="Delete Permanently"
+        cancelText="Cancel"
+        onConfirm={handleConfirmDelete}
+        onCancel={() => setDeleteConfirm({ open: false, id: null })}
+        isDangerous={true}
+      />
     </div>
   );
 }

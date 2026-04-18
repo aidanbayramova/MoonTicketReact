@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useToast, ToastContainer } from "../../../components/admin/Toast";
+import { AdminButton } from "../../../components/admin/AdminButton";
 import "./Product.css";
 
-const API_BASE = "http://localhost:5149";
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5149";
 
 function CreateProductForm() {
   const navigate = useNavigate();
+  const { toasts, showToast, removeToast } = useToast();
   const now = new Date().toISOString().slice(0, 16);
 
   const [form, setForm] = useState({
@@ -29,23 +32,36 @@ function CreateProductForm() {
   const [image, setImage] = useState(null);
   const [video, setVideo] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [fetching, setFetching] = useState(true);
 
   useEffect(() => {
-    fetch(`${API_BASE}/api/CategoryGetAll`)
-      .then(res => res.json())
-      .then(setCategories);
+    const fetchData = async () => {
+      try {
+        const [cRes, scRes, pRes, lRes] = await Promise.all([
+          fetch(`${API_BASE}/api/CategoryGetAll`),
+          fetch(`${API_BASE}/api/SubCategoryGetAll`),
+          fetch(`${API_BASE}/api/PersonGetAll`),
+          fetch(`${API_BASE}/api/LanguageGetAll`),
+        ]);
 
-    fetch(`${API_BASE}/api/SubCategoryGetAll`)
-      .then(res => res.json())
-      .then(setSubCategories);
+        const categories = await cRes.json();
+        const subCategories = await scRes.json();
+        const persons = await pRes.json();
+        const languages = await lRes.json();
 
-    fetch(`${API_BASE}/api/PersonGetAll`)
-      .then(res => res.json())
-      .then(setPersons);
+        setCategories(Array.isArray(categories) ? categories : []);
+        setSubCategories(Array.isArray(subCategories) ? subCategories : []);
+        setPersons(Array.isArray(persons) ? persons : []);
+        setLanguages(Array.isArray(languages) ? languages : []);
+      } catch (error) {
+        console.error("Error fetching form data:", error);
+        showToast("Failed to load form data", "error");
+      } finally {
+        setFetching(false);
+      }
+    };
 
-    fetch(`${API_BASE}/api/LanguageGetAll`)
-      .then(res => res.json())
-      .then(setLanguages);
+    fetchData();
   }, []);
 
   const handleChange = (e) => {
@@ -63,51 +79,47 @@ function CreateProductForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // 🔥 IMAGE MƏCBURİ
+    // Validation
+    if (!form.name.trim()) {
+      showToast("Product name is required", "warning");
+      return;
+    }
+
     if (!image) {
-      alert("Şəkil seçmək məcburidir!");
+      showToast("Product image is required", "warning");
       return;
     }
 
     if (!form.startDate || !form.endDate) {
-      alert("Tarixləri seç");
+      showToast("Start and end dates are required", "warning");
       return;
     }
 
     if (new Date(form.startDate) < new Date()) {
-      alert("Keçmiş tarix olmaz");
+      showToast("Start date cannot be in the past", "warning");
       return;
     }
 
     if (new Date(form.endDate) < new Date(form.startDate)) {
-      alert("End date böyük olmalıdır");
+      showToast("End date must be after start date", "warning");
       return;
     }
 
     const data = new FormData();
-
     data.append("Name", form.name);
     data.append("Description", form.description);
     data.append("Address", form.address);
     data.append("AgeRestriction", parseInt(form.ageRestriction) || 0);
-
     data.append("StartDate", new Date(form.startDate).toISOString());
     data.append("EndDate", new Date(form.endDate).toISOString());
-
     data.append("CategoryId", parseInt(form.categoryId));
-    data.append(
-      "SubCategoryId",
-      form.subCategoryId ? parseInt(form.subCategoryId) : ""
-    );
+    if (form.subCategoryId) {
+      data.append("SubCategoryId", parseInt(form.subCategoryId));
+    }
     data.append("PersonId", parseInt(form.personId));
 
-    form.languageIds.forEach(id =>
-      data.append("LanguageIds", id)
-    );
-
-    // 🔥 ƏN VACİB HİSSƏ
+    form.languageIds.forEach(id => data.append("LanguageIds", id));
     data.append("Image", image);
-
     if (video) data.append("Video", video);
 
     try {
@@ -120,73 +132,205 @@ function CreateProductForm() {
 
       if (!response.ok) {
         const errorText = await response.text();
-        throw new Error(errorText);
+        throw new Error(errorText || "Failed to create product");
       }
 
-      alert("Product created");
-      navigate("/admin/product/productIndex");
-
+      showToast("✓ Product created successfully!", "success");
+      setTimeout(() => {
+        navigate("/admin/product/productIndex");
+      }, 1000);
     } catch (error) {
-      console.error("FULL ERROR:", error);
-      alert("Error: " + error.message);
+      console.error("Error:", error);
+      showToast("Error creating product: " + error.message, "error");
     } finally {
       setLoading(false);
     }
   };
 
+  if (fetching) {
+    return <div className="loading-box">Loading form data...</div>;
+  }
+
   return (
     <div className="product-form-wrapper">
+      <ToastContainer toasts={toasts} onRemoveToast={removeToast} />
+
       <form className="product-form" onSubmit={handleSubmit}>
-        <h2>Create Product</h2>
+        <h2 style={{ marginBottom: "24px" }}>Create New Product</h2>
 
-        <input name="name" placeholder="Name" value={form.name} onChange={handleChange} required />
-        <textarea name="description" placeholder="Description" value={form.description} onChange={handleChange} required />
-        <input name="address" placeholder="Address" value={form.address} onChange={handleChange} required />
+        <div className="form-group">
+          <label>Product Name *</label>
+          <input
+            name="name"
+            placeholder="Enter product name"
+            value={form.name}
+            onChange={handleChange}
+            required
+          />
+        </div>
 
-        <input type="number" name="ageRestriction" value={form.ageRestriction} onChange={handleChange} />
+        <div className="form-group">
+          <label>Description</label>
+          <textarea
+            name="description"
+            placeholder="Enter product description"
+            value={form.description}
+            onChange={handleChange}
+            rows={4}
+          />
+        </div>
 
-        <input type="datetime-local" name="startDate" min={now} value={form.startDate} onChange={handleChange} required />
-        <input type="datetime-local" name="endDate" min={form.startDate || now} value={form.endDate} onChange={handleChange} required />
+        <div className="form-group">
+          <label>Address *</label>
+          <input
+            name="address"
+            placeholder="Enter event address"
+            value={form.address}
+            onChange={handleChange}
+            required
+          />
+        </div>
 
-        <select name="categoryId" value={form.categoryId} onChange={handleChange} required>
-          <option value="">Category</option>
-          {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
-        </select>
+        <div className="form-row">
+          <div className="form-group">
+            <label>Age Rating</label>
+            <input
+              type="number"
+              min="0"
+              name="ageRestriction"
+              value={form.ageRestriction}
+              onChange={handleChange}
+            />
+          </div>
 
-        <select name="subCategoryId" value={form.subCategoryId} onChange={handleChange}>
-          <option value="">SubCategory</option>
-          {subCategories.map(sc => <option key={sc.id} value={sc.id}>{sc.name}</option>)}
-        </select>
+          <div className="form-group">
+            <label>Start Date *</label>
+            <input
+              type="datetime-local"
+              name="startDate"
+              min={now}
+              value={form.startDate}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-        <select name="personId" value={form.personId} onChange={handleChange} required>
-          <option value="">Person</option>
-          {persons.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
-        </select>
+          <div className="form-group">
+            <label>End Date *</label>
+            <input
+              type="datetime-local"
+              name="endDate"
+              min={form.startDate || now}
+              value={form.endDate}
+              onChange={handleChange}
+              required
+            />
+          </div>
+        </div>
 
-        <select multiple onChange={handleLanguageChange}>
-          {languages.map(l => <option key={l.id} value={l.id}>{l.name}</option>)}
-        </select>
+        <div className="form-row">
+          <div className="form-group">
+            <label>Category *</label>
+            <select
+              name="categoryId"
+              value={form.categoryId}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Select a category</option>
+              {categories.map(c => (
+                <option key={c.id || c.Id} value={c.id || c.Id}>
+                  {c.name || c.Name}
+                </option>
+              ))}
+            </select>
+          </div>
 
-        {/* 🔥 FILE INPUT */}
-        <input 
-          type="file" 
-          accept="image/*" 
-          onChange={(e) => {
-            setImage(e.target.files[0]);
-            console.log(e.target.files[0]); // debug
-          }} 
-          required
-        />
+          <div className="form-group">
+            <label>Sub-Category</label>
+            <select
+              name="subCategoryId"
+              value={form.subCategoryId}
+              onChange={handleChange}
+            >
+              <option value="">Select a sub-category</option>
+              {subCategories.map(sc => (
+                <option key={sc.id || sc.Id} value={sc.id || sc.Id}>
+                  {sc.name || sc.Name}
+                </option>
+              ))}
+            </select>
+          </div>
 
-        <input 
-          type="file" 
-          accept="video/*" 
-          onChange={(e) => setVideo(e.target.files[0])} 
-        />
+          <div className="form-group">
+            <label>Organizer *</label>
+            <select
+              name="personId"
+              value={form.personId}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Select an organizer</option>
+              {persons.map(p => (
+                <option key={p.id || p.Id} value={p.id || p.Id}>
+                  {p.name || p.Name}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
 
-        <button type="submit" disabled={loading}>
-          {loading ? "Creating..." : "Create"}
-        </button>
+        <div className="form-group">
+          <label>Languages</label>
+          <select multiple onChange={handleLanguageChange} style={{ minHeight: "100px" }}>
+            {languages.map(l => (
+              <option key={l.id || l.Id} value={l.id || l.Id}>
+                {l.name || l.Name}
+              </option>
+            ))}
+          </select>
+          <small>Hold Ctrl/Cmd to select multiple languages</small>
+        </div>
+
+        <div className="form-group">
+          <label>Product Image *</label>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={(e) => setImage(e.target.files[0])}
+            required
+          />
+          {image && <p className="file-name">✓ {image.name}</p>}
+        </div>
+
+        <div className="form-group">
+          <label>Product Video</label>
+          <input
+            type="file"
+            accept="video/*"
+            onChange={(e) => setVideo(e.target.files[0])}
+          />
+          {video && <p className="file-name">✓ {video.name}</p>}
+        </div>
+
+        <div className="form-buttons">
+          <AdminButton
+            type="submit"
+            variant="primary"
+            disabled={loading}
+            loading={loading}
+          >
+            {loading ? "Creating..." : "Create Product"}
+          </AdminButton>
+          <AdminButton
+            type="button"
+            variant="cancel"
+            onClick={() => navigate("/admin/product/productIndex")}
+            disabled={loading}
+          >
+            Cancel
+          </AdminButton>
+        </div>
       </form>
     </div>
   );

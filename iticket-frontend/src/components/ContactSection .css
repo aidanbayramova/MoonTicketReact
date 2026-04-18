@@ -1,12 +1,12 @@
 .contact-section {
-    background-color: #000; /* qara fon */
-    color: #fff; /* ağ mətn */
+    background-color: #000; /* black background */
+    color: #fff; /* white text */
     padding: 80px 0;
     font-family: Arial, sans-serif;
   }
   
   .contact-section h3 {
-    color: #ff0000; /* qırmızı başlıqlar */
+    color: #ff0000; /* red headings */
     margin-bottom: 10px;
   }
   
@@ -32,7 +32,7 @@
   
   .contact-item h3 {
     margin: 0;
-    color: #ff0000; /* qırmızı başlıqlar */
+    color: #ff0000; /* red headings */
   }
   
   .contact-item p a {

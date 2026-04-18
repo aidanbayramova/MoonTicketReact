@@ -286,24 +286,24 @@
   position: absolute;
   top: 100%;
   left: 0;
-  background-color: #3a0f0f; /* tünd qırmızı fon */
-  border-radius: 12px;       /* rounded künclər */
+  background-color: #3a0f0f; /* dark red background */
+  border-radius: 12px;       /* rounded corners */
   min-width: 180px;
   box-shadow: 0px 4px 12px rgba(0,0,0,0.3);
   z-index: 1000;
-  padding: 5px 0;           /* linklərin arasına boşluq */
+  padding: 5px 0;           /* spacing between links */
   margin-left: 21px;
 }
 
 .dropdown-item {
   padding: 10px 16px;
   text-decoration: none;
-  color: white;              /* ağ yazı */
-  border-radius: 8px;        /* hover zamanı yumşaq künclər */
+  color: white;              /* white text */
+  border-radius: 8px;        /* soft corners on hover */
 }
 
 .dropdown-item:hover {
-  background-color: #5c1a1a; /* hoverda bir az açıq qırmızı */
+  background-color: #5c1a1a; /* slightly lighter red on hover */
   color: white;
 }
 

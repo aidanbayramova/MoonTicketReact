@@ -10,17 +10,17 @@ function EditSubCategoryForm() {
   const [categoryId, setCategoryId] = useState("");
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [saving, setSaving] = useState(false); // ✅ əlavə edildi
+  const [saving, setSaving] = useState(false); // ✅ Added
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Bütün kateqoriyaları götür
+        // Fetch all categories
         const catRes = await fetch("http://localhost:5149/api/CategoryGetAll");
         const cats = await catRes.json();
         setCategories(cats);
 
-        // SubCategory məlumatını götür
+        // Fetch SubCategory data
         const res = await fetch(
           `http://localhost:5149/api/SubCategoryGetById/${id}`
         );
@@ -28,7 +28,7 @@ function EditSubCategoryForm() {
 
         setName(data.name);
 
-        // Seçilmiş kateqoriyanı tap və ID-ni saxla
+        // Find and save selected category ID
         const cat = cats.find((c) => c.name === data.categoryName);
         setCategoryId(cat ? cat.id : "");
 
@@ -52,7 +52,7 @@ function EditSubCategoryForm() {
       );
 
       if (!selectedCategory) {
-        alert("Kateqoriya seçilməyib!");
+        alert("Please select a category!");
         setSaving(false);
         return;
       }
@@ -76,10 +76,10 @@ function EditSubCategoryForm() {
         throw new Error(data.message || "Update failed");
       }
 
-      alert("SubCategory uğurla yeniləndi!");
+      alert("SubCategory updated successfully!");
       navigate("/admin/subcategory/subCategoryIndex");
     } catch (err) {
-      alert("Xəta: " + err.message);
+      alert("Error: " + err.message);
     } finally {
       setSaving(false);
     }

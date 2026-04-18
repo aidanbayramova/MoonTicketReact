@@ -1,6 +1,9 @@
 // SportDetail.jsx
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
+import { buildAssetUrl, fetchProductById, formatDate } from "../../../api/products";
+import { useBasket } from "../../../context/BasketContext";
 
 import ScrollingTicker from "../../../components/ScrollingTicker";
 
@@ -66,12 +69,75 @@ const stadiumSections = [
 const occupiedSeats = ['vip1-5', 'vip2-3', 'prem1-12', 'std1-25', 'std3-8'];
 
 function SportDetail() {
-    const match = matches[0];
+    const { id } = useParams();
+    const { addToBasket, buyNow, getOccupiedSeats } = useBasket();
+    const [product, setProduct] = useState(null);
+    const [similarProducts, setSimilarProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [actionMessage, setActionMessage] = useState("");
+
+    useEffect(() => {
+        let active = true;
+        setLoading(true);
+        
+        (async () => {
+          try {
+            const data = await fetchProductById(id);
+            if (!active) return;
+            setProduct(data);
+            
+            // Fetch similar products from same category
+            const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5149";
+            const res = await fetch(`${API_BASE}/api/ProductGetAll`);
+            if (res.ok) {
+              const all = await res.json();
+              const similar = all
+                .filter(p => p.categoryName === data.categoryName && p.id !== data.id)
+                .slice(0, 2)
+                .map(p => ({
+                  id: p.id,
+                  title: p.name || "Unknown",
+                  poster: buildAssetUrl(p.image) || ""
+                }));
+              setSimilarProducts(similar);
+            }
+          } catch (err) {
+            console.log("Error loading similar products:", err);
+          } finally {
+            active && setLoading(false);
+          }
+        })();
+
+        return () => {
+            active = false;
+        };
+    }, [id]);
+
+    const match = product
+        ? {
+              ...matches[0],
+              id: product.id,
+              title: product.name || matches[0].title,
+              teams: product.personName || matches[0].teams,
+              desc: product.description || matches[0].desc,
+              league: [product.categoryName, product.subCategoryName].filter(Boolean).join(", ") || matches[0].league,
+              stadium: product.address || matches[0].stadium,
+              date: formatDate(product.startDate) || matches[0].date,
+              time: product.startTime || matches[0].time,
+              age: product.ageRestriction ? `${product.ageRestriction}+` : matches[0].age,
+              image: buildAssetUrl(product.image) || matches[0].image,
+          }
+        : matches[0];
+
     const [selectedSeats, setSelectedSeats] = useState([]);
     const [activeSection, setActiveSection] = useState(null);
 
+    const showKey = `sport-${match.id}-${match.date}-${match.time}`;
+    const occupiedFromOrders = getOccupiedSeats(showKey);
+    const occupiedSeatSet = new Set([...occupiedSeats, ...occupiedFromOrders]);
+
     const toggleSeat = (seatId) => {
-        if (occupiedSeats.includes(seatId)) return;
+        if (occupiedSeatSet.has(seatId)) return;
         setSelectedSeats(prev =>
             prev.includes(seatId) ? prev.filter(s => s !== seatId) : [...prev, seatId]
         );
@@ -92,6 +158,41 @@ function SportDetail() {
             top: `calc(50% + ${Math.sin(rad) * radius}px)`,
         };
     };
+
+    const buildBasketItem = () => ({
+        eventType: "sport",
+        productId: match.id,
+        title: match.title,
+        quantity: selectedSeats.length,
+        seats: selectedSeats,
+        showKey,
+        eventDate: match.date,
+        eventTime: match.time,
+        language: match.language,
+        location: match.stadium,
+        total: getTotalPrice(),
+    });
+
+    const handleAddToBasket = () => {
+        if (!selectedSeats.length) return;
+        addToBasket(buildBasketItem());
+        setActionMessage("Selection added to basket.");
+    };
+
+    const handleBuyNow = async () => {
+        if (!selectedSeats.length) return;
+        try {
+            await buyNow(buildBasketItem());
+            setSelectedSeats([]);
+            setActionMessage("Tickets purchased successfully.");
+        } catch (error) {
+            setActionMessage(error.message || "Failed to purchase tickets.");
+        }
+    };
+
+    if (loading && !product) {
+        return <div className="not-found"><h2>Loading...</h2></div>;
+    }
 
     return (
         <div className="concert-page">
@@ -164,7 +265,7 @@ function SportDetail() {
                                         <div className="seats-grid">
                                             {Array.from({ length: section.seats }).map((_, i) => {
                                                 const seatId = `${section.id}-${i + 1}`;
-                                                const occupied = occupiedSeats.includes(seatId);
+                                                const occupied = occupiedSeatSet.has(seatId);
                                                 const selected = selectedSeats.includes(seatId);
 
                                                 return (
@@ -220,11 +321,13 @@ function SportDetail() {
             {/* BOTTOM BAR */}
             <div className="bottom-bar">
                 <div>
+                    {actionMessage && <span className="seat-info">{actionMessage}</span>}
                     <span className="seat-info">{selectedSeats.length} seat(s) selected</span>
                 </div>
                 <div className="booking-actions">
                     <span className="total-price">${getTotalPrice()}</span>
-                    <button disabled={!selectedSeats.length}>Buy Ticket →</button>
+                    <button disabled={!selectedSeats.length} onClick={handleAddToBasket}>Add to Basket</button>
+                    <button disabled={!selectedSeats.length} onClick={handleBuyNow}>Buy Now</button>
                 </div>
             </div>
         </div>

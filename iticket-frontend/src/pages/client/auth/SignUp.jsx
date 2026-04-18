@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { authApi } from "../../../api/auth";
+import PasswordField from "../../../components/auth/PasswordField";
 import "./SignUp.css";
 
 export default function Register() {
@@ -14,7 +15,6 @@ export default function Register() {
     rePassword: ""
   });
 
-  const [showPassword, setShowPassword] = useState(false);
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -38,12 +38,12 @@ export default function Register() {
     e.preventDefault();
 
     if (formData.password !== formData.rePassword) {
-      setMessage("Şifrələr uyğun deyil.");
+      setMessage("Passwords do not match.");
       return;
     }
 
     if (calculateAge(formData.birthDate) < 18) {
-      setMessage("18 yaşdan aşağı qeydiyyat mümkün deyil.");
+      setMessage("Registration is only available for users 18 and older.");
       return;
     }
 
@@ -59,9 +59,9 @@ export default function Register() {
         password: formData.password
       };
       const response = await authApi.register(payload);
-      setMessage(response.message || "Qeydiyyat tamamlandı. Emailini təsdiqlə.");
+      setMessage(response.message || "Registration successful. Please verify your email.");
     } catch (error) {
-      setMessage(error.message || "Qeydiyyat uğursuz oldu.");
+      setMessage(error.message || "Registration failed.");
     } finally {
       setLoading(false);
     }
@@ -140,30 +140,25 @@ export default function Register() {
 
               {/* Password */}
               <div className="register-form-group">
-                <input
-                  type={showPassword ? "text" : "password"}
-                  className="register-input"
+                <PasswordField
                   name="password"
                   placeholder="Password"
                   value={formData.password}
                   onChange={handleChange}
+                  autoComplete="new-password"
+                  required
                 />
-                <span
-                  className="zmdi zmdi-eye register-field-icon"
-                  onClick={() => setShowPassword(!showPassword)}
-                  style={{ cursor: "pointer" }}
-                ></span>
               </div>
 
               {/* Repeat Password */}
               <div className="register-form-group">
-                <input
-                  type="password"
-                  className="register-input"
+                <PasswordField
                   name="rePassword"
                   placeholder="Repeat your password"
                   value={formData.rePassword}
                   onChange={handleChange}
+                  autoComplete="new-password"
+                  required
                 />
               </div>
 

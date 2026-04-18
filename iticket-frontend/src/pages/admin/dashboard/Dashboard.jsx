@@ -5,14 +5,14 @@ import "./Dashboard.css";
 const AdminDashboard = () => {
   const navigate = useNavigate();
 
-  // Dropdown açıq/bağlıq state-ləri
+  // Dropdown open/close states
   const [productsOpen, setProductsOpen] = useState(false);
   const [newsOpen, setNewsOpen] = useState(false);
 
   const productsRef = useRef(null);
   const newsRef = useRef(null);
 
-  // Çöldə klik edəndə dropdown bağlanması
+  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (productsRef.current && !productsRef.current.contains(e.target)) {

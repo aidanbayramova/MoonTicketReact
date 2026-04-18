@@ -1,51 +1,142 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import { fetchProducts } from "../api/products";
 import "./MapWithBranches.css";
 
-const branchesData = {
-  Paris: [
-    { id: 1, name: "Moon Ticket – Champs-Élysées", address: "8 Avenue des Champs-Élysées", lat: 48.869, lng: 2.307, phone: "+33 1 2345 6789", icon: "🗼" },
-    { id: 2, name: "Moon Ticket – Le Marais", address: "5 Rue des Francs-Bourgeois", lat: 48.857, lng: 2.362, phone: "+33 1 9876 5432", icon: "🗼" },
-  ],
-  Berlin: [
-    { id: 3, name: "Moon Ticket – Mitte", address: "Friedrichstraße 100", lat: 52.520, lng: 13.388, phone: "+49 30 123456", icon: "🛡️" },
-    { id: 4, name: "Moon Ticket – Kreuzberg", address: "Kottbusser Damm 101", lat: 52.498, lng: 13.402, phone: "+49 30 654321", icon: "🛡️" },
-  ],
-  Rome: [
-    { id: 5, name: "Moon Ticket – Trastevere", address: "Piazza di Santa Maria", lat: 41.888, lng: 12.470, phone: "+39 06 1234567", icon: "🏛️" },
-  ],
-  London: [
-    { id: 6, name: "Moon Ticket – Soho", address: "12 Carnaby St", lat: 51.512, lng: -0.136, phone: "+44 20 1234 5678", icon: "🎡" },
-  ],
-  Madrid: [
-    { id: 7, name: "Moon Ticket – Sol", address: "Puerta del Sol 1", lat: 40.416, lng: -3.703, phone: "+34 91 234 5678", icon: "🏰" },
-  ],
+const GEOCODE_CACHE_KEY = "moonTicket.geocodeCache";
+
+const fallbackBranches = [
+  { id: 1, name: "Moon Ticket Branch - Baku", address: "Nizami Street, Baku", lat: 40.4093, lng: 49.8671, phone: "+994 12 000 00 00", city: "Baku", icon: "MT" },
+  { id: 2, name: "Moon Ticket Branch - Ganjlik", address: "Ganjlik Mall, Baku", lat: 40.4004, lng: 49.8522, phone: "+994 12 111 11 11", city: "Baku", icon: "MT" },
+];
+
+const parseCity = (address) => {
+  const parts = (address || "").split(",").map((x) => x.trim()).filter(Boolean);
+  if (!parts.length) return "Unknown";
+  return parts[parts.length - 1];
 };
 
-const allBranches = Object.entries(branchesData).flatMap(([city, branches]) =>
-  branches.map(branch => ({ ...branch, city }))
-);
+const readCache = () => {
+  try {
+    const raw = localStorage.getItem(GEOCODE_CACHE_KEY);
+    return raw ? JSON.parse(raw) : {};
+  } catch {
+    return {};
+  }
+};
+
+const writeCache = (cache) => {
+  localStorage.setItem(GEOCODE_CACHE_KEY, JSON.stringify(cache));
+};
+
+async function geocodeAddress(address) {
+  const cache = readCache();
+  if (cache[address]) return cache[address];
+
+  const url = `https://nominatim.openstreetmap.org/search?format=jsonv2&q=${encodeURIComponent(address)}&limit=1`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error("Geocode request failed");
+
+  const data = await res.json();
+  if (!Array.isArray(data) || !data.length) return null;
+
+  const first = data[0];
+  const coords = {
+    lat: Number(first.lat),
+    lng: Number(first.lon),
+  };
+
+  cache[address] = coords;
+  writeCache(cache);
+  return coords;
+}
 
 export default function MapWithBranches() {
   const mapContainerRef = useRef(null);
   const mapInstanceRef = useRef(null);
   const markersRef = useRef([]);
+
   const [searchTerm, setSearchTerm] = useState("");
+  const [branches, setBranches] = useState(fallbackBranches);
 
   useEffect(() => {
-    if (mapInstanceRef.current) return;
+    if (mapInstanceRef.current || !mapContainerRef.current) return;
 
-    const map = L.map(mapContainerRef.current).setView([48.8566, 2.3522], 5);
+    const map = L.map(mapContainerRef.current).setView([40.4093, 49.8671], 6);
     mapInstanceRef.current = map;
 
     L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
-      attribution: '&copy; OpenStreetMap contributors',
+      attribution: "&copy; OpenStreetMap contributors",
       subdomains: "abcd",
       maxZoom: 19,
     }).addTo(map);
+
+    setTimeout(() => map.invalidateSize(), 400);
+  }, []);
+
+  useEffect(() => {
+    let active = true;
+
+    fetchProducts()
+      .then(async (products) => {
+        if (!active) return;
+
+        const addresses = Array.from(
+          new Set(
+            (products || [])
+              .map((x) => x.address)
+              .filter((x) => typeof x === "string" && x.trim())
+          )
+        );
+
+        if (!addresses.length) {
+          setBranches(fallbackBranches);
+          return;
+        }
+
+        const resolved = [];
+        for (let i = 0; i < addresses.length; i += 1) {
+          const address = addresses[i];
+          try {
+            const coords = await geocodeAddress(address);
+            if (!coords) continue;
+            resolved.push({
+              id: i + 1,
+              name: `Moon Ticket Event Point ${i + 1}`,
+              address,
+              lat: coords.lat,
+              lng: coords.lng,
+              phone: "+994 12 000 00 00",
+              city: parseCity(address),
+              icon: "MT",
+            });
+          } catch {
+            continue;
+          }
+        }
+
+        if (!active) return;
+        setBranches(resolved.length ? resolved : fallbackBranches);
+      })
+      .catch(() => {
+        if (!active) return;
+        setBranches(fallbackBranches);
+      });
+
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    const map = mapInstanceRef.current;
+    if (!map) return;
+
+    markersRef.current.forEach(({ marker }) => marker.remove());
+    markersRef.current = [];
 
     const pinIcon = L.icon({
       iconUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png",
@@ -57,77 +148,84 @@ export default function MapWithBranches() {
       shadowSize: [41, 41],
     });
 
-    allBranches.forEach(branch => {
+    branches.forEach((branch) => {
       const marker = L.marker([branch.lat, branch.lng], { icon: pinIcon })
         .bindPopup(`
           <div style="font-family: 'Poppins', sans-serif;">
-            <h4 style="margin: 0 0 8px; color: #7b1305;">${branch.name}</h4>
-            <p style="margin: 4px 0;"><strong>📍 Address:</strong> ${branch.address}</p>
-            <p style="margin: 4px 0;"><strong>📞 Phone:</strong> ${branch.phone}</p>
-            <p style="margin: 4px 0;">${branch.icon} <strong> City:</strong> ${branch.city}</p>
+            <h4 style="margin:0 0 8px;color:#7b1305;">${branch.name}</h4>
+            <p style="margin:4px 0;"><strong>Address:</strong> ${branch.address}</p>
+            <p style="margin:4px 0;"><strong>Phone:</strong> ${branch.phone}</p>
+            <p style="margin:4px 0;"><strong>City:</strong> ${branch.city}</p>
           </div>
         `)
         .addTo(map);
-      
+
       markersRef.current.push({ marker, branch });
     });
 
-    setTimeout(() => map.invalidateSize(), 500);
-  }, []);
+    if (branches.length > 0) {
+      const bounds = L.latLngBounds(branches.map((b) => [b.lat, b.lng]));
+      map.fitBounds(bounds, { padding: [30, 30] });
+    }
+  }, [branches]);
 
-  const filteredBranches = allBranches.filter(branch =>
-    branch.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    branch.address.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    branch.city.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredBranches = useMemo(
+    () =>
+      branches.filter(
+        (branch) =>
+          branch.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          branch.address.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          branch.city.toLowerCase().includes(searchTerm.toLowerCase())
+      ),
+    [branches, searchTerm]
   );
 
   const handleSearch = () => {
-    if (!mapInstanceRef.current || filteredBranches.length === 0) return;
+    const map = mapInstanceRef.current;
+    if (!map || filteredBranches.length === 0) return;
 
-    if (searchTerm.trim() === "") {
-      const bounds = L.latLngBounds(allBranches.map(b => [b.lat, b.lng]));
-      mapInstanceRef.current.fitBounds(bounds);
-    } else if (filteredBranches.length === 1) {
-      const branch = filteredBranches[0];
-      mapInstanceRef.current.setView([branch.lat, branch.lng], 14);
-      
-      const markerData = markersRef.current.find(m => m.branch.id === branch.id);
-      if (markerData) {
-        markerData.marker.openPopup();
-      }
-    } else {
-      const bounds = L.latLngBounds(filteredBranches.map(b => [b.lat, b.lng]));
-      mapInstanceRef.current.fitBounds(bounds);
+    if (!searchTerm.trim()) {
+      const bounds = L.latLngBounds(branches.map((b) => [b.lat, b.lng]));
+      map.fitBounds(bounds, { padding: [30, 30] });
+      return;
     }
+
+    if (filteredBranches.length === 1) {
+      const branch = filteredBranches[0];
+      map.setView([branch.lat, branch.lng], 14);
+      const markerData = markersRef.current.find((m) => m.branch.id === branch.id);
+      if (markerData) markerData.marker.openPopup();
+      return;
+    }
+
+    const bounds = L.latLngBounds(filteredBranches.map((b) => [b.lat, b.lng]));
+    map.fitBounds(bounds, { padding: [30, 30] });
   };
 
   const goToBranch = (branch) => {
-    if (!mapInstanceRef.current) return;
-    
-    mapInstanceRef.current.setView([branch.lat, branch.lng], 15);
-    
-    const markerData = markersRef.current.find(m => m.branch.id === branch.id);
+    const map = mapInstanceRef.current;
+    if (!map) return;
+
+    map.setView([branch.lat, branch.lng], 15);
+    const markerData = markersRef.current.find((m) => m.branch.id === branch.id);
     if (markerData) {
       setTimeout(() => {
         markerData.marker.openPopup();
-      }, 500);
+      }, 200);
     }
   };
 
   return (
-    
     <div className="map-wrapper">
       <div ref={mapContainerRef} id="map"></div>
 
       <div className="sidebar-modern">
-        <h3 className="sidebar-title-modern">
-          Moon Ticket Branches
-        </h3>
+        <h3 className="sidebar-title-modern">Moon Ticket Map Search</h3>
 
         <div className="search-container">
           <input
             type="text"
-            placeholder="Search branches, city..."
+            placeholder="Search by branch or address"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSearch()}
@@ -137,17 +235,18 @@ export default function MapWithBranches() {
 
         <div className="branch-list-modern">
           {filteredBranches.length > 0 ? (
-            filteredBranches.map(branch => (
+            filteredBranches.map((branch) => (
               <div key={branch.id} className="branch-card-modern">
                 <h4>{branch.name}</h4>
-                <p>📍 {branch.address}</p>
-                <p>📞 {branch.phone}</p>
-                <p>{branch.icon} {branch.city}</p>
-                <button className="btnbtn" onClick={() => goToBranch(branch)}>View on Map 🎫</button>
+                <p>{branch.address}</p>
+                {/* <p>{branch.city}</p> */}
+                <button className="btnbtn" onClick={() => goToBranch(branch)}>
+                  View on Map
+                </button>
               </div>
             ))
           ) : (
-            <p className="no-results-modern">No branches found</p>
+            <p className="no-results-modern">No locations found</p>
           )}
         </div>
       </div>

@@ -22,7 +22,7 @@ function EditPersonForm() {
         console.log("Fetched person:", data);
 
         setPerson(data);
-        setName(data.name || data.Name || ""); // backend PascalCase ola bilər
+        setName(data.name || data.Name || ""); // backend may use PascalCase
       } catch (err) {
         alert(err.message);
         navigate("/admin/person/personIndex");
@@ -40,7 +40,7 @@ function EditPersonForm() {
 
     setSaving(true);
 
-    const dto = { Name: name }; // backend ilə match edir
+    const dto = { Name: name }; // match backend format
 
     try {
       const res = await fetch(`http://localhost:5149/api/PersonEdit/${person.id}`, {

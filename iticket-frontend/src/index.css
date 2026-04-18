@@ -3,7 +3,7 @@
   line-height: 1.5;
   font-weight: 700;
 
-  color: #213547; /* yazılar tünd */
+  color: #213547; /* dark text */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -67,21 +67,21 @@ button:focus-visible {
 }
 /* Chrome, Edge, Safari */
 html::-webkit-scrollbar {
-  width: 50px; /* incəliyi */
+  width: 50px; /* thickness */
 }
 
 html::-webkit-scrollbar-track {
-  background: #111; /* fon qara */
+  background: #111; /* black background */
   border-radius: 10px;
 }
 
 html::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #e50914, #ff4b5c); /* qırmızı gradient */
-  border: 2px solid #111; /* içində boşluq effekti */
+  background: linear-gradient(180deg, #e50914, #ff4b5c); /* red gradient */
+  border: 2px solid #111; /* inner spacing effect */
 }
 
 html::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #ff4b5c, #ff7a85); /* hover daha açıq */
+  background: linear-gradient(180deg, #ff4b5c, #ff7a85); /* lighter on hover */
 }
 
 /* Firefox */
@@ -107,4 +107,10 @@ html {
   background-position: center !important;
   background-size: cover !important;
   background-repeat: no-repeat !important;
+}
+
+
+
+body{
+
 }

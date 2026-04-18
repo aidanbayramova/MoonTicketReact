@@ -1,0 +1,9 @@
+# Visual Studio and .NET build artifacts
+**/.vs/
+**/bin/
+**/obj/
+
+# Logs and user-scoped files
+*.log
+*.user
+*.suo

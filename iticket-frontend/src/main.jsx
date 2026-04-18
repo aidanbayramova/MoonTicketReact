@@ -4,14 +4,17 @@ import './index.css';
 import App from './App.jsx';
 import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext.jsx';
+import { BasketProvider } from './context/BasketContext.jsx';
 
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AuthProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <BasketProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </BasketProvider>
     </AuthProvider>
   </StrictMode>
 );

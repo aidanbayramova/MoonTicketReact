@@ -1,17 +1,22 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useToast, ToastContainer } from "../../../components/admin/Toast";
+import { AdminButton } from "../../../components/admin/AdminButton";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5149";
 
 function CreateSliderForm() {
   const navigate = useNavigate();
+    const { toasts, showToast, removeToast } = useToast();
   const [title, setTitle] = useState("");
   const [subTitle, setSubTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [image, setImage] = useState(null);
+  const [saving, setSaving] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+  setSaving(true);
 
     const formData = new FormData();
     formData.append("Title", title);
@@ -30,16 +35,19 @@ function CreateSliderForm() {
         throw new Error(text || "Create failed");
       }
 
-      alert("Slider created successfully!");
-      navigate("/admin/slider/sliderIndex"); 
+  showToast("✓ Slider created successfully!", "success");
+  setTimeout(() => navigate("/admin/slider/sliderIndex"), 1000);
     } catch (err) {
       console.error(err);
-      alert("Error: " + err.message);
+      showToast("Error: " + err.message, "error");
+    } finally {
+      setSaving(false);
     }
   };
 
   return (
     <div className="slider-form-page">
+        <ToastContainer toasts={toasts} onRemoveToast={removeToast} />
       <h2 className="create-font">Create Slider</h2>
 
       <form onSubmit={handleSubmit} className="slider-form">
@@ -65,14 +73,17 @@ function CreateSliderForm() {
         />
         <input type="file" onChange={(e) => setImage(e.target.files[0])} />
         <div style={{ marginTop: "10px" }}>
-          <button className="buton" type="submit">Create</button>
-          <button className="buton"
+          <AdminButton type="submit" variant="primary" loading={saving} disabled={saving}>
+            {saving ? "Creating..." : "Create Slider"}
+          </AdminButton>
+          <AdminButton
             type="button"
+            variant="cancel"
             onClick={() => navigate("/admin/slider/sliderIndex")}
-            style={{ marginLeft: "10px" }}
+            disabled={saving}
           >
             Cancel
-          </button>
+          </AdminButton>
         </div>
       </form>
     </div>

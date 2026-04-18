@@ -1,22 +1,33 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useToast, ToastContainer } from "../../../components/admin/Toast";
+import { ConfirmDialog } from "../../../components/admin/ConfirmDialog";
+import { AdminButton } from "../../../components/admin/AdminButton";
 import "./Product.css";
 
-const API_BASE = "http://localhost:5149";
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5149";
 
 function ProductIndex() {
   const navigate = useNavigate();
+  const { toasts, showToast, removeToast } = useToast();
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [deleteConfirm, setDeleteConfirm] = useState({ open: false, id: null });
 
   const fetchProducts = async () => {
     try {
+      setLoading(true);
       const res = await fetch(`${API_BASE}/api/ProductGetAll`);
+      if (!res.ok) throw new Error("Failed to fetch products");
+      
       const data = await res.json();
-
-      console.log("DATA:", data);
       setProducts(Array.isArray(data) ? data : []);
     } catch (error) {
-      console.log(error);
+      console.error(error);
+      showToast("Failed to load products", "error");
+      setProducts([]);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -24,34 +35,61 @@ function ProductIndex() {
     fetchProducts();
   }, []);
 
-  const handleDelete = async (id) => {
-    if (!window.confirm("Delete this product?")) return;
-
-    await fetch(`${API_BASE}/api/ProductDelete/${id}`, {
-      method: "DELETE",
-    });
-
-    fetchProducts();
+  const handleDeleteClick = (id) => {
+    setDeleteConfirm({ open: true, id });
   };
+
+  const handleConfirmDelete = async () => {
+    const id = deleteConfirm.id;
+    setDeleteConfirm({ open: false, id: null });
+
+    try {
+      const res = await fetch(`${API_BASE}/api/ProductDelete/${id}`, {
+        method: "DELETE",
+      });
+
+      if (!res.ok) throw new Error("Failed to delete product");
+
+      showToast("Product deleted successfully!", "success");
+      fetchProducts();
+    } catch (error) {
+      console.error(error);
+      showToast("Error deleting product", "error");
+    }
+  };
+
+  const getProductId = (p) => p.id || p.Id || p.ID;
+  const getProductName = (p) => p.name || p.Name;
+  const getProductAddress = (p) => p.address || p.Address;
+  const getProductStartDate = (p) => p.startDate || p.StartDate;
+  const getProductAge = (p) => (p.ageRestriction ?? p.AgeRestriction ?? 0);
+  const getProductImage = (p) => p.image || p.Image;
+
+  if (loading) {
+    return <div className="loading-box">Loading products...</div>;
+  }
 
   return (
     <div className="product-container">
-      <h2>Products</h2>
+      <ToastContainer toasts={toasts} onRemoveToast={removeToast} />
 
-      <button
-        className="create-btn"
-        onClick={() => navigate("/admin/product/createProductForm")}
-      >
-        + Create
-      </button>
+      <div className="page-header">
+        <h2>Products</h2>
+        <AdminButton
+          variant="primary"
+          onClick={() => navigate("/admin/product/createProductForm")}
+        >
+          + Create Product
+        </AdminButton>
+      </div>
 
       <table className="product-table">
         <thead>
           <tr>
             <th>Name</th>
             <th>Address</th>
-            <th>Start</th>
-            <th>Age</th>
+            <th>Start Date</th>
+            <th>Age Rating</th>
             <th>Image</th>
             <th>Actions</th>
           </tr>
@@ -60,64 +98,77 @@ function ProductIndex() {
         <tbody>
           {products.length === 0 ? (
             <tr>
-              <td colSpan="6">No products</td>
+              <td colSpan="6" className="empty-state">No products found</td>
             </tr>
           ) : (
-            products.map((p) => (
-              <tr key={p.id}>
-                {/* NAME */}
-                <td>{p.name ?? p.Name ?? "-"}</td>
-
-                {/* ADDRESS */}
-                <td>{p.address ?? p.Address ?? "-"}</td>
-
-                {/* START DATE */}
-                <td>
-                  {p.startDate || p.StartDate
-                    ? new Date(p.startDate || p.StartDate).toLocaleString()
-                    : "-"}
-                </td>
-
-                {/* AGE */}
-                <td>{(p.ageRestriction ?? p.AgeRestriction ?? 0) + "+"}</td>
-
-                {/* IMAGE */}
-                <td>
-                  {p.image || p.Image ? (
-                    <img
-                      src={`${API_BASE}${p.image ?? p.Image}`}
-                      alt="product"
-                      style={{
-                        width: "60px",
-                        height: "60px",
-                        objectFit: "cover",
-                        borderRadius: "8px",
-                      }}
-                    />
-                  ) : (
-                    "No image"
-                  )}
-                </td>
-
-                {/* ACTIONS */}
-                <td>
-                  <button onClick={() => navigate(`/admin/product/detailProduct/${p.id}`)}>
-                    Detail
-                  </button>
-
-                  <button onClick={() => navigate(`/admin/product/editProductForm/${p.id}`)}>
-                    Edit
-                  </button>
-
-                  <button onClick={() => handleDelete(p.id)}>
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))
+            products.map((p) => {
+              const id = getProductId(p);
+              return (
+                <tr key={id}>
+                  <td className="name-cell">{getProductName(p) ?? "-"}</td>
+                  <td>{getProductAddress(p) ?? "-"}</td>
+                  <td>
+                    {getProductStartDate(p)
+                      ? new Date(getProductStartDate(p)).tolocaleString("en-US", {
+                          year: "numeric",
+                          month: "short",
+                          day: "numeric",
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })
+                      : "-"}
+                  </td>
+                  <td className="age-rating">{getProductAge(p)}+</td>
+                  <td className="media">
+                    {getProductImage(p) ? (
+                      <img
+                        src={`${API_BASE}${getProductImage(p)}`}
+                        alt={getProductName(p)}
+                      />
+                    ) : (
+                      <span className="no-media">No image</span>
+                    )}
+                  </td>
+                  <td className="actions">
+                    <AdminButton
+                      variant="primary"
+                      size="sm"
+                      onClick={() => navigate(`/admin/product/detailProduct/${id}`)}
+                    >
+                      Detail
+                    </AdminButton>
+                    <AdminButton
+                      variant="secondary"
+                      size="sm"
+                      onClick={() => navigate(`/admin/product/editProductForm/${id}`)}
+                    >
+                      Edit
+                    </AdminButton>
+                    <AdminButton
+                      variant="danger"
+                      size="sm"
+                      onClick={() => handleDeleteClick(id)}
+                    >
+                      Delete
+                    </AdminButton>
+                  </td>
+                </tr>
+              );
+            })
           )}
         </tbody>
       </table>
+
+      <ConfirmDialog
+        isOpen={deleteConfirm.open}
+        title="Delete Product"
+        message="Are you sure you want to delete this product? This action cannot be undone."
+        confirmText="Delete Permanently"
+        cancelText="Cancel"
+        onConfirm={handleConfirmDelete}
+        onCancel={() => setDeleteConfirm({ open: false, id: null })}
+        isDangerous={true}
+      />
     </div>
   );
 }

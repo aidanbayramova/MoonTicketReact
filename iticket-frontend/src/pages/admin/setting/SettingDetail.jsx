@@ -20,7 +20,7 @@ function SettingDetail() {
         const data = await res.json();
         setSetting(data);
       } catch {
-        alert("Setting tapılmadı");
+        alert("Setting not found");
         navigate("/admin/setting");
       } finally {
         setLoading(false);

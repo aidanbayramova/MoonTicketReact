@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { useToast, ToastContainer } from "../../../components/admin/Toast";
+import { AdminButton } from "../../../components/admin/AdminButton";
 import "./NewsAdmin.css";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5149";
@@ -12,6 +14,7 @@ const getMediaUrl = (path) => {
 function EditNewsForm() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { toasts, showToast, removeToast } = useToast();
 
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
@@ -21,6 +24,7 @@ function EditNewsForm() {
   const [oldImage, setOldImage] = useState("");
   const [authors, setAuthors] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,7 +48,7 @@ function EditNewsForm() {
         setNewsAuthorId(String(newsData.newsAuthorId || ""));
         setOldImage(newsData.image || "");
       } catch (err) {
-        alert(err.message);
+        showToast("Error: " + err.message, "error");
         navigate("/admin/news/newsIndex");
       } finally {
         setLoading(false);
@@ -56,6 +60,7 @@ function EditNewsForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+  setSaving(true);
 
     const formData = new FormData();
     formData.append("Title", title);
@@ -75,10 +80,12 @@ function EditNewsForm() {
         throw new Error(text || "Edit failed");
       }
 
-      alert("News updated successfully!");
-      navigate("/admin/news/newsIndex");
+  showToast("✓ News updated successfully!", "success");
+  setTimeout(() => navigate("/admin/news/newsIndex"), 1000);
     } catch (err) {
-      alert("Error: " + err.message);
+      showToast("Error: " + err.message, "error");
+    } finally {
+      setSaving(false);
     }
   };
 
@@ -86,6 +93,7 @@ function EditNewsForm() {
 
   return (
     <div className="news-admin-form-page">
+        <ToastContainer toasts={toasts} onRemoveToast={removeToast} />
       <h2 className="news-admin-title">Edit News</h2>
 
       <form className="news-admin-form" onSubmit={handleSubmit}>
@@ -133,16 +141,17 @@ function EditNewsForm() {
         />
 
         <div className="news-admin-form-buttons">
-          <button className="news-admin-primary-btn" type="submit">
-            Save
-          </button>
-          <button
-            className="news-admin-secondary-btn"
+          <AdminButton type="submit" variant="primary" loading={saving} disabled={saving}>
+            {saving ? "Saving..." : "Save News"}
+          </AdminButton>
+          <AdminButton
             type="button"
+            variant="cancel"
             onClick={() => navigate("/admin/news/newsIndex")}
+            disabled={saving}
           >
             Cancel
-          </button>
+          </AdminButton>
         </div>
       </form>
     </div>

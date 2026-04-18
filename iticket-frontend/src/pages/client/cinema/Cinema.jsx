@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import ScrollingTicker from "../../../components/ScrollingTicker";
 import { buildAssetUrl, fetchProductById, formatDate } from "../../../api/products";
+import { useBasket } from "../../../context/BasketContext";
 import "./Cinema.css";
 
 
@@ -48,8 +49,10 @@ const seatLayout = [
 
 function Cinema() {
   const { id } = useParams();
+  const { addToBasket, buyNow, getOccupiedSeats } = useBasket();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [actionMessage, setActionMessage] = useState("");
 
   useEffect(() => {
     let active = true;
@@ -86,7 +89,7 @@ function Cinema() {
   const times = ["16:30", "18:30", "20:30", "22:30"];
 
   // Occupied seats (format: "A-3", "B-5")
-  const occupiedSeats = [
+  const staticOccupiedSeats = [
     "A-2", "A-3", "A-6",
     "B-4", "B-5", "B-8",
     "C-3", "C-7", "C-10",
@@ -102,6 +105,10 @@ function Cinema() {
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [selectedLang, setSelectedLang] = useState("English");
   const [showTrailer, setShowTrailer] = useState(false);
+
+  const showKey = `cinema-${movie.id}-${selectedDate}-${selectedTime}-${selectedLang}`;
+  const occupiedFromOrders = getOccupiedSeats(showKey);
+  const occupiedSeats = Array.from(new Set([...staticOccupiedSeats, ...occupiedFromOrders]));
 
   const toggleSeat = (seatId) => {
     if (occupiedSeats.includes(seatId)) return;
@@ -125,8 +132,41 @@ function Cinema() {
     }, 0);
   };
 
+  const quantity = selectedSeats.length;
+
+  const buildBasketItem = () => ({
+    eventType: "cinema",
+    productId: movie.id,
+    title: movie.title,
+    quantity,
+    seats: selectedSeats,
+    showKey,
+    eventDate: selectedDate,
+    eventTime: selectedTime,
+    language: selectedLang,
+    location: movie.location,
+    total: calculateTotal(),
+  });
+
+  const handleAddToBasket = () => {
+    if (quantity === 0) return;
+    addToBasket(buildBasketItem());
+    setActionMessage("Selected seats added to basket.");
+  };
+
+  const handleBuyNow = async () => {
+    if (quantity === 0) return;
+    try {
+      await buyNow(buildBasketItem());
+      setSelectedSeats([]);
+      setActionMessage("Tickets purchased successfully.");
+    } catch (error) {
+      setActionMessage(error.message || "Failed to purchase tickets.");
+    }
+  };
+
   if (loading && !product) {
-    return <div className="not-found"><h2>Yüklənir...</h2></div>;
+    return <div className="not-found"><h2>Loading...</h2></div>;
   }
 
   return (
@@ -352,6 +392,7 @@ function Cinema() {
       {/* ===== BOTTOM BAR ===== */}
       <div className="bottom-bar">
         <div className="booking-info">
+          {actionMessage && <span className="booking-details">{actionMessage}</span>}
           <span className="booking-details">
             {selectedDate} • {selectedTime} • {selectedLang}
           </span>
@@ -362,9 +403,8 @@ function Cinema() {
         </div>
         <div className="booking-actions">
           <span className="total-price">Total: ${calculateTotal()}</span>
-          <button disabled={selectedSeats.length === 0}>
-            Continue to Payment →
-          </button>
+          <button disabled={selectedSeats.length === 0} onClick={handleAddToBasket}>Add to Basket</button>
+          <button disabled={selectedSeats.length === 0} onClick={handleBuyNow}>Buy Now</button>
         </div>
       </div>
     </div>

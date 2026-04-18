@@ -1,6 +1,8 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import ScrollingTicker from "../../../components/ScrollingTicker"; 
+import { buildAssetUrl, fetchProductById, formatDate } from "../../../api/products";
+import { useBasket } from "../../../context/BasketContext";
 import "./KidsDetail.css";
 
 const kidsTheaters = [
@@ -26,13 +28,103 @@ const relatedTheaters = [
 ];
 
 function KidsTheaterDetail() {
-  const theater = kidsTheaters[0]; 
+  const { id } = useParams();
+  const { addToBasket, buyNow } = useBasket();
+  const [product, setProduct] = useState(null);
+  const [similarProducts, setSimilarProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [actionMessage, setActionMessage] = useState("");
+
+  useEffect(() => {
+    let active = true;
+    setLoading(true);
+    
+    (async () => {
+      try {
+        const data = await fetchProductById(id);
+        if (!active) return;
+        setProduct(data);
+        
+        // Fetch similar products from same category
+        const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5149";
+        const res = await fetch(`${API_BASE}/api/ProductGetAll`);
+        if (res.ok) {
+          const all = await res.json();
+          const similar = all
+            .filter(p => p.categoryName === data.categoryName && p.id !== data.id)
+            .slice(0, 2)
+            .map(p => ({
+              id: p.id,
+              title: p.name || "Unknown",
+              poster: buildAssetUrl(p.image) || ""
+            }));
+          setSimilarProducts(similar);
+        }
+      } catch (err) {
+        console.log("Error loading similar products:", err);
+      } finally {
+        active && setLoading(false);
+      }
+    })();
+
+    return () => {
+      active = false;
+    };
+  }, [id]);
+
+  const theater = product
+    ? {
+        ...kidsTheaters[0],
+        id: product.id,
+        title: product.name || kidsTheaters[0].title,
+        desc: product.description || kidsTheaters[0].desc,
+        genre: [product.categoryName, product.subCategoryName].filter(Boolean).join(", ") || kidsTheaters[0].genre,
+        location: product.address || kidsTheaters[0].location,
+        fromDate: formatDate(product.startDate) || kidsTheaters[0].fromDate,
+        time: product.startTime || kidsTheaters[0].time,
+        language: (product.languages || []).join(", ") || kidsTheaters[0].language,
+        age: product.ageRestriction ? `${product.ageRestriction}+` : kidsTheaters[0].age,
+        poster: buildAssetUrl(product.image) || kidsTheaters[0].poster,
+      }
+    : kidsTheaters[0];
   
   const [ticketCount, setTicketCount] = useState(1);
 
   const calculateTotal = () => {
     return theater.price * ticketCount;
   };
+
+  const buildBasketItem = () => ({
+    eventType: "kids",
+    productId: theater.id,
+    title: theater.title,
+    quantity: ticketCount,
+    seats: [],
+    showKey: `kids-${theater.id}-${theater.fromDate}-${theater.time}`,
+    eventDate: theater.fromDate,
+    eventTime: theater.time,
+    language: theater.language,
+    location: theater.location,
+    total: calculateTotal(),
+  });
+
+  const handleAddToBasket = () => {
+    addToBasket(buildBasketItem());
+    setActionMessage("Ticket added to basket.");
+  };
+
+  const handleBuyNow = async () => {
+    try {
+      await buyNow(buildBasketItem());
+      setActionMessage("Ticket purchased successfully.");
+    } catch (error) {
+      setActionMessage(error.message || "Failed to purchase ticket.");
+    }
+  };
+
+  if (loading && !product) {
+    return <div className="not-found"><h2>Loading...</h2></div>;
+  }
 
   return (
     <div className="kids-detail-page">
@@ -136,14 +228,18 @@ function KidsTheaterDetail() {
 
         {/* Related Section */}
         <div className="kids-related-section">
-          <h3 className="kids-section-tit`le">Related Theaters</h3>
+          <h3 className="kids-section-title">Similar Kids Shows</h3>
           <div className="kids-related-grid">
-            {relatedTheaters.map((rm) => (
-              <div key={rm.id} className="kids-related-card">
-                <img src={rm.poster} alt={rm.title} />
-                <p>{rm.title}</p>
-              </div>
-            ))}
+            {similarProducts.length > 0 ? (
+              similarProducts.map((rm) => (
+                <Link key={rm.id} to={`/kids-detail/${rm.id}`} className="kids-related-card">
+                  {rm.poster && <img src={rm.poster} alt={rm.title} />}
+                  <p>{rm.title}</p>
+                </Link>
+              ))
+            ) : (
+              <p>No similar kids shows available.</p>
+            )}
           </div>
         </div>
       </div>
@@ -151,6 +247,7 @@ function KidsTheaterDetail() {
       {/* Bottom Bar */}
       <div className="kids-bottom-bar">
         <div className="kids-booking-info">
+          {actionMessage && <span className="kids-booking-details">{actionMessage}</span>}
           <span className="kids-booking-details">
             {theater.fromDate} • {theater.time} • {theater.language}
           </span>
@@ -160,9 +257,8 @@ function KidsTheaterDetail() {
         </div>
         <div className="kids-booking-actions">
           <span className="kids-total-price">Total: ${calculateTotal()}</span>
-          <button className="kids-payment-btn">
-            Continue to Payment →
-          </button>
+          <button className="kids-payment-btn" onClick={handleAddToBasket}>Add to Basket</button>
+          <button className="kids-payment-btn" onClick={handleBuyNow}>Buy Now</button>
         </div>
       </div>
     </div>

@@ -12,7 +12,7 @@ import "./MoodEvents.css"
 export default function MoodEvents() {
   const navigate = useNavigate()
 
-  // 🔥 ROUTE-LARA TAM UYĞUN mapping
+  // 🔥 Route-to-mood mapping
   const moodMap = {
     energy: ["concert", "sport"],
     relax: ["movie", "museum"],

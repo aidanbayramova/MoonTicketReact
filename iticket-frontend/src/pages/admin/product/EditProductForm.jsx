@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { useToast, ToastContainer } from "../../../components/admin/Toast";
+import { AdminButton } from "../../../components/admin/AdminButton";
 import "./Product.css";
+
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5149";
 
 function EditProductForm() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { toasts, showToast, removeToast } = useToast();
 
   const now = new Date().toISOString().slice(0, 16);
 
@@ -18,28 +23,29 @@ function EditProductForm() {
   const [image, setImage] = useState(null);
   const [video, setVideo] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
 
-  // 🔥 Mövcud product-u gətir
+  // 🔥 Fetch existing product
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await fetch(`http://localhost:5149/api/ProductGetById/${id}`);
+        const res = await fetch(`${API_BASE}/api/ProductGetById/${id}`);
         const data = await res.json();
 
         setProduct(data);
-        setName(data.name || "");f
+        setName(data.name || "");
         setDescription(data.description || "");
         setAddress(data.address || "");
         setAgeRestriction(data.ageRestriction || 0);
 
-        // datetime-local formatına çevir
+        // Convert to datetime-local format
         const formatDate = (date) =>
           new Date(date).toISOString().slice(0, 16);
 
         setStartDate(formatDate(data.startDate));
         setEndDate(formatDate(data.endDate));
       } catch {
-        alert("Product tapılmadı");
+        showToast("Product not found", "error");
         navigate("/admin/product/productIndex");
       } finally {
         setLoading(false);
@@ -53,14 +59,16 @@ function EditProductForm() {
     e.preventDefault();
 
     if (new Date(startDate) < new Date()) {
-      alert("Keçmiş tarix seçilə bilməz");
+      showToast("Cannot select past date", "warning");
       return;
     }
 
     if (new Date(endDate) < new Date(startDate)) {
-      alert("EndDate StartDate-dən böyük olmalıdır");
+      showToast("End date must be after start date", "warning");
       return;
     }
+
+    setSaving(true);
 
     const formData = new FormData();
     formData.append("Name", name);
@@ -72,19 +80,31 @@ function EditProductForm() {
 
     if (image) formData.append("Image", image);
     if (video) formData.append("Video", video);
+    try {
+      const res = await fetch(`${API_BASE}/api/ProductEdit/${id}`, {
+        method: "PUT",
+        body: formData,
+      });
 
-    await fetch(`http://localhost:5149/api/ProductEdit/${id}`, {
-      method: "PUT",
-      body: formData,
-    });
+      if (!res.ok) {
+        const text = await res.text();
+        throw new Error(text || "Edit failed");
+      }
 
-    navigate("/admin/product");
+      showToast("✓ Product updated successfully!", "success");
+      setTimeout(() => navigate("/admin/product/productIndex"), 1000);
+    } catch (err) {
+      showToast("Error: " + err.message, "error");
+    } finally {
+      setSaving(false);
+    }
   };
 
   if (loading) return <div className="loading-box">Loading...</div>;
 
   return (
     <div className="product-form-wrapper">
+      <ToastContainer toasts={toasts} onRemoveToast={removeToast} />
       <form className="product-form" onSubmit={handleSubmit}>
         <h2>Edit Product</h2>
 
@@ -112,7 +132,7 @@ function EditProductForm() {
           onChange={(e) => setAgeRestriction(e.target.value)}
         />
 
-        {/* 🔥 Calendar + Saat */}
+        {/* 🔥 Calendar + Time */}
         <label>Start Date & Time</label>
         <input
           type="datetime-local"
@@ -131,7 +151,7 @@ function EditProductForm() {
           required
         />
 
-        {/* Mövcud şəkil */}
+        {/* Current Image */}
         {product.image && (
           <div>
             <p>Current Image:</p>
@@ -149,7 +169,7 @@ function EditProductForm() {
           onChange={(e) => setImage(e.target.files[0])}
         />
 
-        {/* Mövcud video */}
+        {/* Current Video */}
         {product.video && (
           <div>
             <p>Current Video:</p>
@@ -169,10 +189,12 @@ function EditProductForm() {
         />
 
         <div style={{ display: "flex", gap: "10px" }}>
-          <button type="submit">Save</button>
-          <button type="button" onClick={() => navigate("/admin/product/productIndex")}>
+          <AdminButton type="submit" variant="primary" loading={saving} disabled={saving}>
+            {saving ? "Saving..." : "Save Product"}
+          </AdminButton>
+          <AdminButton type="button" variant="cancel" onClick={() => navigate("/admin/product/productIndex")} disabled={saving}>
             Cancel
-          </button>
+          </AdminButton>
         </div>
       </form>
     </div>

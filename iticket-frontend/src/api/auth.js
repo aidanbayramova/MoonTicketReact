@@ -127,6 +127,18 @@ export const profileApi = {
       body: JSON.stringify(payload)
     });
     return parseResponse(res);
+  },
+
+  async createStripeCheckoutSession(token, payload) {
+    const res = await fetch(`${API_BASE}/api/payments/create-checkout-session`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
+    return parseResponse(res);
   }
 };
 

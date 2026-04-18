@@ -76,7 +76,7 @@ namespace MoonTicketApi.Controllers
             }
 
          
-            string role = "superadmin"; 
+            string role = "member"; 
 
             if (!await _roleManager.RoleExistsAsync(role))
             {
@@ -155,16 +155,23 @@ namespace MoonTicketApi.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var user = await _userManager.FindByEmailAsync(request.Email);
+            var loginIdentifier = string.IsNullOrWhiteSpace(request.Identifier)
+                ? request.Email?.Trim()
+                : request.Identifier.Trim();
+
+            if (string.IsNullOrWhiteSpace(loginIdentifier))
+                return BadRequest(new { message = "Email və ya username tələb olunur." });
+
+            var user = await FindUserByEmailOrUserNameAsync(loginIdentifier);
             if (user == null)
-                return Unauthorized(new { message = "Email və ya şifrə yanlışdır." });
+                return Unauthorized(new { message = "Username/email və ya şifrə yanlışdır." });
 
             if (!user.EmailConfirmed)
                 return Unauthorized(new { message = "Əvvəlcə email təsdiqini tamamlayın." });
 
             var signIn = await _signInManager.CheckPasswordSignInAsync(user, request.Password, false);
             if (!signIn.Succeeded)
-                return Unauthorized(new { message = "Email və ya şifrə yanlışdır." });
+                return Unauthorized(new { message = "Username/email və ya şifrə yanlışdır." });
 
             var roles = await _userManager.GetRolesAsync(user);
             var (tokenValue, expiresAt) = _jwtTokenGenerator.CreateToken(user, roles);
@@ -239,6 +246,18 @@ namespace MoonTicketApi.Controllers
             return Ok(new { message = "Şifrə uğurla yeniləndi." });
         }
 
+        private async Task<ApplicationUser?> FindUserByEmailOrUserNameAsync(string identifier)
+        {
+            var normalized = identifier.Trim();
+            var user = await _userManager.FindByEmailAsync(normalized);
+            if (user != null)
+            {
+                return user;
+            }
+
+            return await _userManager.FindByNameAsync(normalized);
+        }
+
         private static int CalculateAge(DateTime birthDate)
         {
             var today = DateTime.Today;
@@ -261,6 +280,7 @@ namespace MoonTicketApi.Controllers
                     FullName = user.FullName,
                     UserName = user.UserName ?? "",
                     Email = user.Email ?? "",
+                    EmailConfirmed = user.EmailConfirmed,
                     Phone = user.PhoneNumber,
                     BirthDate = user.BirthDate,
                     ProfileImage = user.ProfileImage,

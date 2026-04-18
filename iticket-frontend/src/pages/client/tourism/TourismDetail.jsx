@@ -1,6 +1,8 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import ScrollingTicker from "../../../components/ScrollingTicker";
+import { buildAssetUrl, fetchProductById, formatDate } from "../../../api/products";
+import { useBasket } from "../../../context/BasketContext";
 import "./TourismDetail.css";
 
 const tourismDetail = [
@@ -14,7 +16,7 @@ const tourismDetail = [
         location: "Cinema Park – Mall 28",
         time: "10:00-20:00",
         price: 12,
-        availableDates: ["2025-12-21", "2025-12-22", "2025-12-24"] // Seçilə biləcək tarixlər
+        availableDates: ["2025-12-21", "2025-12-22", "2025-12-24"] // Available dates
     },
 ];
 
@@ -24,12 +26,105 @@ const relatedtourisms = [
 ];
 
 function TourismDetail() {
-    const tourism = tourismDetail[0];
+    const { id } = useParams();
+    const { addToBasket, buyNow } = useBasket();
+    const [product, setProduct] = useState(null);
+    const [similarProducts, setSimilarProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [actionMessage, setActionMessage] = useState("");
+
+    useEffect(() => {
+        let active = true;
+        setLoading(true);
+        
+        (async () => {
+            try {
+                const data = await fetchProductById(id);
+                if (!active) return;
+                setProduct(data);
+                
+                // Fetch similar products from same category
+                const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5149";
+                const res = await fetch(`${API_BASE}/api/ProductGetAll`);
+                if (res.ok) {
+                    const all = await res.json();
+                    const similar = all
+                        .filter(p => p.categoryName === data.categoryName && p.id !== data.id)
+                        .slice(0, 2)
+                        .map(p => ({
+                            id: p.id,
+                            title: p.name || "Unknown",
+                            poster: buildAssetUrl(p.image) || ""
+                        }));
+                    setSimilarProducts(similar);
+                }
+            } catch (err) {
+                console.log("Error loading similar products:", err);
+            } finally {
+                active && setLoading(false);
+            }
+        })();
+
+        return () => {
+            active = false;
+        };
+    }, [id]);
+
+    const tourism = product
+        ? {
+              ...tourismDetail[0],
+              id: product.id,
+              title: product.name || tourismDetail[0].title,
+              desc: product.description || tourismDetail[0].desc,
+              genre: [product.categoryName, product.subCategoryName].filter(Boolean).join(", ") || tourismDetail[0].genre,
+              location: product.address || tourismDetail[0].location,
+              time: product.startTime || tourismDetail[0].time,
+              poster: buildAssetUrl(product.image) || tourismDetail[0].poster,
+              availableDates: product.startDate ? [new Date(product.startDate).toISOString().split("T")[0]] : tourismDetail[0].availableDates,
+          }
+        : tourismDetail[0];
 
     const [ticketCount, setTicketCount] = useState(1);
     const [selectedDate, setSelectedDate] = useState(tourism.availableDates[0]);
 
+    useEffect(() => {
+        if (tourism.availableDates?.length) {
+            setSelectedDate(tourism.availableDates[0]);
+        }
+    }, [tourism.availableDates]);
+
     const calculateTotal = () => tourism.price * ticketCount;
+
+    const buildBasketItem = () => ({
+        eventType: "tourism",
+        productId: tourism.id,
+        title: tourism.title,
+        quantity: ticketCount,
+        seats: [],
+        showKey: `tourism-${tourism.id}-${selectedDate}-${tourism.time}`,
+        eventDate: formatDate(new Date(selectedDate)) || selectedDate,
+        eventTime: tourism.time,
+        location: tourism.location,
+        total: calculateTotal(),
+    });
+
+    const handleAddToBasket = () => {
+        addToBasket(buildBasketItem());
+        setActionMessage("Ticket added to basket.");
+    };
+
+    const handleBuyNow = async () => {
+        try {
+            await buyNow(buildBasketItem());
+            setActionMessage("Ticket purchased successfully.");
+        } catch (error) {
+            setActionMessage(error.message || "Failed to purchase ticket.");
+        }
+    };
+
+    if (loading && !product) {
+        return <div className="not-found"><h2>Loading...</h2></div>;
+    }
 
     return (
         <div className="tourism-detail-page">
@@ -132,14 +227,18 @@ function TourismDetail() {
 
                 {/* Related Section */}
                 <div className="tourism-related-section">
-                    <h3 className="tourism-section-title">Related tourisms</h3>
+                    <h3 className="tourism-section-title">Similar Attractions</h3>
                     <div className="tourism-related-grid">
-                        {relatedtourisms.map((rm) => (
-                            <div key={rm.id} className="tourism-related-card">
-                                <img src={rm.poster} alt={rm.title} />
-                                <p>{rm.title}</p>
-                            </div>
-                        ))}
+                        {similarProducts.length > 0 ? (
+                            similarProducts.map((rm) => (
+                                <Link key={rm.id} to={`/tourism-detail/${rm.id}`} className="tourism-related-card">
+                                    {rm.poster && <img src={rm.poster} alt={rm.title} />}
+                                    <p>{rm.title}</p>
+                                </Link>
+                            ))
+                        ) : (
+                            <p>No similar attractions available.</p>
+                        )}
                     </div>
                 </div>
             </div>
@@ -147,6 +246,7 @@ function TourismDetail() {
             {/* Bottom Bar */}
             <div className="tourism-bottom-bar">
                 <div className="tourism-booking-info">
+                    {actionMessage && <span className="tourism-booking-details">{actionMessage}</span>}
                     <span className="tourism-booking-details">
                         {new Date(selectedDate).toLocaleDateString("en-US")} • {tourism.time}
                     </span>
@@ -156,9 +256,8 @@ function TourismDetail() {
                 </div>
                 <div className="tourism-booking-actions">
                     <span className="tourism-total-price">Total: ${calculateTotal()}</span>
-                    <button className="tourism-payment-btn">
-                        Continue to Payment →
-                    </button>
+                    <button className="tourism-payment-btn" onClick={handleAddToBasket}>Add to Basket</button>
+                    <button className="tourism-payment-btn" onClick={handleBuyNow}>Buy Now</button>
                 </div>
             </div>
         </div>

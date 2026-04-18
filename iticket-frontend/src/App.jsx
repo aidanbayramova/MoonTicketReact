@@ -31,6 +31,9 @@ import ForgotPassword from "./pages/client/auth/ForgotPassword";
 import ResetPassword from "./pages/client/auth/ResetPassword";
 import ConfirmEmail from "./pages/client/auth/ConfirmEmail";
 import Profile from "./pages/client/profile/Profile";
+import Basket from "./pages/client/basket/Basket";
+import PaymentSuccess from "./pages/client/payment/PaymentSuccess";
+import PaymentCancel from "./pages/client/payment/PaymentCancel";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 /* ===== ADMIN ===== */
@@ -141,6 +144,9 @@ function App() {
       <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/confirm-email" element={<ConfirmEmail />} />
       <Route path="/profile" element={<ProtectedRoute><Layout><Profile /></Layout></ProtectedRoute>} />
+      <Route path="/basket" element={<Layout><Basket /></Layout>} />
+      <Route path="/payment/success" element={<Layout><PaymentSuccess /></Layout>} />
+      <Route path="/payment/cancel" element={<Layout><PaymentCancel /></Layout>} />
 
       {/* ================= ADMIN  ================= */}
       <Route path="/admin" element={<Dashboard />}>

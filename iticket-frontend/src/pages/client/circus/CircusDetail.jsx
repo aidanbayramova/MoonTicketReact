@@ -1,5 +1,8 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
+import { buildAssetUrl, fetchProductById, formatDate } from "../../../api/products";
+import { useBasket } from "../../../context/BasketContext";
 
 import ScrollingTicker from "../../../components/ScrollingTicker"; 
 
@@ -68,12 +71,75 @@ const circusSections = [
 const occupiedSeats = ["vip1-5", "vip2-3", "prem1-12", "std1-25", "std3-8"];
 
 function CircusDetail() {
-  const show = shows[0];
+  const { id } = useParams();
+  const { addToBasket, buyNow, getOccupiedSeats } = useBasket();
+  const [product, setProduct] = useState(null);
+  const [similarProducts, setSimilarProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [actionMessage, setActionMessage] = useState("");
+
+  useEffect(() => {
+    let active = true;
+    setLoading(true);
+    
+    (async () => {
+      try {
+        const data = await fetchProductById(id);
+        if (!active) return;
+        setProduct(data);
+        
+        // Fetch similar products from same category
+        const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5149";
+        const res = await fetch(`${API_BASE}/api/ProductGetAll`);
+        if (res.ok) {
+          const all = await res.json();
+          const similar = all
+            .filter(p => p.categoryName === data.categoryName && p.id !== data.id)
+            .slice(0, 2)
+            .map(p => ({
+              id: p.id,
+              title: p.name || "Unknown",
+              image: buildAssetUrl(p.image) || ""
+            }));
+          setSimilarProducts(similar);
+        }
+      } catch (err) {
+        console.log("Error loading similar products:", err);
+      } finally {
+        active && setLoading(false);
+      }
+    })();
+
+    return () => {
+      active = false;
+    };
+  }, [id]);
+
+  const show = product
+    ? {
+        ...shows[0],
+        id: product.id,
+        title: product.name || shows[0].title,
+        teams: product.personName || shows[0].teams,
+        desc: product.description || shows[0].desc,
+        league: [product.categoryName, product.subCategoryName].filter(Boolean).join(", ") || shows[0].league,
+        stadium: product.address || shows[0].stadium,
+        date: formatDate(product.startDate) || shows[0].date,
+        time: product.startTime || shows[0].time,
+        age: product.ageRestriction ? `${product.ageRestriction}+` : shows[0].age,
+        image: buildAssetUrl(product.image) || shows[0].image,
+      }
+    : shows[0];
+
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [activeSection, setActiveSection] = useState(null);
 
+  const showKey = `circus-${show.id}-${show.date}-${show.time}`;
+  const occupiedFromOrders = getOccupiedSeats(showKey);
+  const occupiedSeatSet = new Set([...occupiedSeats, ...occupiedFromOrders]);
+
   const toggleSeat = (seatId) => {
-    if (occupiedSeats.includes(seatId)) return;
+    if (occupiedSeatSet.has(seatId)) return;
     setSelectedSeats((prev) =>
       prev.includes(seatId)
         ? prev.filter((s) => s !== seatId)
@@ -96,6 +162,41 @@ function CircusDetail() {
       top: `calc(50% + ${Math.sin(rad) * radius}px)`,
     };
   };
+
+  const buildBasketItem = () => ({
+    eventType: "circus",
+    productId: show.id,
+    title: show.title,
+    quantity: selectedSeats.length,
+    seats: selectedSeats,
+    showKey,
+    eventDate: show.date,
+    eventTime: show.time,
+    language: show.language,
+    location: show.stadium,
+    total: getTotalPrice(),
+  });
+
+  const handleAddToBasket = () => {
+    if (!selectedSeats.length) return;
+    addToBasket(buildBasketItem());
+    setActionMessage("Selection added to basket.");
+  };
+
+  const handleBuyNow = async () => {
+    if (!selectedSeats.length) return;
+    try {
+      await buyNow(buildBasketItem());
+      setSelectedSeats([]);
+      setActionMessage("Tickets purchased successfully.");
+    } catch (error) {
+      setActionMessage(error.message || "Failed to purchase tickets.");
+    }
+  };
+
+  if (loading && !product) {
+    return <div className="not-found"><h2>Loading...</h2></div>;
+  }
 
   return (
     <div className="circus-page">
@@ -182,7 +283,7 @@ function CircusDetail() {
               <div className="seats-grid">
                 {Array.from({ length: section.seats }).map((_, i) => {
                   const seatId = `${section.id}-${i + 1}`;
-                  const occupied = occupiedSeats.includes(seatId);
+                  const occupied = occupiedSeatSet.has(seatId);
                   const selected = selectedSeats.includes(seatId);
 
                   return (
@@ -258,12 +359,11 @@ function CircusDetail() {
 
       {/* ===== BOTTOM BAR ===== */}
       <div className="bottom-bar">
-        <span className="seat-info">
-          {selectedSeats.length} seat(s) selected
-        </span>
+        <span className="seat-info">{actionMessage || `${selectedSeats.length} seat(s) selected`}</span>
         <div className="booking-actions">
           <span className="total-price">${getTotalPrice()}</span>
-          <button disabled={!selectedSeats.length}>Buy Ticket →</button>
+          <button disabled={!selectedSeats.length} onClick={handleAddToBasket}>Add to Basket</button>
+          <button disabled={!selectedSeats.length} onClick={handleBuyNow}>Buy Now</button>
         </div>
       </div>
     </div>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import ScrollingTicker from "../../../components/ScrollingTicker";
 import { buildAssetUrl, fetchProductById, formatDate } from "../../../api/products";
+import { useBasket } from "../../../context/BasketContext";
 import "./ConcertDetail.css";
 
 const fallbackConcert = {
@@ -45,19 +46,43 @@ const venueLayout = [
 
 function Concert() {
   const { id } = useParams();
+  const { addToBasket, buyNow, getOccupiedSeats } = useBasket();
   const [product, setProduct] = useState(null);
+  const [similarProducts, setSimilarProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [actionMessage, setActionMessage] = useState("");
 
   useEffect(() => {
     let active = true;
     setLoading(true);
-    fetchProductById(id)
-      .then((data) => {
+    
+    (async () => {
+      try {
+        const data = await fetchProductById(id);
         if (!active) return;
         setProduct(data);
-      })
-      .catch(() => {})
-      .finally(() => active && setLoading(false));
+        
+        // Fetch similar products from same category
+        const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5149";
+        const res = await fetch(`${API_BASE}/api/ProductGetAll`);
+        if (res.ok) {
+          const all = await res.json();
+          const similar = all
+            .filter(p => p.categoryName === data.categoryName && p.id !== data.id)
+            .slice(0, 2)
+            .map(p => ({
+              id: p.id,
+              title: p.name || "Unknown",
+              image: buildAssetUrl(p.image) || ""
+            }));
+          setSimilarProducts(similar);
+        }
+      } catch (err) {
+        console.log("Error loading similar products:", err);
+      } finally {
+        active && setLoading(false);
+      }
+    })();
     return () => {
       active = false;
     };
@@ -88,7 +113,7 @@ function Concert() {
     'B': 31
   };
 
-  const occupiedSeats = [
+  const staticOccupiedSeats = [
     "VIP-1-2", "VIP-1-5", "VIP-2-3",
     "C-1-4", "C-2-7", "C-3-10",
     "D-1-3", "D-2-8", "D-4-12",
@@ -97,6 +122,10 @@ function Concert() {
 
   const [selectedTickets, setSelectedTickets] = useState({});
   const [selectedSeats, setSelectedSeats] = useState([]);
+
+  const showKey = `concert-${concert.id}-${concert.date}-${concert.time}`;
+  const occupiedFromOrders = getOccupiedSeats(showKey);
+  const occupiedSeats = Array.from(new Set([...staticOccupiedSeats, ...occupiedFromOrders]));
 
   const toggleSeat = (seatId) => {
     if (occupiedSeats.includes(seatId)) return;
@@ -152,8 +181,41 @@ function Concert() {
     return standingCount + selectedSeats.length;
   };
 
+  const buildBasketItem = () => ({
+    eventType: "concert",
+    productId: concert.id,
+    title: concert.title,
+    quantity: getTotalTickets(),
+    seats: selectedSeats,
+    standing: selectedTickets,
+    showKey,
+    eventDate: concert.date,
+    eventTime: concert.time,
+    language: concert.language,
+    location: concert.location,
+    total: calculateTotal(),
+  });
+
+  const handleAddToBasket = () => {
+    if (getTotalTickets() === 0) return;
+    addToBasket(buildBasketItem());
+    setActionMessage("Selection added to basket.");
+  };
+
+  const handleBuyNow = async () => {
+    if (getTotalTickets() === 0) return;
+    try {
+      await buyNow(buildBasketItem());
+      setSelectedSeats([]);
+      setSelectedTickets({});
+      setActionMessage("Tickets purchased successfully.");
+    } catch (error) {
+      setActionMessage(error.message || "Failed to purchase tickets.");
+    }
+  };
+
   if (loading && !product) {
-    return <div className="not-found"><h2>Yüklənir...</h2></div>;
+    return <div className="not-found"><h2>Loading...</h2></div>;
   }
 
   return (
@@ -356,20 +418,25 @@ function Concert() {
 
       {/* ===== RELATED CONCERTS ===== */}
       <div className="related-section">
-        <h3 className="section-title">Related Concerts</h3>
+        <h3 className="section-title">Similar Concerts</h3>
         <div className="related-grid">
-          {relatedConcerts.map((rc) => (
-            <div key={rc.id} className="related-card">
-              <img src={rc.image} alt={rc.title} />
-              <p>{rc.title}</p>
-            </div>
-          ))}
+          {similarProducts.length > 0 ? (
+            similarProducts.map((rc) => (
+              <Link key={rc.id} to={`/event/concert/${rc.id}`} className="related-card">
+                {rc.image && <img src={rc.image} alt={rc.title} />}
+                <p>{rc.title}</p>
+              </Link>
+            ))
+          ) : (
+            <p>No similar concerts available.</p>
+          )}
         </div>
       </div>
 
       {/* ===== BOTTOM BAR ===== */}
       <div className="bottom-bar">
         <div className="booking-info">
+          {actionMessage && <span className="booking-details">{actionMessage}</span>}
           <span className="booking-details">
             {concert.date} • {concert.time} • {concert.language}
           </span>
@@ -380,9 +447,8 @@ function Concert() {
         </div>
         <div className="booking-actions">
           <span className="total-price">Total: ${calculateTotal()}</span>
-          <button disabled={getTotalTickets() === 0}>
-            Continue to Payment →
-          </button>
+          <button disabled={getTotalTickets() === 0} onClick={handleAddToBasket}>Add to Basket</button>
+          <button disabled={getTotalTickets() === 0} onClick={handleBuyNow}>Buy Now</button>
         </div>
       </div>
     </div>

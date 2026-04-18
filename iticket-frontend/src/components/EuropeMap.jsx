@@ -202,7 +202,7 @@ export default function EuropeMap() {
         setAddressGroups(withCoords.filter((group) => Array.isArray(group.coords)));
       } catch (error) {
         if (!active) return;
-        setLoadError("Address-ləri xəritədə göstərmək üçün məlumatlar yüklənmədi.");
+        setLoadError("Failed to load address data to display on map.");
       } finally {
         if (active) setLoading(false);
       }

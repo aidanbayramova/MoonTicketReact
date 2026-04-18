@@ -107,7 +107,7 @@
     cursor: pointer;
     transition: 0.3s ease;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-    appearance: none; /* default arrow gizlətmək üçün */
+    appearance: none; /* hide default arrow */
     -webkit-appearance: none;
     -moz-appearance: none;
     background-position: right 15px center;

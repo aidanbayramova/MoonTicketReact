@@ -1,103 +1,125 @@
 /* ===== PAGE CONTAINER ===== */
 .slider-container {
-    padding: 24px;
-    min-height: 100%;
-    font-family: "Poppins", sans-serif;
-    color: #f5f5f5;
-  }
-  
-  /* ===== TITLE ===== */
-  .slider-container h2 {
-    margin-bottom: 33px;
-    font-size: 40px;
-    font-weight: 600;
-    color: #ffffff;
-    margin-top: -3pc;
+  padding: 24px;
+  min-height: 100%;
+  font-family: "Poppins", sans-serif;
+  color: #f5f5f5;
 }
-  
-  /* ===== CREATE BUTTON ===== */
-  .slider-container .create-btn {
-    margin-bottom: 22px;
-    padding: 12px 28px;
-    border-radius: 26px;
-    border: none;
-    cursor: pointer;
-  
-    background: linear-gradient(135deg, #350404, #530808);
-    color: #fff;
-    font-weight: 600;
-  
-    box-shadow: 0 14px 35px rgba(83, 8, 8, 0.55);
-    transition: 0.3s ease;
-  }
-  
-  .slider-container .create-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 18px 40px rgba(83, 8, 8, 0.8);
-  }
-  
-  .slider-table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-    overflow: hidden;
-  
-    background: linear-gradient(
-      160deg,
-      rgba(40, 12, 12, 0.9),
-      rgba(55, 14, 14, 0.9)
-    );
-    border-radius: 24px;
-  
-    box-shadow:
-      inset 0 0 0 1px rgba(255, 255, 255, 0.06),
-      0 30px 80px rgb(2, 0, 0);
-  }
-  
-  .slider-table thead {
-    background: linear-gradient(135deg, #350404, #4d010b);
-  }
-  
-  .slider-table th {
-    padding: 16px 18px;
-    font-size: 14px;
-    font-weight: 600;
-    color: #ffffff;
-    text-transform: uppercase;
-  }
-  
-  .slider-table td {
-    padding: 16px 18px;
-    font-size: 14px;
-    color: #cfcfcf;
-  }
-  
-  .slider-table tbody tr {
-    transition: 0.3s ease;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  }
-  
-  .slider-table tbody tr:hover {
-    background: rgba(83, 8, 8, 0.18);
-  }
-  
-  /* ===== IMAGE ===== */
-  .slider-table img {
-    width: 80px;
-    height: 48px;
-    object-fit: cover;
-    border-radius: 10px;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
-  }
-  
-  /* ===== ACTION BUTTONS ===== */
-  .action-btn {
-    padding: 8px 16px;
-    border-radius: 20px;
-    border: none;
-    cursor: pointer;
-    font-size: 13px;
-    font-weight: 500;
+
+/* ===== PAGE HEADER ===== */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.page-header h2 {
+  font-size: 36px;
+  margin: 0;
+  font-weight: 600;
+}
+
+/* ===== TABLE ===== */
+.slider-table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+  background: linear-gradient(
+    160deg,
+    rgba(40, 12, 12, 0.9),
+    rgba(55, 14, 14, 0.9)
+  );
+  border-radius: 20px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06), 0 20px 50px rgb(2, 0, 0);
+  margin-top: 20px;
+}
+
+.slider-table thead {
+  background: linear-gradient(135deg, #350404, #4d010b);
+}
+
+.slider-table th {
+  padding: 14px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.slider-table td {
+  padding: 14px 16px;
+  font-size: 14px;
+  color: #cfcfcf;
+  text-align: left;
+}
+
+.slider-table tbody tr {
+  transition: background-color 0.2s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.slider-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.slider-table tbody tr:hover {
+  background: rgba(83, 8, 8, 0.18);
+}
+
+.slider-table td.title {
+  font-weight: 500;
+}
+
+.slider-table td.name-cell {
+  font-weight: 500;
+}
+
+.slider-table td.description {
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.slider-table td.media {
+  text-align: center;
+}
+
+.slider-table img {
+  width: 80px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+.slider-table td.media .no-media {
+  color: #999;
+  font-size: 12px;
+}
+
+.slider-table td.empty-state {
+  text-align: center;
+  color: #888;
+  padding: 40px 16px;
+}
+
+.slider-table td.actions {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.loading-box {
+  padding: 40px;
+  text-align: center;
+  color: #999;
+}
     transition: 0.3s ease;
   }
   
@@ -313,15 +335,15 @@
     font-size: 39px;
   }
 
-  /* Table-da bütün mətni ellipsis ilə göstərmək */
+  /* Display all table text with ellipsis */
 table td {
-    max-width: 200px;         /* istədiyin maksimum en */
-    white-space: nowrap;       /* tək sətirdə saxla */
-    overflow: hidden;          /* daşanı gizlət */
-    text-overflow: ellipsis;   /* uzun mətni ... ilə göstər */
+    max-width: 200px;         /* desired max width */
+    white-space: nowrap;       /* keep in single line */
+    overflow: hidden;          /* hide overflow */
+    text-overflow: ellipsis;   /* show long text with ... */
   }
   
-  /* Image və Actions hüceyrələrinə təsir etməmək üçün xüsusi siniflər əlavə edə bilərsən */
+  /* Use special classes to exclude image and actions cells */
   table td.image, table td.actions {
     max-width: none;
     white-space: normal;

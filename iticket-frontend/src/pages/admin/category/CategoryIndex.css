@@ -6,26 +6,26 @@
   color: #f5f5f5;
 }
 
+/* Page Header */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.page-header h2 {
+  font-size: 36px;
+  margin: 0;
+  font-weight: 600;
+}
+
 h2.form-title {
-    font-size: 36px;
+  font-size: 36px;
   margin-bottom: 24px;
   font-weight: 600;
-}
-
-
-.cancel-btn {
-  padding: 10px 20px;
-  border-radius: 26px;
-  border: none;
-  background: linear-gradient(135deg, #350404, #6b0f0f);
-  color: #fff;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.3s ease;
-}
-.cancel-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(83, 8, 8, 0.5);
 }
 
 /* Table */
@@ -37,17 +37,28 @@ h2.form-title {
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06), 0 20px 50px rgb(2, 0, 0);
   text-align: center;
   margin-top: 20px;
+  overflow: hidden;
 }
 
 .category-table th,
 .category-table td {
-  padding: 12px 16px;
+  padding: 14px 16px;
   color: #fff;
 }
 
 .category-table th {
   background: linear-gradient(135deg, #350404, #4d010b);
   font-weight: 600;
+  text-align: left;
+}
+
+.category-table tbody tr {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: background-color 0.2s ease;
+}
+
+.category-table tbody tr:last-child {
+  border-bottom: none;
 }
 
 .category-table tbody tr:hover {
@@ -61,12 +72,38 @@ h2.form-title {
   text-overflow: ellipsis;
 }
 
+.category-table td.name-cell {
+  font-weight: 500;
+}
+
+.category-table td.media {
+  text-align: center;
+}
+
 .category-table td.media img,
 .category-table td.media video {
-    width: 98px;
-    height: 88px;
+  width: 98px;
+  height: 88px;
   object-fit: cover;
   border-radius: 10px;
+  display: inline-block;
+}
+
+.category-table td.media .no-media {
+  color: #999;
+  font-size: 12px;
+}
+
+.category-table td.empty-state {
+  text-align: center;
+  color: #888;
+  padding: 40px 16px;
+}
+
+.category-table td.actions {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
 }
 
 /* Form inputs */
@@ -74,28 +111,94 @@ h2.form-title {
   display: flex;
   flex-direction: column;
   gap: 15px;
-  max-width: 500px;
+  max-width: 600px;
 }
 
 .category-form input[type="text"],
 .category-form textarea,
 .category-form input[type="file"] {
-  padding: 10px;
+  padding: 12px;
   border-radius: 10px;
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  color: #f5f5f5;
+  font-family: "Poppins", sans-serif;
   outline: none;
+  transition: all 0.3s ease;
+}
+
+.category-form input[type="text"]:focus,
+.category-form textarea:focus,
+.category-form input[type="file"]:focus {
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 3px rgba(123, 19, 5, 0.2);
 }
 
 .category-form textarea {
   resize: vertical;
-  min-height: 80px;
+  min-height: 100px;
+}
+
+.category-form label {
+  color: #ccc;
+  font-weight: 500;
+  margin-top: 8px;
 }
 
 /* Form buttons */
-.form-buttons {
+.form-buttons,
+.form-actions {
   display: flex;
-  gap: 10px;
+  gap: 12px;
   margin-top: 10px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.file-name {
+  font-size: 12px;
+  color: #4caf50;
+  margin-top: -8px;
+}
+
+.media-preview-container {
+  display: flex;
+  gap: 20px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.media-preview {
+  flex: 1;
+  min-width: 200px;
+}
+
+.media-preview p {
+  color: #aaa;
+  font-size: 12px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.media-preview img,
+.media-preview video {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.loading-box {
+  padding: 40px;
+  text-align: center;
+  color: #999;
 }
 
 /* Media previews */
@@ -115,8 +218,8 @@ h2.form-title {
 
 .media-preview-container {
     display: flex;
-    gap: 1rem; /* aralarında boşluq */
-    flex-wrap: wrap; /* kiçik ekranlarda alt-alta düşsün */
+    gap: 1rem; /* spacing between items */
+    flex-wrap: wrap; /* wrap on small screens */
     margin-bottom: 1rem;
   }
   
@@ -124,7 +227,7 @@ h2.form-title {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 220px; /* ölçü balaca */
+    width: 220px; /* small size */
   }
   
   .media-preview img,

@@ -1,0 +1,44 @@
+.payment-status-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 20px 40px;
+  background: radial-gradient(circle at 20% 20%, rgba(190, 24, 93, 0.18), transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.18), transparent 40%),
+    #0b1220;
+}
+
+.payment-status-card {
+  width: min(560px, 100%);
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  border-radius: 16px;
+  background: rgba(15, 23, 42, 0.82);
+  padding: 24px;
+  color: #e2e8f0;
+}
+
+.payment-status-card h1 {
+  margin: 0 0 12px;
+}
+
+.payment-status-card p {
+  margin: 0;
+  color: #cbd5e1;
+}
+
+.payment-status-actions {
+  margin-top: 18px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.payment-status-actions a {
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: #b91c1c;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+}
