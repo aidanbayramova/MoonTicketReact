@@ -42,17 +42,41 @@ export const authApi = {
 
   async login(payload) {
     try {
-      console.log("Login request sent to:", `${API_BASE}/api/auth/login`);
-      console.log("Login payload:", payload);
+      const endpoint = `${API_BASE}/api/auth/login`;
+      const body = JSON.stringify(payload);
       
-      const res = await fetch(`${API_BASE}/api/auth/login`, {
+      console.log("=== LOGIN REQUEST ===");
+      console.log("Endpoint:", endpoint);
+      console.log("Payload:", payload);
+      console.log("Stringified body:", body);
+      
+      const res = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
+        body: body
       });
       
-      console.log("Login response status:", res.status);
-      return parseResponse(res);
+      console.log("Response status:", res.status);
+      
+      // Response body'yi oku
+      const responseText = await res.text();
+      console.log("Response body:", responseText);
+      
+      // Manuel parse et
+      let responseData = null;
+      try {
+        responseData = responseText ? JSON.parse(responseText) : null;
+      } catch (e) {
+        console.error("Failed to parse response:", responseText);
+      }
+      
+      if (!res.ok) {
+        const message = responseData?.message || responseData?.error || `Status ${res.status}: ${responseText}`;
+        console.error("Login failed:", message);
+        throw new Error(message);
+      }
+      
+      return responseData;
     } catch (err) {
       console.error("Login error:", err);
       throw err;

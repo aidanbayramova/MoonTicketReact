@@ -22,13 +22,11 @@ export default function Login() {
     setLoading(true);
     
     try {
-      // Email pattern detect et
-      const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.emailOrUsername);
-      
-      // Backend-ə göndəriləcək payload
-      const payload = isEmail 
-        ? { email: formData.emailOrUsername, password: formData.password }
-        : { username: formData.emailOrUsername, password: formData.password };
+      // Backend `Identifier` alanını gözləyir (email və ya username hər ikisi ola bilər)
+      const payload = {
+        identifier: formData.emailOrUsername,
+        password: formData.password
+      };
       
       console.log("Login attempt with payload:", payload);
       await login(payload);
