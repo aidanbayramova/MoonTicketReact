@@ -36,11 +36,17 @@ import PaymentSuccess from "./pages/client/payment/PaymentSuccess";
 import PaymentCancel from "./pages/client/payment/PaymentCancel";
 import ProtectedRoute from "./components/ProtectedRoute";
 
+/* ===== ERROR PAGES ===== */
+import NotFound from "./pages/errors/NotFound";
+import BadRequest from "./pages/errors/BadRequest";
+import Unauthorized from "./pages/errors/Unauthorized";
+
 /* ===== ADMIN ===== */
 import Dashboard from "./pages/admin/dashboard/Dashboard";
 import SliderIndex from "./pages/admin/slider/SliderIndex";
 import CreateSliderForm from "./pages/admin/slider/CreateSliderForm";
 import EditSliderForm from "./pages/admin/slider/EditSliderForm";
+import ReservationIndex from "./pages/admin/reservation/ReservationIndex";
 
 
 import SettingIndex from "./pages/admin/setting/SettingIndex";
@@ -149,9 +155,18 @@ function App() {
       <Route path="/payment/cancel" element={<Layout><PaymentCancel /></Layout>} />
 
       {/* ================= ADMIN  ================= */}
-      <Route path="/admin" element={<Dashboard />}>
+      <Route 
+        path="/admin" 
+        element={
+          <ProtectedRoute adminPanel={true} requiredRoles={["Admin", "SuperAdmin"]}>
+            <Dashboard />
+          </ProtectedRoute>
+        }
+      >
         <Route index element={<h2>Admin Dashboard</h2>} />
         <Route path="dashboard" element={<h2 style={{fontSize:"40px",display:"flex" , justifyContent:"center",alignItems:"center",marginTop:"-3pc"}}>Admin Dashboard</h2>} />
+
+        <Route path="reservation/index" element={<ReservationIndex />} />
 
         <Route path="slider/sliderIndex" element={<SliderIndex />} />
         <Route path="slider/createSliderForm" element={<CreateSliderForm />} />
@@ -198,6 +213,12 @@ function App() {
         <Route path="contact/reply/:id" element={<ReplyContactMessageForm />} />
         <Route path="subscriber/index" element={<SubscriberIndex />} />
       </Route>
+
+      {/* ================= ERROR PAGES  ================= */}
+      <Route path="/not-found" element={<NotFound />} />
+      <Route path="/bad-request" element={<BadRequest />} />
+      <Route path="/unauthorized" element={<Unauthorized />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }

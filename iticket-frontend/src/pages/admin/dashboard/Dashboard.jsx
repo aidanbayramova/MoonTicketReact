@@ -40,15 +40,11 @@ const AdminDashboard = () => {
             Dashboard
           </NavLink>
 
-          <NavLink to="/admin/slider/sliderIndex" className="menu-btn">
-            Sliders
+          <NavLink to="/admin/reservation/index" className="menu-btn">
+            Reservations
           </NavLink>
 
-          <NavLink to="/admin/setting/settingIndex" className="menu-btn">
-            Settings
-          </NavLink>
-
-          {/* NEWS DROPDOWN */}
+          {/* NEWS DROPDOWN - ONLY DETAIL & EDIT */}
           <div className="dropdown" ref={newsRef}>
             <div className="menu-btn news-btn">
               <span
@@ -74,31 +70,33 @@ const AdminDashboard = () => {
             {newsOpen && (
               <div className="dropdown-content">
                 <NavLink
-                  to="/admin/news/newsIndex"
+                  to="/admin/news/detailNews/1"
                   className="dropdown-item"
                 >
-                  All News
+                  View News
                 </NavLink>
                 <NavLink
-                  to="/admin/newsauthor/newsAuthorIndex"
+                  to="/admin/newsauthor/detailNewsAuthor/1"
                   className="dropdown-item"
                 >
-                  News Authors
+                  View Authors
                 </NavLink>
               </div>
             )}
           </div>
 
-          {/* PRODUCTS DROPDOWN */}
+          {/* PRODUCTS DROPDOWN - ONLY DETAIL & EDIT */}
           <div className="dropdown" ref={productsRef}>
             <div className="menu-btn products-btn">
-              <NavLink
-                to="/admin/product/productIndex"
-                className="products-link"
-                style={{ color: "white" }}
+              <span
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setProductsOpen((prev) => !prev);
+                }}
+                style={{ cursor: "pointer", color: "white" }}
               >
                 Products
-              </NavLink>
+              </span>
               <span
                 className={`menu-icon ${productsOpen ? "rotate" : ""}`}
                 onClick={(e) => {
@@ -112,36 +110,20 @@ const AdminDashboard = () => {
             {productsOpen && (
               <div className="dropdown-content">
                 <NavLink
-                  to="/admin/category/categoryIndex"
+                  to="/admin/product/detailProduct/1"
                   className="dropdown-item"
                 >
-                  Category
+                  View Product
                 </NavLink>
                 <NavLink
-                  to="/admin/person/PersonIndex"
+                  to="/admin/setting/settingDetail/1"
                   className="dropdown-item"
                 >
-                  Persons
-                </NavLink>
-                <NavLink
-                  to="/admin/language/languageIndex"
-                  className="dropdown-item"
-                >
-                  Languages
-                </NavLink>
-                <NavLink
-                  to="/admin/subcategory/SubCategoryIndex"
-                  className="dropdown-item"
-                >
-                  SubCategories
+                  Settings
                 </NavLink>
               </div>
             )}
           </div>
-
-          <NavLink to="/admin/statistics" className="menu-btn">
-            Statistics
-          </NavLink>
 
           <NavLink to="/admin/contact/messages" className="menu-btn">
             Contact Messages

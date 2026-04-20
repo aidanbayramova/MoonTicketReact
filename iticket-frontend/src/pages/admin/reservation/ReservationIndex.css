@@ -1,0 +1,123 @@
+.reservation-container {
+  padding: 30px;
+  background: #0a0a0a;
+  border-radius: 10px;
+  margin: 20px 0;
+}
+
+.reservation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  border-bottom: 2px solid #800020;
+  padding-bottom: 15px;
+}
+
+.reservation-header h2 {
+  color: white;
+  font-size: 28px;
+  margin: 0;
+}
+
+.reservation-count {
+  color: #800020;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.reservation-empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: #999;
+  font-size: 16px;
+}
+
+.reservation-loading,
+.reservation-error {
+  text-align: center;
+  padding: 20px;
+  color: #ccc;
+  font-size: 16px;
+}
+
+.reservation-error {
+  color: #ef013d;
+}
+
+.reservation-table-wrapper {
+  overflow-x: auto;
+}
+
+.reservation-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.reservation-table thead {
+  background: #800020;
+}
+
+.reservation-table th {
+  color: white;
+  padding: 15px;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 2px solid #600018;
+}
+
+.reservation-table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #333;
+  color: #ddd;
+}
+
+.reservation-table tbody tr:hover {
+  background: #252525;
+}
+
+.reservation-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.btn-cancel {
+  background: #dc2626;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-cancel:hover {
+  background: #ef013d;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .reservation-container {
+    padding: 15px;
+  }
+
+  .reservation-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .reservation-table {
+    font-size: 14px;
+  }
+
+  .reservation-table th,
+  .reservation-table td {
+    padding: 10px;
+  }
+}
