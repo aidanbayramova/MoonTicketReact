@@ -1,13 +1,20 @@
 const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5149";
 
 const parseResponse = async (res) => {
-  const text = await res.text();
-  const data = text ? JSON.parse(text) : null;
-  if (!res.ok) {
-    const message = data?.message || "Request failed";
-    throw new Error(message);
+  try {
+    const text = await res.text();
+    const data = text ? JSON.parse(text) : null;
+    
+    if (!res.ok) {
+      const message = data?.message || data?.error || `Request failed with status ${res.status}`;
+      console.error(`API Error: ${res.status}`, { data, message });
+      throw new Error(message);
+    }
+    return data;
+  } catch (err) {
+    console.error("Response parsing error:", err);
+    throw err;
   }
-  return data;
 };
 
 export const authStorage = {
@@ -34,12 +41,22 @@ export const authApi = {
   },
 
   async login(payload) {
-    const res = await fetch(`${API_BASE}/api/auth/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    });
-    return parseResponse(res);
+    try {
+      console.log("Login request sent to:", `${API_BASE}/api/auth/login`);
+      console.log("Login payload:", payload);
+      
+      const res = await fetch(`${API_BASE}/api/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      
+      console.log("Login response status:", res.status);
+      return parseResponse(res);
+    } catch (err) {
+      console.error("Login error:", err);
+      throw err;
+    }
   },
 
   async confirmEmail(email, token) {

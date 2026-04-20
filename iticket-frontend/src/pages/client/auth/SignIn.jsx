@@ -20,11 +20,22 @@ export default function Login() {
     e.preventDefault();
     setMessage("");
     setLoading(true);
+    
     try {
-      await login(formData);
+      // Email pattern detect et
+      const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.emailOrUsername);
+      
+      // Backend-ə göndəriləcək payload
+      const payload = isEmail 
+        ? { email: formData.emailOrUsername, password: formData.password }
+        : { username: formData.emailOrUsername, password: formData.password };
+      
+      console.log("Login attempt with payload:", payload);
+      await login(payload);
       navigate("/profile");
     } catch (error) {
-      setMessage(error.message || "Login failed.");
+      console.error("Login error:", error);
+      setMessage(error.message || "Login olmadı. Zəhmət olmasa yenidən cəhd edin.");
     } finally {
       setLoading(false);
     }
