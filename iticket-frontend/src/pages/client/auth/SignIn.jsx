@@ -7,7 +7,7 @@ import "./SignUp.css";
 export default function Login() {
   const navigate = useNavigate();
   const { login } = useAuth();
-  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [formData, setFormData] = useState({ emailOrUsername: "", password: "" });
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -44,15 +44,16 @@ export default function Login() {
               <h2 className="register-title">Login</h2>
               {message && <p className="auth-message">{message}</p>}
 
-              {/* Email */}
+              {/* Email or Username */}
               <div className="register-form-group">
                 <input
-                  type="email"
+                  type="text"
                   className="register-input"
-                  name="email"
-                  placeholder="Your Email"
-                  value={formData.email}
+                  name="emailOrUsername"
+                  placeholder="Email yaxud Username"
+                  value={formData.emailOrUsername}
                   onChange={handleChange}
+                  required
                 />
               </div>
 
