@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { basketApi } from "../../../api/products";
 import "./ReservationIndex.css";
+
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5149";
 
 export default function ReservationIndex() {
   const [reservations, setReservations] = useState([]);
@@ -14,25 +15,32 @@ export default function ReservationIndex() {
   const fetchReservations = async () => {
     try {
       setLoading(true);
-      // Tüm kullanıcıların basket verilerini almak için API çağrısı yapacak
-      const response = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL}/api/baskets/all`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
+      const token = localStorage.getItem("token");
+      
+      if (!token) {
+        setError("Yetkilendirme gerekli");
+        setLoading(false);
+        return;
+      }
+
+      const response = await fetch(`${API_BASE}/api/baskets/all`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       if (response.ok) {
         const data = await response.json();
-        setReservations(data || []);
+        setReservations(Array.isArray(data) ? data : []);
       } else if (response.status === 404) {
         setReservations([]);
       } else {
         setError("Rezervasyonlar yüklənilərkən xəta");
       }
     } catch (err) {
+      console.error("Hata:", err);
       setError(err.message || "Bir xəta baş verdi");
     } finally {
       setLoading(false);
@@ -43,12 +51,14 @@ export default function ReservationIndex() {
     if (!window.confirm("Bu rezervasiyanı ləğv etmək istəyirsiniz?")) return;
 
     try {
+      const token = localStorage.getItem("token");
       const response = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL}/api/baskets/${reservationId}`,
+        `${API_BASE}/api/baskets/${reservationId}`,
         {
           method: "DELETE",
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
         }
       );
