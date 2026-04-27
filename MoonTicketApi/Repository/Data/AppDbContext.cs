@@ -46,7 +46,6 @@ namespace Repository.Data
         public  DbSet<Setting> Settings { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<SubCategory> SubCategories { get; set; }
-
         public DbSet<Product> Products { get; set; }
         public DbSet<Person> Persons { get; set; }
 

@@ -59,7 +59,7 @@ export default function Register() {
         password: formData.password
       };
       const response = await authApi.register(payload);
-      setMessage(response.message || "Registration successful. Please verify your email.");
+      setMessage(response?.message || "Registration successful. Please verify your email.");
     } catch (error) {
       setMessage(error.message || "Registration failed.");
     } finally {

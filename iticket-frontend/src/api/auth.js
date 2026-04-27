@@ -1,12 +1,46 @@
 const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5149";
 
+const extractErrorMessage = (data, status) => {
+  if (!data) {
+    return `Request failed with status ${status}`;
+  }
+
+  if (typeof data === "string") {
+    return data;
+  }
+
+  if (Array.isArray(data?.errors) && data.errors.length > 0) {
+    return data.errors[0];
+  }
+
+  if (data?.errors && typeof data.errors === "object") {
+    const firstFieldErrors = Object.values(data.errors).find(
+      (value) => Array.isArray(value) && value.length > 0
+    );
+
+    if (firstFieldErrors) {
+      return firstFieldErrors[0];
+    }
+  }
+
+  return data?.message || data?.error || `Request failed with status ${status}`;
+};
+
 const parseResponse = async (res) => {
   try {
     const text = await res.text();
-    const data = text ? JSON.parse(text) : null;
+    let data = null;
+
+    if (text) {
+      try {
+        data = JSON.parse(text);
+      } catch {
+        data = text;
+      }
+    }
     
     if (!res.ok) {
-      const message = data?.message || data?.error || `Request failed with status ${res.status}`;
+      const message = extractErrorMessage(data, res.status);
       console.error(`API Error: ${res.status}`, { data, message });
       throw new Error(message);
     }

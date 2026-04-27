@@ -4,8 +4,7 @@ namespace MoonTicketApi.Models.Auth
 {
     public class LoginRequest
     {
-        [Required]
-        public string Identifier { get; set; } = string.Empty;
+        public string? Identifier { get; set; }
 
         // Backward compatibility for older clients still posting "email".
         public string? Email { get; set; }

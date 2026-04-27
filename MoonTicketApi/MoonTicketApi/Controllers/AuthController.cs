@@ -1,10 +1,11 @@
-using System.Net;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Text;
 using Domain.Entities;
+using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.WebUtilities;
-using MoonTicketApi.Helpers;
+using Microsoft.IdentityModel.Tokens;
 using MoonTicketApi.Models.Auth;
 using Service.Services.Interfaces;
 
@@ -16,307 +17,279 @@ namespace MoonTicketApi.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly JwtTokenGenerator _jwtTokenGenerator;
+        private readonly IConfiguration _config;
         private readonly IEmailService _emailService;
-        private readonly IConfiguration _configuration;
 
-        public AuthController(
-            UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager,
-            RoleManager<IdentityRole> roleManager,
-            JwtTokenGenerator jwtTokenGenerator,
-            IEmailService emailService,
-            IConfiguration configuration)
+        public AuthController(UserManager<ApplicationUser> userManager,
+                              SignInManager<ApplicationUser> signInManager,
+                              IConfiguration config,
+                              IEmailService emailService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _roleManager = roleManager;
-            _jwtTokenGenerator = jwtTokenGenerator;
+            _config = config;
             _emailService = emailService;
-            _configuration = configuration;
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterRequest request)
+        public async Task<IActionResult> Register(RegisterRequest request)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            var age = CalculateAge(request.BirthDate);
-            if (age < 18)
-                return BadRequest(new { message = "18 yaşdan aşağı istifadəçilər qeydiyyat ola bilməz." });
-
-            var existsByEmail = await _userManager.FindByEmailAsync(request.Email);
-            if (existsByEmail != null)
-                return BadRequest(new { message = "Bu email ilə hesab artıq mövcuddur." });
-
-            var existsByUserName = await _userManager.FindByNameAsync(request.UserName);
-            if (existsByUserName != null)
-                return BadRequest(new { message = "Bu username artıq istifadə olunur." });
-
-            var user = new ApplicationUser
+            try
             {
-                FullName = request.FullName,
-                UserName = request.UserName,
-                Email = request.Email,
-                PhoneNumber = request.Phone,
-                BirthDate = request.BirthDate,
-                EmailConfirmed = false
-            };
-
-            var createResult = await _userManager.CreateAsync(user, request.Password);
-            if (!createResult.Succeeded)
-            {
-                return BadRequest(new
+                if (!ModelState.IsValid)
                 {
-                    message = "Qeydiyyat uğursuz oldu.",
-                    errors = createResult.Errors.Select(x => x.Description)
+                    var validationErrors = ModelState.Values
+                        .SelectMany(v => v.Errors)
+                        .Select(e => e.ErrorMessage)
+                        .Where(e => !string.IsNullOrWhiteSpace(e))
+                        .ToList();
+
+                    return BadRequest(new
+                    {
+                        success = false,
+                        message = validationErrors.FirstOrDefault() ?? "Invalid registration data",
+                        errors = validationErrors
+                    });
+                }
+
+                var exists = await _userManager.FindByEmailAsync(request.Email);
+                if (exists != null)
+                {
+                    return BadRequest(new { success = false, message = "User already exists" });
+                }
+
+                var user = new ApplicationUser
+                {
+                    UserName = request.UserName,
+                    Email = request.Email,
+                    FullName = request.FullName
+                };
+
+                var result = await _userManager.CreateAsync(user, request.Password);
+
+                if (!result.Succeeded)
+                {
+                    var identityErrors = result.Errors.Select(x => x.Description).ToList();
+
+                    return BadRequest(new
+                    {
+                        success = false,
+                        message = identityErrors.FirstOrDefault() ?? "Registration failed",
+                        errors = identityErrors
+                    });
+                }
+
+                await _userManager.AddToRoleAsync(user, "Member");
+
+                var emailConfirmationToken = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                var encodedToken = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(emailConfirmationToken));
+
+                var frontendBaseUrl = (_config["FrontendBaseUrl"] ?? "http://localhost:5173").TrimEnd('/');
+                var confirmUrl = $"{frontendBaseUrl}/confirm-email?email={Uri.EscapeDataString(user.Email ?? string.Empty)}&token={Uri.EscapeDataString(encodedToken)}";
+
+                var emailBody = $@"
+                    <div style='font-family:Arial,sans-serif;line-height:1.6;color:#1f2937;'>
+                        <h2 style='margin-bottom:8px;'>Hello {user.FullName},</h2>
+                        <p style='margin-top:0;'>Thanks for registering on Moon Ticket.</p>
+                        <p>Please confirm your email by clicking the button below:</p>
+                        <p style='margin:24px 0;'>
+                            <a href='{confirmUrl}' style='background:#640c0c;color:#ffffff;padding:12px 20px;text-decoration:none;border-radius:6px;display:inline-block;font-weight:600;'>
+                                Confirm Email
+                            </a>
+                        </p>
+                        <p>If the button does not work, copy and paste this link into your browser:</p>
+                        <p><a href='{confirmUrl}'>{confirmUrl}</a></p>
+                    </div>";
+
+                await _emailService.SendAsync(
+                    user.Email,
+                    "Confirm your Moon Ticket account",
+                    emailBody
+                );
+
+                return Ok(new
+                {
+                    success = true,
+                    message = "Registration successful. Please verify your email."
                 });
             }
-
-         
-            string role = "member"; 
-
-            if (!await _roleManager.RoleExistsAsync(role))
+            catch (Exception ex)
             {
-                await _roleManager.CreateAsync(new IdentityRole(role));
+                return StatusCode(500, new
+                {
+                    success = false,
+                    message = ex.Message 
+                });
             }
-
-            await _userManager.AddToRoleAsync(user, role);
-
-            var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-            var encodedToken = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(token));
-            var encodedEmail = WebUtility.UrlEncode(user.Email);
-
-            var frontendBaseUrl = _configuration["FrontendBaseUrl"] ?? "http://localhost:5173";
-            var confirmUrl = $"{frontendBaseUrl}/confirm-email?email={encodedEmail}&token={encodedToken}";
-
-            await _emailService.SendAsync(
-                user.Email!,
-                "MoonTicket - Email Təsdiqi",
-                BuildEmailTemplate(
-                    "Hesabını təsdiqlə",
-                    $"Salam {user.FullName}, qeydiyyatını tamamla və hesabını aktiv et.",
-                    "Emaili təsdiqlə",
-                    confirmUrl,
-                    "Bu linkə klik etdikdən sonra avtomatik login aktiv olacaq."
-                )
-            );
-
-            return Ok(new
-            {
-                message = "Qeydiyyat tamamlandı. Email ünvanına təsdiq linki göndərildi.",
-                requiresEmailConfirmation = true
-            });
         }
 
         [HttpGet("confirm-email")]
-        public async Task<IActionResult> ConfirmEmail([FromQuery] string email, [FromQuery] string token)
+        public async Task<IActionResult> ConfirmEmail(string email, string token)
         {
-            var decodedEmail = WebUtility.UrlDecode(email);
-            string decodedToken;
-
-            try
+            if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(token))
             {
-                decodedToken = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(token));
-            }
-            catch
-            {
-                decodedToken = WebUtility.UrlDecode(token).Replace(" ", "+");
+                return BadRequest(new { success = false, message = "Email or token is missing" });
             }
 
-            if (string.IsNullOrWhiteSpace(decodedEmail) || string.IsNullOrWhiteSpace(decodedToken))
-                return BadRequest(new { message = "Email və token tələb olunur." });
+            var user = await _userManager.FindByEmailAsync(email);
 
-            var user = await _userManager.FindByEmailAsync(decodedEmail);
             if (user == null)
-                return BadRequest(new { message = "İstifadəçi tapılmadı." });
-
-            var result = await _userManager.ConfirmEmailAsync(user, decodedToken);
-            if (!result.Succeeded)
             {
-                return BadRequest(new
+                return BadRequest(new { success = false, message = "User not found" });
+            }
+
+            if (!user.EmailConfirmed)
+            {
+                string decodedToken;
+                try
                 {
-                    message = "Email təsdiqi alınmadı.",
-                    errors = result.Errors.Select(x => x.Description)
-                });
+                    decodedToken = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(token));
+                }
+                catch
+                {
+                    return BadRequest(new { success = false, message = "Invalid confirmation token" });
+                }
+
+                var result = await _userManager.ConfirmEmailAsync(user, decodedToken);
+
+                if (!result.Succeeded)
+                {
+                    return BadRequest(new
+                    {
+                        success = false,
+                        message = result.Errors.Select(e => e.Description).FirstOrDefault() ?? "Invalid token"
+                    });
+                }
             }
 
             var roles = await _userManager.GetRolesAsync(user);
-            var (tokenValue, expiresAt) = _jwtTokenGenerator.CreateToken(user, roles);
+            var jwt = GenerateToken(user, roles);
 
-            return Ok(BuildAuthResponse(user, tokenValue, expiresAt, roles));
+            return Ok(new
+            {
+                success = true,
+                message = "Email confirmed successfully",
+                token = jwt,
+                user = new
+                {
+                    user.Id,
+                    user.Email,
+                    user.UserName,
+                    user.FullName,
+                    roles
+                }
+            });
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginRequest request)
+        public async Task<IActionResult> Login(LoginRequest request)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            var loginIdentifier = string.IsNullOrWhiteSpace(request.Identifier)
-                ? request.Email?.Trim()
-                : request.Identifier.Trim();
-
-            if (string.IsNullOrWhiteSpace(loginIdentifier))
-                return BadRequest(new { message = "Email və ya username tələb olunur." });
-
-            var user = await FindUserByEmailOrUserNameAsync(loginIdentifier);
-            if (user == null)
-                return Unauthorized(new { message = "Username/email və ya şifrə yanlışdır." });
-
-            if (!user.EmailConfirmed)
-                return Unauthorized(new { message = "Əvvəlcə email təsdiqini tamamlayın." });
-
-            var signIn = await _signInManager.CheckPasswordSignInAsync(user, request.Password, false);
-            if (!signIn.Succeeded)
-                return Unauthorized(new { message = "Username/email və ya şifrə yanlışdır." });
-
-            var roles = await _userManager.GetRolesAsync(user);
-            var (tokenValue, expiresAt) = _jwtTokenGenerator.CreateToken(user, roles);
-
-            return Ok(BuildAuthResponse(user, tokenValue, expiresAt, roles));
-        }
-
-        [HttpPost("forgot-password")]
-        public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordRequest request)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            var user = await _userManager.FindByEmailAsync(request.Email);
-
-            if (user != null)
-            {
-                var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-                var encodedToken = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(token));
-                var encodedEmail = WebUtility.UrlEncode(user.Email);
-
-                var frontendBaseUrl = _configuration["FrontendBaseUrl"] ?? "http://localhost:5173";
-                var resetUrl = $"{frontendBaseUrl}/reset-password?email={encodedEmail}&token={encodedToken}";
-
-                await _emailService.SendAsync(
-                    user.Email!,
-                    "MoonTicket - Şifrə Yeniləmə",
-                    BuildEmailTemplate(
-                        "Şifrəni yenilə",
-                        $"Salam {user.FullName}, şifrə yeniləmə sorğusu aldıq.",
-                        "Şifrəni yenilə",
-                        resetUrl,
-                        "Bu sorğunu siz etməmisinizsə, emaili görməzdən gəlin."
-                    )
-                );
-            }
-
-            return Ok(new { message = "Əgər email mövcuddursa, link göndərildi." });
-        }
-
-        [HttpPost("reset-password")]
-        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordRequest request)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            var user = await _userManager.FindByEmailAsync(request.Email);
-            if (user == null)
-                return BadRequest(new { message = "İstifadəçi tapılmadı." });
-
-            string decodedToken;
-
-            try
-            {
-                decodedToken = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(request.Token));
-            }
-            catch
-            {
-                decodedToken = WebUtility.UrlDecode(request.Token).Replace(" ", "+");
-            }
-
-            var result = await _userManager.ResetPasswordAsync(user, decodedToken, request.NewPassword);
-            if (!result.Succeeded)
+            if (request == null)
             {
                 return BadRequest(new
                 {
-                    message = "Şifrə yenilənmədi.",
-                    errors = result.Errors.Select(x => x.Description)
+                    success = false,
+                    message = "Login payload is missing"
                 });
             }
 
-            return Ok(new { message = "Şifrə uğurla yeniləndi." });
-        }
+            var identifier = (request.Identifier ?? request.Email)?.Trim();
 
-        private async Task<ApplicationUser?> FindUserByEmailOrUserNameAsync(string identifier)
-        {
-            var normalized = identifier.Trim();
-            var user = await _userManager.FindByEmailAsync(normalized);
-            if (user != null)
+            if (string.IsNullOrWhiteSpace(identifier) || string.IsNullOrWhiteSpace(request.Password))
             {
-                return user;
+                return BadRequest(new
+                {
+                    success = false,
+                    message = "Email/username and password are required"
+                });
             }
 
-            return await _userManager.FindByNameAsync(normalized);
-        }
-
-        private static int CalculateAge(DateTime birthDate)
-        {
-            var today = DateTime.Today;
-            var age = today.Year - birthDate.Year;
-            if (birthDate.Date > today.AddYears(-age))
-                age--;
-
-            return age;
-        }
-
-        private static AuthResponse BuildAuthResponse(ApplicationUser user, string token, DateTime expiresAt, IEnumerable<string> roles)
-        {
-            return new AuthResponse
+            ApplicationUser? user;
+            if (identifier.Contains("@"))
             {
-                Token = token,
-                ExpiresAt = expiresAt,
-                User = new UserSummary
+                user = await _userManager.FindByEmailAsync(identifier);
+            }
+            else
+            {
+                user = await _userManager.FindByNameAsync(identifier);
+            }
+
+            if (user == null)
+            {
+                return Unauthorized(new
                 {
-                    Id = user.Id,
-                    FullName = user.FullName,
-                    UserName = user.UserName ?? "",
-                    Email = user.Email ?? "",
-                    EmailConfirmed = user.EmailConfirmed,
-                    Phone = user.PhoneNumber,
-                    BirthDate = user.BirthDate,
-                    ProfileImage = user.ProfileImage,
-                    Roles = roles.ToList()
+                    success = false,
+                    message = "Invalid credentials"
+                });
+            }
+
+            if (!await _userManager.IsEmailConfirmedAsync(user))
+            {
+                return Unauthorized(new
+                {
+                    success = false,
+                    message = "Email not confirmed"
+                });
+            }
+
+            var checkPassword = await _signInManager.CheckPasswordSignInAsync(user, request.Password, false);
+
+            if (!checkPassword.Succeeded)
+            {
+                return Unauthorized(new
+                {
+                    success = false,
+                    message = "Invalid credentials"
+                });
+            }
+
+            var roles = await _userManager.GetRolesAsync(user);
+
+            var token = GenerateToken(user, roles);
+
+            return Ok(new
+            {
+                success = true,
+                token,
+                user = new
+                {
+                    user.Id,
+                    user.Email,
+                    user.UserName,
+                    roles
                 }
-            };
+            });
         }
 
-        private static string BuildEmailTemplate(string title, string description, string buttonText, string buttonUrl, string footerText)
+        private string GenerateToken(ApplicationUser user, IList<string> roles)
         {
-            return $@"
-    <div style='font-family: Arial, sans-serif; background-color:#f4f4f4; padding:20px;'>
-        <div style='max-width:600px; margin:auto; background:white; padding:20px; border-radius:10px; text-align:center;'>
-            
-            <h2 style='color:#333;'>{title}</h2>
-            
-            <p style='color:#555; font-size:16px;'>
-                {description}
-            </p>
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.NameIdentifier, user.Id),
+                new Claim(ClaimTypes.Email, user.Email ?? ""),
+                new Claim(ClaimTypes.Name, user.UserName ?? "")
+            };
 
-            <a href='{buttonUrl}' 
-               style='display:inline-block; margin-top:20px; padding:12px 25px; background:#007bff; color:white; text-decoration:none; border-radius:5px; font-weight:bold;'>
-                {buttonText}
-            </a>
+            foreach (var role in roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
 
-            <p style='margin-top:30px; font-size:14px; color:#888;'>
-                {footerText}
-            </p>
+            var key = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(_config["JwtSettings:SecretKey"])
+            );
 
-            <hr style='margin:20px 0;' />
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-            <p style='font-size:12px; color:#aaa;'>
-                © 2026 MoonTicket. All rights reserved.
-            </p>
-        </div>
-    </div>";
+            var token = new JwtSecurityToken(
+                issuer: _config["JwtSettings:Issuer"],
+                audience: _config["JwtSettings:Audience"],
+                claims: claims,
+                expires: DateTime.UtcNow.AddHours(2),
+                signingCredentials: creds
+            );
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }
 }
