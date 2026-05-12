@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { sortNewestFirst } from "../utils/sortNewestFirst";
 import "./LanguageForms.css";
 
 function LanguageIndex() {
@@ -10,7 +11,7 @@ function LanguageIndex() {
     try {
       const res = await fetch("http://localhost:5149/api/LanguageGetAll");
       const data = await res.json();
-      setLanguages(Array.isArray(data) ? data : []);
+      setLanguages(sortNewestFirst(data));
     } catch {
       setLanguages([]);
     }

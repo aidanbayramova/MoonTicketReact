@@ -5,6 +5,7 @@ import { AdminButton } from "../../../components/admin/AdminButton";
 import "./Product.css";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5149";
+const PERSON_OPTIONAL_CATEGORIES = new Set(["museum", "circus", "tourism", "kids"]);
 
 function CreateProductForm() {
   const navigate = useNavigate();
@@ -33,6 +34,15 @@ function CreateProductForm() {
   const [video, setVideo] = useState(null);
   const [loading, setLoading] = useState(false);
   const [fetching, setFetching] = useState(true);
+
+  const selectedCategory = categories.find(
+    (c) => String(c.id || c.Id) === String(form.categoryId)
+  );
+  const selectedCategoryName = (selectedCategory?.name || selectedCategory?.Name || "")
+    .toString()
+    .trim()
+    .toLowerCase();
+  const isPersonOptional = PERSON_OPTIONAL_CATEGORIES.has(selectedCategoryName);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -65,7 +75,25 @@ function CreateProductForm() {
   }, []);
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+
+    if (name === "categoryId") {
+      const nextCategory = categories.find((c) => String(c.id || c.Id) === String(value));
+      const nextCategoryName = (nextCategory?.name || nextCategory?.Name || "")
+        .toString()
+        .trim()
+        .toLowerCase();
+      const nextPersonOptional = PERSON_OPTIONAL_CATEGORIES.has(nextCategoryName);
+
+      setForm((prev) => ({
+        ...prev,
+        categoryId: value,
+        personId: nextPersonOptional ? "" : prev.personId,
+      }));
+      return;
+    }
+
+    setForm({ ...form, [name]: value });
   };
 
   const handleLanguageChange = (e) => {
@@ -105,6 +133,11 @@ function CreateProductForm() {
       return;
     }
 
+    if (!isPersonOptional && !form.personId) {
+      showToast("Organizer is required for this category", "warning");
+      return;
+    }
+
     const data = new FormData();
     data.append("Name", form.name);
     data.append("Description", form.description);
@@ -116,7 +149,9 @@ function CreateProductForm() {
     if (form.subCategoryId) {
       data.append("SubCategoryId", parseInt(form.subCategoryId));
     }
-    data.append("PersonId", parseInt(form.personId));
+    if (!isPersonOptional && form.personId) {
+      data.append("PersonId", parseInt(form.personId));
+    }
 
     form.languageIds.forEach(id => data.append("LanguageIds", id));
     data.append("Image", image);
@@ -263,14 +298,19 @@ function CreateProductForm() {
           </div>
 
           <div className="form-group">
-            <label>Organizer *</label>
+            <label>{isPersonOptional ? "Organizer (Optional)" : "Organizer *"}</label>
             <select
               name="personId"
               value={form.personId}
               onChange={handleChange}
-              required
+              required={!isPersonOptional}
+              disabled={isPersonOptional}
             >
-              <option value="">Select an organizer</option>
+              <option value="">
+                {isPersonOptional
+                  ? "Organizer is not required for this category"
+                  : "Select an organizer"}
+              </option>
               {persons.map(p => (
                 <option key={p.id || p.Id} value={p.id || p.Id}>
                   {p.name || p.Name}

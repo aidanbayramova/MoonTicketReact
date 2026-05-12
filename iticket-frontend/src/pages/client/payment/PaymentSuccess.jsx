@@ -10,8 +10,10 @@ export default function PaymentSuccess() {
 
   useEffect(() => {
     let active = true;
+    const params = new URLSearchParams(window.location.search);
+    const sessionId = params.get("session_id") || "";
 
-    checkoutBasket()
+    checkoutBasket(sessionId)
       .then((summary) => {
         if (!active) return;
         setStatus("success");

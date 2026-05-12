@@ -1,31 +1,22 @@
-import React, { useState, useRef, useEffect } from "react";
-import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import React, { useMemo, useState } from "react";
+import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import "./Dashboard.css";
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
-  // Dropdown open/close states
-  const [productsOpen, setProductsOpen] = useState(false);
-  const [newsOpen, setNewsOpen] = useState(false);
+  const isProductSectionActive = useMemo(() => {
+    return (
+      location.pathname.startsWith("/admin/product") ||
+      location.pathname.startsWith("/admin/category") ||
+      location.pathname.startsWith("/admin/language") ||
+      location.pathname.startsWith("/admin/subcategory") ||
+      location.pathname.startsWith("/admin/person")
+    );
+  }, [location.pathname]);
 
-  const productsRef = useRef(null);
-  const newsRef = useRef(null);
-
-  // Close dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (productsRef.current && !productsRef.current.contains(e.target)) {
-        setProductsOpen(false);
-      }
-      if (newsRef.current && !newsRef.current.contains(e.target)) {
-        setNewsOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  const [productsOpen, setProductsOpen] = useState(isProductSectionActive);
 
   return (
     <div className="admin-dashboard">
@@ -44,86 +35,52 @@ const AdminDashboard = () => {
             Reservations
           </NavLink>
 
-          {/* NEWS DROPDOWN - ONLY DETAIL & EDIT */}
-          <div className="dropdown" ref={newsRef}>
-            <div className="menu-btn news-btn">
-              <span
-                className="news-link"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setNewsOpen((prev) => !prev);
-                }}
-                style={{ cursor: "pointer", color: "white" }}
-              >
-                News
-              </span>
-              <span
-                className={`menu-icon ${newsOpen ? "rotate" : ""}`}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setNewsOpen((prev) => !prev);
-                }}
-              >
-                ☰
-              </span>
-            </div>
-            {newsOpen && (
-              <div className="dropdown-content">
-                <NavLink
-                  to="/admin/news/detailNews/1"
-                  className="dropdown-item"
-                >
-                  View News
+          <div className={`menu-group ${isProductSectionActive ? "active" : ""}`}>
+            <button
+              type="button"
+              className="menu-btn menu-group-toggle"
+              onClick={() => setProductsOpen((prev) => !prev)}
+            >
+              <span>Products</span>
+              <span className={`menu-group-arrow ${productsOpen ? "open" : ""}`}>▾</span>
+            </button>
+
+            {productsOpen && (
+              <div className="menu-submenu">
+                <NavLink to="/admin/product/productIndex" className="submenu-btn">
+                  Product List
                 </NavLink>
-                <NavLink
-                  to="/admin/newsauthor/detailNewsAuthor/1"
-                  className="dropdown-item"
-                >
-                  View Authors
+                <NavLink to="/admin/category/categoryIndex" className="submenu-btn">
+                  Categories
+                </NavLink>
+                <NavLink to="/admin/language/languageIndex" className="submenu-btn">
+                  Languages
+                </NavLink>
+                <NavLink to="/admin/subcategory/subCategoryIndex" className="submenu-btn">
+                  SubCategories
+                </NavLink>
+                <NavLink to="/admin/person/personIndex" className="submenu-btn">
+                  Persons
                 </NavLink>
               </div>
             )}
           </div>
 
-          {/* PRODUCTS DROPDOWN - ONLY DETAIL & EDIT */}
-          <div className="dropdown" ref={productsRef}>
-            <div className="menu-btn products-btn">
-              <span
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setProductsOpen((prev) => !prev);
-                }}
-                style={{ cursor: "pointer", color: "white" }}
-              >
-                Products
-              </span>
-              <span
-                className={`menu-icon ${productsOpen ? "rotate" : ""}`}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setProductsOpen((prev) => !prev);
-                }}
-              >
-                ☰
-              </span>
-            </div>
-            {productsOpen && (
-              <div className="dropdown-content">
-                <NavLink
-                  to="/admin/product/detailProduct/1"
-                  className="dropdown-item"
-                >
-                  View Product
-                </NavLink>
-                <NavLink
-                  to="/admin/setting/settingDetail/1"
-                  className="dropdown-item"
-                >
-                  Settings
-                </NavLink>
-              </div>
-            )}
-          </div>
+          <NavLink to="/admin/news/newsIndex" className="menu-btn">
+            News
+          </NavLink>
+
+          <NavLink to="/admin/newsauthor/newsAuthorIndex" className="menu-btn">
+            News Authors
+          </NavLink>
+
+          <NavLink to="/admin/slider/sliderIndex" className="menu-btn">
+            Sliders
+          </NavLink>
+
+          <NavLink to="/admin/setting/settingIndex" className="menu-btn">
+            Settings
+          </NavLink>
 
           <NavLink to="/admin/contact/messages" className="menu-btn">
             Contact Messages
@@ -131,6 +88,10 @@ const AdminDashboard = () => {
 
           <NavLink to="/admin/subscriber/index" className="menu-btn">
             Subscribers
+          </NavLink>
+
+          <NavLink to="/admin/refund/index" className="menu-btn">
+            Refund Requests
           </NavLink>
         </nav>
       </aside>

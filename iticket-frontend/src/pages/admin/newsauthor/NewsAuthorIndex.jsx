@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { sortNewestFirst } from "../utils/sortNewestFirst";
 import "./NewsAuthorAdmin.css";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5149";
@@ -12,7 +13,7 @@ function NewsAuthorIndex() {
     try {
       const res = await fetch(`${API_BASE}/api/NewsAuthorGetAll`);
       const data = await res.json();
-      setAuthors(Array.isArray(data) ? data : []);
+      setAuthors(sortNewestFirst(data));
     } catch {
       setAuthors([]);
     }

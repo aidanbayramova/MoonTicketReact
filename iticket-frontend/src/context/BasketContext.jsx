@@ -5,6 +5,7 @@ import { useAuth } from "./AuthContext";
 const STORAGE_KEY = "moonTicket.basket";
 const OCCUPIED_KEY = "moonTicket.occupiedSeats";
 const METRICS_KEY = "moonTicket.metrics";
+const METRICS_EVENT = "moonTicket:metrics-updated";
 
 const readJson = (key, fallback) => {
   try {
@@ -55,6 +56,7 @@ export function BasketProvider({ children }) {
     };
 
     writeJson(METRICS_KEY, next);
+    window.dispatchEvent(new CustomEvent(METRICS_EVENT, { detail: next }));
   };
 
   const addToBasket = (item) => {
@@ -113,16 +115,19 @@ export function BasketProvider({ children }) {
     }
 
     const quantity = Number(item.quantity || item.seats?.length || 1);
+    const totalPaidUsd = Number(item.total || 0);
     await profileApi.purchase(token, {
       productId: Number(item.productId),
       quantity,
+      unitPriceUsd: quantity > 0 ? Number((totalPaidUsd / quantity).toFixed(2)) : 0,
+      totalPaidUsd,
     });
 
     occupySeats(item.showKey, item.seats || []);
     updateMetrics({ orders: 1, tickets: quantity, amount: Number(item.total || 0) });
   };
 
-  const checkoutBasket = async () => {
+  const checkoutBasket = async (stripeSessionId = "") => {
     if (!isAuthenticated || !token) {
       throw new Error("Checkout ucun daxil olmalisiniz.");
     }
@@ -138,9 +143,13 @@ export function BasketProvider({ children }) {
 
     for (const item of currentItems) {
       const quantity = Number(item.quantity || item.seats?.length || 1);
+      const totalPaidUsd = Number(item.total || 0);
       await profileApi.purchase(token, {
         productId: Number(item.productId),
         quantity,
+        unitPriceUsd: quantity > 0 ? Number((totalPaidUsd / quantity).toFixed(2)) : 0,
+        totalPaidUsd,
+        stripeSessionId: stripeSessionId || undefined,
       });
 
       occupySeats(item.showKey, item.seats || []);

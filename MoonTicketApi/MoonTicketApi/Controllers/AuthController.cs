@@ -272,7 +272,19 @@ namespace MoonTicketApi.Controllers
 
             foreach (var role in roles)
             {
-                claims.Add(new Claim(ClaimTypes.Role, role));
+                if (string.IsNullOrWhiteSpace(role))
+                {
+                    continue;
+                }
+
+                var trimmedRole = role.Trim();
+                claims.Add(new Claim(ClaimTypes.Role, trimmedRole));
+
+                var canonicalRole = NormalizeRoleName(trimmedRole);
+                if (!string.Equals(trimmedRole, canonicalRole, StringComparison.Ordinal))
+                {
+                    claims.Add(new Claim(ClaimTypes.Role, canonicalRole));
+                }
             }
 
             var key = new SymmetricSecurityKey(
@@ -290,6 +302,18 @@ namespace MoonTicketApi.Controllers
             );
 
             return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+        private static string NormalizeRoleName(string role)
+        {
+            return role.Trim().ToLowerInvariant() switch
+            {
+                "admin" => "Admin",
+                "superadmin" => "SuperAdmin",
+                "member" => "Member",
+                "user" => "User",
+                _ => role.Trim()
+            };
         }
     }
 }

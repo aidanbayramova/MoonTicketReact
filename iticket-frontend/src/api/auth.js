@@ -42,7 +42,10 @@ const parseResponse = async (res) => {
     if (!res.ok) {
       const message = extractErrorMessage(data, res.status);
       console.error(`API Error: ${res.status}`, { data, message });
-      throw new Error(message);
+      const error = new Error(message);
+      error.status = res.status;
+      error.responseData = data;
+      throw error;
     }
     return data;
   } catch (err) {
@@ -100,7 +103,7 @@ export const authApi = {
       let responseData = null;
       try {
         responseData = responseText ? JSON.parse(responseText) : null;
-      } catch (e) {
+      } catch {
         console.error("Failed to parse response:", responseText);
       }
       
@@ -182,6 +185,38 @@ export const profileApi = {
 
   async refund(token, payload) {
     const res = await fetch(`${API_BASE}/api/profile/refund-request`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
+    return parseResponse(res);
+  },
+
+  async adminRefundRequests(token, status = "") {
+    const query = status ? `?status=${encodeURIComponent(status)}` : "";
+    const res = await fetch(`${API_BASE}/api/admin/refund-requests${query}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    return parseResponse(res);
+  },
+
+  async approveRefundRequest(token, id, payload = {}) {
+    const res = await fetch(`${API_BASE}/api/admin/refund-requests/${id}/approve`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
+    return parseResponse(res);
+  },
+
+  async rejectRefundRequest(token, id, payload = {}) {
+    const res = await fetch(`${API_BASE}/api/admin/refund-requests/${id}/reject`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,

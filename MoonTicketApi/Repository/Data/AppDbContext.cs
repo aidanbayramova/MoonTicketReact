@@ -12,6 +12,21 @@ namespace Repository.Data
     public class AppDbContext : IdentityDbContext<ApplicationUser>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+
+        public  DbSet<Slider> Sliders { get; set; }
+        public  DbSet<Setting> Settings { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<SubCategory> SubCategories { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Person> Persons { get; set; }
+        public DbSet<Language> Languages { get; set; }
+        public DbSet<ProductLanguage> ProductLanguages { get; set; }
+        public DbSet<News> News { get; set; }
+        public DbSet<NewsAuthor> NewsAuthors { get; set; }
+        public DbSet<ContactMessage> ContactMessages { get; set; }
+        public DbSet<Subscriber> Subscribers { get; set; }
+        public DbSet<TicketPurchase> TicketPurchases { get; set; }
+        public DbSet<RefundRequest> RefundRequests { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -40,24 +55,13 @@ namespace Repository.Data
                 .WithMany()
                 .HasForeignKey(x => x.TicketPurchaseId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<TicketPurchase>()
+                .HasMany(tp => tp.RefundRequests)
+                .WithOne(rr => rr.TicketPurchase)
+                .HasForeignKey(rr => rr.TicketPurchaseId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
-
-        public  DbSet<Slider> Sliders { get; set; }
-        public  DbSet<Setting> Settings { get; set; }
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<SubCategory> SubCategories { get; set; }
-        public DbSet<Product> Products { get; set; }
-        public DbSet<Person> Persons { get; set; }
-
-        public DbSet<Language> Languages { get; set; }
-        public DbSet<ProductLanguage> ProductLanguages { get; set; }
-        public DbSet<News> News { get; set; }
-        public DbSet<NewsAuthor> NewsAuthors { get; set; }
-        public DbSet<ContactMessage> ContactMessages { get; set; }
-        public DbSet<Subscriber> Subscribers { get; set; }
-        public DbSet<TicketPurchase> TicketPurchases { get; set; }
-        public DbSet<RefundRequest> RefundRequests { get; set; }
-
 
     }
 }

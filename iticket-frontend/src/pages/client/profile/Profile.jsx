@@ -6,6 +6,37 @@ import "./Profile.css";
 
 const fallbackAvatar = "https://ui-avatars.com/api/?name=Moon+Ticket&background=7f1d1d&color=fff";
 
+const groupTicketsByEvent = (list) => {
+  const map = new Map();
+
+  list.forEach((ticket) => {
+    const key = `${ticket.productId}-${ticket.eventDate}`;
+    const current = map.get(key);
+    const qty = Number(ticket.quantity || 0);
+
+    if (!current) {
+      map.set(key, {
+        key,
+        productId: ticket.productId,
+        eventName: ticket.eventName,
+        image: ticket.image,
+        eventDate: ticket.eventDate,
+        isPast: ticket.isPast,
+        totalQuantity: qty,
+        entries: [ticket],
+      });
+      return;
+    }
+
+    current.totalQuantity += qty;
+    current.entries.push(ticket);
+  });
+
+  return Array.from(map.values()).sort(
+    (a, b) => new Date(a.eventDate).getTime() - new Date(b.eventDate).getTime()
+  );
+};
+
 export default function Profile() {
   const { token, user, setAuthSession, auth, logout } = useAuth();
   const { items, removeFromBasket, clearBasket, checkoutBasket } = useBasket();
@@ -13,6 +44,7 @@ export default function Profile() {
   const [tickets, setTickets] = useState([]);
   const [message, setMessage] = useState("");
   const [refundReason, setRefundReason] = useState({});
+  const [refundQty, setRefundQty] = useState({});
   const [checkoutLoading, setCheckoutLoading] = useState(false);
 
   useEffect(() => {
@@ -33,6 +65,8 @@ export default function Profile() {
 
   const upcoming = useMemo(() => tickets.filter((x) => !x.isPast), [tickets]);
   const past = useMemo(() => tickets.filter((x) => x.isPast), [tickets]);
+  const groupedUpcoming = useMemo(() => groupTicketsByEvent(upcoming), [upcoming]);
+  const groupedPast = useMemo(() => groupTicketsByEvent(past), [past]);
   const basketTotal = useMemo(
     () => items.reduce((sum, x) => sum + Number(x.total || 0), 0),
     [items]
@@ -49,10 +83,10 @@ export default function Profile() {
     return {
       totalBought,
       activeReservations: items.length,
-      upcomingCount: upcoming.length,
+      upcomingCount: groupedUpcoming.length,
       loyaltyTier: totalBought >= 20 ? "Legend" : totalBought >= 10 ? "Pro" : "Starter",
     };
-  }, [tickets, items, upcoming]);
+  }, [tickets, items, groupedUpcoming]);
 
   const handleUpdate = async (e) => {
     e.preventDefault();
@@ -95,13 +129,49 @@ export default function Profile() {
     }
   };
 
-  const sendRefund = async (ticketId) => {
+  const sendRefund = async (groupedTicket) => {
     try {
-      await profileApi.refund(token, {
-        ticketPurchaseId: ticketId,
-        reason: refundReason[ticketId] || "No reason provided"
-      });
+      const requested = Number(refundQty[groupedTicket.key] || 1);
+      const totalQuantity = Number(groupedTicket.totalQuantity || 0);
+
+      if (!Number.isFinite(requested) || requested < 1) {
+        setMessage("Refund quantity must be at least 1.");
+        return;
+      }
+
+      if (requested > totalQuantity) {
+        setMessage(`You can refund maximum ${totalQuantity} ticket(s) for this event.`);
+        return;
+      }
+
+      const entries = [...groupedTicket.entries]
+        .sort((a, b) => Number(b.quantity || 0) - Number(a.quantity || 0));
+
+      let remaining = requested;
+      for (const entry of entries) {
+        if (remaining <= 0) break;
+        const available = Number(entry.quantity || 0);
+        if (available <= 0) continue;
+
+        const take = Math.min(remaining, available);
+        await profileApi.refund(token, {
+          ticketPurchaseId: entry.id,
+          quantity: take,
+          reason: refundReason[groupedTicket.key] || "No reason provided",
+        });
+        remaining -= take;
+      }
+
+      if (remaining > 0) {
+        throw new Error("Not enough refundable ticket quantity found.");
+      }
+
+      setRefundReason((prev) => ({ ...prev, [groupedTicket.key]: "" }));
+      setRefundQty((prev) => ({ ...prev, [groupedTicket.key]: 1 }));
+
       setMessage("Refund request submitted successfully.");
+      const myTickets = await profileApi.tickets(token);
+      setTickets(myTickets);
     } catch (error) {
       setMessage(error.message || "Failed to submit refund request.");
     }
@@ -300,22 +370,39 @@ export default function Profile() {
             </div>
           </div>
           <div className="ticket-list">
-            {upcoming.length === 0 && <p>No upcoming tickets.</p>}
-            {upcoming.map((ticket) => (
-              <div className="ticket-item" key={ticket.id}>
+            {groupedUpcoming.length === 0 && <p>No upcoming tickets.</p>}
+            {groupedUpcoming.map((ticket) => (
+              <div className="ticket-item" key={ticket.key}>
                 <img src={toAbsoluteImage(ticket.image)} alt={ticket.eventName} />
                 <div>
                   <h3>{ticket.eventName}</h3>
                   <p>{new Date(ticket.eventDate).toLocaleString()}</p>
-                  <p>Qty: {ticket.quantity}</p>
+                  <p>Qty: {ticket.totalQuantity}</p>
+                  <div style={{ display: "flex", gap: 8, alignItems: "center", marginBottom: 8 }}>
+                    <label htmlFor={`refund-qty-${ticket.key}`}>Refund qty</label>
+                    <input
+                      id={`refund-qty-${ticket.key}`}
+                      type="number"
+                      min="1"
+                      max={ticket.totalQuantity}
+                      value={refundQty[ticket.key] || 1}
+                      onChange={(e) =>
+                        setRefundQty((prev) => ({
+                          ...prev,
+                          [ticket.key]: e.target.value,
+                        }))
+                      }
+                      style={{ width: 90 }}
+                    />
+                  </div>
                   <textarea
                     placeholder="Refund reason"
-                    value={refundReason[ticket.id] || ""}
+                    value={refundReason[ticket.key] || ""}
                     onChange={(e) =>
-                      setRefundReason((prev) => ({ ...prev, [ticket.id]: e.target.value }))
+                      setRefundReason((prev) => ({ ...prev, [ticket.key]: e.target.value }))
                     }
                   />
-                  <button className="ghost-btn" onClick={() => sendRefund(ticket.id)}>Send refund request</button>
+                  <button className="ghost-btn" onClick={() => sendRefund(ticket)}>Send refund request</button>
                 </div>
               </div>
             ))}
@@ -328,14 +415,14 @@ export default function Profile() {
             </div>
           </div>
           <div className="ticket-list">
-            {past.length === 0 && <p>No past tickets.</p>}
-            {past.map((ticket) => (
-              <div className="ticket-item" key={ticket.id}>
+            {groupedPast.length === 0 && <p>No past tickets.</p>}
+            {groupedPast.map((ticket) => (
+              <div className="ticket-item" key={ticket.key}>
                 <img src={toAbsoluteImage(ticket.image)} alt={ticket.eventName} />
                 <div>
                   <h3>{ticket.eventName}</h3>
                   <p>{new Date(ticket.eventDate).toLocaleString()}</p>
-                  <p>Qty: {ticket.quantity}</p>
+                  <p>Qty: {ticket.totalQuantity}</p>
                 </div>
               </div>
             ))}

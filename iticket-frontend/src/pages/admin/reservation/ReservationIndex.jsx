@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { sortNewestFirst } from "../utils/sortNewestFirst";
 import "./ReservationIndex.css";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5149";
@@ -33,7 +34,7 @@ export default function ReservationIndex() {
 
       if (response.ok) {
         const data = await response.json();
-        setReservations(Array.isArray(data) ? data : []);
+        setReservations(sortNewestFirst(data));
       } else if (response.status === 404) {
         setReservations([]);
       } else {

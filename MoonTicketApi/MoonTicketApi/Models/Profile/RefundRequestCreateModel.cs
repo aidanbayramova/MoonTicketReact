@@ -7,6 +7,9 @@ namespace MoonTicketApi.Models.Profile
         [Required]
         public int TicketPurchaseId { get; set; }
 
+        [Range(1, 20)]
+        public int Quantity { get; set; } = 1;
+
         [Required]
         [MaxLength(500)]
         public string Reason { get; set; } = string.Empty;

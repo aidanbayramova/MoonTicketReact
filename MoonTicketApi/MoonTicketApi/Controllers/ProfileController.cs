@@ -4,8 +4,13 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using MoonTicketApi.Models.Profile;
+using MoonTicketApi.Helpers;
 using Repository.Data;
+using Service.Services.Interfaces;
+using Stripe;
+using Stripe.Checkout;
 
 namespace MoonTicketApi.Controllers
 {
@@ -17,15 +22,21 @@ namespace MoonTicketApi.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly AppDbContext _context;
         private readonly IWebHostEnvironment _environment;
+        private readonly IEmailService _emailService;
+        private readonly StripeSettings _stripeSettings;
 
         public ProfileController(
             UserManager<ApplicationUser> userManager,
             AppDbContext context,
-            IWebHostEnvironment environment)
+            IWebHostEnvironment environment,
+            IEmailService emailService,
+            IOptions<StripeSettings> stripeSettings)
         {
             _userManager = userManager;
             _context = context;
             _environment = environment;
+            _emailService = emailService;
+            _stripeSettings = stripeSettings.Value;
         }
 
         [HttpGet("me")]
@@ -182,8 +193,37 @@ namespace MoonTicketApi.Controllers
                 UserId = user.Id,
                 ProductId = product.Id,
                 EventDate = DateTime.SpecifyKind(product.StartDate, DateTimeKind.Utc),
-                Quantity = request.Quantity
+                Quantity = request.Quantity,
+                UnitPriceUsd = request.UnitPriceUsd > 0
+                    ? request.UnitPriceUsd
+                    : request.TotalPaidUsd > 0
+                        ? Math.Round(request.TotalPaidUsd / request.Quantity, 2)
+                        : 0,
+                TotalPaidUsd = request.TotalPaidUsd > 0
+                    ? request.TotalPaidUsd
+                    : request.UnitPriceUsd > 0
+                        ? request.UnitPriceUsd * request.Quantity
+                        : 0,
+                PaymentProvider = string.IsNullOrWhiteSpace(request.StripeSessionId) ? "Manual" : "Stripe",
+                StripeSessionId = string.IsNullOrWhiteSpace(request.StripeSessionId) ? null : request.StripeSessionId,
             };
+
+            if (!string.IsNullOrWhiteSpace(request.StripeSessionId)
+                && !string.IsNullOrWhiteSpace(_stripeSettings.SecretKey)
+                && !_stripeSettings.SecretKey.Contains("replace_me", StringComparison.OrdinalIgnoreCase))
+            {
+                try
+                {
+                    StripeConfiguration.ApiKey = _stripeSettings.SecretKey;
+                    var sessionService = new SessionService();
+                    var session = await sessionService.GetAsync(request.StripeSessionId);
+                    purchase.StripePaymentIntentId = session.PaymentIntentId;
+                }
+                catch
+                {
+                    // Keep purchase creation resilient even if Stripe lookup fails.
+                }
+            }
 
             _context.TicketPurchases.Add(purchase);
             await _context.SaveChangesAsync();
@@ -212,23 +252,51 @@ namespace MoonTicketApi.Controllers
                 return NotFound(new { message = "Bilet tapılmadı." });
             }
 
-            var exists = await _context.RefundRequests
-                .AnyAsync(x => x.TicketPurchaseId == ticket.Id && x.UserId == user.Id && x.Status == "Pending");
-            if (exists)
+            if (ticket.EventDate <= DateTime.UtcNow)
+            {
+                return BadRequest(new { message = "Keçmiş tədbir bileti üçün qaytarma sorğusu göndərilə bilməz." });
+            }
+
+            if (request.Quantity > ticket.Quantity)
+            {
+                return BadRequest(new { message = "Qaytarılacaq say alınan bilet sayından çox ola bilməz." });
+            }
+
+            var pendingQuantity = await _context.RefundRequests
+                .Where(x => x.TicketPurchaseId == ticket.Id && x.UserId == user.Id && x.Status == "Pending")
+                .SumAsync(x => (int?)x.RequestedQuantity) ?? 0;
+
+            var remainingRefundable = ticket.Quantity - pendingQuantity;
+            if (remainingRefundable <= 0)
             {
                 return BadRequest(new { message = "Bu bilet üçün artıq aktiv qaytarma sorğusu var." });
+            }
+
+            if (request.Quantity > remainingRefundable)
+            {
+                return BadRequest(new { message = $"Maksimum {remainingRefundable} bilet üçün qaytarma sorğusu göndərə bilərsiniz." });
             }
 
             var refundRequest = new RefundRequest
             {
                 TicketPurchaseId = ticket.Id,
                 UserId = user.Id,
+                RequestedQuantity = request.Quantity,
                 Reason = request.Reason,
                 Status = "Pending"
             };
 
             _context.RefundRequests.Add(refundRequest);
             await _context.SaveChangesAsync();
+
+            if (!string.IsNullOrWhiteSpace(user.Email))
+            {
+                await _emailService.SendAsync(
+                    user.Email,
+                    "MoonTicket - Refund request received",
+                    $"<p>Your refund request has been received.</p><p>Ticket ID: {ticket.Id}</p><p>Requested quantity: {request.Quantity}</p><p>Reason: {System.Net.WebUtility.HtmlEncode(request.Reason)}</p>"
+                );
+            }
 
             return Ok(new { message = "Qaytarma sorğusu göndərildi." });
         }

@@ -5,27 +5,11 @@ import { useAuth } from "../../../context/AuthContext";
 import { profileApi } from "../../../api/auth";
 import "./Basket.css";
 
-const initialCard = {
-  cardholder: "",
-  cardNumber: "",
-  expiry: "",
-  cvc: "",
-};
-
-const maskCard = (value) => value.replace(/\D/g, "").slice(0, 16).replace(/(.{4})/g, "$1 ").trim();
-const maskExpiry = (value) => {
-  const digits = value.replace(/\D/g, "").slice(0, 4);
-  if (digits.length < 3) return digits;
-  return `${digits.slice(0, 2)}/${digits.slice(2)}`;
-};
-
 export default function Basket() {
-  const { items, removeFromBasket, clearBasket, checkoutBasket } = useBasket();
-  const { isAuthenticated, token } = useAuth();
+  const { items, removeFromBasket, clearBasket } = useBasket();
+  const { isAuthenticated, token, logout } = useAuth();
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  const [showPayment, setShowPayment] = useState(false);
-  const [card, setCard] = useState(initialCard);
 
   const total = useMemo(
     () => items.reduce((sum, item) => sum + Number(item.total || 0), 0),
@@ -44,13 +28,15 @@ export default function Basket() {
       return;
     }
 
-    if (!isAuthenticated) {
+    if (!isAuthenticated || !token) {
       setMessage("Please log in to checkout.");
       return;
     }
 
     try {
       setLoading(true);
+      await profileApi.me(token);
+
       const payload = {
         items: items.map((x) => ({
           productId: Number(x.productId),
@@ -67,41 +53,14 @@ export default function Basket() {
 
       window.location.href = stripeSession.url;
     } catch (error) {
-      const errorMessage = error.message || "Stripe checkout acilmadi.";
-      if (errorMessage.toLowerCase().includes("stripe acarlari konfiqurasiya olunmayib")) {
-        setMessage("Stripe key-lar henuz set edilmeyib. Demo Stripe modal acildi.");
-        setShowPayment(true);
-      } else {
-        setMessage(errorMessage);
+      if (error?.status === 401) {
+        logout();
+        setMessage("Session expired. Please log in again and retry checkout.");
+        return;
       }
-    } finally {
-      setLoading(false);
-    }
-  };
 
-  const completeFakeStripePayment = async (e) => {
-    e.preventDefault();
-    setMessage("");
-
-    if (
-      !card.cardholder.trim() ||
-      card.cardNumber.replace(/\D/g, "").length < 16 ||
-      card.expiry.length < 5 ||
-      card.cvc.replace(/\D/g, "").length < 3
-    ) {
-      setMessage("Kart melumatlarini tam daxil edin.");
-      return;
-    }
-
-    try {
-      setLoading(true);
-      await new Promise((resolve) => setTimeout(resolve, 1400));
-      const summary = await checkoutBasket();
-      setMessage(`${summary.items} order(s) and ${summary.tickets} ticket(s) purchased successfully. Fake Stripe payment approved.`);
-      setShowPayment(false);
-      setCard(initialCard);
-    } catch (error) {
-      setMessage(error.message || "Payment failed. Please try again.");
+      const errorMessage = error.message || "Stripe checkout acilmadi.";
+      setMessage(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -181,9 +140,6 @@ export default function Basket() {
                 <button onClick={handleCheckout} disabled={loading}>
                   {loading ? "Redirecting..." : "Pay with Stripe"}
                 </button>
-                <button onClick={() => setShowPayment(true)} className="danger" type="button">
-                  Demo Stripe (Fake)
-                </button>
               </div>
 
               {!isAuthenticated && (
@@ -194,57 +150,6 @@ export default function Basket() {
             </>
           )}
 
-          {showPayment && (
-            <div className="stripe-modal-overlay" onClick={() => setShowPayment(false)}>
-              <div className="stripe-modal" onClick={(e) => e.stopPropagation()}>
-                <p className="basket-kicker">Demo payment</p>
-                <h2>Stripe Checkout (Demo)</h2>
-                <p>This is a demo payment, for testing only.</p>
-                <form onSubmit={completeFakeStripePayment} className="stripe-form">
-                  <input
-                    type="text"
-                    placeholder="Cardholder Name"
-                    value={card.cardholder}
-                    onChange={(e) => setCard((prev) => ({ ...prev, cardholder: e.target.value }))}
-                  />
-                  <input
-                    type="text"
-                    placeholder="Card Number"
-                    value={card.cardNumber}
-                    onChange={(e) => setCard((prev) => ({ ...prev, cardNumber: maskCard(e.target.value) }))}
-                  />
-                  <div className="stripe-row">
-                    <input
-                      type="text"
-                      placeholder="MM/YY"
-                      value={card.expiry}
-                      onChange={(e) => setCard((prev) => ({ ...prev, expiry: maskExpiry(e.target.value) }))}
-                    />
-                    <input
-                      type="text"
-                      placeholder="CVC"
-                      value={card.cvc}
-                      onChange={(e) => setCard((prev) => ({ ...prev, cvc: e.target.value.replace(/\D/g, "").slice(0, 4) }))}
-                    />
-                  </div>
-
-                  <div className="stripe-summary">
-                    <span>Total:</span>
-                    <strong>${total.toFixed(2)}</strong>
-                  </div>
-
-                  <div className="stripe-actions">
-                    <button type="button" className="danger" onClick={() => setShowPayment(false)}>
-                      Cancel
-                    </button>
-                    <button type="submit" disabled={loading}>
-                      {loading ? "Authorizing..." : "Confirm Payment"}
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          )}
         </div>
       </div>
     </div>

@@ -1,0 +1,222 @@
+/* Unified admin theme overrides. Scoped to .admin-main so client pages are unaffected. */
+.admin-main {
+  --admin-bg-1: #120607;
+  --admin-bg-2: #1a080b;
+  --admin-surface: rgba(28, 10, 12, 0.88);
+  --admin-surface-soft: rgba(255, 255, 255, 0.03);
+  --admin-border: rgba(255, 255, 255, 0.12);
+  --admin-border-strong: rgba(255, 255, 255, 0.18);
+  --admin-text: #f4e9ea;
+  --admin-text-muted: #c7b5b7;
+  --admin-accent: #7b1020;
+  --admin-accent-2: #991628;
+  --admin-danger: #b42332;
+  --admin-success: #1c8c5f;
+}
+
+.admin-main :where(
+  .product-container,
+  .category-container,
+  .subcategory-container,
+  .language-container,
+  .person-container,
+  .setting-container,
+  .contact-admin-container,
+  .news-admin-container,
+  .news-author-admin-container,
+  .reservation-container,
+  .setting-detail-container,
+  .news-admin-detail-container,
+  .news-author-admin-detail-container,
+  .product-form-wrapper,
+  .category-form-page,
+  .subcategory-form-page,
+  .language-form-page,
+  .person-form-page,
+  .setting-form-page,
+  .news-admin-form-page,
+  .news-author-admin-form-page,
+  .edit-setting-wrapper,
+  .detail-wrapper
+) {
+  background: linear-gradient(180deg, var(--admin-bg-1), var(--admin-bg-2));
+  border: 1px solid var(--admin-border);
+  border-radius: 20px;
+  padding: 22px;
+  color: var(--admin-text);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+}
+
+.admin-main :where(h1, h2, h3, .page-title, .form-title, .create-font, .news-admin-title, .news-author-admin-title, .contact-admin-title) {
+  color: var(--admin-text);
+}
+
+.admin-main :where(p, li, label, small, .subtitle, .contact-admin-status, .reservation-count) {
+  color: var(--admin-text-muted);
+}
+
+.admin-main :where(input, select, textarea) {
+  width: 100%;
+  border: 1px solid var(--admin-border);
+  border-radius: 12px;
+  background: var(--admin-surface-soft);
+  color: var(--admin-text);
+  padding: 11px 12px;
+  outline: none;
+}
+
+.admin-main :where(input, select, textarea):focus {
+  border-color: var(--admin-border-strong);
+  box-shadow: 0 0 0 3px rgba(153, 22, 40, 0.28);
+}
+
+.admin-main :where(table, .reservation-table-wrapper) {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 14px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--admin-border);
+}
+
+.admin-main :where(th, td) {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--admin-text);
+  padding: 12px 14px;
+}
+
+.admin-main :where(th) {
+  background: rgba(123, 16, 32, 0.28);
+  font-weight: 600;
+}
+
+.admin-main :where(tr:hover td) {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.admin-main :where(.no-media, .empty-state, .news-admin-loading, .news-author-admin-loading, .loading-box, .reservation-loading, .reservation-error) {
+  color: var(--admin-text-muted);
+}
+
+.admin-main :where(
+  .create-btn,
+  .buton,
+  .buton2,
+  .cancel-btn,
+  .news-admin-primary-btn,
+  .news-admin-secondary-btn,
+  .news-author-admin-primary-btn,
+  .news-author-admin-secondary-btn,
+  .contact-admin-primary-btn,
+  .contact-admin-secondary-btn,
+  .btn-cancel,
+  .drawer-logout-btn,
+  .admin-btn
+) {
+  border: 1px solid transparent;
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+.admin-main :where(
+  .create-btn,
+  .buton,
+  .news-admin-primary-btn,
+  .news-author-admin-primary-btn,
+  .contact-admin-primary-btn,
+  .admin-btn-primary,
+  .admin-btn-secondary,
+  .admin-btn-success
+) {
+  background: linear-gradient(135deg, var(--admin-accent), var(--admin-accent-2));
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.admin-main :where(
+  .buton2,
+  .cancel-btn,
+  .news-admin-secondary-btn,
+  .news-author-admin-secondary-btn,
+  .contact-admin-secondary-btn,
+  .admin-btn-cancel
+) {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--admin-text);
+  border-color: var(--admin-border);
+}
+
+.admin-main :where(
+  .btn-cancel,
+  .admin-btn-danger
+) {
+  background: linear-gradient(135deg, #8f1826, var(--admin-danger));
+  color: #fff;
+}
+
+.admin-main :where(
+  .create-btn,
+  .buton,
+  .buton2,
+  .cancel-btn,
+  .news-admin-primary-btn,
+  .news-admin-secondary-btn,
+  .news-author-admin-primary-btn,
+  .news-author-admin-secondary-btn,
+  .contact-admin-primary-btn,
+  .contact-admin-secondary-btn,
+  .btn-cancel,
+  .admin-btn
+):hover {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+}
+
+.admin-main :where(.form-buttons, .form-actions, .news-admin-form-buttons, .news-author-admin-form-buttons, .page-header, .reservation-header) {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.admin-main :where(.media img, .media video, .image img, .image video) {
+  border-radius: 10px;
+  border: 1px solid var(--admin-border);
+}
+
+@media (max-width: 900px) {
+  .admin-main {
+    padding: 14px;
+  }
+
+  .admin-main :where(
+    .product-container,
+    .category-container,
+    .subcategory-container,
+    .language-container,
+    .person-container,
+    .setting-container,
+    .contact-admin-container,
+    .news-admin-container,
+    .news-author-admin-container,
+    .reservation-container,
+    .setting-detail-container,
+    .news-admin-detail-container,
+    .news-author-admin-detail-container,
+    .product-form-wrapper,
+    .category-form-page,
+    .subcategory-form-page,
+    .language-form-page,
+    .person-form-page,
+    .setting-form-page,
+    .news-admin-form-page,
+    .news-author-admin-form-page,
+    .edit-setting-wrapper,
+    .detail-wrapper
+  ) {
+    padding: 14px;
+    border-radius: 14px;
+  }
+}

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { sortNewestFirst } from "../utils/sortNewestFirst";
 import "../contact/ContactAdmin.css";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5149";
@@ -11,7 +12,7 @@ export default function SubscriberIndex() {
     try {
       const res = await fetch(`${API_BASE}/api/SubscriberGetAll`);
       const data = await res.json();
-      setSubscribers(Array.isArray(data) ? data : []);
+      setSubscribers(sortNewestFirst(data));
     } catch {
       setSubscribers([]);
     }

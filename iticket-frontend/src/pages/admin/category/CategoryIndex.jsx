@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useToast, ToastContainer } from "../../../components/admin/Toast";
 import { ConfirmDialog } from "../../../components/admin/ConfirmDialog";
 import { AdminButton } from "../../../components/admin/AdminButton";
+import { sortNewestFirst } from "../utils/sortNewestFirst";
 import "./CategoryIndex.css";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5149";
@@ -20,21 +21,7 @@ function CategoryIndex() {
       if (!res.ok) throw new Error("Failed to fetch categories");
       
       const data = await res.json();
-
-      // 🔹 NEWEST FIRST SORT
-      const sorted = Array.isArray(data)
-        ? data.sort((a, b) => {
-            const dateA = a.createdDate || a.CreatedDate;
-            const dateB = b.createdDate || b.CreatedDate;
-            
-            if (dateA && dateB) {
-              return new Date(dateB) - new Date(dateA);
-            }
-            return (b.id || b.Id) - (a.id || a.Id);
-          })
-        : [];
-
-      setCategories(sorted);
+      setCategories(sortNewestFirst(data));
     } catch (err) {
       console.error(err);
       showToast("Failed to load categories", "error");

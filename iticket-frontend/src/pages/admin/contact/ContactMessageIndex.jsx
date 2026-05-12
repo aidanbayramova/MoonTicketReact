@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { sortNewestFirst } from "../utils/sortNewestFirst";
 import "./ContactAdmin.css";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5149";
@@ -12,7 +13,7 @@ export default function ContactMessageIndex() {
     try {
       const res = await fetch(`${API_BASE}/api/ContactMessageGetAll`);
       const data = await res.json();
-      setMessages(Array.isArray(data) ? data : []);
+      setMessages(sortNewestFirst(data));
     } catch {
       setMessages([]);
     }

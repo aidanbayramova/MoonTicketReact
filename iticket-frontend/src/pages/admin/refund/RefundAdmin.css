@@ -1,0 +1,245 @@
+.refund-admin-wrapper {
+  padding: 24px 16px;
+  color: #f5f5f5;
+  font-family: "Poppins", sans-serif;
+  box-sizing: border-box;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.refund-admin-title {
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+/* Filter */
+.refund-filter-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+  font-weight: 500;
+}
+
+.refund-filter-row select {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.45);
+  color: #fff;
+  border: 1px solid rgba(128, 0, 32, 0.55);
+  border-radius: 8px;
+  padding: 7px 14px;
+  font-size: 14px;
+  outline: none;
+}
+
+/* Status text */
+.refund-status-msg {
+  color: #f0c9d1;
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+/* Table wrapper */
+.refund-scroll-shell {
+  width: 100%;
+  overflow-x: hidden;
+  border-radius: 16px;
+}
+
+/* Table */
+.refund-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  background: linear-gradient(
+    160deg,
+    rgba(40, 12, 12, 0.92),
+    rgba(55, 14, 14, 0.92)
+  );
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+/* Header */
+.refund-table thead th {
+  background: linear-gradient(135deg, #350404, #4d010b);
+  padding: 14px;
+  text-align: left;
+  font-size: 13px;
+  font-weight: 600;
+  color: #f5f5f5;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Rows */
+.refund-table tbody tr {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  transition: background 0.15s ease;
+}
+
+.refund-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* Cells */
+.refund-table tbody td {
+  padding: 12px 14px;
+  font-size: 13px;
+  color: #e8e8e8;
+  vertical-align: middle;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Prevent action buttons clipping */
+.refund-table td:last-child {
+  overflow: visible;
+}
+
+/* Column widths */
+.refund-table .col-user {
+  width: 11%;
+}
+
+.refund-table .col-email {
+  width: 15%;
+}
+
+.refund-table .col-event {
+  width: 14%;
+}
+
+.refund-table .col-date {
+  width: 13%;
+}
+
+.refund-table .col-qty {
+  width: 5%;
+}
+
+.refund-table .col-reason {
+  width: 8%;
+}
+
+.refund-table .col-status {
+  width: 8%;
+}
+
+.refund-table .col-note {
+  width: 13%;
+}
+
+.refund-table .col-actions {
+  width: 15%;
+}
+
+/* Truncate */
+.refund-table .truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Badge */
+.refund-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.refund-badge.pending {
+  background: rgba(255, 180, 0, 0.15);
+  color: #fbbf24;
+}
+
+.refund-badge.approved {
+  background: rgba(0, 200, 100, 0.15);
+  color: #4cde9a;
+}
+
+.refund-badge.rejected {
+  background: rgba(200, 50, 50, 0.18);
+  color: #f87171;
+}
+
+/* Input */
+.refund-note-input {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(128, 0, 32, 0.5);
+  border-radius: 10px;
+  color: #fff;
+  padding: 7px 10px;
+  font-size: 12px;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.refund-note-input::placeholder {
+  color: #888;
+}
+
+.refund-note-input:focus {
+  border-color: rgba(200, 30, 60, 0.8);
+}
+
+/* Actions */
+.refund-action-btns {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: nowrap;
+  min-width: 160px;
+}
+
+.refund-btn-approve,
+.refund-btn-reject {
+  border: none;
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.15s ease;
+}
+
+.refund-btn-approve:hover,
+.refund-btn-reject:hover {
+  opacity: 0.85;
+}
+
+.refund-btn-approve {
+  background: linear-gradient(135deg, #7a0000, #b00000);
+  color: #fff;
+}
+
+.refund-btn-reject {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
+/* Empty */
+.refund-empty-cell {
+  text-align: center;
+  padding: 24px;
+  color: #777;
+}
+
+/* Loading */
+.refund-loading {
+  padding: 30px;
+  color: #f0c9d1;
+  font-size: 15px;
+}

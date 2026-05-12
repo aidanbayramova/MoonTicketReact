@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { sortNewestFirst } from "../utils/sortNewestFirst";
 import "./SubCategoryForms.css";
 
 function SubCategoryIndex() {
@@ -10,7 +11,7 @@ function SubCategoryIndex() {
     try {
       const res = await fetch("http://localhost:5149/api/SubCategoryGetAll");
       const data = await res.json();
-      setSubCategories(Array.isArray(data) ? data : []);
+      setSubCategories(sortNewestFirst(data));
     } catch {
       setSubCategories([]);
     }

@@ -44,7 +44,6 @@
   .trending-main-title {
     font-size: 35px;
     font-weight: bold;
-    background: linear-gradient(135deg, #800020 0%, #800020 90%, #ffffff 100%);
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;

@@ -1,16 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useToast, ToastContainer } from "../../../components/admin/Toast";
 import { ConfirmDialog } from "../../../components/admin/ConfirmDialog";
 import { AdminButton } from "../../../components/admin/AdminButton";
+import { sortNewestFirst } from "../utils/sortNewestFirst";
 import "./Product.css";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5149";
+const ITEMS_PER_PAGE = 8;
 
 function ProductIndex() {
   const navigate = useNavigate();
   const { toasts, showToast, removeToast } = useToast();
   const [products, setProducts] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const [deleteConfirm, setDeleteConfirm] = useState({ open: false, id: null });
 
@@ -21,7 +25,7 @@ function ProductIndex() {
       if (!res.ok) throw new Error("Failed to fetch products");
       
       const data = await res.json();
-      setProducts(Array.isArray(data) ? data : []);
+      setProducts(sortNewestFirst(data));
     } catch (error) {
       console.error(error);
       showToast("Failed to load products", "error");
@@ -65,6 +69,31 @@ function ProductIndex() {
   const getProductAge = (p) => (p.ageRestriction ?? p.AgeRestriction ?? 0);
   const getProductImage = (p) => p.image || p.Image;
 
+  const filteredProducts = useMemo(() => {
+    const q = searchTerm.trim().toLowerCase();
+    if (!q) return products;
+
+    return products.filter((p) => {
+      const name = String(getProductName(p) || "").toLowerCase();
+      const address = String(getProductAddress(p) || "").toLowerCase();
+      return name.includes(q) || address.includes(q);
+    });
+  }, [products, searchTerm]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm, products.length]);
+
+  const totalPages = Math.max(1, Math.ceil(filteredProducts.length / ITEMS_PER_PAGE));
+
+  const paginatedProducts = useMemo(() => {
+    const start = (currentPage - 1) * ITEMS_PER_PAGE;
+    return filteredProducts.slice(start, start + ITEMS_PER_PAGE);
+  }, [filteredProducts, currentPage]);
+
+  const goToPrevPage = () => setCurrentPage((prev) => Math.max(1, prev - 1));
+  const goToNextPage = () => setCurrentPage((prev) => Math.min(totalPages, prev + 1));
+
   if (loading) {
     return <div className="loading-box">Loading products...</div>;
   }
@@ -75,12 +104,21 @@ function ProductIndex() {
 
       <div className="page-header">
         <h2>Products</h2>
-        <AdminButton
-          variant="primary"
-          onClick={() => navigate("/admin/product/createProductForm")}
-        >
-          + Create Product
-        </AdminButton>
+        <div className="product-header-actions">
+          <input
+            type="text"
+            className="product-search"
+            placeholder="Search by name or address..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <AdminButton
+            variant="primary"
+            onClick={() => navigate("/admin/product/createProductForm")}
+          >
+            + Create Product
+          </AdminButton>
+        </div>
       </div>
 
       <table className="product-table">
@@ -96,12 +134,12 @@ function ProductIndex() {
         </thead>
 
         <tbody>
-          {products.length === 0 ? (
+          {filteredProducts.length === 0 ? (
             <tr>
               <td colSpan="6" className="empty-state">No products found</td>
             </tr>
           ) : (
-            products.map((p) => {
+            paginatedProducts.map((p) => {
               const id = getProductId(p);
               return (
                 <tr key={id}>
@@ -109,7 +147,7 @@ function ProductIndex() {
                   <td>{getProductAddress(p) ?? "-"}</td>
                   <td>
                     {getProductStartDate(p)
-                      ? new Date(getProductStartDate(p)).tolocaleString("en-US", {
+                      ? new Date(getProductStartDate(p)).toLocaleString("en-US", {
                           year: "numeric",
                           month: "short",
                           day: "numeric",
@@ -158,6 +196,30 @@ function ProductIndex() {
           )}
         </tbody>
       </table>
+
+      {filteredProducts.length > 0 && (
+        <div className="product-pagination">
+          <button
+            type="button"
+            className="product-page-btn"
+            onClick={goToPrevPage}
+            disabled={currentPage === 1}
+          >
+            Prev
+          </button>
+          <span className="product-page-info">
+            Page {currentPage} / {totalPages}
+          </span>
+          <button
+            type="button"
+            className="product-page-btn"
+            onClick={goToNextPage}
+            disabled={currentPage === totalPages}
+          >
+            Next
+          </button>
+        </div>
+      )}
 
       <ConfirmDialog
         isOpen={deleteConfirm.open}

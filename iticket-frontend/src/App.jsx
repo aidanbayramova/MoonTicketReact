@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 
 import Layout from "./components/Layout";
@@ -43,6 +43,7 @@ import Unauthorized from "./pages/errors/Unauthorized";
 
 /* ===== ADMIN ===== */
 import Dashboard from "./pages/admin/dashboard/Dashboard";
+import DashboardHome from "./pages/admin/dashboard/DashboardHome";
 import SliderIndex from "./pages/admin/slider/SliderIndex";
 import CreateSliderForm from "./pages/admin/slider/CreateSliderForm";
 import EditSliderForm from "./pages/admin/slider/EditSliderForm";
@@ -92,6 +93,8 @@ import DetailNewsAuthor from "./pages/admin/newsauthor/DetailNewsAuthor";
 import ContactMessageIndex from "./pages/admin/contact/ContactMessageIndex";
 import ReplyContactMessageForm from "./pages/admin/contact/ReplyContactMessageForm";
 import SubscriberIndex from "./pages/admin/subscriber/SubscriberIndex";
+import RefundRequestIndex from "./pages/admin/refund/RefundRequestIndex";
+import "./pages/admin/dashboard/AdminUnified.css";
 
 
 
@@ -163,8 +166,8 @@ function App() {
           </ProtectedRoute>
         }
       >
-        <Route index element={<h2>Admin Dashboard</h2>} />
-        <Route path="dashboard" element={<h2 style={{fontSize:"40px",display:"flex" , justifyContent:"center",alignItems:"center",marginTop:"-3pc"}}>Admin Dashboard</h2>} />
+        <Route index element={<Navigate to="dashboard" replace />} />
+        <Route path="dashboard" element={<DashboardHome />} />
 
         <Route path="reservation/index" element={<ReservationIndex />} />
 
@@ -212,6 +215,7 @@ function App() {
         <Route path="contact/messages" element={<ContactMessageIndex />} />
         <Route path="contact/reply/:id" element={<ReplyContactMessageForm />} />
         <Route path="subscriber/index" element={<SubscriberIndex />} />
+        <Route path="refund/index" element={<RefundRequestIndex />} />
       </Route>
 
       {/* ================= ERROR PAGES  ================= */}

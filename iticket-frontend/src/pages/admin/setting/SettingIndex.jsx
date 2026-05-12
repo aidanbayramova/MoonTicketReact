@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { sortNewestFirst } from "../utils/sortNewestFirst";
 import "./SettingIndex.css";
 
 function SettingIndex() {
@@ -10,7 +11,7 @@ function SettingIndex() {
     try {
       const res = await fetch("http://localhost:5149/api/SettingGetAll");
       const data = await res.json();
-      setSettings(Array.isArray(data) ? data : []);
+      setSettings(sortNewestFirst(data));
     } catch {
       setSettings([]);
     }

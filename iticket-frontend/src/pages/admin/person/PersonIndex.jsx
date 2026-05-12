@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { sortNewestFirst } from "../utils/sortNewestFirst";
 import "./PersonForms.css";
 
 function PersonIndex() {
@@ -10,7 +11,7 @@ function PersonIndex() {
         try {
             const res = await fetch("http://localhost:5149/api/PersonGetAll");
             const data = await res.json();
-            setPersons(Array.isArray(data) ? data : []);
+            setPersons(sortNewestFirst(data));
         } catch {
             setPersons([]);
         }

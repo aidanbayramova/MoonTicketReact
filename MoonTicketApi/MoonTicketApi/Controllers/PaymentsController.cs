@@ -42,7 +42,10 @@ namespace MoonTicketApi.Controllers
 
             if (string.IsNullOrWhiteSpace(_stripeSettings.SecretKey))
             {
-                return BadRequest(new { message = "Stripe SecretKey config yoxdur." });
+                return BadRequest(new
+                {
+                    message = "Stripe acarlari konfiqurasiya olunmayib. appsettings.Development.json faylinda StripeSettings SecretKey/PublishableKey deyerlerini real test acarlarla yenileyin."
+                });
             }
 
             if (_stripeSettings.SecretKey.Contains("replace_me", StringComparison.OrdinalIgnoreCase))

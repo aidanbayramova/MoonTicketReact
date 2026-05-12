@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone, faEnvelope, faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5149";
+const METRICS_EVENT = "moonTicket:metrics-updated";
 
 export default function ContactSection() {
   const [contactData, setContactData] = useState(null);
@@ -87,6 +88,7 @@ export default function ContactSection() {
 
       if (!res.ok) throw new Error("Subscribe failed");
       setSubscribeStatus("You are subscribed successfully.");
+      window.dispatchEvent(new CustomEvent(METRICS_EVENT));
     } catch {
       setSubscribeStatus("Subscribe failed. Try again.");
     } finally {
@@ -112,6 +114,7 @@ export default function ContactSection() {
 
       if (!res.ok) throw new Error("Unsubscribe failed");
       setSubscribeStatus("You are unsubscribed successfully.");
+      window.dispatchEvent(new CustomEvent(METRICS_EVENT));
     } catch {
       setSubscribeStatus("Unsubscribe failed or email was not found.");
     } finally {

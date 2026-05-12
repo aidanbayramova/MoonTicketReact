@@ -11,6 +11,7 @@ using Repository.Repositories.Interfaces;
 using Service.Helpers;
 using Service.Services;
 using Service.Services.Interfaces;
+using Stripe;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -85,12 +86,18 @@ builder.Services.AddAuthorization();
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 //
+// STRIPE
+//
+builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("StripeSettings"));
+StripeConfiguration.ApiKey = builder.Configuration["StripeSettings:SecretKey"];
+
+//
 // SERVICES
 //
 builder.Services.AddScoped<JwtTokenGenerator>();
 builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
 
-builder.Services.AddScoped<IFileService, FileService>();
+builder.Services.AddScoped<IFileService, Service.Services.FileService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IContactMessageService, ContactMessageService>();
@@ -98,7 +105,7 @@ builder.Services.AddScoped<ILanguageService, LanguageService>();
 builder.Services.AddScoped<INewsAuthorService, NewsAuthorService>();
 builder.Services.AddScoped<INewsService, NewsService>();
 builder.Services.AddScoped<IPersonService, PersonService>();
-builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IProductService, Service.Services.ProductService>();
 builder.Services.AddScoped<ISettingService, SettingService>();
 builder.Services.AddScoped<ISliderService, SliderService>();
 builder.Services.AddScoped<ISubCategoryService, SubCategoryService>();

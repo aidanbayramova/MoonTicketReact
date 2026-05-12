@@ -484,10 +484,10 @@
 .main-content {
   min-height: 50vh;
   padding: 50px;
-    background:
+    /* background:
     radial-gradient(circle at top left, rgba(123, 19, 5, 0.34), transparent 28%),
     radial-gradient(circle at top right, rgba(185, 28, 28, 0.18), transparent 22%),
-    linear-gradient(180deg, #050505 0%, #090404 42%, #110707 100%);
+    linear-gradient(180deg, #050505 0%, #090404 42%, #110707 100%); */
 }
 
 .footer {

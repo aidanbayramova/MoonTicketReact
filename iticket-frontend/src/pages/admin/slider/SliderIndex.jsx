@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useToast, ToastContainer } from "../../../components/admin/Toast";
 import { ConfirmDialog } from "../../../components/admin/ConfirmDialog";
 import { AdminButton } from "../../../components/admin/AdminButton";
+import { sortNewestFirst } from "../utils/sortNewestFirst";
 import "./SliderIndex.css";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5149";
@@ -20,7 +21,7 @@ function SliderIndex() {
       const res = await fetch(`${API_BASE}/api/SliderGetAll`);
       if (!res.ok) throw new Error("Failed to fetch sliders");
       const data = await res.json();
-      setSliders(Array.isArray(data) ? data : []);
+      setSliders(sortNewestFirst(data));
     } catch (error) {
       console.error(error);
       showToast("Failed to load sliders", "error");

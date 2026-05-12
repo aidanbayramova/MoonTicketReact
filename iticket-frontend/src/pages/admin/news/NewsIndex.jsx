@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useToast, ToastContainer } from "../../../components/admin/Toast";
 import { ConfirmDialog } from "../../../components/admin/ConfirmDialog";
 import { AdminButton } from "../../../components/admin/AdminButton";
+import { sortNewestFirst } from "../utils/sortNewestFirst";
 import "./NewsAdmin.css";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5149";
@@ -25,7 +26,7 @@ function NewsIndex() {
       const res = await fetch(`${API_BASE}/api/NewsGetAll`);
       if (!res.ok) throw new Error("Failed to fetch news");
       const data = await res.json();
-      setNewsList(Array.isArray(data) ? data : []);
+      setNewsList(sortNewestFirst(data));
     } catch (error) {
       console.error(error);
       showToast("Failed to load news", "error");
